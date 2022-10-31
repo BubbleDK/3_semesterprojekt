@@ -20,20 +20,21 @@ CREATE TABLE nc_Person(
 );
 
 CREATE TABLE nc_Customer(
-    personid INT NOT NULL,
+    personid INT,
 
-    CONSTRAINT fk_ncPerson foreign key (personid) references nc_Person(zipCode),
+    CONSTRAINT fk_ncPerson foreign key (personid) references nc_Person(id),
     PRIMARY KEY(personid),
 );
 
 CREATE TABLE nc_Employee(
-    personid INT NOT NULL,
+    personid INT,
     address VARCHAR(50), 
     role VARCHAR(15),
     access VARCHAR(15),
     zipCode INT NOT NULL,
 
     CONSTRAINT fk_ncZipCode foreign key (zipCode) references nc_CityZipCode(zipCode),
+    CONSTRAINT fk_ncEmployeepersonid foreign key (personid) references nc_Person(id),
     PRIMARY KEY(personid),
 );
 
@@ -42,7 +43,7 @@ CREATE TABLE nc_Booking(
     bookingNo INT NOT NULL,
     startTime INT NOT NULL,
     endTime INT NOT NULL,
-    customerid INT NOT NULL,
+    customerid INT,
     employeeid INT NOT NULL,
 
     CONSTRAINT fk_ncCustomer foreign key (customerid) references nc_Customer(personid),
@@ -77,7 +78,7 @@ CREATE TABLE nc_BookingLine(
     bookingid INT NOT NULL,
     quantity INT NOT NULL,
     rentableid INT NOT NULL,
-    consumableid INT NOT NULL,
+    consumableid INT,
 
     CONSTRAINT fk_ncBookinglinebookingid foreign key (bookingid) references nc_Booking(id),
     CONSTRAINT fk_ncBookinglinerentableid foreign key (rentableid) references nc_Rentable(productid),
