@@ -63,7 +63,7 @@ CREATE TABLE nc_Consumables(
     productid INT NOT NULL,
     description VARCHAR(50),
 
-    CONSTRAINT fk_ncConsumablesproducid foreign key (productid) references nc_Product(id),
+    CONSTRAINT fk_ncConsumablesproductid foreign key (productid) references nc_Product(id),
     PRIMARY KEY(productid),
 );
 
