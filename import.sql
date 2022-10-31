@@ -1,6 +1,6 @@
 USE [DMA-CSD-S212_10182474];
 
-DROP TABLE nc_CityZipCode;
+DROP TABLE nc_Booking, nc_BookingLine, nc_CityZipCode, nc_Consumables, nc_Customer, nc_Employee, nc_GamingStation, nc_Pack, nc_PackLine, nc_Person, nc_Product, nc_Rentable;
 go
 
 CREATE TABLE nc_CityZipCode(
@@ -43,7 +43,7 @@ CREATE TABLE nc_Booking(
     bookingNo INT NOT NULL,
     startTime INT NOT NULL,
     endTime INT NOT NULL,
-    customerid INT,
+    customerid INT NOT NULL,
     employeeid INT NOT NULL,
 
     CONSTRAINT fk_ncCustomer foreign key (customerid) references nc_Customer(personid),
