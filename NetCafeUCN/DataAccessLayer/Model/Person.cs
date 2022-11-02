@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Model
 {
-    internal abstract class Person
+    public abstract class Person
     {
     }
 }
