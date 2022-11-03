@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
 
-namespace NetCafeRestServer.Controllers
+namespace NetCafeUCN.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
