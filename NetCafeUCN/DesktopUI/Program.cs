@@ -10,11 +10,13 @@ namespace DesktopUI
         [STAThread]
         static void Main()
         {
+            UserDataAccess _userDAO = new UserDataAccess();
+            _userDAO.GetAll();
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.Run(new Form1());
-            UserDataAccess.GetAll();
+            
         }
     }
 }

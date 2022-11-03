@@ -25,7 +25,7 @@ namespace DataAccessLayer.DAO
 
         public IEnumerable<Person> GetAll()
         {
-            string sqlStatement = "SELECT * FROM Persons";
+            string sqlStatement = "SELECT * FROM nc_Person";
             List<Person> list = new List<Person>();
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
