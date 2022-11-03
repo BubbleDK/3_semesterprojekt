@@ -19,8 +19,9 @@ namespace NetCafeUCN.DAL.Model
             this.SeatNumber = seatNumber;
             this.Tier = Tier;
             this.Booked = false;
-
         }
+        
+
 
     }
 }

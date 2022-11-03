@@ -16,5 +16,8 @@ namespace DataAccessLayer.Model
             this.ProductNumber = productNumber;
             this.Description = description;
         }
+        public Product()
+        {
+        }
     }
 }
