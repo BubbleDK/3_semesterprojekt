@@ -11,16 +11,19 @@ namespace NetCafeUCN.tests
         public void TestDBConnection()
         {
             //Arrange
-            using(SqlConnection Connection = new SqlConnection(DBConnection.ConnectionString)) {
+            ConnectionState? connectionstate = null;
+            SqlConnection Connection = new SqlConnection(DBConnection.ConnectionString);
+            
                 Connection.Open();
-                Assert.True(Connection.State == ConnectionState.Open);
+                connectionstate = Connection.State;
+
                 Connection.Close();
-            }
+            
             //Act
-            
+
             //Assert
-            
-            
+            Assert.True(connectionstate == ConnectionState.Open);
+
         }
     }
 }
