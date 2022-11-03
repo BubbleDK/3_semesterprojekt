@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "YEbOOLQsHi7wMr+wqt8VwM4soeisnsa5ipTdrxgrovX4I/tkW1uj9Chc0pzZJeAIxQHYUlYZAfntWcrILOPdeg==",
+  "dgSpecHash": "KfTy62lMobJ8sk0Ev9Ipwa1OU6ZMfE9KDzTlm+z7zucdoztjK9yVtPA2TNX8FFKWAtAMfYxYA7tnI2luMeI9XA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\funde\\Documents\\GitHub\\3_semesterprojekt\\3_semesterprojekt\\NetCafeUCN\\DesktopUI\\DesktopUI.csproj",
+  "projectFilePath": "C:\\Users\\funde\\Documents\\GitHub\\3_semesterprojekt\\3_semesterprojekt\\NetCafeUCN\\DesktopUI\\NetCafeUCN.Desktop.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\funde\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\funde\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",

@@ -147,17 +147,17 @@
           }
         }
       },
-      "DataAccessLayer/1.0.0": {
+      "NetCafeUCN.DAL/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "System.Data.SqlClient": "4.8.4"
         },
         "compile": {
-          "bin/placeholder/DataAccessLayer.dll": {}
+          "bin/placeholder/NetCafeUCN.DAL.dll": {}
         },
         "runtime": {
-          "bin/placeholder/DataAccessLayer.dll": {}
+          "bin/placeholder/NetCafeUCN.DAL.dll": {}
         }
       }
     }
@@ -476,15 +476,15 @@
         "version.txt"
       ]
     },
-    "DataAccessLayer/1.0.0": {
+    "NetCafeUCN.DAL/1.0.0": {
       "type": "project",
-      "path": "../DataAccessLayer/DataAccessLayer.csproj",
-      "msbuildProject": "../DataAccessLayer/DataAccessLayer.csproj"
+      "path": "../DataAccessLayer/NetCafeUCN.DAL.csproj",
+      "msbuildProject": "../DataAccessLayer/NetCafeUCN.DAL.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0-windows7.0": [
-      "DataAccessLayer >= 1.0.0"
+      "NetCafeUCN.DAL >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -493,9 +493,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\funde\\Documents\\GitHub\\3_semesterprojekt\\3_semesterprojekt\\NetCafeUCN\\DesktopUI\\DesktopUI.csproj",
-      "projectName": "DesktopUI",
-      "projectPath": "C:\\Users\\funde\\Documents\\GitHub\\3_semesterprojekt\\3_semesterprojekt\\NetCafeUCN\\DesktopUI\\DesktopUI.csproj",
+      "projectUniqueName": "C:\\Users\\funde\\Documents\\GitHub\\3_semesterprojekt\\3_semesterprojekt\\NetCafeUCN\\DesktopUI\\NetCafeUCN.Desktop.csproj",
+      "projectName": "NetCafeUCN.Desktop",
+      "projectPath": "C:\\Users\\funde\\Documents\\GitHub\\3_semesterprojekt\\3_semesterprojekt\\NetCafeUCN\\DesktopUI\\NetCafeUCN.Desktop.csproj",
       "packagesPath": "C:\\Users\\funde\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\funde\\Documents\\GitHub\\3_semesterprojekt\\3_semesterprojekt\\NetCafeUCN\\DesktopUI\\obj\\",
       "projectStyle": "PackageReference",
@@ -514,8 +514,8 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "projectReferences": {
-            "C:\\Users\\funde\\Documents\\GitHub\\3_semesterprojekt\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\DataAccessLayer.csproj": {
-              "projectPath": "C:\\Users\\funde\\Documents\\GitHub\\3_semesterprojekt\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\DataAccessLayer.csproj"
+            "C:\\Users\\funde\\Documents\\GitHub\\3_semesterprojekt\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\NetCafeUCN.DAL.csproj": {
+              "projectPath": "C:\\Users\\funde\\Documents\\GitHub\\3_semesterprojekt\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\NetCafeUCN.DAL.csproj"
             }
           }
         }
