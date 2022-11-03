@@ -19,7 +19,7 @@ namespace DataAccessLayer.DAO
             throw new NotImplementedException();
         }
 
-        public bool Remove(string productNo)
+        public bool Remove(int id)
         {
             throw new NotImplementedException();
         }
