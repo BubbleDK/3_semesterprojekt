@@ -5,8 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace NetCafeUCN.API.Controllers
 {
-    namespace NetCafeRestServer.Controllers
-    {
+    
         [Route("api/[controller]")]
         [ApiController]
         public class PersonController : ControllerBase
@@ -64,4 +63,4 @@ namespace NetCafeUCN.API.Controllers
             }
         }
     }
-}
+
