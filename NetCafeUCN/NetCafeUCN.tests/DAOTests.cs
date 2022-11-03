@@ -33,10 +33,10 @@ namespace NetCafeUCN.tests
         {
             //Arrange
             UserDataAccess userDataAccess = new UserDataAccess();
-            IEnumerable<Person> list = userDataAccess.GetAll();
+            List<Person> list = userDataAccess.GetAll().ToList();
             //Assert
             Console.WriteLine(list);
-            //Assert.True(list.;
+            Assert.True(list.Count>0);
         }
     }
 }
