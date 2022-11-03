@@ -5,7 +5,9 @@ VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{7E584D4D-644A-4289-B745-2F627F271A82}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopUI", "DesktopUI\DesktopUI.csproj", "{51070CD5-1A4F-4B51-AEBC-07008FF84F97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesktopUI", "DesktopUI\DesktopUI.csproj", "{51070CD5-1A4F-4B51-AEBC-07008FF84F97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCafeRestServer", "NetCafeRestServer\NetCafeRestServer.csproj", "{F48B60D0-73E4-49A0-8899-F0502976B985}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{51070CD5-1A4F-4B51-AEBC-07008FF84F97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51070CD5-1A4F-4B51-AEBC-07008FF84F97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51070CD5-1A4F-4B51-AEBC-07008FF84F97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F48B60D0-73E4-49A0-8899-F0502976B985}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F48B60D0-73E4-49A0-8899-F0502976B985}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F48B60D0-73E4-49A0-8899-F0502976B985}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F48B60D0-73E4-49A0-8899-F0502976B985}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
