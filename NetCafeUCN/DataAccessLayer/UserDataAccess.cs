@@ -38,9 +38,9 @@ namespace DataAccessLayer
                     {
                         Person person = new Customer()
                         {
-                            //name = (string)reader["name"],
-                            //phone = (string)reader["phone"],
-                            //email = (string)reader["email"]
+                            name = (string)reader["name"],
+                            phone = (string)reader["phone"],
+                            email = (string)reader["email"]
                         };
                         list.Add(person);
                     }

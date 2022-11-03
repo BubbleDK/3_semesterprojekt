@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DataAccessLayer.Model
 {
-    internal class Customer:Person
+    public class Customer : Person
     {
+        public Customer() : base(string name, string phone, string email);
+        {
+        }
     }
 }
