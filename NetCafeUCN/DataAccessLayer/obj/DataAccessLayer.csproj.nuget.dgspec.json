@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\neski\\Source\\Repos\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\DataAccessLayer.csproj": {}
+    "C:\\Repos\\3_SemesterProjekt\\NetCafeUCN\\DataAccessLayer\\DataAccessLayer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\neski\\Source\\Repos\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\DataAccessLayer.csproj": {
+    "C:\\Repos\\3_SemesterProjekt\\NetCafeUCN\\DataAccessLayer\\DataAccessLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\neski\\Source\\Repos\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\DataAccessLayer.csproj",
+        "projectUniqueName": "C:\\Repos\\3_SemesterProjekt\\NetCafeUCN\\DataAccessLayer\\DataAccessLayer.csproj",
         "projectName": "DataAccessLayer",
-        "projectPath": "C:\\Users\\neski\\Source\\Repos\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\DataAccessLayer.csproj",
+        "projectPath": "C:\\Repos\\3_SemesterProjekt\\NetCafeUCN\\DataAccessLayer\\DataAccessLayer.csproj",
         "packagesPath": "C:\\Users\\neski\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\neski\\Source\\Repos\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\obj\\",
+        "outputPath": "C:\\Repos\\3_SemesterProjekt\\NetCafeUCN\\DataAccessLayer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
