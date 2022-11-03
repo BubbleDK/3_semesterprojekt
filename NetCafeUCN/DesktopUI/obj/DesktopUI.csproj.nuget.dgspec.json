@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Repos\\3_SemesterProjekt\\NetCafeUCN\\DesktopUI\\DesktopUI.csproj": {}
+    "C:\\Users\\funde\\OneDrive\\Dokumenter\\GitHub\\3_semesterprojekt\\NetCafeUCN\\DesktopUI\\DesktopUI.csproj": {}
   },
   "projects": {
-    "C:\\Repos\\3_SemesterProjekt\\NetCafeUCN\\DesktopUI\\DesktopUI.csproj": {
+    "C:\\Users\\funde\\OneDrive\\Dokumenter\\GitHub\\3_semesterprojekt\\NetCafeUCN\\DesktopUI\\DesktopUI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Repos\\3_SemesterProjekt\\NetCafeUCN\\DesktopUI\\DesktopUI.csproj",
+        "projectUniqueName": "C:\\Users\\funde\\OneDrive\\Dokumenter\\GitHub\\3_semesterprojekt\\NetCafeUCN\\DesktopUI\\DesktopUI.csproj",
         "projectName": "DesktopUI",
-        "projectPath": "C:\\Repos\\3_SemesterProjekt\\NetCafeUCN\\DesktopUI\\DesktopUI.csproj",
-        "packagesPath": "C:\\Users\\neski\\.nuget\\packages\\",
-        "outputPath": "C:\\Repos\\3_SemesterProjekt\\NetCafeUCN\\DesktopUI\\obj\\",
+        "projectPath": "C:\\Users\\funde\\OneDrive\\Dokumenter\\GitHub\\3_semesterprojekt\\NetCafeUCN\\DesktopUI\\DesktopUI.csproj",
+        "packagesPath": "C:\\Users\\funde\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\funde\\OneDrive\\Dokumenter\\GitHub\\3_semesterprojekt\\NetCafeUCN\\DesktopUI\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\neski\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\funde\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -63,7 +58,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }
