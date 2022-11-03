@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "/pmz1KgwB1nHectzDSwUX/cVP+zzexGQVozEC47WwQsHlIfo2ZH0giwXhAsFsXEFvo2W4iJIZhUKInr+aux2Jg==",
   "success": true,
   "projectFilePath": "C:\\repos\\BubbleDK\\3_semesterprojekt\\NetCafeUCN\\DesktopUI\\DesktopUI.csproj",
+=======
+  "dgSpecHash": "2PrASkv0imVwOEd6uU80Ka+p8wCjlIgnn9wbwCWQMdg9jdwXb6+q+q5WMzJToUh1wqlhCVu0tBBBxSXFgjA+IA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\funde\\OneDrive\\Dokumenter\\GitHub\\3_semesterprojekt\\NetCafeUCN\\DesktopUI\\DesktopUI.csproj",
+>>>>>>> 88133830989c3afd03cf74153e63db17cc2ae81e
   "expectedPackageFiles": [],
   "logs": []
 }
