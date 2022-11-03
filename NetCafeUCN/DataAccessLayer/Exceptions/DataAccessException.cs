@@ -11,7 +11,7 @@ namespace DataAccessLayer.Exceptions
 
         public DataAccessException(string? message) : base(message)
         {
-            message = "Can't access data";
+            
         }
 
         public DataAccessException(string? message, Exception? innerException) : base(message, innerException)

@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.ComponentModel.DataAnnotations;
 using DataAccessLayer.Exceptions;
+using NetCafeUCN.DAL.DAO;
 
 namespace DataAccessLayer.DAO
 {
     public class UserDataAccess : INetCafeDataAccess<Person>
     {
-        private readonly string connectionString = @"Data Source=hildur.ucn.dk;User ID=DMA-CSD-S212_10182474;Password=Password1!;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         public int Add(Person o)
         {
             throw new NotImplementedException();
@@ -27,7 +27,7 @@ namespace DataAccessLayer.DAO
         {
             string sqlStatement = "SELECT * FROM nc_Person";
             List<Person> list = new List<Person>();
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand(sqlStatement, conn);
 
@@ -49,7 +49,7 @@ namespace DataAccessLayer.DAO
                 catch (DataAccessException)
                 {
 
-                    throw new DataAccessException();
+                    throw new DataAccessException("Can't access data");
                 }
             }
             return list;
