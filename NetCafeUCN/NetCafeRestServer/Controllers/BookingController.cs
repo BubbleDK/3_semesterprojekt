@@ -27,9 +27,9 @@ namespace NetCafeRestServer.Controllers
         // GET api/<BookingController>/5
         [HttpGet]
         [Route("{id}")]
-        public ActionResult<Booking> Get(int id)
+        public ActionResult<Booking> Get(int bookingNo)
         {
-            var booking = dataAccess.Get(id);
+            var booking = dataAccess.Get(bookingNo);
             if (booking == null) { return NotFound(); }
             return Ok(booking);
         }
