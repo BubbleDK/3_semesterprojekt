@@ -1,7 +1,7 @@
 ﻿using DataAccessLayer.DAO;
 using DataAccessLayer.Model;
 using Microsoft.AspNetCore.Mvc;
-
+using System.Collections.Generic;
 
 
 namespace NetCafeRestServer.Controllers
@@ -19,10 +19,13 @@ namespace NetCafeRestServer.Controllers
         }
 
         // GET api/<BookingController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet]
+        [Route("{id}")]
+        public ActionResult<Booking> Get(int id)
         {
-            return "value";
+            var booking = dataAccess.Get(id);
+            if (booking == null) { return NotFound(); }
+            return Ok(booking);
         }
 
         // POST api/<BookingController>
