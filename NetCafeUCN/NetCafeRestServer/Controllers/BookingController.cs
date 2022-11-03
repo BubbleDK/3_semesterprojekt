@@ -11,6 +11,12 @@ namespace NetCafeRestServer.Controllers
     public class BookingController : ControllerBase
     {
         private INetCafeDataAccess<Booking> dataAccess;
+
+        public BookingController(INetCafeDataAccess<Booking> dataAccess)
+        {
+            this.dataAccess = dataAccess;
+        }
+
         // GET: api/<BookingController>
         [HttpGet]
         public ActionResult <IEnumerable<Booking>> Get()
@@ -30,20 +36,30 @@ namespace NetCafeRestServer.Controllers
 
         // POST api/<BookingController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult<int> Add(Booking booking)
         {
+            return Ok(dataAccess.Add(booking));
         }
 
         // PUT api/<BookingController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public ActionResult<bool> Update(Booking booking)
         {
+            return Ok(dataAccess.Update(booking));
         }
 
         // DELETE api/<BookingController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{bookingNo}")]
+        public ActionResult<bool> Delete(int bookingNo)
         {
+            if (dataAccess.Remove(bookingNo))
+            {
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
         }
     }
 }
