@@ -147,17 +147,17 @@
           }
         }
       },
-      "NetCafeUCN.DAL/1.0.0": {
+      "DataAccessLayer/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "System.Data.SqlClient": "4.8.4"
         },
         "compile": {
-          "bin/placeholder/NetCafeUCN.DAL.dll": {}
+          "bin/placeholder/DataAccessLayer.dll": {}
         },
         "runtime": {
-          "bin/placeholder/NetCafeUCN.DAL.dll": {}
+          "bin/placeholder/DataAccessLayer.dll": {}
         }
       }
     }
@@ -476,36 +476,31 @@
         "version.txt"
       ]
     },
-    "NetCafeUCN.DAL/1.0.0": {
+    "DataAccessLayer/1.0.0": {
       "type": "project",
-      "path": "../DataAccessLayer/NetCafeUCN.DAL.csproj",
-      "msbuildProject": "../DataAccessLayer/NetCafeUCN.DAL.csproj"
+      "path": "../DataAccessLayer/DataAccessLayer.csproj",
+      "msbuildProject": "../DataAccessLayer/DataAccessLayer.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0-windows7.0": [
-      "NetCafeUCN.DAL >= 1.0.0"
+      "DataAccessLayer >= 1.0.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\neski\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\funde\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Repos\\3_SemesterProjekt\\NetCafeUCN\\DesktopUI\\NetCafeUCN.Desktop.csproj",
-      "projectName": "NetCafeUCN.Desktop",
-      "projectPath": "C:\\Repos\\3_SemesterProjekt\\NetCafeUCN\\DesktopUI\\NetCafeUCN.Desktop.csproj",
-      "packagesPath": "C:\\Users\\neski\\.nuget\\packages\\",
-      "outputPath": "C:\\Repos\\3_SemesterProjekt\\NetCafeUCN\\DesktopUI\\obj\\",
+      "projectUniqueName": "C:\\Users\\funde\\Documents\\GitHub\\3_semesterprojekt\\3_semesterprojekt\\NetCafeUCN\\DesktopUI\\DesktopUI.csproj",
+      "projectName": "DesktopUI",
+      "projectPath": "C:\\Users\\funde\\Documents\\GitHub\\3_semesterprojekt\\3_semesterprojekt\\NetCafeUCN\\DesktopUI\\DesktopUI.csproj",
+      "packagesPath": "C:\\Users\\funde\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\funde\\Documents\\GitHub\\3_semesterprojekt\\3_semesterprojekt\\NetCafeUCN\\DesktopUI\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\neski\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\funde\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -513,15 +508,14 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "projectReferences": {
-            "C:\\Repos\\3_SemesterProjekt\\NetCafeUCN\\DataAccessLayer\\NetCafeUCN.DAL.csproj": {
-              "projectPath": "C:\\Repos\\3_SemesterProjekt\\NetCafeUCN\\DataAccessLayer\\NetCafeUCN.DAL.csproj"
+            "C:\\Users\\funde\\Documents\\GitHub\\3_semesterprojekt\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\DataAccessLayer.csproj": {
+              "projectPath": "C:\\Users\\funde\\Documents\\GitHub\\3_semesterprojekt\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\DataAccessLayer.csproj"
             }
           }
         }
@@ -554,7 +548,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }
