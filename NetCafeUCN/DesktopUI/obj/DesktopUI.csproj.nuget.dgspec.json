@@ -1,28 +1,28 @@
 {
   "format": 1,
   "restore": {
-    "C:\\repos\\BubbleDK\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\DataAccessLayer.csproj": {}
+    "C:\\Repos\\3_SemesterProjekt\\NetCafeUCN\\DesktopUI\\DesktopUI.csproj": {}
   },
   "projects": {
-    "C:\\repos\\BubbleDK\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\DataAccessLayer.csproj": {
+    "C:\\Repos\\3_SemesterProjekt\\NetCafeUCN\\DesktopUI\\DesktopUI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\repos\\BubbleDK\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\DataAccessLayer.csproj",
-        "projectName": "DataAccessLayer",
-        "projectPath": "C:\\repos\\BubbleDK\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\DataAccessLayer.csproj",
-        "packagesPath": "C:\\Users\\marks\\.nuget\\packages\\",
-        "outputPath": "C:\\repos\\BubbleDK\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\obj\\",
+        "projectUniqueName": "C:\\Repos\\3_SemesterProjekt\\NetCafeUCN\\DesktopUI\\DesktopUI.csproj",
+        "projectName": "DesktopUI",
+        "projectPath": "C:\\Repos\\3_SemesterProjekt\\NetCafeUCN\\DesktopUI\\DesktopUI.csproj",
+        "packagesPath": "C:\\Users\\neski\\.nuget\\packages\\",
+        "outputPath": "C:\\Repos\\3_SemesterProjekt\\NetCafeUCN\\DesktopUI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\marks\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\neski\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net6.0-windows"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -30,8 +30,8 @@
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net6.0-windows7.0": {
+            "targetAlias": "net6.0-windows",
             "projectReferences": {}
           }
         },
@@ -42,14 +42,8 @@
         }
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
-          "dependencies": {
-            "System.Data.SqlClient": {
-              "target": "Package",
-              "version": "[4.8.4, )"
-            }
-          },
+        "net6.0-windows7.0": {
+          "targetAlias": "net6.0-windows",
           "imports": [
             "net461",
             "net462",
@@ -64,9 +58,12 @@
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WindowsForms": {
+              "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

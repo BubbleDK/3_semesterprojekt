@@ -476,11 +476,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\marks\\Source\\Repos\\BubbleDK\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\DataAccessLayer.csproj",
+      "projectUniqueName": "C:\\repos\\BubbleDK\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\DataAccessLayer.csproj",
       "projectName": "DataAccessLayer",
-      "projectPath": "C:\\Users\\marks\\Source\\Repos\\BubbleDK\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\DataAccessLayer.csproj",
+      "projectPath": "C:\\repos\\BubbleDK\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\DataAccessLayer.csproj",
       "packagesPath": "C:\\Users\\marks\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\marks\\Source\\Repos\\BubbleDK\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\obj\\",
+      "outputPath": "C:\\repos\\BubbleDK\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

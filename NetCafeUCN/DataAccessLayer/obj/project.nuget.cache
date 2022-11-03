@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "k/Pe7pdsOWoaYE1Cs81v+QJQFCtPNue3BBNacBfesg6GaggCDmQ+3pjaso30ra56R5cDB6lpoDVw5krvs64HIA==",
+  "dgSpecHash": "OiMcyZDAc/6e6p1sUcUPxA8q7enfhVUcC3ft6rL3zteSH5W2l1R0+wP6xRekZvQEjnfidOBuK6XM0WT/0UFHGQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\marks\\Source\\Repos\\BubbleDK\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\DataAccessLayer.csproj",
+  "projectFilePath": "C:\\repos\\BubbleDK\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\DataAccessLayer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\marks\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\marks\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
