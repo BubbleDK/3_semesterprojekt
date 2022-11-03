@@ -13,7 +13,7 @@ namespace NetCafeRestServer.Controllers
         private INetCafeDataAccess<Booking> dataAccess;
         // GET: api/<BookingController>
         [HttpGet]
-        public IEnumerable<Booking> Get()
+        public ActionResult <IEnumerable<Booking>> Get()
         {
             return Ok(dataAccess.GetAll());
         }
