@@ -1,39 +1,20 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
-    "C:\\repos\\BubbleDK\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\DataAccessLayer.csproj": {}
+    "C:\\Users\\funde\\Documents\\GitHub\\3_semesterprojekt\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\DataAccessLayer.csproj": {}
   },
   "projects": {
-    "C:\\repos\\BubbleDK\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\DataAccessLayer.csproj": {
+    "C:\\Users\\funde\\Documents\\GitHub\\3_semesterprojekt\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\DataAccessLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\repos\\BubbleDK\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\DataAccessLayer.csproj",
+        "projectUniqueName": "C:\\Users\\funde\\Documents\\GitHub\\3_semesterprojekt\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\DataAccessLayer.csproj",
         "projectName": "DataAccessLayer",
-        "projectPath": "C:\\repos\\BubbleDK\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\DataAccessLayer.csproj",
-        "packagesPath": "C:\\Users\\marks\\.nuget\\packages\\",
-        "outputPath": "C:\\repos\\BubbleDK\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\obj\\",
-=======
-    "C:\\Users\\funde\\OneDrive\\Dokumenter\\GitHub\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\DataAccessLayer.csproj": {}
-  },
-  "projects": {
-    "C:\\Users\\funde\\OneDrive\\Dokumenter\\GitHub\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\DataAccessLayer.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\funde\\OneDrive\\Dokumenter\\GitHub\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\DataAccessLayer.csproj",
-        "projectName": "DataAccessLayer",
-        "projectPath": "C:\\Users\\funde\\OneDrive\\Dokumenter\\GitHub\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\DataAccessLayer.csproj",
+        "projectPath": "C:\\Users\\funde\\Documents\\GitHub\\3_semesterprojekt\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\DataAccessLayer.csproj",
         "packagesPath": "C:\\Users\\funde\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\funde\\OneDrive\\Dokumenter\\GitHub\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\obj\\",
->>>>>>> 88133830989c3afd03cf74153e63db17cc2ae81e
+        "outputPath": "C:\\Users\\funde\\Documents\\GitHub\\3_semesterprojekt\\3_semesterprojekt\\NetCafeUCN\\DataAccessLayer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-<<<<<<< HEAD
-          "C:\\Users\\marks\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-=======
           "C:\\Users\\funde\\AppData\\Roaming\\NuGet\\NuGet.Config",
->>>>>>> 88133830989c3afd03cf74153e63db17cc2ae81e
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -80,11 +61,7 @@
               "privateAssets": "all"
             }
           },
-<<<<<<< HEAD
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
-=======
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
->>>>>>> 88133830989c3afd03cf74153e63db17cc2ae81e
         }
       }
     }

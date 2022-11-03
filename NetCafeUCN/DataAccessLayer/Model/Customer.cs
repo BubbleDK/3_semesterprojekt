@@ -9,8 +9,6 @@ namespace DataAccessLayer.Model
 {
     public class Customer : Person
     {
-        public Customer() : base(string name, string phone, string email);
-        {
-        }
     }
 }
+

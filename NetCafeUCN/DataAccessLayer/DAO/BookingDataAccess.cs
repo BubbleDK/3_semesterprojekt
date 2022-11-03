@@ -1,20 +1,25 @@
 ﻿using DataAccessLayer.Model;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace DataAccessLayer
+namespace DataAccessLayer.DAO
 {
-    public class ProductDataAccess : INetCafeDataAccess<Product>
+    public class BookingDataAccess : INetCafeDataAccess<Booking>
     {
-        public int Add(Product o)
+        public int Add(Booking o)
         {
             throw new NotImplementedException();
         }
 
-        public Product? Get(dynamic key)
+        public Booking? Get(dynamic key)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Product> GetAll()
+        public IEnumerable<Booking> GetAll()
         {
             throw new NotImplementedException();
         }
@@ -24,7 +29,7 @@ namespace DataAccessLayer
             throw new NotImplementedException();
         }
 
-        public bool Update(Product o)
+        public bool Update(Booking o)
         {
             throw new NotImplementedException();
         }
