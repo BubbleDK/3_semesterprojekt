@@ -10,5 +10,14 @@ namespace DataAccessLayer.Model
     {
         public string ProductNumber{ get; set; }
         public string Description { get; set; }
+
+        public Product(string productNumber, string description)
+        {
+            this.ProductNumber = productNumber;
+            this.Description = description;
+        }
+        public Product()
+        {
+        }
     }
 }
