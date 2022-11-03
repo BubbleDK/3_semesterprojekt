@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\NetCafeUCN",
+    "\\NetCafeUCN\\DataAccessLayer",
+    "\\NetCafeUCN\\DataAccessLayer\\Model"
   ],
+  "SelectedNode": "\\NetCafeUCN\\DataAccessLayer\\Model\\Product.cs",
   "PreviewInSolutionExplorer": false
 }
