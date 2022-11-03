@@ -8,15 +8,19 @@ namespace DataAccessLayer.Model
 {
     public abstract class Person
     {
-        public string Name{ get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
+        public string? Name{ get; set; }
+        public string? Email { get; set; }
+        public string? Phone { get; set; }
 
-        protected Person(string name, string email, string phone)
+        public Person(string name, string email, string phone)
         {
             Name = name;
             Email = email;
             Phone = phone;
+        }
+        public Person()
+        {
+
         }
     }
 }

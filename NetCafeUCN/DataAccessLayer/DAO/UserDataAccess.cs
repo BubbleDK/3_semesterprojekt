@@ -6,12 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.ComponentModel.DataAnnotations;
+using DataAccessLayer.Exceptions;
 
-namespace DataAccessLayer
+namespace DataAccessLayer.DAO
 {
     public class UserDataAccess : INetCafeDataAccess<Person>
     {
-        private string connectionString = @"Data Source=hildur.ucn.dk;User ID=DMA-CSD-S212_10182474;Password=Password1!;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        private readonly string connectionString = @"Data Source=hildur.ucn.dk;User ID=DMA-CSD-S212_10182474;Password=Password1!;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         public int Add(Person o)
         {
             throw new NotImplementedException();
@@ -26,7 +27,7 @@ namespace DataAccessLayer
         {
             string sqlStatement = "SELECT * FROM Persons";
             List<Person> list = new List<Person>();
-            using(SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand(sqlStatement, conn);
 
@@ -38,17 +39,17 @@ namespace DataAccessLayer
                     {
                         Person person = new Customer()
                         {
-                            name = (string)reader["name"],
-                            phone = (string)reader["phone"],
-                            email = (string)reader["email"]
+                            Name = (string?)reader["name"],
+                            Email = (string?)reader["email"],
+                            Phone = (string?)reader["phone"]
                         };
                         list.Add(person);
                     }
                 }
-                catch
+                catch (DataAccessException)
                 {
 
-                    throw;
+                    throw new DataAccessException();
                 }
             }
             return list;
