@@ -20,7 +20,7 @@ namespace DataAccessLayer.DAO
 
         public IEnumerable<Product> GetAll()
         {
-            string sqlStatement = "SELECT * FROM nc_Product WHERE productType = 'gamingstation'";
+            string sqlStatement = "SELECT * FROM nc_Product, nc_GamingStation WHERE productType = 'gamingstation'";
             List<Product> list = new List<Product>();
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
@@ -36,7 +36,7 @@ namespace DataAccessLayer.DAO
                         {
                             ProductNumber = (string)reader["productNo"],
                             Description = (string)reader["description"],
-                            SeatNumber = (string)reader["seatnumber"],
+                            SeatNumber = (string)reader["seatNo"],
                             Tier = (int)reader["tier"],
                             Booked = (bool)reader["booked"]
                         };
