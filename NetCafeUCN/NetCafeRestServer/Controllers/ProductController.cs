@@ -2,6 +2,7 @@
 using DataAccessLayer.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NetCafeUCN.DAL.Model;
 
 namespace NetCafeUCN.API.Controllers
 {
@@ -18,7 +19,7 @@ namespace NetCafeUCN.API.Controllers
 
         // GET: api/<ProductController>
         [HttpGet]
-        public ActionResult<IEnumerable<Product>> Get()
+        public ActionResult<IEnumerable<Product>> GetAll()
         {
             return Ok(dataAccess.GetAll());
         }
