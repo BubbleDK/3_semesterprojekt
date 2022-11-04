@@ -10,33 +10,34 @@ namespace NetCafeUCN.tests
 {
     public class DAOTests
     {
-        //[Fact]
-        //public void TestDBConnection()
-        //{
-        //    //Arrange
-        //    ConnectionState? connectionstate = null;
-        //    SqlConnection Connection = new SqlConnection(DBConnection.ConnectionString);
-           
-        //    Connection.Open();
-        //    connectionstate = Connection.State;
+        [Fact]
+        public void TestDBConnection()
+        {
+            //Arrange
+            ConnectionState? connectionstate = null;
+            using (SqlConnection Connection = new SqlConnection(DBConnection.ConnectionString))
+            {
 
-        //    Connection.Close();
-            
-        //    //Act
+                Connection.Open();
+                connectionstate = Connection.State;
 
-        //    //Assert
-        //    Assert.True(connectionstate == ConnectionState.Open);
+                //Connection.Close();
 
-        //}
-        //[Fact]
-        //public void TestGetAll()
-        //{
-        //    //Arrange
-        //    UserDataAccess userDataAccess = new UserDataAccess();
-        //    List<Person> list = userDataAccess.GetAll().ToList();
-        //    //Assert
-        //    Console.WriteLine(list);
-        //    Assert.True(list.Count>0);
-        //}
+                //Act
+
+                //Assert
+                Assert.True(Connection.State == ConnectionState.Open);
+            }
+        }
+        [Fact]
+        public void TestGetAll()
+        {
+            //Arrange
+            UserDataAccess userDataAccess = new UserDataAccess();
+            List<Person> list = userDataAccess.GetAll().ToList();
+            //Assert
+            Console.WriteLine(list);
+            Assert.True(list.Count > 0);
+        }
     }
 }

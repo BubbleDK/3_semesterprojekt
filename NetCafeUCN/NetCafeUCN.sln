@@ -5,11 +5,11 @@ VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCafeUCN.DAL", "DataAccessLayer\NetCafeUCN.DAL.csproj", "{7E584D4D-644A-4289-B745-2F627F271A82}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCafeUCN.Desktop", "DesktopUI\NetCafeUCN.Desktop.csproj", "{51070CD5-1A4F-4B51-AEBC-07008FF84F97}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCafeUCN.API", "NetCafeRestServer\NetCafeUCN.API.csproj", "{F48B60D0-73E4-49A0-8899-F0502976B985}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCafeUCN.tests", "NetCafeUCN.tests\NetCafeUCN.tests.csproj", "{76606162-95C9-47D2-96D5-D75B7DDBCA25}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCafeUCN.tests", "NetCafeUCN.tests\NetCafeUCN.tests.csproj", "{76606162-95C9-47D2-96D5-D75B7DDBCA25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForTesting", "ForTesting\ForTesting.csproj", "{F9167BA2-E4F7-4D5A-AFE4-D7CC7434558E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +21,6 @@ Global
 		{7E584D4D-644A-4289-B745-2F627F271A82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E584D4D-644A-4289-B745-2F627F271A82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E584D4D-644A-4289-B745-2F627F271A82}.Release|Any CPU.Build.0 = Release|Any CPU
-		{51070CD5-1A4F-4B51-AEBC-07008FF84F97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{51070CD5-1A4F-4B51-AEBC-07008FF84F97}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{51070CD5-1A4F-4B51-AEBC-07008FF84F97}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{51070CD5-1A4F-4B51-AEBC-07008FF84F97}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F48B60D0-73E4-49A0-8899-F0502976B985}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F48B60D0-73E4-49A0-8899-F0502976B985}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F48B60D0-73E4-49A0-8899-F0502976B985}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +29,10 @@ Global
 		{76606162-95C9-47D2-96D5-D75B7DDBCA25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76606162-95C9-47D2-96D5-D75B7DDBCA25}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76606162-95C9-47D2-96D5-D75B7DDBCA25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9167BA2-E4F7-4D5A-AFE4-D7CC7434558E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9167BA2-E4F7-4D5A-AFE4-D7CC7434558E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9167BA2-E4F7-4D5A-AFE4-D7CC7434558E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9167BA2-E4F7-4D5A-AFE4-D7CC7434558E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

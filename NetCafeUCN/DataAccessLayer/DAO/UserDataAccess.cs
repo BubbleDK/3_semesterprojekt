@@ -27,7 +27,7 @@ namespace DataAccessLayer.DAO
         {
             string sqlStatement = "SELECT * FROM nc_Person";
             List<Person> list = new List<Person>();
-            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+            using (SqlConnection conn = new SqlConnection("Data Source = hildur.ucn.dk; User ID = DMA-CSD-S212_10182474; Password = Password1!; Encrypt = False; TrustServerCertificate = True"))
             {
                 SqlCommand cmd = new SqlCommand(sqlStatement, conn);
 
