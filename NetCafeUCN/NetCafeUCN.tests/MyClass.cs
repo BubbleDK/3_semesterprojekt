@@ -11,15 +11,14 @@ namespace NetCafeUCN.tests
 {
     public class MyClass
     {
-        
+        [Fact]
         public void TestDBConn()
         {
             SqlConnection Connection = new SqlConnection(DBConnection.ConnectionString);
             Connection.Open();
-            Console.WriteLine(Connection.State == ConnectionState.Open);
-            //string querystring = "Select * From Booking";
-            //SqlCommand command = new SqlCommand(querystring, Connection);
-            //Assert.Throws<SqlException>(() => command.ExecuteNonQuery());
+            string querystring = "Select * From Booking";
+            SqlCommand command = new SqlCommand(querystring, Connection);
+            Assert.Throws<SqlException>(() => command.ExecuteNonQuery());
             Connection.Close();
         }
     }
