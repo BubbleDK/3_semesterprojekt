@@ -9,7 +9,7 @@ namespace NetCafeUCN.DAL.Model
 {
     public class GamingStation : Product
     {
-        public string SeatNumber { get; set; }
+        public string ?SeatNumber { get; set; }
         public bool Booked  { get; set; }
         public int Tier { get; set; }
         public GamingStation(string productNumber, string description, string seatNumber, int Tier) : base(productNumber, description)
