@@ -1,6 +1,7 @@
 USE [DMA-CSD-S212_10182474];
 
-DROP TABLE nc_PackLine, nc_Pack, nc_GamingStation, nc_BookingLine, nc_Rentable, nc_Consumables, nc_Product, nc_Booking, nc_Customer, nc_Employee, nc_Person, nc_CityZipCode;
+--DROP TABLE nc_PackLine, nc_Pack, nc_GamingStation, nc_BookingLine, nc_Rentable, nc_Consumables, nc_Product, nc_Booking, nc_Customer, nc_Employee, nc_Person, nc_CityZipCode;
+DROP TABLE nc_GamingStation, nc_BookingLine, nc_Consumables, nc_Product, nc_Booking, nc_Customer, nc_Employee, nc_Person, nc_CityZipCode;
 go
 
 CREATE TABLE nc_CityZipCode(
@@ -54,7 +55,7 @@ CREATE TABLE nc_Booking(
 CREATE TABLE nc_Product(
     id INT IDENTITY(1,1),
     productNo INT NOT NULL,
-    description VARCHAR(80),
+    productType VARCHAR(80),
 
     PRIMARY KEY(id),
 );
@@ -77,40 +78,41 @@ CREATE TABLE nc_Rentable(
 CREATE TABLE nc_BookingLine(
     bookingid INT NOT NULL,
     quantity INT NOT NULL,
-    rentableid INT NOT NULL,
+    stationid INT NOT NULL,
     consumableid INT,
 
     CONSTRAINT fk_ncBookinglinebookingid foreign key (bookingid) references nc_Booking(id),
-    CONSTRAINT fk_ncBookinglinerentableid foreign key (rentableid) references nc_Rentable(productid),
+    CONSTRAINT fk_ncBookinglineStationid foreign key (stationid) references nc_Product(id),
     CONSTRAINT fk_ncBookinglineConsumableid FOREIGN KEY (consumableid) references nc_Consumables(productid),
 );
 
 
 CREATE TABLE nc_GamingStation(
-    rentableid INT NOT NULL,
+    stationid INT NOT NULL,
     seatNo INT NOT NULL,
     description VARCHAR(50),
     tier INT NOT NULL,
     booked INT DEFAULT 0,
 
-    CONSTRAINT fk_ncGamingstationrentableid foreign key (rentableid) references nc_Rentable(productid),
+    CONSTRAINT fk_ncGamingstationrentableid foreign key (stationid) references nc_Product(id),
+	PRIMARY KEY(stationid),
 );
 
-CREATE TABLE nc_Pack(
-    rentableid INT NOT NULL,
-    id INT IDENTITY(1,1),
+--CREATE TABLE nc_Pack(
+--    rentableid INT NOT NULL,
+--    id INT IDENTITY(1,1),
 
-    CONSTRAINT fk_ncPackproductid FOREIGN KEY (rentableid) REFERENCES nc_Product(productid),
-    PRIMARY KEY(id),
-);
+--    CONSTRAINT fk_ncPackproductid FOREIGN KEY (rentableid) REFERENCES nc_Product(productid),
+--    PRIMARY KEY(id),
+--);
 
-CREATE TABLE nc_PackLine(
-    productid INT NOT NULL,
-    quantity INT NOT NULL,
-    packid INT NOT NULL,
+--CREATE TABLE nc_PackLine(
+--    productid INT NOT NULL,
+--    quantity INT NOT NULL,
+--    packid INT NOT NULL,
 
-    CONSTRAINT fk_ncPackLineproductid FOREIGN KEY (productid) REFERENCES nc_Product(productid),
-    CONSTRAINT fk_ncPackLinepackid FOREIGN KEY (packid) REFERENCES nc_Pack(id),
-);
+--    CONSTRAINT fk_ncPackLineproductid FOREIGN KEY (productid) REFERENCES nc_Product(productid),
+--    CONSTRAINT fk_ncPackLinepackid FOREIGN KEY (packid) REFERENCES nc_Pack(id),
+--);
 
 
