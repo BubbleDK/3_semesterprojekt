@@ -43,8 +43,8 @@ CREATE TABLE nc_Employee(
 CREATE TABLE nc_Booking(
     id INT IDENTITY(1,1),
     bookingNo INT NOT NULL,
-    startTime dateTime NOT NULL,
-    endTime dateTime NOT NULL,
+    startTime smalldateTime NOT NULL,
+    endTime smalldateTime NOT NULL,
     customerid INT NOT NULL,
     employeeid INT NOT NULL,
 
