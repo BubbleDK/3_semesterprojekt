@@ -51,11 +51,12 @@ namespace DataAccessLayer.DAO
                         {
                             Product product = new GamingStation()
                             {
-                                ProductNumber = (string)reader["productNo"],
-                                Description = (string)reader["description"],
-                                SeatNumber = (string)reader["seatNo"],
-                                Tier = (int)reader["tier"],
-                                Booked = (bool)reader["booked"]
+                            ProductNumber = (string)reader["productNo"],
+                            Type = (string)reader["type"],
+                            SeatNumber = (string)reader["seatNo"],
+                            Description = (string)reader["description"],
+                            Tier = (int)reader["tier"],
+                            Booked = (bool)reader["booked"]
                             };
                             return product;
                         }
@@ -88,8 +89,9 @@ namespace DataAccessLayer.DAO
                         Product product = new GamingStation()
                         {
                             ProductNumber = (string)reader["productNo"],
-                            Description = (string)reader["description"],
+                            Type = (string)reader["type"],
                             SeatNumber = (string)reader["seatNo"],
+                            Description = (string)reader["description"],
                             Tier = (int)reader["tier"],
                             Booked = (bool)reader["booked"]
                         };
