@@ -21,7 +21,7 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
 
         public IEnumerable<Booking> GetAll()
         {
-
+            throw new NotImplementedException();
         }
 
         public bool Remove(int id)

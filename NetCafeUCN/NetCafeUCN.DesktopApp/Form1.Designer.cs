@@ -28,24 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lstAllBookings = new System.Windows.Forms.ListBox();
+            this.lstAllproducts = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
-            // lstAllBookings
+            // lstAllproducts
             // 
-            this.lstAllBookings.FormattingEnabled = true;
-            this.lstAllBookings.ItemHeight = 15;
-            this.lstAllBookings.Location = new System.Drawing.Point(85, 45);
-            this.lstAllBookings.Name = "lstAllBookings";
-            this.lstAllBookings.Size = new System.Drawing.Size(417, 244);
-            this.lstAllBookings.TabIndex = 0;
+            this.lstAllproducts.FormattingEnabled = true;
+            this.lstAllproducts.ItemHeight = 15;
+            this.lstAllproducts.Location = new System.Drawing.Point(85, 45);
+            this.lstAllproducts.Name = "lstAllproducts";
+            this.lstAllproducts.Size = new System.Drawing.Size(417, 244);
+            this.lstAllproducts.TabIndex = 0;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.lstAllBookings);
+            this.Controls.Add(this.lstAllproducts);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -54,6 +54,6 @@
 
         #endregion
 
-        private ListBox lstAllBookings;
+        private ListBox lstAllproducts;
     }
 }

@@ -8,4 +8,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="RestSharp.Serializers.NewtonsoftJson" Version="108.0.2" />
+  </ItemGroup>
+
 </Project>

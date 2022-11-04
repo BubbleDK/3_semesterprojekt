@@ -1,25 +1,25 @@
-﻿using DataAccessLayer.Model;
+﻿using NetCafeUCN.DesktopApp.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccessLayer.DAO
+namespace NetCafeUCN.DesktopApp.ServiceLayer
 {
-    public class BookingDataAccess : INetCafeDataAccess<Booking>
+    internal class ProductService : INetCafeDataAccess<Product>
     {
-        public int Add(Booking o)
+        public int Add(Product o)
         {
             throw new NotImplementedException();
         }
 
-        public Booking? Get(dynamic key)
+        public Product? Get(dynamic key)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Booking> GetAll()
+        public IEnumerable<Product> GetAll()
         {
             throw new NotImplementedException();
         }
@@ -29,7 +29,7 @@ namespace DataAccessLayer.DAO
             throw new NotImplementedException();
         }
 
-        public bool Update(Booking o)
+        public bool Update(Product o)
         {
             throw new NotImplementedException();
         }

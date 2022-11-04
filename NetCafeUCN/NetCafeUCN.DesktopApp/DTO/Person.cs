@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace NetCafeUCN.DesktopApp.DTO
 {
-    public class Booking
+    public class Person
     {
-        public int BookingNo { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
+        public string? Name { get; set; }
+        public string? Email { get; set; }
+        public string? Phone { get; set; }
     }
 }

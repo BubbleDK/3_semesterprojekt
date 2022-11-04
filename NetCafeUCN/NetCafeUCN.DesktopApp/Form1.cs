@@ -1,10 +1,11 @@
+using NetCafeUCN.DesktopApp.DTO;
 using NetCafeUCN.DesktopApp.ServiceLayer;
 
 namespace NetCafeUCN.DesktopApp
 {
     public partial class Form1 : Form
     {
-        public BookingService bookingService = new();
+        INetCafeDataAccess<Person> UserService = new UserService("https://localhost:7197/api/Person");
         public Form1()
         {
             InitializeComponent();
@@ -13,8 +14,9 @@ namespace NetCafeUCN.DesktopApp
 
         private void ShowAllBookings()
         {
-            lstAllBookings.Items.Clear();
-            lstAllBookings.Items.Add(bookingService.GetAll());
+            lstAllproducts.Items.Clear();
+            var all = UserService.GetAll();
+            lstAllproducts.Items.Add(UserService.GetAll());
         }
     }
 }
