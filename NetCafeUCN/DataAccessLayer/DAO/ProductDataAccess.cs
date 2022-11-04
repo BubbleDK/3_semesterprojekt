@@ -13,10 +13,41 @@ namespace DataAccessLayer.DAO
             throw new NotImplementedException();
         }
 
-        public Product? Get(dynamic key)
+        public Product? Get(dynamic productNo)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString)) {
+                using (SqlCommand command = new SqlCommand("SELECT * FROM nc_Product, nc_GamingStation WHERE productNo = @productNo", conn))
+                {
+                    command.Parameters.AddWithValue("productNo", productNo);
+                    {
+                        try
+                        {
+                            conn.Open();
+                            SqlDataReader reader = command.ExecuteReader();
+                            while (reader.Read())
+                            {
+                                Product product = new GamingStation()
+                                {
+                                    ProductNumber = (string)reader["productNo"],
+                                    Description = (string)reader["description"],
+                                    SeatNumber = (string)reader["seatNo"],
+                                    Tier = (int)reader["tier"],
+                                    Booked = (bool)reader["booked"]
+                                };
+                                return product;
+                            }
+                        }
+                        catch (DataAccessException)
+                        {
+
+                            throw new DataAccessException("Can't access data");
+                        }
+                    }
+                }
+            }
+           return null;
         }
+    
 
         public IEnumerable<Product> GetAll()
         {
