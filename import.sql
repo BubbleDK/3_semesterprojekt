@@ -14,8 +14,9 @@ CREATE TABLE nc_CityZipCode(
 CREATE TABLE nc_Person(
 	id INT IDENTITY(1,1),
 	name VARCHAR(50) NOT NULL,
-	phone INT,
+	phone VARCHAR (50),
 	email VARCHAR(50) NOT NULL,
+	personType VARCHAR(50) NOT NULL,
 
 	PRIMARY KEY(id),
 );
@@ -42,8 +43,8 @@ CREATE TABLE nc_Employee(
 CREATE TABLE nc_Booking(
     id INT IDENTITY(1,1),
     bookingNo INT NOT NULL,
-    startTime INT NOT NULL,
-    endTime INT NOT NULL,
+    startTime dateTime NOT NULL,
+    endTime dateTime NOT NULL,
     customerid INT NOT NULL,
     employeeid INT NOT NULL,
 
