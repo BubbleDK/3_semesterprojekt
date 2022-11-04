@@ -15,8 +15,7 @@ namespace NetCafeUCN.DesktopApp
         private void ShowAllBookings()
         {
             lstAllproducts.Items.Clear();
-            var all = UserService.GetAll();
-            lstAllproducts.Items.Add(UserService.GetAll());
+            UserService.GetAll().ToList().ForEach(x => lstAllproducts.Items.Add(x));
         }
     }
 }
