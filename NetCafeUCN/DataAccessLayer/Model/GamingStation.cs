@@ -20,8 +20,9 @@ namespace NetCafeUCN.DAL.Model
             this.Tier = Tier;
             this.Booked = false;
         }
-        
 
-
+        public GamingStation()
+        {
+        }
     }
 }
