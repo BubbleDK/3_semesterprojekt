@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="RestSharp" Version="108.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\DataAccessLayer\NetCafeUCN.DAL.csproj" />
     <ProjectReference Include="..\NetCafeRestServer\NetCafeUCN.API.csproj" />
   </ItemGroup>

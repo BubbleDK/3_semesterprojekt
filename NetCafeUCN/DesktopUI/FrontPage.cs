@@ -22,7 +22,7 @@ namespace NetCafeUCN.Desktop
         private void ShowAllProducts()
         {
             lstAllProducts.Items.Clear();
-            //lstAllProducts.Items.Add(ProductController.)
+            
         }
     }
 }
