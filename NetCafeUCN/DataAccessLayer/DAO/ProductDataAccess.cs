@@ -3,45 +3,67 @@ using DataAccessLayer.Model;
 using NetCafeUCN.DAL.DAO;
 using NetCafeUCN.DAL.Model;
 using System.Data.SqlClient;
+using System.Xml.Linq;
 
 namespace DataAccessLayer.DAO
 {
     public class ProductDataAccess : INetCafeDataAccess<Product>
     {
-        public int Add(Product o)
+        public int Add(Product p)
         {
-            throw new NotImplementedException();
-        }
+
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+            {
+                {
+                    conn.Open();
+                    try
+                    {
+                        using (SqlCommand command = new SqlCommand(
+                            "INSERT INTO nc_GamingStation VALUES(@seatNo, @description, @tier, @booked)", conn))
+                        {
+                            command.Parameters.Add(new SqlParameter("seatNo", p));
+                            command.Parameters.Add(new SqlParameter("description", p));
+                            command.Parameters.Add(new SqlParameter("tier", p));
+                            command.Parameters.Add(new SqlParameter("booked", p));
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                    catch(DataAccessException)
+                    {
+                        throw new DataAccessException("Can't access data");
+                    }
+                }
+          }
+            return 0;
+    }
 
         public Product? Get(dynamic productNo)
         {
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString)) {
-                using (SqlCommand command = new SqlCommand("SELECT * FROM nc_Product, nc_GamingStation WHERE productNo = @productNo", conn))
+                using SqlCommand command = new SqlCommand("SELECT * FROM nc_Product, nc_GamingStation WHERE productNo = @productNo", conn);
+                command.Parameters.AddWithValue("productNo", productNo);
                 {
-                    command.Parameters.AddWithValue("productNo", productNo);
+                    try
                     {
-                        try
+                        conn.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
                         {
-                            conn.Open();
-                            SqlDataReader reader = command.ExecuteReader();
-                            while (reader.Read())
+                            Product product = new GamingStation()
                             {
-                                Product product = new GamingStation()
-                                {
-                                    ProductNumber = (string)reader["productNo"],
-                                    Description = (string)reader["description"],
-                                    SeatNumber = (string)reader["seatNo"],
-                                    Tier = (int)reader["tier"],
-                                    Booked = (bool)reader["booked"]
-                                };
-                                return product;
-                            }
+                                ProductNumber = (string)reader["productNo"],
+                                Description = (string)reader["description"],
+                                SeatNumber = (string)reader["seatNo"],
+                                Tier = (int)reader["tier"],
+                                Booked = (bool)reader["booked"]
+                            };
+                            return product;
                         }
-                        catch (DataAccessException)
-                        {
+                    }
+                    catch (DataAccessException)
+                    {
 
-                            throw new DataAccessException("Can't access data");
-                        }
+                        throw new DataAccessException("Can't access data");
                     }
                 }
             }
