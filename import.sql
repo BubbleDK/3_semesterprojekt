@@ -1,6 +1,6 @@
 USE [DMA-CSD-S212_10182474];
 
-DROP TABLE nc_Booking, nc_BookingLine, nc_CityZipCode, nc_Consumables, nc_Customer, nc_Employee, nc_GamingStation, nc_Pack, nc_PackLine, nc_Person, nc_Product, nc_Rentable;
+DROP TABLE nc_PackLine, nc_Pack, nc_GamingStation, nc_BookingLine, nc_Rentable, nc_Consumables, nc_Product, nc_Booking, nc_Customer, nc_Employee, nc_Person, nc_CityZipCode;
 go
 
 CREATE TABLE nc_CityZipCode(
