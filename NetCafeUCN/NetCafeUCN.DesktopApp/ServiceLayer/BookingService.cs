@@ -1,13 +1,13 @@
-﻿using DataAccessLayer.Model;
+﻿using NetCafeUCN.DesktopApp.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccessLayer.DAO
+namespace NetCafeUCN.DesktopApp.ServiceLayer
 {
-    public class BookingDataAccess : INetCafeDataAccess<Booking>
+    public class BookingService : INetCafeDataAccess<Booking>
     {
         public int Add(Booking o)
         {
@@ -21,8 +21,7 @@ namespace DataAccessLayer.DAO
 
         public IEnumerable<Booking> GetAll()
         {
-            List<Booking> bookings = new List<Booking>();
-           return bookings;
+
         }
 
         public bool Remove(int id)

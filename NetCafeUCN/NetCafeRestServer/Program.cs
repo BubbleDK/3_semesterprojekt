@@ -1,7 +1,12 @@
+using DataAccessLayer.DAO;
+using DataAccessLayer.Model;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddSingleton<INetCafeDataAccess<Booking>, BookingDataAccess>();
+builder.Services.AddSingleton<INetCafeDataAccess<Person>, UserDataAccess>();
+builder.Services.AddSingleton<INetCafeDataAccess<Product>, ProductDataAccess>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
