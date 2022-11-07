@@ -20,7 +20,7 @@ namespace NetCafeUCN.DesktopApp
 
         private void btnDeleteByPhoneNumber_Click(object sender, EventArgs e)
         {
-            UserService.Remove(txtPhoneNumber);
+            UserService.Remove(txtPhoneNumber.Text);
         }
     }
 }
