@@ -18,7 +18,7 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
             BaseUri = baseUri;
             RestClient = new RestClient(baseUri);
         }
-        public int Add(Person o)
+        public bool Add(Person o)
         {
             throw new NotImplementedException();
         }
