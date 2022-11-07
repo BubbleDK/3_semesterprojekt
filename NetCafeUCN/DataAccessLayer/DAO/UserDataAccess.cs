@@ -13,21 +13,62 @@ namespace DataAccessLayer.DAO
 {
     public class UserDataAccess : INetCafeDataAccess<Person>
     {
-        public int Add(Person o)
+        public bool Add(Person o)
         {
             throw new NotImplementedException();
         }
 
         public Person? Get(dynamic key)
         {
-            throw new NotImplementedException();
+            string sqlStatement = "SELECT * FROM nc_Person WHERE @phone = phone";
+
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand(sqlStatement, conn);
+
+                try
+                {
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    Person? person = null;
+                    if ((string?)reader["persontype"] == "customer")
+                    {
+                        person = new Customer()
+                        {
+                            Name = (string?)reader["name"],
+                            Email = (string?)reader["email"],
+                            Phone = (string?)reader["phone"]
+                        };
+                    }else if ((string?)reader["persontype"] == "employee") 
+                    {
+                        person = new Employee()
+                        {
+                            Name = (string?)reader["name"],
+                            Email = (string?)reader["email"],
+                            Phone = (string?)reader["phone"],
+                            Role = (string)reader["role"],
+                            Address = (string)reader["address"],
+                            Access = (string)reader["access"],
+                            Zipcode = (int)reader["zipcode"],
+                            City = (string)reader["City"]
+
+                        };
+                    }
+                    return person;
+                }
+                catch (Exception)
+                {
+
+                    Console.WriteLine("YOU DONKEY");
+                }
+            }
         }
 
         public IEnumerable<Person> GetAll()
         {
             string sqlStatement = "SELECT * FROM nc_Person";
             List<Person> list = new List<Person>();
-            using (SqlConnection conn = new SqlConnection("Data Source = hildur.ucn.dk; User ID = DMA-CSD-S212_10182474; Password = Password1!; Encrypt = False; TrustServerCertificate = True"))
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand(sqlStatement, conn);
 
