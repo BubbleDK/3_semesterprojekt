@@ -50,7 +50,7 @@ namespace NetCafeUCN.API.Controllers
 
             // DELETE api/<PersonController>/40559810
             [HttpDelete("{phoneNo}")]
-            public ActionResult<bool> Delete(int phoneNo)
+            public ActionResult<bool> Delete(string phoneNo)
             {
                 if (dataAccess.Remove(phoneNo))
                 {
