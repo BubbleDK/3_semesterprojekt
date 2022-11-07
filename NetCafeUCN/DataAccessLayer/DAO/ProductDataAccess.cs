@@ -90,7 +90,6 @@ namespace DataAccessLayer.DAO
                             Type = (string)reader["type"],
                             SeatNumber = (string)reader["seatNo"],
                             Description = (string)reader["description"],
-                            Tier = (int)reader["tier"],
                             Booked = (bool)reader["booked"]
                         };
                         list.Add(product);
