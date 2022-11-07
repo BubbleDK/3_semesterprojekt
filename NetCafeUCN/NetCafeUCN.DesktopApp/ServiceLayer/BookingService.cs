@@ -9,7 +9,7 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
 {
     public class BookingService : INetCafeDataAccess<Booking>
     {
-        public int Add(Booking o)
+        public bool Add(Booking o)
         {
             throw new NotImplementedException();
         }
