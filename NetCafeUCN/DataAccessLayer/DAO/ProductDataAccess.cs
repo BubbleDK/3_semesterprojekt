@@ -23,7 +23,6 @@ namespace DataAccessLayer.DAO
                         {
                             command.Parameters.Add(new SqlParameter("seatNo", p));
                             command.Parameters.Add(new SqlParameter("description", p));
-                            command.Parameters.Add(new SqlParameter("booked", p));
                             command.ExecuteNonQuery();
                         }
                     }
@@ -54,7 +53,6 @@ namespace DataAccessLayer.DAO
                             Type = (string)reader["type"],
                             SeatNumber = (string)reader["seatNo"],
                             Description = (string)reader["description"],
-                            Booked = (bool)reader["booked"]
                             };
                             return product;
                         }
@@ -90,7 +88,6 @@ namespace DataAccessLayer.DAO
                             Type = (string)reader["type"],
                             SeatNumber = (string)reader["seatNo"],
                             Description = (string)reader["description"],
-                            Booked = (bool)reader["booked"]
                         };
                         list.Add(product);
                     }

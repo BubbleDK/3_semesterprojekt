@@ -48,7 +48,6 @@ namespace DataAccessLayer.DAO
                             Phone = (string?)reader["phone"],
                             Role = (string)reader["role"],
                             Address = (string)reader["address"],
-                            Access = (string)reader["access"],
                             Zipcode = (int)reader["zipcode"],
                             City = (string)reader["City"]
 
