@@ -24,7 +24,7 @@ CREATE TABLE nc_Person(
 CREATE TABLE nc_Customer(
     personid INT,
 
-    CONSTRAINT fk_ncPerson foreign key (personid) references nc_Person(id),
+    CONSTRAINT fk_ncPerson foreign key (personid) references nc_Person(id) ON DELETE CASCADE,
     PRIMARY KEY(personid),
 );
 
@@ -35,7 +35,7 @@ CREATE TABLE nc_Employee(
     zipCode INT NOT NULL,
 
     CONSTRAINT fk_ncZipCode foreign key (zipCode) references nc_CityZipCode(zipCode),
-    CONSTRAINT fk_ncEmployeepersonid foreign key (personid) references nc_Person(id),
+    CONSTRAINT fk_ncEmployeepersonid foreign key (personid) references nc_Person(id) ON DELETE CASCADE,
     PRIMARY KEY(personid),
 );
 
@@ -44,9 +44,9 @@ CREATE TABLE nc_Booking(
     bookingNo INT NOT NULL,
     startTime smalldateTime NOT NULL,
     endTime smalldateTime NOT NULL,
-    customerid INT NOT NULL,
+    customerid INT,
 
-    CONSTRAINT fk_ncCustomer foreign key (customerid) references nc_Customer(personid),
+    CONSTRAINT fk_ncCustomer foreign key (customerid) references nc_Customer(personid) ON DELETE SET NULL,
     PRIMARY KEY(id),
 );
 
@@ -62,7 +62,7 @@ CREATE TABLE nc_Consumables(
     productid INT NOT NULL,
     description VARCHAR(50),
 
-    CONSTRAINT fk_ncConsumablesproductid foreign key (productid) references nc_Product(id),
+    CONSTRAINT fk_ncConsumablesproductid foreign key (productid) references nc_Product(id) ON DELETE CASCADE,
     PRIMARY KEY(productid),
 );
 
@@ -72,7 +72,7 @@ CREATE TABLE nc_BookingLine(
     stationid INT NOT NULL,
     consumableid INT,
 
-    CONSTRAINT fk_ncBookinglinebookingid foreign key (bookingid) references nc_Booking(id),
+    CONSTRAINT fk_ncBookinglinebookingid foreign key (bookingid) references nc_Booking(id) ON DELETE CASCADE,
     CONSTRAINT fk_ncBookinglineStationid foreign key (stationid) references nc_Product(id),
     CONSTRAINT fk_ncBookinglineConsumableid FOREIGN KEY (consumableid) references nc_Consumables(productid),
 );
