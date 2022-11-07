@@ -36,7 +36,7 @@ namespace NetCafeUCN.API.Controllers
 
             // POST api/<PersonController>
             [HttpPost]
-            public ActionResult<int> Add(Person person)
+            public ActionResult<bool> Add(Person person)
             {
                 return Ok(dataAccess.Add(person));
             }

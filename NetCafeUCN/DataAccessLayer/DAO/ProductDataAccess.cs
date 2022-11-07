@@ -9,7 +9,7 @@ namespace DataAccessLayer.DAO
 {
     public class ProductDataAccess : INetCafeDataAccess<Product>
     {
-        public int Add(Product p)
+        public bool Add(Product p)
         {
 
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))

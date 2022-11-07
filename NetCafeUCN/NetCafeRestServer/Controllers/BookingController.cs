@@ -36,7 +36,7 @@ namespace NetCafeUCN.API.Controllers
 
         // POST api/<BookingController>
         [HttpPost]
-        public ActionResult<int> Add(Booking booking)
+        public ActionResult<bool> Add(Booking booking)
         {
             return Ok(dataAccess.Add(booking));
         }

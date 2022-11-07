@@ -9,7 +9,7 @@ namespace DataAccessLayer.DAO
 {
     public class BookingDataAccess : INetCafeDataAccess<Booking>
     {
-        public int Add(Booking o)
+        public bool Add(Booking o)
         {
             throw new NotImplementedException();
         }

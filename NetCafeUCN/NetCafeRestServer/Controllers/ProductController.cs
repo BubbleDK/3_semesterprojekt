@@ -36,7 +36,7 @@ namespace NetCafeUCN.API.Controllers
 
         // POST api/<ProductController>
         [HttpPost]
-        public ActionResult<int> Add(Product product)
+        public ActionResult<bool> Add(Product product)
         {
             return Ok(dataAccess.Add(product));
         }
