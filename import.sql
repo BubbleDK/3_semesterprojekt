@@ -32,7 +32,6 @@ CREATE TABLE nc_Employee(
     personid INT,
     address VARCHAR(50), 
     role VARCHAR(15),
-    access VARCHAR(15),
     zipCode INT NOT NULL,
 
     CONSTRAINT fk_ncZipCode foreign key (zipCode) references nc_CityZipCode(zipCode),
@@ -55,7 +54,7 @@ CREATE TABLE nc_Booking(
 
 CREATE TABLE nc_Product(
     id INT IDENTITY(1,1),
-    productNo INT NOT NULL,
+    productNo VARCHAR(50) NOT NULL,
     productType VARCHAR(80),
 
     PRIMARY KEY(id),
@@ -90,9 +89,8 @@ CREATE TABLE nc_BookingLine(
 
 CREATE TABLE nc_GamingStation(
     stationid INT NOT NULL,
-    seatNo INT NOT NULL,
+    seatNo VARCHAR(50) NOT NULL,
     description VARCHAR(50),
-    tier INT NOT NULL,
     booked INT DEFAULT 0,
 
     CONSTRAINT fk_ncGamingstationrentableid foreign key (stationid) references nc_Product(id),
