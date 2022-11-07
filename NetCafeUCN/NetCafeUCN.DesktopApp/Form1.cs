@@ -17,5 +17,10 @@ namespace NetCafeUCN.DesktopApp
             lstAllproducts.Items.Clear();
             UserService.GetAll().ToList().ForEach(x => lstAllproducts.Items.Add(x));
         }
+
+        private void btnDeleteByPhoneNumber_Click(object sender, EventArgs e)
+        {
+            UserService.Remove(txtPhoneNumber);
+        }
     }
 }
