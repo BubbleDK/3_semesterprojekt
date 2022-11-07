@@ -109,7 +109,7 @@ INSERT INTO nc_CityZipCode VALUES (9000, 'Aalborg');
 
 INSERT INTO nc_Person VALUES ('John', '88888888', 'john@gmail.com', 'Customer');
 INSERT INTO nc_Person VALUES ('Bodil', '88888889', 'bodil@gmail.com', 'Employee');
-INSERT INTO nc_Person VALUES ('Carsten', '99999999', 'john@gmail.com', 'Customer');
+INSERT INTO nc_Person VALUES ('Carsten', '99999999', 'carsten@gmail.com', 'Customer');
 
 INSERT INTO nc_Customer VALUES (1);
 INSERT INTO nc_Customer VALUES (3);
