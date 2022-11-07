@@ -115,7 +115,7 @@ namespace DataAccessLayer.DAO
             return list;
         }
 
-        public bool Remove(dynamic key)
+        public bool Remove(dynamic id)
         {
             throw new NotImplementedException();
         }
