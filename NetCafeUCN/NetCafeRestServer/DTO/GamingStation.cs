@@ -11,6 +11,6 @@ namespace NetCafeUCN.DesktopApp.DTO
         public string? SeatNumber { get; set; }
         public string? Description { get; set; }
         public bool Booked { get; set; }
-        public int Tier { get; set; }
+        
     }
 }
