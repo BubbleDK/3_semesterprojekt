@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.ComponentModel.DataAnnotations;
 using DataAccessLayer.Exceptions;
 using NetCafeUCN.DAL.DAO;
+using System.Data;
 
 namespace DataAccessLayer.DAO
 {
@@ -15,7 +16,34 @@ namespace DataAccessLayer.DAO
     {
         public bool Add(Person o)
         {
-            throw new NotImplementedException();
+            string sqlStatement = "INSERT INTO nc_Person(name, phone, email, personType) VALUES (@name, @phone, @email, @personType)";
+
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+            {
+
+                try
+                {
+                    SqlCommand cmd = new SqlCommand(sqlStatement, conn);
+                    conn.Open();
+                    cmd.Parameters.Add("@name", SqlDbType.VarChar);
+                    cmd.Parameters["@name"].Value = o.Name;
+                    cmd.Parameters.Add("@phone", SqlDbType.VarChar);
+                    cmd.Parameters["@phone"].Value = o.Phone;
+                    cmd.Parameters.Add("@email", SqlDbType.VarChar);
+                    cmd.Parameters["@email"].Value = o.Email;
+                    cmd.Parameters.Add("@personType", SqlDbType.VarChar);
+                    cmd.Parameters["@personType"].Value = o.PersonType;
+                    cmd.ExecuteNonQuery();
+
+                    return true;
+                }
+                catch (Exception)
+                {
+
+                    return false;
+                }
+
+            }
         }
 
         public Person? Get(dynamic key)
@@ -25,7 +53,7 @@ namespace DataAccessLayer.DAO
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand(sqlStatement, conn);
-                cmd.Parameters.Add("@phone", System.Data.SqlDbType.VarChar);
+                cmd.Parameters.Add("@phone", SqlDbType.VarChar);
                 cmd.Parameters["@phone"].Value = key;
                 Person? person = null;
                 try
