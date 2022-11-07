@@ -23,7 +23,6 @@ namespace DataAccessLayer.DAO
                         {
                             command.Parameters.Add(new SqlParameter("seatNo", p));
                             command.Parameters.Add(new SqlParameter("description", p));
-                            command.Parameters.Add(new SqlParameter("booked", p));
                             command.ExecuteNonQuery();
                         }
                     }
@@ -54,7 +53,6 @@ namespace DataAccessLayer.DAO
                             Type = (string)reader["type"],
                             SeatNumber = (string)reader["seatNo"],
                             Description = (string)reader["description"],
-                            Booked = (bool)reader["booked"]
                             };
                             return product;
                         }
@@ -72,7 +70,7 @@ namespace DataAccessLayer.DAO
 
         public IEnumerable<Product> GetAll()
         {
-            string sqlStatement = "SELECT * FROM nc_Product, nc_GamingStation WHERE productType = 'gamingstation'";
+            string sqlStatement = "SELECT * FROM nc_Product, nc_GamingStation, nc_Consumables";
             List<Product> list = new List<Product>();
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
@@ -84,15 +82,28 @@ namespace DataAccessLayer.DAO
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        Product product = new GamingStation()
+                        if ((string)reader["productType"] == "gamingstation")
                         {
-                            ProductNumber = (string)reader["productNo"],
-                            Type = (string)reader["type"],
-                            SeatNumber = (string)reader["seatNo"],
-                            Description = (string)reader["description"],
-                            Booked = (bool)reader["booked"]
-                        };
-                        list.Add(product);
+                            Product product = new GamingStation()
+                            {
+                                ProductNumber = (string)reader["productNo"],
+                                Description = (string)reader["description"],
+                                Type = (string)reader["productType"],
+                                SeatNumber = (string)reader["seatNo"],
+
+                            };
+                            list.Add(product);
+                        }
+                        else
+                        {
+                            Product product = new Consumable()
+                            {
+                                ProductNumber = (string)reader["productNo"],
+                                Description = (string)reader["description"],
+                                Type = (string)reader["productType"],
+                            };
+                            list.Add(product);
+                        }
                     }
                 }
                 catch (DataAccessException)

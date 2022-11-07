@@ -20,52 +20,46 @@ namespace DataAccessLayer.DAO
 
         public Person? Get(dynamic key)
         {
-            string sqlStatement = "SELECT * FROM nc_Person WHERE phone = @phone";
+            string sqlStatement = "SELECT * FROM nc_Person WHERE @phone = phone";
 
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand(sqlStatement, conn);
-                cmd.Parameters.Add("@phone", System.Data.SqlDbType.VarChar);
-                cmd.Parameters["@phone"].Value = key;
                 Person? person = null;
                 try
                 {
                     conn.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read())
+                   
+                    if ((string?)reader["persontype"] == "customer")
                     {
-                        if ((string?)reader["personType"] == "Customer")
+                        person = new Customer()
                         {
-                            person = new Customer()
-                            {
-                                Name = (string?)reader["name"],
-                                Email = (string?)reader["email"],
-                                Phone = (string?)reader["phone"]
-                            };
-                        }
-                        else if ((string?)reader["personType"] == "Employee")
+                            Name = (string?)reader["name"],
+                            Email = (string?)reader["email"],
+                            Phone = (string?)reader["phone"]
+                        };
+                    }else if ((string?)reader["persontype"] == "employee") 
+                    {
+                        person = new Employee()
                         {
-                            person = new Employee()
-                            {
-                                Name = (string?)reader["name"],
-                                Email = (string?)reader["email"],
-                                Phone = (string?)reader["phone"],
-                                Role = (string)reader["role"],
-                                Address = (string)reader["address"],
-                                Zipcode = (int)reader["zipcode"],
-                                City = (string)reader["City"]
+                            Name = (string?)reader["name"],
+                            Email = (string?)reader["email"],
+                            Phone = (string?)reader["phone"],
+                            Role = (string)reader["role"],
+                            Address = (string)reader["address"],
+                            Zipcode = (int)reader["zipcode"],
+                            City = (string)reader["City"]
 
-                            };
-                        }
-                        
+                        };
                     }
+                    return person;
                 }
                 catch (Exception)
                 {
 
-                    throw;
+                    return person;
                 }
-                return person;
             }
         }
 
@@ -101,31 +95,8 @@ namespace DataAccessLayer.DAO
             return list;
         }
 
-        public bool Remove(dynamic key)
+        public bool Remove(int id)
         {
-            string sqlStatement = "DELETE FROM nc_Person WHERE phone = @phone";
-
-            using(SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
-            {
-                SqlCommand cmd = new SqlCommand(sqlStatement, conn);
-
-                try
-                {
-                    conn.Open();
-
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    cmd.Parameters.Add("@phone", System.Data.SqlDbType.VarChar);
-                    cmd.Parameters["@phone"].Value = key;
-                    cmd.ExecuteNonQuery();
-
-
-                }
-                catch (Exception)
-                {
-
-                    throw;
-                }
-            }
             throw new NotImplementedException();
         }
 

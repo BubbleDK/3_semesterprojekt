@@ -8,7 +8,7 @@ namespace DataAccessLayer.Model
 {
     public abstract class Product
     {
-        public string ?ProductNumber{ get; set; }
+        public string ProductNumber{ get; set; }
         public string ?Type { get; set; }
 
         public Product(string productNumber, string type)
