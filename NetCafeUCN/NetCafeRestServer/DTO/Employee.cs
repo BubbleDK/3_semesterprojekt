@@ -9,7 +9,6 @@ namespace NetCafeUCN.DesktopApp.DTO
     internal class Employee:Person
     {
         public string Role { get; set; }
-        public string Access { get; set; }
         public string Address { get; set; }
         public int Zipcode { get; set; }
         public string City { get; set; }

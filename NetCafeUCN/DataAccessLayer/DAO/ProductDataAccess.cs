@@ -23,7 +23,6 @@ namespace DataAccessLayer.DAO
                         {
                             command.Parameters.Add(new SqlParameter("seatNo", p));
                             command.Parameters.Add(new SqlParameter("description", p));
-                            command.Parameters.Add(new SqlParameter("tier", p));
                             command.Parameters.Add(new SqlParameter("booked", p));
                             command.ExecuteNonQuery();
                         }
