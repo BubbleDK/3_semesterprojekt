@@ -14,13 +14,29 @@ namespace NetCafeUCN.DesktopApp
 
         private void ShowAllBookings()
         {
-            lstAllproducts.Items.Clear();
-            UserService.GetAll().ToList().ForEach(x => lstAllproducts.Items.Add(x));
-        }
+            lstAllusers.Items.Clear();
+            try {
+                UserService.GetAll().ToList().ForEach(x => lstAllusers.Items.Add(x));
+            }catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            } }
 
         private void btnDeleteByPhoneNumber_Click(object sender, EventArgs e)
         {
-            UserService.Remove(txtPhoneNumber.Text);
+            if (UserService.Remove(txtPhoneNumber.Text))
+            {
+                txtDeleteCheck.Text = "True";
+            }
+            else
+            {
+                txtDeleteCheck.Text = "False";
+            }
+        }
+
+        private void btnAddPerson_Click(object sender, EventArgs e)
+        {
+            AddPersonForm addPersonForm = new AddPersonForm(UserService);
+            addPersonForm.ShowDialog();
         }
     }
 }

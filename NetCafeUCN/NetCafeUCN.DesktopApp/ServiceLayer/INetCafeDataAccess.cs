@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NetCafeUCN.DesktopApp.ServiceLayer
 {
-    internal interface INetCafeDataAccess<TEntity>
+    public interface INetCafeDataAccess<TEntity>
     {
         public IEnumerable<TEntity> GetAll();
         public TEntity? Get(dynamic key);
