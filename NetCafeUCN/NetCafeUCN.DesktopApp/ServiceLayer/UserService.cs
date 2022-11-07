@@ -41,7 +41,7 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
 
         public bool Update(Person o)
         {
-            throw new NotImplementedException();
+            return RestClient.Execute<Person>(new RestRequest($"api/Person/{0}",Method.Put)).IsSuccessful;
         }
     }
 }
