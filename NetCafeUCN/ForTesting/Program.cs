@@ -1,6 +1,7 @@
 ﻿
 
 using DataAccessLayer.DAO;
+using DataAccessLayer.Model;
 using NetCafeUCN.DAL.DAO;
 
 internal class Program
@@ -10,6 +11,10 @@ internal class Program
         Console.WriteLine(DBConnection.ConnectionString);
         UserDataAccess userDataAccess = new UserDataAccess();
         Console.WriteLine(userDataAccess.GetAll());
-        Console.WriteLine(userDataAccess.Get("88888888"));
+        foreach (Person person in userDataAccess.GetAll())
+        {
+            Console.WriteLine(person.Phone);
+        }
+        Console.WriteLine(userDataAccess.Get("99999999").Name);
     }
 }
