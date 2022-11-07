@@ -24,7 +24,7 @@ namespace DataAccessLayer.DAO
             throw new NotImplementedException();
         }
 
-        public bool Remove(int id)
+        public bool Remove(dynamic key)
         {
             throw new NotImplementedException();
         }
