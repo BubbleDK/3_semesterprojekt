@@ -28,19 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lstAllproducts = new System.Windows.Forms.ListBox();
+            this.lstAllusers = new System.Windows.Forms.ListBox();
             this.txtPhoneNumber = new System.Windows.Forms.TextBox();
             this.btnDeleteByPhoneNumber = new System.Windows.Forms.Button();
+            this.txtDeleteCheck = new System.Windows.Forms.TextBox();
+            this.btnAddPerson = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // lstAllproducts
+            // lstAllusers
             // 
-            this.lstAllproducts.FormattingEnabled = true;
-            this.lstAllproducts.ItemHeight = 15;
-            this.lstAllproducts.Location = new System.Drawing.Point(85, 45);
-            this.lstAllproducts.Name = "lstAllproducts";
-            this.lstAllproducts.Size = new System.Drawing.Size(417, 244);
-            this.lstAllproducts.TabIndex = 0;
+            this.lstAllusers.FormattingEnabled = true;
+            this.lstAllusers.ItemHeight = 15;
+            this.lstAllusers.Location = new System.Drawing.Point(85, 45);
+            this.lstAllusers.Name = "lstAllusers";
+            this.lstAllusers.Size = new System.Drawing.Size(417, 244);
+            this.lstAllusers.TabIndex = 0;
             // 
             // txtPhoneNumber
             // 
@@ -59,14 +61,33 @@
             this.btnDeleteByPhoneNumber.UseVisualStyleBackColor = true;
             this.btnDeleteByPhoneNumber.Click += new System.EventHandler(this.btnDeleteByPhoneNumber_Click);
             // 
+            // txtDeleteCheck
+            // 
+            this.txtDeleteCheck.Location = new System.Drawing.Point(610, 315);
+            this.txtDeleteCheck.Name = "txtDeleteCheck";
+            this.txtDeleteCheck.Size = new System.Drawing.Size(100, 23);
+            this.txtDeleteCheck.TabIndex = 3;
+            // 
+            // btnAddPerson
+            // 
+            this.btnAddPerson.Location = new System.Drawing.Point(134, 361);
+            this.btnAddPerson.Name = "btnAddPerson";
+            this.btnAddPerson.Size = new System.Drawing.Size(75, 23);
+            this.btnAddPerson.TabIndex = 4;
+            this.btnAddPerson.Text = "AddPerson";
+            this.btnAddPerson.UseVisualStyleBackColor = true;
+            this.btnAddPerson.Click += new System.EventHandler(this.btnAddPerson_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnAddPerson);
+            this.Controls.Add(this.txtDeleteCheck);
             this.Controls.Add(this.btnDeleteByPhoneNumber);
             this.Controls.Add(this.txtPhoneNumber);
-            this.Controls.Add(this.lstAllproducts);
+            this.Controls.Add(this.lstAllusers);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -76,8 +97,10 @@
 
         #endregion
 
-        private ListBox lstAllproducts;
+        private ListBox lstAllusers;
         private TextBox txtPhoneNumber;
         private Button btnDeleteByPhoneNumber;
+        private TextBox txtDeleteCheck;
+        private Button btnAddPerson;
     }
 }

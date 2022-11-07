@@ -31,13 +31,19 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
 
         public IEnumerable<Person> GetAll()
         {
-            return RestClient.Execute<IEnumerable<Person>>(new RestRequest()).Data;
+            try
+            {
+                return RestClient.Execute<IEnumerable<Person>>(new RestRequest()).Data;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception();
+            }
         }
 
         public bool Remove(dynamic key)
         {
-            RestClient.Execute<Person>(new RestRequest($"{key}", Method.Delete));
-            return true;
+            return RestClient.Execute<Person>(new RestRequest($"{key}", Method.Delete)).IsSuccessful;
         }
 
         public bool Update(Person o)
