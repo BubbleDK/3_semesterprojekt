@@ -36,7 +36,7 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
 
         public bool Remove(dynamic key)
         {
-            return RestClient.Execute<Person>(new RestRequest($"api/Person/{key}")).IsSuccessful;
+            return RestClient.Execute<Person>(new RestRequest($"api/Person/{key}",Method.Delete)).IsSuccessful;
         }
 
         public bool Update(Person o)
