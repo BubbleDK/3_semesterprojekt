@@ -11,7 +11,7 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
         public IEnumerable<TEntity> GetAll();
         public TEntity? Get(dynamic key);
         public bool Add(TEntity o);
-        public bool Remove(int id);
+        public bool Remove(dynamic key);
         public bool Update(TEntity o);
     }
 }

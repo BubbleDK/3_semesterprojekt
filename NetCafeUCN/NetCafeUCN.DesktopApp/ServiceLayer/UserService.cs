@@ -21,12 +21,12 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
         //
         public bool Add(Person o)
         {
-            return RestClient.Execute<Person>(new RestRequest()).IsSuccessful;
+            return RestClient.Execute<Person>(new RestRequest($"api/Person/{o}", Method.Post)).IsSuccessful;
         }
 
         public Person? Get(dynamic key)
         {
-            throw new NotImplementedException();
+            return RestClient.Execute<Person>(new RestRequest($"api/Person/{key}", Method.Get)).Data;
         }
 
         public IEnumerable<Person> GetAll()
@@ -34,9 +34,9 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
             return RestClient.Execute<IEnumerable<Person>>(new RestRequest()).Data;
         }
 
-        public bool Remove(int id)
+        public bool Remove(dynamic key)
         {
-            throw new NotImplementedException();
+            return RestClient.Execute<Person>(new RestRequest($"api/Person/{key}")).IsSuccessful;
         }
 
         public bool Update(Person o)
