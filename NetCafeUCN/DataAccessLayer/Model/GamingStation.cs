@@ -22,5 +22,11 @@ namespace NetCafeUCN.DAL.Model
         public GamingStation()
         {
         }
+
+        public override string ToString()
+        {
+
+            return ProductNumber + SeatNumber;
+        }
     }
 }

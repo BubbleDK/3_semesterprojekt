@@ -9,5 +9,10 @@ namespace NetCafeUCN.DAL.Model
         {
 
         }
+        public override string ToString()
+        {
+
+            return ProductNumber + Description;
+        }
     }
 }

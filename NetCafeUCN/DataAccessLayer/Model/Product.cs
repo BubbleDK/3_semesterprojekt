@@ -19,5 +19,9 @@ namespace DataAccessLayer.Model
         public Product()
         {
         }
+
+        public override abstract string ToString();
+        
+
     }
 }

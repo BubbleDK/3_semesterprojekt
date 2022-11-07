@@ -11,16 +11,23 @@ namespace NetCafeUCN.API.Controllers
     public class ProductController : ControllerBase
     {
         private INetCafeDataAccess<Product> dataAccess;
+        
 
         public ProductController(INetCafeDataAccess<Product> dataAccess)
         {
             this.dataAccess = dataAccess;
+           
         }
 
         // GET: api/<ProductController>
         [HttpGet]
         public ActionResult<IEnumerable<Product>> GetAll()
         {
+            List<Product> ListCombined = new List<Product>();
+
+            
+            ListCombined.AddRange(dataAccess.GetAll());
+
             return Ok(dataAccess.GetAll());
         }
 
