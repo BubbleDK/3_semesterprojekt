@@ -25,12 +25,12 @@ namespace DataAccessLayer.DAO
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand(sqlStatement, conn);
-
+                Person? person = null;
                 try
                 {
                     conn.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
-                    Person? person = null;
+                   
                     if ((string?)reader["persontype"] == "customer")
                     {
                         person = new Customer()
@@ -59,7 +59,7 @@ namespace DataAccessLayer.DAO
                 catch (Exception)
                 {
 
-                    Console.WriteLine("YOU DONKEY");
+                    return person;
                 }
             }
         }

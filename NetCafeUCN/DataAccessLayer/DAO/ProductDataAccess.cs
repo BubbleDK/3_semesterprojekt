@@ -33,7 +33,7 @@ namespace DataAccessLayer.DAO
                     }
                 }
           }
-            return 0;
+            return false;
     }
 
         public Product? Get(dynamic productNo)
