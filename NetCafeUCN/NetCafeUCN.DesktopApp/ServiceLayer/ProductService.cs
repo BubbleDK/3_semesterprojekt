@@ -9,7 +9,7 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
 {
     internal class ProductService : INetCafeDataAccess<Product>
     {
-        public int Add(Product o)
+        public bool Add(Product o)
         {
             throw new NotImplementedException();
         }
