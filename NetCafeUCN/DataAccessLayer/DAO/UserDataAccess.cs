@@ -57,7 +57,7 @@ namespace DataAccessLayer.DAO
 
                             };
                         }
-                        
+
                     }
                 }
                 catch (Exception)
@@ -104,30 +104,32 @@ namespace DataAccessLayer.DAO
         public bool Remove(dynamic key)
         {
             string sqlStatement = "DELETE FROM nc_Person WHERE phone = @phone";
-
-            using(SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+            try
             {
-                SqlCommand cmd = new SqlCommand(sqlStatement, conn);
-
-                try
+                using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
                 {
-                    conn.Open();
-
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    cmd.Parameters.Add("@phone", System.Data.SqlDbType.VarChar);
-                    cmd.Parameters["@phone"].Value = key;
-                    cmd.ExecuteNonQuery();
+                    using (var cmd = conn.CreateCommand())
+                    {
 
 
-                }
-                catch (Exception)
-                {
+                        conn.Open();
+                        cmd.CommandText = sqlStatement;
+                        cmd.Parameters.AddWithValue("@phone", key);
+                        cmd.ExecuteNonQuery();
 
-                    throw;
+                        return true;
+
+
+                    }
                 }
             }
-            throw new NotImplementedException();
+            catch (Exception)
+            {
+
+                return false;
+            }
         }
+
 
         public bool Update(Person o)
         {
