@@ -13,8 +13,10 @@ internal class Program
         Console.WriteLine(userDataAccess.GetAll());
         foreach (Person person in userDataAccess.GetAll())
         {
-            Console.WriteLine(person.Phone);
+            Console.WriteLine(person.Name);
         }
+        Console.WriteLine(userDataAccess.Get("99999999").Name);
+        userDataAccess.Remove("99999999");
         Console.WriteLine(userDataAccess.Get("99999999").Name);
     }
 }
