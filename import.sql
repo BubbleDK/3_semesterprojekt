@@ -52,7 +52,7 @@ CREATE TABLE nc_Booking(
 
 CREATE TABLE nc_Product(
     id INT IDENTITY(1,1),
-    productNo VARCHAR(50) NOT NULL,
+    productNo VARCHAR(50) NOT NULL UNIQUE,
     productType VARCHAR(80),
     name VARCHAR(25) NOT NULL,
 

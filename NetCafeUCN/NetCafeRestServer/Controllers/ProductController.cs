@@ -63,7 +63,7 @@ namespace NetCafeUCN.API.Controllers
         [HttpDelete("{productNo}")]
         public ActionResult<bool> Delete(string productNo)
         {
-            if (dataAccess.Remove(Int32.Parse(productNo)))
+            if (dataAccess.Remove(productNo))
             {
                 return Ok();
             }
