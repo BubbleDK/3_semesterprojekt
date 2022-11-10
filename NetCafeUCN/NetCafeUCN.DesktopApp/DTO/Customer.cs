@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 
 namespace NetCafeUCN.DesktopApp.DTO
 {
-    internal class Customer : Person
+    public class Customer : Person
     {
         public Customer(string name, string email, string phone, string personType) : base(name, email, phone, personType)
         {
+        }
+        public Customer():base()
+        {
+
         }
     }
 }
