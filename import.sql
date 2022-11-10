@@ -119,8 +119,8 @@ INSERT INTO nc_Employee VALUES (2, 'bodilvej 2', 'Admin', 9000);
 
 INSERT INTO nc_Booking VALUES (40, '1955-12-13 12:43:00', '1955-12-13 14:43:00', 3);
 
-INSERT INTO nc_Product VALUES ('FEDTFEDT', 'Gamingstation')
-INSERT INTO nc_Product VALUES ('FEDTNICE', 'Consumable')
+INSERT INTO nc_Product VALUES ('FEDTFEDT', 'Gamingstation', 'Produkt1')
+INSERT INTO nc_Product VALUES ('FEDTNICE', 'Consumable', 'Produkt2')
 
 INSERT INTO nc_Consumables VALUES (2, 'Et eller andet nice');
 
