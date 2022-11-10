@@ -1,4 +1,5 @@
 ﻿using NetCafeUCN.DesktopApp.DTO;
+using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -26,19 +27,25 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
 
         public Person? Get(dynamic key)
         {
-            return RestClient.Execute<Person>(new RestRequest($"api/Person/{key}", Method.Get)).Data;
+            return RestClient.Execute<Customer>(new RestRequest($"api/Person/{key}", Method.Get)).Data;
         }
 
         public IEnumerable<Person> GetAll()
         {
-            try
-            {
-                return RestClient.Execute<IEnumerable<Person>>(new RestRequest($"{BaseUri}"), Method.Get).Data;
-            }
-            catch (Exception)
-            {
-                throw new Exception();
-            }
+            //try
+            //{
+            //RestRequest request = new RestRequest(BaseUri);
+            //IEnumerable<Person> list = new List<Person>();
+            //RestResponse response = RestClient.ExecuteGet(request);
+            //response.Content.
+            //list = JsonConvert.DeserializeObject<List<Person>>(response.Content);
+            //return list;
+            return (IEnumerable<Person>)RestClient.Execute<IEnumerable<Person>>(new RestRequest($"{BaseUri}"), Method.Get).Data;
+            //}
+            //catch (Exception)
+            //{
+            //    throw new Exception();
+            //}
         }
 
         public bool Remove(dynamic key)

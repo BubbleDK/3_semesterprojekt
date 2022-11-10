@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetCafeUCN.DesktopApp.DTO
+namespace NetCafeUCN.API.DTO
 {
     internal class Employee:Person
     {
