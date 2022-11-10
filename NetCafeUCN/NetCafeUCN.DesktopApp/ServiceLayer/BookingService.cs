@@ -24,22 +24,22 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
 
         public Booking? Get(dynamic key)
         {
-            throw new NotImplementedException();
+            return RestClient.Execute<Booking>(new RestRequest($"{BaseUri}{key}", Method.Get)).Data;
         }
 
         public IEnumerable<Booking> GetAll()
         {
-            throw new NotImplementedException();
+            return RestClient.Execute<IEnumerable<Booking>>(new RestRequest()).Data;
         }
 
         public bool Remove(dynamic key)
         {
-            throw new NotImplementedException();
+            return RestClient.Execute<Booking>(new RestRequest($"{BaseUri}{key}", Method.Delete)).IsSuccessful;
         }
 
         public bool Update(Booking o)
         {
-            throw new NotImplementedException();
+            return RestClient.Execute<Booking>(new RestRequest($"{BaseUri}{o}", Method.Put)).IsSuccessful;
         }
     }
 }
