@@ -33,7 +33,7 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
         {
             try
             {
-                return RestClient.Execute<IEnumerable<Person>>(new RestRequest(), Method.Get).Data;
+                return RestClient.Execute<IEnumerable<Person>>(new RestRequest($"{BaseUri}"), Method.Get).Data;
             }
             catch (Exception ex)
             {
