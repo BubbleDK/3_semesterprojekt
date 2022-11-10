@@ -55,6 +55,7 @@ CREATE TABLE nc_Product(
     productNo VARCHAR(50) NOT NULL UNIQUE,
     productType VARCHAR(80),
     name VARCHAR(25) NOT NULL,
+    isActive INT NOT NULL SET DEFAULT 1,
 
     PRIMARY KEY(id),
 );
