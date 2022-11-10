@@ -49,10 +49,40 @@ namespace DataAccessLayer.DAO
         public Person? Get(dynamic key)
         {
             string sqlStatement = "SELECT * FROM nc_Person WHERE phone = @phone";
-
+            string secondSqlStatement = "";
+            string personType = "";
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand(sqlStatement, conn);
+                cmd.Parameters.Add("@phone", SqlDbType.VarChar);
+                cmd.Parameters["@phone"].Value = key;
+                try
+                {
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        if ((string?)reader["personType"] == "Customer")
+                        {
+                            secondSqlStatement = "SELECT * FROM nc_Customer inner join nc_Person on nc_Person.id = nc_Customer.personid where nc_Person.phone = @phone";
+                            personType = "Customer";
+                        }
+                        else if ((string?)reader["personType"] == "Employee")
+                        {
+                            secondSqlStatement = "SELECT * FROM nc_Employee inner join nc_Person on nc_Person.id = nc_Employee.personid where nc_Person.phone = @phone";
+                            personType = "Employee";
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+
+                    throw new DataAccessException("Can't access data");
+                }
+            }
+            using(SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand(secondSqlStatement, conn);
                 cmd.Parameters.Add("@phone", SqlDbType.VarChar);
                 cmd.Parameters["@phone"].Value = key;
                 Person? person = null;
@@ -62,7 +92,7 @@ namespace DataAccessLayer.DAO
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        if ((string?)reader["personType"] == "Customer")
+                        if(personType == "Customer")
                         {
                             person = new Customer()
                             {
@@ -71,7 +101,7 @@ namespace DataAccessLayer.DAO
                                 Phone = (string?)reader["phone"]
                             };
                         }
-                        else if ((string?)reader["personType"] == "Employee")
+                        else if(personType == "Employee")
                         {
                             person = new Employee()
                             {
@@ -80,27 +110,25 @@ namespace DataAccessLayer.DAO
                                 Phone = (string?)reader["phone"],
                                 Role = (string)reader["role"],
                                 Address = (string)reader["address"],
-                                Zipcode = (int)reader["zipcode"],
+                                Zipcode = (string)reader["zipcode"],
                                 City = (string)reader["City"]
-
                             };
                         }
-
                     }
+                    return person;
                 }
                 catch (Exception)
                 {
 
-                    throw;
+                    throw new DataAccessException("Can't access data");
                 }
-                return person;
             }
         }
 
         public IEnumerable<Person> GetAll()
         {
             string sqlStatement = "SELECT * FROM nc_Person";
-            List<Person> list = new List<Person>();
+            List<Person> list = new();
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand(sqlStatement, conn);
@@ -111,13 +139,82 @@ namespace DataAccessLayer.DAO
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        Person person = new Customer()
+                        Customer person = new Customer()
                         {
                             Name = (string?)reader["name"],
                             Email = (string?)reader["email"],
-                            Phone = (string?)reader["phone"]
+                            Phone = (string?)reader["phone"],
+                            PersonType = (string)reader["personType"]
                         };
                         list.Add(person);
+                    }
+                }
+                catch (DataAccessException)
+                {
+
+                    throw new DataAccessException("Can't access data");
+                }
+            }
+            return list;
+        
+        }
+
+        public IEnumerable<Customer> GetAllCustomers()
+        {
+            string sqlStatement = "SELECT * FROM nc_Customer inner join nc_Person on nc_Person.id = nc_Customer.personid";
+            List<Customer> list = new();
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand(sqlStatement, conn);
+
+                try
+                {
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                            Customer person = new Customer()
+                            {
+                                Name = (string?)reader["name"],
+                                Email = (string?)reader["email"],
+                                Phone = (string?)reader["phone"]
+                            };
+                            list.Add(person);
+                    }
+                }
+                catch (DataAccessException)
+                {
+
+                    throw new DataAccessException("Can't access data");
+                }
+            }
+            return list;
+        }
+        public IEnumerable<Employee> GetAllEmployee()
+        {
+            string sqlStatement = "SELECT * FROM nc_Employee inner join nc_Person on nc_Person.id = nc_Employee.personid";
+            List<Employee> list = new();
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand(sqlStatement, conn);
+
+                try
+                {
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                            Employee person = new Employee()
+                            {
+                                Name = (string?)reader["name"],
+                                Email = (string?)reader["email"],
+                                Phone = (string?)reader["phone"],
+                                Role = (string?)reader["role"],
+                                Address = (string?)reader["address"],
+                                City = (string?)reader["city"],
+                                Zipcode = (string?)reader["zipcode"]
+                            };
+                            list.Add(person);
                     }
                 }
                 catch (DataAccessException)

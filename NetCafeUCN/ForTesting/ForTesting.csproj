@@ -10,6 +10,8 @@
   <ItemGroup>
     <ProjectReference Include="..\DataAccessLayer\NetCafeUCN.DAL.csproj" />
     <ProjectReference Include="..\NetCafeRestServer\NetCafeUCN.API.csproj" />
+    <ProjectReference Include="..\NetCafeUCN.DesktopApp\NetCafeUCN.DesktopApp.csproj" />
+    <ProjectReference Include="..\NetCafeUCN.tests\NetCafeUCN.tests.csproj" />
   </ItemGroup>
 
 </Project>
