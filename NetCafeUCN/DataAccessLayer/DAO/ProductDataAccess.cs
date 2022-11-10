@@ -39,7 +39,7 @@ namespace DataAccessLayer.DAO
         {
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString)) {
                 using SqlCommand command = new SqlCommand("SELECT * FROM nc_Product, nc_GamingStation WHERE productNo = @productNo", conn);
-                command.Parameters.AddWithValue("productNo", productNo);
+                command.Parameters.AddWithValue("@productNo", productNo);
                 {
                     try
                     {
@@ -49,10 +49,12 @@ namespace DataAccessLayer.DAO
                         {
                             Product product = new GamingStation()
                             {
-                            ProductNumber = (string)reader["productNo"],
-                            Type = (string)reader["type"],
-                            SeatNumber = (string)reader["seatNo"],
-                            Description = (string)reader["description"],
+                                ProductNumber = (string)reader["productNo"],
+                                Name = (string)reader["name"],
+                                Description = (string)reader["description"],
+                                Type = (string)reader["productType"],
+                                SeatNumber = (string)reader["seatNo"],
+
                             };
                             return product;
                         }
