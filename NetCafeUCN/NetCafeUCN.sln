@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCafeUCN.tests", "NetCafe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCafeUCN.DesktopApp", "NetCafeUCN.DesktopApp\NetCafeUCN.DesktopApp.csproj", "{0640D5EB-4509-4CEE-90E7-E7C53DB79AD7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "test\test.csproj", "{10616736-F27E-4489-9DF4-37CF5EB6E701}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{0640D5EB-4509-4CEE-90E7-E7C53DB79AD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0640D5EB-4509-4CEE-90E7-E7C53DB79AD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0640D5EB-4509-4CEE-90E7-E7C53DB79AD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10616736-F27E-4489-9DF4-37CF5EB6E701}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10616736-F27E-4489-9DF4-37CF5EB6E701}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10616736-F27E-4489-9DF4-37CF5EB6E701}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10616736-F27E-4489-9DF4-37CF5EB6E701}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

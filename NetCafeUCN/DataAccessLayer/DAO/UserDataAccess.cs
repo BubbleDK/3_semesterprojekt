@@ -139,7 +139,7 @@ namespace DataAccessLayer.DAO
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        Customer person = new Customer()
+                        Person person = new Customer()
                         {
                             Name = (string?)reader["name"],
                             Email = (string?)reader["email"],
