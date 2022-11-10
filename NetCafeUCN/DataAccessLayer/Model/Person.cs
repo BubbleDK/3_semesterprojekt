@@ -11,7 +11,7 @@ namespace DataAccessLayer.Model
         public string? Name{ get; set; }
         public string? Email { get; set; }
         public string? Phone { get; set; }
-        public string PersonType { get; set; }
+        public string? PersonType { get; set; }
 
         public Person(string name, string email, string phone, string personType)
         {
