@@ -12,29 +12,52 @@ namespace DataAccessLayer.DAO
     {
         public bool Add(Product p)
         {
-
+            SqlCommand command = new SqlCommand();
+            int id = 0;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
+                try
                 {
-                    conn.Open();
-                    try
+                    using (SqlCommand productCommand = new SqlCommand(
+                            "INSERT INTO nc_Product VALUES(@productNo, @productType, @name, @isActive)", conn))
                     {
-                        using (SqlCommand command = new SqlCommand(
-                            "INSERT INTO nc_GamingStation VALUES(@seatNo, @description, @tier, @booked)", conn))
+                        productCommand.Parameters.AddWithValue("@productNo", p.ProductNumber);
+                        productCommand.Parameters.AddWithValue("productType", p.Type);
+                        productCommand.Parameters.AddWithValue("@name", p.Name);
+                        productCommand.Parameters.AddWithValue("@isActive", 1);
+                        conn.Open();
+                        id = (int)productCommand.ExecuteScalar();
+                    }
+                    
+                    if (p.Type == "gamingstation")
+                    {
+                        p = p as GamingStation;
+                        using (command = new SqlCommand(
+                            "INSERT INTO nc_GamingStation VALUES(@stationid, @seatNo, @description)", conn))
                         {
-                            command.Parameters.Add(new SqlParameter("seatNo", p));
-                            command.Parameters.Add(new SqlParameter("description", p));
-                            command.ExecuteNonQuery();
+                            command.Parameters.AddWithValue("@stationid", id);
+                            command.Parameters.AddWithValue("seatNo", p);
+                            command.Parameters.AddWithValue("description", p);
+                        }
+                    } else if (p.Type == "consmuable")
+                    {
+                        p = p as Consumable;
+                        using (command = new SqlCommand(
+                            "INSERT INTO nc_Consumables VALUES(@description", conn))
+                        {
+                            command.Parameters.AddWithValue("description", p);
                         }
                     }
-                    catch(DataAccessException)
-                    {
-                        throw new DataAccessException("Can't access data");
-                    }
+                    conn.Open();
+                    command.ExecuteNonQuery();
                 }
-          }
+                catch (DataAccessException)
+                {
+                    throw new DataAccessException("Can't access data");
+                }
+            }
             return false;
-    }
+        }
 
         public Product? Get(dynamic productNo)
         {
@@ -186,7 +209,21 @@ namespace DataAccessLayer.DAO
         }
         public bool Update(Product o)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+            {
+                using SqlCommand command = new SqlCommand("UPDATE nc_Product SET IsActive = 0 WHERE productNo = @productNo", conn);
+                command.Parameters.AddWithValue("@productNo", o.ProductNumber);
+                try
+                {
+                    conn.Open();
+                    command.ExecuteNonQuery();
+                    return true;
+                }
+                catch (DataAccessException)
+                {
+                    throw new DataAccessException("Can't access data");
+                }
+            }
         }
     }
 }

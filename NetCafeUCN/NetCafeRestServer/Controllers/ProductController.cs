@@ -47,9 +47,10 @@ namespace NetCafeUCN.API.Controllers
 
         // POST api/<ProductController>
         [HttpPost]
-        public ActionResult<bool> Add(Product product)
+        public ActionResult<bool> Add([FromBody]Product p)
         {
-            return Ok(dataAccess.Add(product));
+
+            return Ok(dataAccess.Add(p));
         }
 
         // PUT api/<ProductController>/

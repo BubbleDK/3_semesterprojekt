@@ -16,7 +16,7 @@ namespace DataAccessLayer.Model
         {
             this.ProductNumber = productNumber;
             this.Type = type;
-            Name = name;
+            this.Name = name;
         }
         public Product()
         {
