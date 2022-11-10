@@ -125,6 +125,40 @@ namespace DataAccessLayer.DAO
             }
         }
 
+        public IEnumerable<Person> GetAll()
+        {
+            string sqlStatement = "SELECT * FROM nc_Person";
+            List<Person> list = new();
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand(sqlStatement, conn);
+
+                try
+                {
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Customer person = new Customer()
+                        {
+                            Name = (string?)reader["name"],
+                            Email = (string?)reader["email"],
+                            Phone = (string?)reader["phone"],
+                            PersonType = (string)reader["personType"]
+                        };
+                        list.Add(person);
+                    }
+                }
+                catch (DataAccessException)
+                {
+
+                    throw new DataAccessException("Can't access data");
+                }
+            }
+            return list;
+        
+        }
+
         public IEnumerable<Customer> GetAllCustomers()
         {
             string sqlStatement = "SELECT * FROM nc_Customer inner join nc_Person on nc_Person.id = nc_Customer.personid";
