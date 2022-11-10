@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Model
 {
-    internal class Employee:Person
+    public class Employee:Person
     {
-        public string Role { get; set; }
-        public string Address { get; set; }
-        public int Zipcode { get; set; }
-        public string City { get; set; }
+        public string? Role { get; set; }
+        public string? Address { get; set; }
+        public string? Zipcode { get; set; }
+        public string? City { get; set; }
     }
 }
