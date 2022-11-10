@@ -1,4 +1,5 @@
 ﻿using NetCafeUCN.DesktopApp.DTO;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,16 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
 {
     public class BookingService : INetCafeDataAccess<Booking>
     {
+        public string BaseUri { get; private set; }
+        private RestClient RestClient { get; set; }
+        public BookingService(string baseUri)
+        {
+            BaseUri = baseUri;
+            RestClient = new RestClient();
+        }
         public bool Add(Booking o)
         {
-            throw new NotImplementedException();
+            return RestClient.Execute<Booking>(new RestRequest($"{BaseUri}{0}", Method.Post)).IsSuccessful;
         }
 
         public Booking? Get(dynamic key)

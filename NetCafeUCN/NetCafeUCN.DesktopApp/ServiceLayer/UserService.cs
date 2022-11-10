@@ -33,7 +33,7 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
         {
             try
             {
-                return RestClient.Execute<IEnumerable<Person>>(new RestRequest()).Data;
+                return RestClient.Execute<IEnumerable<Person>>(new RestRequest(), Method.Get).Data;
             }
             catch (Exception ex)
             {
@@ -48,7 +48,7 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
 
         public bool Update(Person o)
         {
-            return RestClient.Execute<Person>(new RestRequest($"api/Person/{0}",Method.Put)).IsSuccessful;
+            return RestClient.Execute<Person>(new RestRequest($"api/Person/{0}", Method.Put)).IsSuccessful;
         }
     }
 }

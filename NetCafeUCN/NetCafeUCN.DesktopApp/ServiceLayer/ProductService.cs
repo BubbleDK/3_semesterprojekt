@@ -1,4 +1,5 @@
 ﻿using NetCafeUCN.DesktopApp.DTO;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,29 +10,39 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
 {
     internal class ProductService : INetCafeDataAccess<Product>
     {
+        public string BaseUri { get; private set; }
+        private RestClient RestClient { get; set; }
+        public ProductService(string baseUri)
+        {
+            BaseUri = baseUri;
+            RestClient = new RestClient(baseUri);
+        }
         public bool Add(Product o)
         {
-            throw new NotImplementedException();
+            return RestClient.Execute<Product>(new RestRequest($"api/Product/{o}", Method.Post)).IsSuccessful;
         }
 
         public Product? Get(dynamic key)
         {
-            throw new NotImplementedException();
+            return RestClient.Execute<Product>(new RestRequest($"api/product/{key}",Method.Get)).Data;
         }
 
         public IEnumerable<Product> GetAll()
         {
-            throw new NotImplementedException();
+            //return RestClient.Execute<IEnumerable<Product>>(new RestRequest()).Data;
+            var request = new RestRequest("/api/v1/Companies");
+            var response = RestClient.Get<List<Product>>(request);
+            return response;
         }
 
         public bool Remove(dynamic key)
         {
-            throw new NotImplementedException();
+            return RestClient.Execute<Product?>(new RestRequest($"api/Product/{key}", Method.Delete)).IsSuccessful;
         }
 
         public bool Update(Product o)
         {
-            throw new NotImplementedException();
+            return RestClient.Execute<Product>(new RestRequest($"api/Person/{o}",Method.Put)).IsSuccessful;
         }
     }
 }
