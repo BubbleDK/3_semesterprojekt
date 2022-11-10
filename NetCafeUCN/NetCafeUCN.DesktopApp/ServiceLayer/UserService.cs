@@ -31,6 +31,7 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
 
         public IEnumerable<Person> GetAll()
         {
+            //Få JSON ud, kig efter personType og opret ud fra person typen. Og læg i en samlet liste af personer
             try
             {
                 return RestClient.Execute<IEnumerable<Person>>(new RestRequest($"{BaseUri}"), Method.Get).Data;
