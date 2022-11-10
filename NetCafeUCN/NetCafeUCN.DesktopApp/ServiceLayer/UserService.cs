@@ -35,7 +35,7 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
             {
                 return RestClient.Execute<IEnumerable<Person>>(new RestRequest($"{BaseUri}"), Method.Get).Data;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw new Exception();
             }
