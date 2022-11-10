@@ -9,9 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCafeUCN.API", "NetCafeRe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCafeUCN.tests", "NetCafeUCN.tests\NetCafeUCN.tests.csproj", "{76606162-95C9-47D2-96D5-D75B7DDBCA25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForTesting", "ForTesting\ForTesting.csproj", "{F9167BA2-E4F7-4D5A-AFE4-D7CC7434558E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCafeUCN.DesktopApp", "NetCafeUCN.DesktopApp\NetCafeUCN.DesktopApp.csproj", "{0640D5EB-4509-4CEE-90E7-E7C53DB79AD7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCafeUCN.DesktopApp", "NetCafeUCN.DesktopApp\NetCafeUCN.DesktopApp.csproj", "{0640D5EB-4509-4CEE-90E7-E7C53DB79AD7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,10 +29,6 @@ Global
 		{76606162-95C9-47D2-96D5-D75B7DDBCA25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76606162-95C9-47D2-96D5-D75B7DDBCA25}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76606162-95C9-47D2-96D5-D75B7DDBCA25}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F9167BA2-E4F7-4D5A-AFE4-D7CC7434558E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F9167BA2-E4F7-4D5A-AFE4-D7CC7434558E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F9167BA2-E4F7-4D5A-AFE4-D7CC7434558E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F9167BA2-E4F7-4D5A-AFE4-D7CC7434558E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0640D5EB-4509-4CEE-90E7-E7C53DB79AD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0640D5EB-4509-4CEE-90E7-E7C53DB79AD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0640D5EB-4509-4CEE-90E7-E7C53DB79AD7}.Release|Any CPU.ActiveCfg = Release|Any CPU

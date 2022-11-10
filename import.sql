@@ -55,6 +55,7 @@ CREATE TABLE nc_Product(
     productNo VARCHAR(50) NOT NULL UNIQUE,
     productType VARCHAR(80),
     name VARCHAR(25) NOT NULL,
+    isActive INT NOT NULL DEFAULT 1,
 
     PRIMARY KEY(id),
 );
@@ -119,8 +120,8 @@ INSERT INTO nc_Employee VALUES (2, 'bodilvej 2', 'Admin', 9000);
 
 INSERT INTO nc_Booking VALUES (40, '1955-12-13 12:43:00', '1955-12-13 14:43:00', 3);
 
-INSERT INTO nc_Product VALUES ('FEDTFEDT', 'Gamingstation', 'Produkt1')
-INSERT INTO nc_Product VALUES ('FEDTNICE', 'Consumable', 'Produkt2')
+INSERT INTO nc_Product VALUES ('FEDTFEDT', 'Gamingstation', 'Produkt1', 1)
+INSERT INTO nc_Product VALUES ('FEDTNICE', 'Consumable', 'Produkt2', 1)
 
 INSERT INTO nc_Consumables VALUES (2, 'Et eller andet nice');
 

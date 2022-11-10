@@ -19,6 +19,10 @@ namespace NetCafeUCN.DesktopApp.DTO
             Phone = phone;
             PersonType = personType;
         }
+        public Person()
+        {
+
+        }
         public override string ToString()
         {
             return Name;
