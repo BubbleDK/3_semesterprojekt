@@ -39,7 +39,7 @@ namespace DataAccessLayer.DAO
         public Product? Get(dynamic productNo)
         {
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString)) {
-                using SqlCommand command = new SqlCommand("SELECT * FROM nc_Product, nc_GamingStation WHERE productNo = @productNo", conn);
+                using SqlCommand command = new SqlCommand("SELECT * FROM nc_Product, nc_GamingStation, nc_Consumables WHERE productNo = @productNo", conn);
                 command.Parameters.AddWithValue("@productNo", productNo);
                 {
                     try
