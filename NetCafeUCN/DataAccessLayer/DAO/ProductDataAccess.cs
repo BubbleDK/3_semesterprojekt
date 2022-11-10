@@ -134,38 +134,56 @@ namespace DataAccessLayer.DAO
             return list;
         }
 
+        //public bool Remove(dynamic id)
+        //{
+        //    int indentifier = 0;
+        //    using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+        //    {
+        //        using SqlCommand command = new SqlCommand("DELETE FROM nc_Product WHERE productNo = @productNo", conn);
+        //        using SqlCommand sCommand = new SqlCommand("SELECT id FROM nc_Product WHERE productNo = @productNo", conn);
+        //        using SqlCommand uCommand = new SqlCommand("UPDATE nc_BookingLine SET stationid = @stationid WHERE stationid = @stationid", conn);
+        //        sCommand.Parameters.AddWithValue("@productNo", id);
+        //        try
+        //        {
+        //            conn.Open();
+        //            SqlDataReader reader = sCommand.ExecuteReader();
+        //            while (reader.Read())
+        //            {
+        //                indentifier = (int)reader["id"];
+        //            }
+        //            reader.Close();
+        //            uCommand.Parameters.AddWithValue("@stationid", indentifier);
+        //            command.Parameters.AddWithValue("@productNo", id);
+        //            uCommand.ExecuteNonQuery();
+        //            command.ExecuteNonQuery();
+        //        }
+        //        catch (DataAccessException)
+        //        {
+
+        //            throw new DataAccessException("Can't access data");
+        //        }
+        //    }
+        //    throw new NotImplementedException();
+        //}
+
         public bool Remove(dynamic id)
         {
-            int indentifier = 0;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
-                using SqlCommand command = new SqlCommand("DELETE FROM nc_Product WHERE productNo = @productNo", conn);
-                using SqlCommand sCommand = new SqlCommand("SELECT id FROM nc_Product WHERE productNo = @productNo", conn);
-                using SqlCommand uCommand = new SqlCommand("UPDATE nc_BookingLine SET stationid = @stationid WHERE stationid = @stationid", conn);
-                sCommand.Parameters.AddWithValue("@productNo", id);
+                using SqlCommand command = new SqlCommand("UPDATE nc_Product SET IsActive = 0 WHERE productNo = @productNo", conn);
+                command.Parameters.AddWithValue("@productNo", id);
                 try
                 {
                     conn.Open();
-                    SqlDataReader reader = sCommand.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        indentifier = (int)reader["id"];
-                    }
-                    reader.Close();
-                    uCommand.Parameters.AddWithValue("@stationid", indentifier);
-                    command.Parameters.AddWithValue("@productNo", id);
-                    uCommand.ExecuteNonQuery();
                     command.ExecuteNonQuery();
+                    return true;
                 }
                 catch (DataAccessException)
                 {
-
                     throw new DataAccessException("Can't access data");
                 }
             }
-            throw new NotImplementedException();
         }
-
         public bool Update(Product o)
         {
             throw new NotImplementedException();
