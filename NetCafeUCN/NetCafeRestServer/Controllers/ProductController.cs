@@ -36,10 +36,17 @@ namespace NetCafeUCN.API.Controllers
         [Route("{productNo}")]
         public ActionResult<Product> Get(string productNo)
         {
-
             var product = dataAccess.Get(productNo);
-            product = product as GamingStation;
             if (product == null) { return NotFound(); }
+
+
+            if (product.Type == "gamingstation")
+            {
+                product = product as GamingStation;
+            } else
+            {
+                product = product as Consumable;
+            }
             return Ok(product);
         }
 

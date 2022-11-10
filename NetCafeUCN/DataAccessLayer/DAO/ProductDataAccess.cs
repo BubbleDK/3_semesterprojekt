@@ -2,6 +2,7 @@
 using DataAccessLayer.Model;
 using NetCafeUCN.DAL.DAO;
 using NetCafeUCN.DAL.Model;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Xml.Linq;
 
@@ -47,16 +48,31 @@ namespace DataAccessLayer.DAO
                         SqlDataReader reader = command.ExecuteReader();
                         while (reader.Read())
                         {
-                            Product product = new GamingStation()
-                            {
-                                ProductNumber = (string)reader["productNo"],
-                                Name = (string)reader["name"],
-                                Description = (string)reader["description"],
-                                Type = (string)reader["productType"],
-                                SeatNumber = (string)reader["seatNo"],
 
-                            };
-                            return product;
+                            if ((string)reader["productType"] == "gamingstation")
+                            {
+                                Product product = new GamingStation()
+                                {
+                                    ProductNumber = (string)reader["productNo"],
+                                    Name = (string)reader["name"],
+                                    Description = (string)reader["description"],
+                                    Type = (string)reader["productType"],
+                                    SeatNumber = (string)reader["seatNo"],
+
+                                };
+                                return product;
+                            }
+                            else
+                            {
+                                Product product = new Consumable()
+                                {
+                                    ProductNumber = (string)reader["productNo"],
+                                    Name = (string)reader["name"],
+                                    Description = (string)reader["description"],
+                                    Type = (string)reader["productType"],
+                                };
+                                return product;
+                            }
                         }
                     }
                     catch (DataAccessException)
