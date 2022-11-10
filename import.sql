@@ -54,6 +54,7 @@ CREATE TABLE nc_Product(
     id INT IDENTITY(1,1),
     productNo VARCHAR(50) NOT NULL,
     productType VARCHAR(80),
+    name VARCHAR(25) NOT NULL,
 
     PRIMARY KEY(id),
 );
