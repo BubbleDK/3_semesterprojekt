@@ -10,11 +10,13 @@ namespace DataAccessLayer.Model
     {
         public string ProductNumber{ get; set; }
         public string ?Type { get; set; }
+        public string Name { get; set; }
 
-        public Product(string productNumber, string type)
+        public Product(string productNumber, string type, string name)
         {
             this.ProductNumber = productNumber;
             this.Type = type;
+            Name = name;
         }
         public Product()
         {

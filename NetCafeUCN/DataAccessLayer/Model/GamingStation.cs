@@ -11,10 +11,11 @@ namespace NetCafeUCN.DAL.Model
     {
         public string ?SeatNumber { get; set; }
         public string ?Description { get; set; }
-        public GamingStation(string productNumber, string type, string seatNumber, string description) : base(productNumber, type)
+        public GamingStation(string productNumber, string type, string name, string seatNumber, string description) : base(productNumber, type, name)
         {
             this.ProductNumber = productNumber;
             this.Description = description;
+            this.Name = name;
             this.Type = type;
             this.SeatNumber = seatNumber;
         }

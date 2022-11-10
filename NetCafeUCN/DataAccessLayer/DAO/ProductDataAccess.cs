@@ -87,6 +87,7 @@ namespace DataAccessLayer.DAO
                             Product product = new GamingStation()
                             {
                                 ProductNumber = (string)reader["productNo"],
+                                Name = (string)reader["name"],
                                 Description = (string)reader["description"],
                                 Type = (string)reader["productType"],
                                 SeatNumber = (string)reader["seatNo"],
@@ -99,6 +100,7 @@ namespace DataAccessLayer.DAO
                             Product product = new Consumable()
                             {
                                 ProductNumber = (string)reader["productNo"],
+                                Name = (string)reader["name"],
                                 Description = (string)reader["description"],
                                 Type = (string)reader["productType"],
                             };
