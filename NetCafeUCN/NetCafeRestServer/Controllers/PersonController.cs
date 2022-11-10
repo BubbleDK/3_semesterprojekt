@@ -21,7 +21,7 @@ namespace NetCafeUCN.API.Controllers
             [HttpGet]
             public ActionResult<IEnumerable<Person>> Get()
             {
-                return Ok((List<Person>)dataAccess.GetAll());
+                return Ok(dataAccess.GetAll());
             }
 
             // GET api/<PersonController>/40559810
