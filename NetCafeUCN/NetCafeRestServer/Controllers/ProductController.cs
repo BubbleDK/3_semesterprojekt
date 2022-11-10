@@ -23,11 +23,6 @@ namespace NetCafeUCN.API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Product>> GetAll()
         {
-            List<Product> ListCombined = new List<Product>();
-
-            
-            ListCombined.AddRange(dataAccess.GetAll());
-
             return Ok(dataAccess.GetAll());
         }
 
