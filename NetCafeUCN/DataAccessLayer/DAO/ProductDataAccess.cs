@@ -36,8 +36,8 @@ namespace DataAccessLayer.DAO
                             "INSERT INTO nc_GamingStation VALUES(@stationid, @seatNo, @description)", conn))
                         {
                             command.Parameters.AddWithValue("@stationid", id);
-                            command.Parameters.AddWithValue("seatNo", p);
-                            command.Parameters.AddWithValue("description", p);
+                            command.Parameters.AddWithValue("@seatNo", p);
+                            command.Parameters.AddWithValue("@description", p);
                         }
                     } else if (p.Type == "consmuable")
                     {
@@ -45,7 +45,7 @@ namespace DataAccessLayer.DAO
                         using (command = new SqlCommand(
                             "INSERT INTO nc_Consumables VALUES(@description", conn))
                         {
-                            command.Parameters.AddWithValue("description", p);
+                            command.Parameters.AddWithValue("@description", p);
                         }
                     }
                     conn.Open();
@@ -71,29 +71,32 @@ namespace DataAccessLayer.DAO
                         SqlDataReader reader = command.ExecuteReader();
                         while (reader.Read())
                         {
+                            if ((int)reader["isActive"] != 0)
+                            {
 
-                            if ((string)reader["productType"] == "gamingstation")
-                            {
-                                Product product = new GamingStation()
+                                if ((string)reader["productType"] == "gamingstation")
                                 {
-                                    ProductNumber = (string)reader["productNo"],
-                                    Name = (string)reader["name"],
-                                    Description = (string)reader["description"],
-                                    Type = (string)reader["productType"],
-                                    SeatNumber = (string)reader["seatNo"],
-                                };
-                                return product;
-                            }
-                            else
-                            {
-                                Product product = new Consumable()
+                                    Product product = new GamingStation()
+                                    {
+                                        ProductNumber = (string)reader["productNo"],
+                                        Name = (string)reader["name"],
+                                        Description = (string)reader["description"],
+                                        Type = (string)reader["productType"],
+                                        SeatNumber = (string)reader["seatNo"],
+                                    };
+                                    return product;
+                                }
+                                else
                                 {
-                                    ProductNumber = (string)reader["productNo"],
-                                    Name = (string)reader["name"],
-                                    Description = (string)reader["description"],
-                                    Type = (string)reader["productType"],
-                                };
-                                return product;
+                                    Product product = new Consumable()
+                                    {
+                                        ProductNumber = (string)reader["productNo"],
+                                        Name = (string)reader["name"],
+                                        Description = (string)reader["description"],
+                                        Type = (string)reader["productType"],
+                                    };
+                                    return product;
+                                }
                             }
                         }
                     }
@@ -122,29 +125,32 @@ namespace DataAccessLayer.DAO
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        if ((string)reader["productType"] == "gamingstation")
+                        if ((int)reader["isActive"] != 0)
                         {
-                            Product product = new GamingStation()
+                            if ((string)reader["productType"] == "gamingstation")
                             {
-                                ProductNumber = (string)reader["productNo"],
-                                Name = (string)reader["name"],
-                                Description = (string)reader["description"],
-                                Type = (string)reader["productType"],
-                                SeatNumber = (string)reader["seatNo"],
+                                Product product = new GamingStation()
+                                {
+                                    ProductNumber = (string)reader["productNo"],
+                                    Name = (string)reader["name"],
+                                    Description = (string)reader["description"],
+                                    Type = (string)reader["productType"],
+                                    SeatNumber = (string)reader["seatNo"],
 
-                            };
-                            list.Add(product);
-                        }
-                        else
-                        {
-                            Product product = new Consumable()
+                                };
+                                list.Add(product);
+                            }
+                            else
                             {
-                                ProductNumber = (string)reader["productNo"],
-                                Name = (string)reader["name"],
-                                Description = (string)reader["description"],
-                                Type = (string)reader["productType"],
-                            };
-                            list.Add(product);
+                                Product product = new Consumable()
+                                {
+                                    ProductNumber = (string)reader["productNo"],
+                                    Name = (string)reader["name"],
+                                    Description = (string)reader["description"],
+                                    Type = (string)reader["productType"],
+                                };
+                                list.Add(product);
+                            }
                         }
                     }
                 }
