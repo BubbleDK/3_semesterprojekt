@@ -4,7 +4,7 @@ using NetCafeUCN.MVC.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddSingleton<INetCafeDataAccess<Product>, ProductService>();
+//builder.Services.AddSingleton<INetCafeDataAccess<Product>, ProductService>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
