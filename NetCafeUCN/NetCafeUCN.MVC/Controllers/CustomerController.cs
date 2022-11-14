@@ -5,13 +5,13 @@ using NetCafeUCN.MVC.Services;
 
 namespace NetCafeUCN.MVC.Controllers
 {
-    public class PersonController : Controller
+    public class CustomerController : Controller
     {
-        INetCafeDataAccess<Person> userService = new UserService("https://localhost:7197/api/Person");
+        INetCafeDataAccess<Customer> customerService = new CustomerService("https://localhost:7197/api/Customer");
         // GET: PersonController
         public ActionResult Index()
         {
-            return View(userService.GetAll());
+            return View(customerService.GetAll());
         }
 
         // GET: PersonController/Details/5
