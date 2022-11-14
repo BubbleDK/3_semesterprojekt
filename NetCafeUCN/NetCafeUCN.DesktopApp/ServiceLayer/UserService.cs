@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,13 +33,18 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
 
         public IEnumerable<Person> GetAll()
         {
+            IEnumerable<Customer>? customers = RestClient.Execute<IEnumerable<Customer>>(new RestRequest($"{BaseUri}"), Method.Get).Data;
+            IEnumerable<Employee>? employees = RestClient.Execute<IEnumerable<Employee>>(new RestRequest($"{BaseUri}"), Method.Get).Data;
             try
             {
-                return RestClient.Execute<IEnumerable<Person>>(new RestRequest($"{BaseUri}"), Method.Get).Data;
+                var joined = customers.ToList<Person>();
+                joined.AddRange(employees);
+                return joined;
             }
             catch (Exception)
             {
-                throw new Exception();
+
+                throw;
             }
         }
 
