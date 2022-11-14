@@ -14,10 +14,10 @@ namespace NetCafeUCN.API.Controllers
             private INetCafeDataAccess<Customer> dataAccess;
 
 
-            public GamingStationController(INetCafeDataAccess<Customer> dataAccess)
+            public CustomerController(INetCafeDataAccess<Customer> dataAccess)
             {
                 this.dataAccess = dataAccess;
-
+                
             }
 
             // GET: api/<CustomerController>
