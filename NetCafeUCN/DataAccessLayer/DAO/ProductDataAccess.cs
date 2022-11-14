@@ -36,8 +36,8 @@ namespace DataAccessLayer.DAO
                             "INSERT INTO nc_GamingStation VALUES(@stationid, @seatNo, @description)", conn))
                         {
                             command.Parameters.AddWithValue("@stationid", id);
-                            command.Parameters.AddWithValue("seatNo", p);
-                            command.Parameters.AddWithValue("description", p);
+                            command.Parameters.AddWithValue("@seatNo", p);
+                            command.Parameters.AddWithValue("@description", p);
                         }
                     } else if (p.Type == "consmuable")
                     {
@@ -45,7 +45,7 @@ namespace DataAccessLayer.DAO
                         using (command = new SqlCommand(
                             "INSERT INTO nc_Consumables VALUES(@description", conn))
                         {
-                            command.Parameters.AddWithValue("description", p);
+                            command.Parameters.AddWithValue("@description", p);
                         }
                     }
                     conn.Open();
