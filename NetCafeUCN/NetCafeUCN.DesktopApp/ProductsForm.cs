@@ -15,37 +15,21 @@ namespace NetCafeUCN.DesktopApp
     public partial class ProductsForm : Form
     {
         INetCafeDataAccess<Product> productService = new ProductService("https://localhost:7197/api/Product");
-        int selectedIndex;
         public ProductsForm()
         {
             InitializeComponent();
-            CreateThread();
-            //UpdateList();
-        }
-
-        private void CreateThread()
-        {
-            Thread t1 = new Thread(UpdateList);
-            t1.Start();
+            UpdateList();
         }
 
         private void UpdateList()
         {
-            ProductsForm.Invoke(new MethodInvoker(delegate ()
+            lstProducts.Items.Clear();
+            List<Product> collection = new();
+            collection = productService.GetAll().ToList();
+            foreach (Product p in collection)
             {
-                while (true)
-                {
-                    selectedIndex = lstProducts.SelectedIndex;
-                    lstProducts.Items.Clear();
-                    List<Product> collection = new();
-                    collection = productService.GetAll().ToList();
-                    foreach (Product p in collection)
-                    {
-                        lstProducts.Items.Add(p);
-                    }
-                    Thread.Sleep(1000);
-                }
-            }));
+                lstProducts.Items.Add(p);
+            }
         }
 
         private void ShowInputDialog()
@@ -66,10 +50,16 @@ namespace NetCafeUCN.DesktopApp
 
         private void UpdateProduct()
         {
-            lstProducts.SelectedItem = lstProducts.SelectedIndex;
             Product p = lstProducts.SelectedItem as Product;
             Form gamingStationForm = new GamingstationForm(p.ProductNumber, p.Type, p.Name);
             gamingStationForm.Show();
+        }
+        private void ProductsForm_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.F5)
+            {
+                UpdateList();
+            }
         }
     }
 }
