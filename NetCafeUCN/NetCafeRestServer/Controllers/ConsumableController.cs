@@ -40,7 +40,6 @@ namespace NetCafeUCN.API.Controllers
         [HttpPost]
         public ActionResult<bool> Add([FromBody] Consumable p)
         {
-
             return Ok(dataAccess.Add(p));
         }
 

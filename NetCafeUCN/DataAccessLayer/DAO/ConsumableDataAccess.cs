@@ -14,29 +14,28 @@ namespace NetCafeUCN.DAL.DAO
     {
         public bool Add(Consumable o)
         {
-            SqlCommand command = new SqlCommand();
             int id = 0;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
                 try
                 {
                     using (SqlCommand productCommand = new SqlCommand(
-                            "INSERT INTO nc_Product VALUES(@productNo, @productType, @name, @isActive)", conn))
+                            "INSERT INTO nc_Product VALUES(@productNo, @productType, @name, @isActive); SELECT SCOPE_IDENTITY();", conn))
                     {
                         productCommand.Parameters.AddWithValue("@productNo", o.ProductNumber);
-                        productCommand.Parameters.AddWithValue("productType", o.Type);
+                        productCommand.Parameters.AddWithValue("@productType", o.Type);
                         productCommand.Parameters.AddWithValue("@name", o.Name);
                         productCommand.Parameters.AddWithValue("@isActive", 1);
                         conn.Open();
-                        id = (int)productCommand.ExecuteScalar();
+                        id = Convert.ToInt32(productCommand.ExecuteScalar());
                     }
 
+
                     using (SqlCommand consumableCommand = new SqlCommand(
-                            "INSERT INTO nc_Consumable VALUES(@productid, @description)", conn))
+                            "INSERT INTO nc_Consumables VALUES(@productid, @description)", conn))
                     {
                         consumableCommand.Parameters.AddWithValue("@productid", id);
                         consumableCommand.Parameters.AddWithValue("@description", o.Description);
-                        conn.Open();
                         consumableCommand.ExecuteNonQuery();
                     }
                 }
@@ -144,6 +143,7 @@ namespace NetCafeUCN.DAL.DAO
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
                 using SqlCommand command = new SqlCommand("UPDATE nc_Product SET IsActive = 0 WHERE productNo = @productNo", conn);
+                using SqlCommand consumableCommand = new SqlCommand("UPDATE nc_Consumable SET description WHERE productNo = @productNo", conn);
                 command.Parameters.AddWithValue("@productNo", o.ProductNumber);
                 try
                 {
