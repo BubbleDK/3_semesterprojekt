@@ -56,7 +56,7 @@ namespace NetCafeUCN.DAL.DAO
         {
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
-                using SqlCommand command = new SqlCommand("SELECT * FROM nc_Product, nc_GamingStation WHERE productNo = @productNo", conn);
+                using SqlCommand command = new SqlCommand("SELECT productNo, name, description, productType, seatNo FROM nc_Product INNER JOIN nc_GamingStation ON nc_Product.id = nc_GamingStation.stationid WHERE productNo = @productNo;", conn);
                 command.Parameters.AddWithValue("@productNo", key);
                 {
                     try
@@ -65,11 +65,6 @@ namespace NetCafeUCN.DAL.DAO
                         SqlDataReader reader = command.ExecuteReader();
                         while (reader.Read())
                         {
-                            if ((int)reader["isActive"] != 0)
-                            {
-
-                                if ((string)reader["productType"] == "gamingstation")
-                                {
                                     GamingStation product = new GamingStation()
                                     {
                                         ProductNumber = (string)reader["productNo"],
@@ -79,8 +74,6 @@ namespace NetCafeUCN.DAL.DAO
                                         SeatNumber = (string)reader["seatNo"],
                                     };
                                     return product;
-                                }
-                            }
                         }
                     }
                     catch (DataAccessException)
@@ -97,7 +90,7 @@ namespace NetCafeUCN.DAL.DAO
         public IEnumerable<GamingStation> GetAll()
         {
 
-            string sqlStatement = "SELECT * FROM nc_Product, nc_GamingStation";
+            string sqlStatement = "SELECT productNo, name, description, productType, seatNo FROM nc_Product INNER JOIN nc_GamingStation ON nc_Product.id = nc_GamingStation.stationid";
             List<GamingStation> list = new List<GamingStation>();
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
@@ -109,10 +102,6 @@ namespace NetCafeUCN.DAL.DAO
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        if ((int)reader["isActive"] != 0)
-                        {
-                            if ((string)reader["productType"] == "gamingstation")
-                            {
                                 GamingStation product = new()
                                 {
                                     ProductNumber = (string)reader["productNo"],
@@ -123,9 +112,7 @@ namespace NetCafeUCN.DAL.DAO
 
                                 };
                                 list.Add(product);
-                            }
-                        }
-                    }
+                      }
                 }
                 catch (DataAccessException)
                 {
@@ -140,7 +127,7 @@ namespace NetCafeUCN.DAL.DAO
         {
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
-                using SqlCommand command = new SqlCommand("UPDATE nc_Product SET IsActive = 0 WHERE productNo = @productNo", conn);
+                using SqlCommand command = new SqlCommand("UPDATE nc_Product SET IsActive = 0 WHERE productNo = @productNo AND productType = 'gamingstation'", conn);
                 command.Parameters.AddWithValue("@productNo", key);
                 try
                 {
