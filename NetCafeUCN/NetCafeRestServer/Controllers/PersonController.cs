@@ -61,6 +61,20 @@ namespace NetCafeUCN.API.Controllers
                     return NotFound();
                 }
             }
+
+        // GET api/<PersonController>/Customer
+        [HttpGet("{personType}")]
+        public ActionResult<IEnumerable<Customer>> GetAllCustomers()
+        {
+            return Ok(GetAllCustomers());
+        }
+
+        // GET api/<PersonController>/Employee
+        [HttpGet("{personType}")]
+        public ActionResult<IEnumerable<Employee>> GetAllEmployees()
+        {
+            return Ok(GetAllEmployees());
+        }
         }
     }
 
