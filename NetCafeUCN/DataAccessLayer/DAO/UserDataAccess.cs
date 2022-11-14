@@ -9,6 +9,7 @@ using System.ComponentModel.DataAnnotations;
 using DataAccessLayer.Exceptions;
 using NetCafeUCN.DAL.DAO;
 using System.Data;
+using System.Transactions;
 
 namespace DataAccessLayer.DAO
 {
@@ -17,14 +18,16 @@ namespace DataAccessLayer.DAO
         public bool Add(Person o)
         {
             string sqlStatement = "INSERT INTO nc_Person(name, phone, email, personType) VALUES (@name, @phone, @email, @personType)";
-
+            SqlTransaction transaction;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
-
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(sqlStatement, conn);
+                transaction = conn.BeginTransaction();
+                cmd.Transaction = transaction;
                 try
                 {
-                    SqlCommand cmd = new SqlCommand(sqlStatement, conn);
-                    conn.Open();
+
                     cmd.Parameters.Add("@name", SqlDbType.VarChar);
                     cmd.Parameters["@name"].Value = o.Name;
                     cmd.Parameters.Add("@phone", SqlDbType.VarChar);
@@ -38,17 +41,19 @@ namespace DataAccessLayer.DAO
                     if (o.PersonType == "Employee")
                     {
                         AddEmployee(id, o.PersonType);
+                        transaction.Commit();
                     }
-                    else if(o.PersonType == "Customer")
+                    else if (o.PersonType == "Customer")
                     {
                         AddCustomer(id, o.PersonType);
+                        transaction.Commit();
                     }
 
                     return true;
                 }
                 catch (Exception)
                 {
-
+                    transaction.Rollback();
                     return false;
                 }
 
@@ -58,39 +63,57 @@ namespace DataAccessLayer.DAO
         private bool AddCustomer(object id, string personType)
         {
             string sqlStatement = "INSERT INTO nc_Customer(id) VALUES (@id)";
+            SqlTransaction transaction;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(sqlStatement, conn);
+                transaction = conn.BeginTransaction();
+                cmd.Transaction = transaction;
                 try
                 {
-                    SqlCommand cmd = new SqlCommand(sqlStatement, conn);
-                    conn.Open();
+
+
                     cmd.Parameters.Add("@id", SqlDbType.Int);
                     cmd.Parameters["@id"].Value = id;
 
+                    transaction.Commit();
                     return true;
                 }
                 catch (Exception)
                 {
+                    transaction.Rollback();
                     return false;
                 }
-                
+
             }
-            
+
         }
 
         private void AddEmployee(object id, string personType)
         {
             string sqlStatement = "INSERT INTO nc_Employee(personid, address, role, zipCode) VALUES (@id, @address, @role, @zipCode)";
-            using(SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+            SqlTransaction transaction;
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
-                SqlCommand cmd = new SqlCommand(sqlStatement, conn);
                 conn.Open();
-                cmd.Parameters.Add("@id", SqlDbType.Int);
-                cmd.Parameters["@id"].Value = id;
-                cmd.Parameters.Add("@address", SqlDbType.VarChar);
-                //cmd.Parameters["@address"].Value = 
+                SqlCommand cmd = new SqlCommand(sqlStatement, conn);
+                transaction = conn.BeginTransaction();
+                cmd.Transaction = transaction;
+                try
+                {
+                    cmd.Parameters.Add("@id", SqlDbType.Int);
+                    cmd.Parameters["@id"].Value = id;
+                    cmd.Parameters.Add("@address", SqlDbType.VarChar);
+                    //cmd.Parameters["@address"].Value = 
+                    transaction.Commit();
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                    throw;
+                }
             }
-            throw new NotImplementedException();
         }
 
         public Person? Get(dynamic key)
@@ -127,7 +150,7 @@ namespace DataAccessLayer.DAO
                     throw new DataAccessException("Can't access data");
                 }
             }
-            using(SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand(secondSqlStatement, conn);
                 cmd.Parameters.Add("@phone", SqlDbType.VarChar);
@@ -139,7 +162,7 @@ namespace DataAccessLayer.DAO
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        if(personType == "Customer")
+                        if (personType == "Customer")
                         {
                             person = new Customer()
                             {
@@ -148,7 +171,7 @@ namespace DataAccessLayer.DAO
                                 Phone = (string?)reader["phone"]
                             };
                         }
-                        else if(personType == "Employee")
+                        else if (personType == "Employee")
                         {
                             person = new Employee()
                             {
@@ -203,7 +226,7 @@ namespace DataAccessLayer.DAO
                 }
             }
             return list;
-        
+
         }
 
         public IEnumerable<Customer> GetAllCustomers()
@@ -220,13 +243,13 @@ namespace DataAccessLayer.DAO
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                            Customer person = new Customer()
-                            {
-                                Name = (string?)reader["name"],
-                                Email = (string?)reader["email"],
-                                Phone = (string?)reader["phone"]
-                            };
-                            list.Add(person);
+                        Customer person = new Customer()
+                        {
+                            Name = (string?)reader["name"],
+                            Email = (string?)reader["email"],
+                            Phone = (string?)reader["phone"]
+                        };
+                        list.Add(person);
                     }
                 }
                 catch (DataAccessException)
@@ -251,17 +274,17 @@ namespace DataAccessLayer.DAO
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                            Employee person = new Employee()
-                            {
-                                Name = (string?)reader["name"],
-                                Email = (string?)reader["email"],
-                                Phone = (string?)reader["phone"],
-                                Role = (string?)reader["role"],
-                                Address = (string?)reader["address"],
-                                City = (string?)reader["city"],
-                                Zipcode = (string?)reader["zipcode"]
-                            };
-                            list.Add(person);
+                        Employee person = new Employee()
+                        {
+                            Name = (string?)reader["name"],
+                            Email = (string?)reader["email"],
+                            Phone = (string?)reader["phone"],
+                            Role = (string?)reader["role"],
+                            Address = (string?)reader["address"],
+                            City = (string?)reader["city"],
+                            Zipcode = (string?)reader["zipcode"]
+                        };
+                        list.Add(person);
                     }
                 }
                 catch (DataAccessException)
@@ -276,29 +299,32 @@ namespace DataAccessLayer.DAO
         public bool Remove(dynamic key)
         {
             string sqlStatement = "DELETE FROM nc_Person WHERE phone = @phone";
-            try
+            SqlTransaction transaction;
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
-                using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+
+                    conn.Open();
+                    transaction = conn.BeginTransaction();
+                    SqlCommand cmd = conn.CreateCommand();
+                try
                 {
-                    using (var cmd = conn.CreateCommand())
-                    {
+
+                    cmd.Transaction = transaction;
 
 
-                        conn.Open();
-                        cmd.CommandText = sqlStatement;
-                        cmd.Parameters.AddWithValue("@phone", key);
-                        cmd.ExecuteNonQuery();
+                    cmd.CommandText = sqlStatement;
+                    cmd.Parameters.AddWithValue("@phone", key);
+                    cmd.ExecuteNonQuery();
 
-                        return true;
-
-
-                    }
+                    transaction.Commit();
+                    return true;
                 }
-            }
-            catch (Exception)
-            {
-
-                return false;
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                    return false;
+                    throw;
+                }
             }
         }
 
