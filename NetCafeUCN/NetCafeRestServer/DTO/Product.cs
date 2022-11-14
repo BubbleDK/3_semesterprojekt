@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NetCafeUCN.API.DTO
 {
-    internal class Product
+    public class Product
     {
         public string? ProductNumber { get; set; }
         public string? Type { get; set; }

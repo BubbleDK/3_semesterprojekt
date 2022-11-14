@@ -33,7 +33,16 @@ namespace DataAccessLayer.DAO
                     cmd.Parameters["@email"].Value = o.Email;
                     cmd.Parameters.Add("@personType", SqlDbType.VarChar);
                     cmd.Parameters["@personType"].Value = o.PersonType;
-                    cmd.ExecuteNonQuery();
+                    var id = cmd.ExecuteScalar();
+
+                    if (o.PersonType == "Employee")
+                    {
+                        AddEmployee(id, o.PersonType);
+                    }
+                    else if(o.PersonType == "Customer")
+                    {
+                        AddCustomer(id, o.PersonType);
+                    }
 
                     return true;
                 }
@@ -44,6 +53,44 @@ namespace DataAccessLayer.DAO
                 }
 
             }
+        }
+
+        private bool AddCustomer(object id, string personType)
+        {
+            string sqlStatement = "INSERT INTO nc_Customer(id) VALUES (@id)";
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand(sqlStatement, conn);
+                    conn.Open();
+                    cmd.Parameters.Add("@id", SqlDbType.Int);
+                    cmd.Parameters["@id"].Value = id;
+
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+                
+            }
+            
+        }
+
+        private void AddEmployee(object id, string personType)
+        {
+            string sqlStatement = "INSERT INTO nc_Employee(personid, address, role, zipCode) VALUES (@id, @address, @role, @zipCode)";
+            using(SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand(sqlStatement, conn);
+                conn.Open();
+                cmd.Parameters.Add("@id", SqlDbType.Int);
+                cmd.Parameters["@id"].Value = id;
+                cmd.Parameters.Add("@address", SqlDbType.VarChar);
+                //cmd.Parameters["@address"].Value = 
+            }
+            throw new NotImplementedException();
         }
 
         public Person? Get(dynamic key)
@@ -139,7 +186,7 @@ namespace DataAccessLayer.DAO
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        Customer person = new Customer()
+                        Person person = new Customer()
                         {
                             Name = (string?)reader["name"],
                             Email = (string?)reader["email"],
