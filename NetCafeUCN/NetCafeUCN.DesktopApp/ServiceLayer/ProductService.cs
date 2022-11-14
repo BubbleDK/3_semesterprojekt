@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NetCafeUCN.DesktopApp.ServiceLayer
 {
-    internal class ProductService : INetCafeDataAccess<Product>
+    public class ProductService : INetCafeDataAccess<Product>
     {
         public string BaseUri { get; private set; }
         private RestClient RestClient { get; set; }
@@ -29,10 +29,10 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
 
         public IEnumerable<Product> GetAll()
         {
-            //return RestClient.Execute<IEnumerable<Product>>(new RestRequest()).Data;
-            var request = new RestRequest("/api/v1/Companies");
-            var response = RestClient.Get<List<Product>>(request);
-            return response;
+            return RestClient.Execute<IEnumerable<Product>>(new RestRequest()).Data;
+            //var request = new RestRequest("/api/Product");
+            //var response = RestClient.Get<List<Product>>(request);
+            //return response;
         }
 
         public bool Remove(dynamic key)

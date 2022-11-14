@@ -17,6 +17,15 @@ namespace NetCafeUCN.DesktopApp
             InitializeComponent();
         }
 
+        public GamingstationForm(string productNumber, string type, string name)
+        {
+            //txtDescription.Text = description;
+            txtProductName.Text = name;
+            txtProductNum.Text = productNumber;
+            txtProductType.Text = type;
+            //txtSeatNumber.Text = seatNo;
+        }
+
         private void btnConfirm_Click(object sender, EventArgs e)
         {
             confirmOption();

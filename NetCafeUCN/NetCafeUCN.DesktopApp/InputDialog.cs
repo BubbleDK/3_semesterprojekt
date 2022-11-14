@@ -12,10 +12,17 @@ namespace NetCafeUCN.DesktopApp
 {
     public partial class InputDialog : Form
     {
+        private enum Type
+        {
+            Gamingstation = 0,
+            Consumable = 1,
+        };
+
         public InputDialog(string inputFormIdentity)
         {
             InitializeComponent();
             lblInput.Text = inputFormIdentity;
+            cmbInput.DataSource = Enum.GetValues(typeof(Type));
         }
 
         private void btnConfirm_Click(object sender, EventArgs e)
@@ -25,14 +32,10 @@ namespace NetCafeUCN.DesktopApp
 
         private void confirmInupt()
         {
-            if (txtInput.Text.ToLower().Equals("gamingstation"))
+            if(cmbInput.SelectedIndex == 0)
             {
                 Form gamingStationForm = new GamingstationForm();
                 gamingStationForm.Show();
-            }
-            else if (txtInput.Text.ToLower().Equals("consumable"))
-            {
-
             }
         }
     }

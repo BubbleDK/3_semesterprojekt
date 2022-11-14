@@ -28,17 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtInput = new System.Windows.Forms.TextBox();
             this.lblInput = new System.Windows.Forms.Label();
             this.btnConfirm = new System.Windows.Forms.Button();
+            this.cmbInput = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
-            // 
-            // txtInput
-            // 
-            this.txtInput.Location = new System.Drawing.Point(0, 24);
-            this.txtInput.Name = "txtInput";
-            this.txtInput.Size = new System.Drawing.Size(204, 23);
-            this.txtInput.TabIndex = 0;
             // 
             // lblInput
             // 
@@ -60,14 +53,23 @@
             this.btnConfirm.UseVisualStyleBackColor = true;
             this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
             // 
+            // cmbInput
+            // 
+            this.cmbInput.FormattingEnabled = true;
+            this.cmbInput.Location = new System.Drawing.Point(0, 24);
+            this.cmbInput.Name = "cmbInput";
+            this.cmbInput.Size = new System.Drawing.Size(192, 23);
+            this.cmbInput.TabIndex = 3;
+            this.cmbInput.DropDownStyle = ComboBoxStyle.DropDownList;
+            // 
             // InputDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(204, 97);
+            this.Controls.Add(this.cmbInput);
             this.Controls.Add(this.btnConfirm);
             this.Controls.Add(this.lblInput);
-            this.Controls.Add(this.txtInput);
             this.Name = "InputDialog";
             this.Text = "InputDialog";
             this.ResumeLayout(false);
@@ -76,9 +78,8 @@
         }
 
         #endregion
-
-        private TextBox txtInput;
         private Label lblInput;
         private Button btnConfirm;
+        private ComboBox cmbInput;
     }
 }
