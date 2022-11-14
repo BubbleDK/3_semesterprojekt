@@ -11,7 +11,7 @@ namespace NetCafeUCN.DesktopApp.DTO
         public Customer(string name, string email, string phone, string personType) : base(name, email, phone, personType)
         {
         }
-        public Customer():base()
+        public Customer() : base()
         {
 
         }
