@@ -32,20 +32,14 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
 
         public IEnumerable<Person> GetAll()
         {
-            //try
-            //{
-            //RestRequest request = new RestRequest(BaseUri);
-            //IEnumerable<Person> list = new List<Person>();
-            //RestResponse response = RestClient.ExecuteGet(request);
-            //response.Content.
-            //list = JsonConvert.DeserializeObject<List<Person>>(response.Content);
-            //return list;
-            return (IEnumerable<Person>)RestClient.Execute<IEnumerable<Person>>(new RestRequest($"{BaseUri}"), Method.Get).Data;
-            //}
-            //catch (Exception)
-            //{
-            //    throw new Exception();
-            //}
+            try
+            {
+                return RestClient.Execute<IEnumerable<Person>>(new RestRequest($"{BaseUri}"), Method.Get).Data;
+            }
+            catch (Exception)
+            {
+                throw new Exception();
+            }
         }
 
         public bool Remove(dynamic key)
