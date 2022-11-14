@@ -14,37 +14,33 @@ namespace NetCafeUCN.DAL.DAO
     {
         public bool Add(GamingStation p)
         {
-            SqlTransaction trans = null;
             int id = 0;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
                 try
                 {
                     using (SqlCommand productCommand = new SqlCommand(
-                            "INSERT INTO nc_Product VALUES(@productNo, @productType, @name, @isActive)", conn))
+                            "INSERT INTO nc_Product VALUES(@productNo, @productType, @name, @isActive); SELECT SCOPE_IDENTITY();", conn))
                     {
                         productCommand.Parameters.AddWithValue("@productNo", p.ProductNumber);
                         productCommand.Parameters.AddWithValue("@productType", p.Type);
                         productCommand.Parameters.AddWithValue("@name", p.Name);
                         productCommand.Parameters.AddWithValue("@isActive", 1);
-                        
+                        conn.Open();
+                        id = Convert.ToInt32(productCommand.ExecuteScalar());
+                    }
+
                         using (SqlCommand command = new SqlCommand(
                             "INSERT INTO nc_GamingStation VALUES(@stationid, @seatNo, @description)", conn))
                         {
                             command.Parameters.AddWithValue("@stationid", id);
                             command.Parameters.AddWithValue("@seatNo", p.SeatNumber);
                             command.Parameters.AddWithValue("@description", p.Description);
-                            conn.Open();
-                            trans = conn.BeginTransaction();
-                            id = Convert.ToInt32(productCommand.ExecuteScalar());
                             command.ExecuteNonQuery();
-                            trans.Commit();
                         }
-                    }
                 }
                 catch (DataAccessException)
                 {
-                    trans.Rollback();
                     throw new DataAccessException("Can't access data");
                 }
             }
