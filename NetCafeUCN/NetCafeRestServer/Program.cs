@@ -1,5 +1,3 @@
-using DataAccessLayer.DAO;
-using DataAccessLayer.Model;
 using NetCafeUCN.DAL.DAO;
 using NetCafeUCN.DAL.Model;
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccessLayer.DAO
+namespace NetCafeUCN.DAL.DAO
 {
     public interface INetCafeDataAccess<TEntity>
     {

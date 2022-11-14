@@ -1,12 +1,8 @@
 ﻿using DataAccessLayer.Exceptions;
-using DataAccessLayer.Model;
-using NetCafeUCN.DAL.DAO;
 using NetCafeUCN.DAL.Model;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Xml.Linq;
 
-namespace DataAccessLayer.DAO
+namespace NetCafeUCN.DAL.DAO
 {
     public class ProductDataAccess : INetCafeDataAccess<Product>
     {
