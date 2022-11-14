@@ -36,6 +36,10 @@ namespace NetCafeUCN.DesktopApp
             {
                 Form gamingStationForm = new GamingstationForm();
                 gamingStationForm.Show();
+            }else if(cmbInput.SelectedIndex == 1)
+            {
+                Form consumableForm = new ConsumableForm();
+                consumableForm.Show();
             }
         }
     }

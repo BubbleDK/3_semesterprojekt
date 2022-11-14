@@ -15,7 +15,7 @@ namespace NetCafeUCN.DesktopApp.DTO
 
         public override string ToString()
         {
-            return "Produkt nr: " + ProductNumber + " Produkttype: " + Type;
+            return "Produkt: " + Name + "Produkt nr: " + ProductNumber + " Produkttype: " + Type;
         }
     }
 }

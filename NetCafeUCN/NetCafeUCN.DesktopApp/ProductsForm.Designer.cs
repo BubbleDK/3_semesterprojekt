@@ -115,6 +115,7 @@
             this.btnDeleteProduct.TabIndex = 2;
             this.btnDeleteProduct.Text = "Slet";
             this.btnDeleteProduct.UseVisualStyleBackColor = true;
+            this.btnDeleteProduct.Click += new System.EventHandler(this.btnDeleteProduct_Click);
             // 
             // lstProducts
             // 

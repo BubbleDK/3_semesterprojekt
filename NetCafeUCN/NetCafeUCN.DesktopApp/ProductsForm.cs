@@ -24,6 +24,7 @@ namespace NetCafeUCN.DesktopApp
         private void UpdateList()
         {
             lstProducts.Items.Clear();
+            //TODO: List should contain Gamingstation and Consumable instead of Product
             List<Product> collection = new();
             collection = productService.GetAll().ToList();
             foreach (Product p in collection)
@@ -60,6 +61,12 @@ namespace NetCafeUCN.DesktopApp
             {
                 UpdateList();
             }
+        }
+
+        private void btnDeleteProduct_Click(object sender, EventArgs e)
+        {
+            Product p = lstProducts.SelectedItem as Product;
+            productService.Remove(p.ProductNumber);
         }
     }
 }
