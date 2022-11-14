@@ -29,12 +29,11 @@ namespace NetCafeUCN.API.Controllers
         // GET api/<ProductController>/74747
         [HttpGet]
         [Route("{productNo}")]
-        public ActionResult<Product> Get(string productNo)
+        public ActionResult<GamingStation> Get(string productNo)
         {
-            var product = dataAccess.Get(productNo);
-            if (product == null) { return NotFound(); }
+            
 
-            return Ok(product);
+            return Ok(dataAccess.Get(productNo));
         }
 
         // POST api/<ProductController>
