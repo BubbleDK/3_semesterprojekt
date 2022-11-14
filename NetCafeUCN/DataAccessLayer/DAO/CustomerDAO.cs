@@ -1,12 +1,6 @@
-﻿using DataAccessLayer.DAO;
-using DataAccessLayer.Exceptions;
-using DataAccessLayer.Model;
-using System;
-using System.Collections.Generic;
+﻿using DataAccessLayer.Exceptions;
+using NetCafeUCN.DAL.Model;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NetCafeUCN.DAL.DAO
 {
@@ -19,7 +13,35 @@ namespace NetCafeUCN.DAL.DAO
 
         public Customer? Get(dynamic key)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+            {
+                SqlCommand command = new SqlCommand("SELECT * FROM nc_Person WHERE phone = @phone",conn);
+                command.Parameters.AddWithValue("@phone", key);
+                {
+                    Customer? customer = null;
+                    try
+                    {
+                        conn.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            customer = new Customer()
+                            {
+                                Name = (string)reader["Name"],
+                                Email = (string)reader["email"],
+                                Phone = (string)reader["phone"],
+                                PersonType = (string)reader["PersonType"]
+                            };
+                        }
+                        return customer;
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
+                }
+            }
         }
 
         public IEnumerable<Customer> GetAll()
