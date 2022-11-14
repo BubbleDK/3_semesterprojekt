@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NetCafeUCN.API.DTO
 {
-    internal class GamingStation:Product
+    public class GamingStation:Product
     {
         public string? SeatNumber { get; set; }
         public string? Description { get; set; }
