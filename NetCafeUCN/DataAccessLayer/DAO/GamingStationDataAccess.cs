@@ -14,6 +14,7 @@ namespace NetCafeUCN.DAL.DAO
     {
         public bool Add(GamingStation p)
         {
+            SqlTransaction trans = null;
             int id = 0;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
@@ -26,11 +27,7 @@ namespace NetCafeUCN.DAL.DAO
                         productCommand.Parameters.AddWithValue("@productType", p.Type);
                         productCommand.Parameters.AddWithValue("@name", p.Name);
                         productCommand.Parameters.AddWithValue("@isActive", 1);
-                        conn.Open();
-                        id = Convert.ToInt32(productCommand.ExecuteScalar());
-                        conn.Close();
-                    }
-                    
+                        
                         using (SqlCommand command = new SqlCommand(
                             "INSERT INTO nc_GamingStation VALUES(@stationid, @seatNo, @description)", conn))
                         {
@@ -38,12 +35,16 @@ namespace NetCafeUCN.DAL.DAO
                             command.Parameters.AddWithValue("@seatNo", p.SeatNumber);
                             command.Parameters.AddWithValue("@description", p.Description);
                             conn.Open();
+                            trans = conn.BeginTransaction();
+                            id = Convert.ToInt32(productCommand.ExecuteScalar());
                             command.ExecuteNonQuery();
+                            trans.Commit();
+                        }
                     }
-                   
                 }
                 catch (DataAccessException)
                 {
+                    trans.Rollback();
                     throw new DataAccessException("Can't access data");
                 }
             }
