@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NetCafeUCN.MVC.Models;
 using NetCafeUCN.MVC.Services;
 
 namespace NetCafeUCN.MVC.Controllers
 {
     public class PersonController : Controller
     {
-        UserService userService = new UserService("https://localhost:7197/api/Person");
+        INetCafeDataAccess<Person> userService = new UserService("https://localhost:7197/api/Person");
         // GET: PersonController
         public ActionResult Index()
         {

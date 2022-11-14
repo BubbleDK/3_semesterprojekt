@@ -7,7 +7,7 @@ namespace NetCafeUCN.MVC.Controllers
 {
     public class ProductController : Controller
     {
-        ProductService productService = new ProductService("https://localhost:7197/api/Product");
+        INetCafeDataAccess<Product> productService = new ProductService("https://localhost:7197/api/Product");
         // GET: ProductController
         public ActionResult Index()
         {
