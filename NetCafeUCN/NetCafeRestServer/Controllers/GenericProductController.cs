@@ -1,12 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NetCafeUCN.API.DTO;
 
 namespace NetCafeUCN.API.Controllers
 {
-    public class GenericProductController : Controller
+    public class GenericProductController<T> : Controller where T : Product
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+        
     }
 }
