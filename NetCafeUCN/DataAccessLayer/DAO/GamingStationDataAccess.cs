@@ -14,7 +14,6 @@ namespace NetCafeUCN.DAL.DAO
     {
         public bool Add(GamingStation p)
         {
-            SqlCommand command = new SqlCommand();
             int id = 0;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
@@ -24,32 +23,31 @@ namespace NetCafeUCN.DAL.DAO
                             "INSERT INTO nc_Product VALUES(@productNo, @productType, @name, @isActive)", conn))
                     {
                         productCommand.Parameters.AddWithValue("@productNo", p.ProductNumber);
-                        productCommand.Parameters.AddWithValue("productType", p.Type);
+                        productCommand.Parameters.AddWithValue("@productType", p.Type);
                         productCommand.Parameters.AddWithValue("@name", p.Name);
                         productCommand.Parameters.AddWithValue("@isActive", 1);
                         conn.Open();
-                        id = (int)productCommand.ExecuteScalar();
+                        id = Convert.ToInt32(productCommand.ExecuteScalar());
+                        conn.Close();
                     }
-
-                    if (p.Type == "gamingstation")
-                    {
-                        using (command = new SqlCommand(
+                    
+                        using (SqlCommand command = new SqlCommand(
                             "INSERT INTO nc_GamingStation VALUES(@stationid, @seatNo, @description)", conn))
                         {
                             command.Parameters.AddWithValue("@stationid", id);
                             command.Parameters.AddWithValue("@seatNo", p.SeatNumber);
                             command.Parameters.AddWithValue("@description", p.Description);
-                        }
+                            conn.Open();
+                            command.ExecuteNonQuery();
                     }
-                    conn.Open();
-                    command.ExecuteNonQuery();
+                   
                 }
                 catch (DataAccessException)
                 {
                     throw new DataAccessException("Can't access data");
                 }
             }
-            return false;
+            return true;
         }
 
         public GamingStation? Get(dynamic key)
