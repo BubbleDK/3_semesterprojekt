@@ -8,7 +8,34 @@ namespace NetCafeUCN.DAL.DAO
     {
         public bool Add(Customer o)
         {
-            throw new NotImplementedException();
+            int id = -1;
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+            {
+                try
+                {
+                    using (SqlCommand addToPersonCommand = new SqlCommand(
+                        "INSERT INTO nc_Person VALUES(@Name, @Phone, @Email, @PersonType) SELECT SCOPE_IDENTITY();", conn))
+                    {
+                        addToPersonCommand.Parameters.AddWithValue("@Name", o.Name);
+                        addToPersonCommand.Parameters.AddWithValue("@Email", o.Email);
+                        addToPersonCommand.Parameters.AddWithValue("@Phone", o.Phone);
+                        addToPersonCommand.Parameters.AddWithValue("@PersonType", o.PersonType);
+                        conn.Open();
+                        id = Convert.ToInt32(addToPersonCommand.ExecuteScalar());
+                    }
+                    using (SqlCommand addToCustomerCommand = new SqlCommand("INSERT INTO nc_Customer VALUES(@id)", conn))
+                    {
+                        addToCustomerCommand.Parameters.AddWithValue("@id", id);
+                        addToCustomerCommand.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                return true;
+            }
         }
 
         public Customer? Get(dynamic key)
