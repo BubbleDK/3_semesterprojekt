@@ -3,6 +3,10 @@ using RestSharp;
 
 namespace NetCafeUCN.DesktopApp.ServiceLayer
 {
+    /// <summary>
+    /// Handles CRUD functionality for objects of static type Person
+    /// Uses RestSharp to communicate with Controllers in the API
+    /// </summary>
     public class UserService : INetCafeDataAccess<Person>
     {
         public string BaseUri { get; private set; }
