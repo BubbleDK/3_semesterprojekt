@@ -5,12 +5,14 @@ namespace NetCafeUCN.DesktopApp
 {
     public partial class ProductsForm : Form
     {
-        INetCafeDataAccess<Consumable> consumableService = new ConsumableService("https://localhost:7197/api/Consumable/");
-        INetCafeDataAccess<GamingStation> gamingstationService = new GamingStationService("https://localhost:7197/api/Gamingstation/");
+        INetCafeDataAccess<Consumable> consumableService;
+        INetCafeDataAccess<GamingStation> gamingstationService;
         public ProductsForm()
         {
             InitializeComponent();
             RefreshList();
+            consumableService = new ConsumableService("https://localhost:7197/api/Consumable/");
+            gamingstationService = new GamingStationService("https://localhost:7197/api/Gamingstation/");
         }
 
         private void RefreshList()

@@ -65,46 +65,27 @@
             this.btnBookings.TabIndex = 0;
             this.btnBookings.Text = "Bookings";
             this.btnBookings.UseVisualStyleBackColor = true;
-            this.btnBookings.Click += new System.EventHandler(this.btnBookings_Click);
             // 
             // btnUsers
             // 
-            this.btnUsers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnUsers.Font = new System.Drawing.Font("Segoe UI", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnUsers.Location = new System.Drawing.Point(3, 95);
-            this.btnUsers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnUsers.Location = new System.Drawing.Point(0, 0);
             this.btnUsers.Name = "btnUsers";
-            this.btnUsers.Size = new System.Drawing.Size(251, 89);
+            this.btnUsers.Size = new System.Drawing.Size(75, 23);
             this.btnUsers.TabIndex = 1;
-            this.btnUsers.Text = "Brugere";
-            this.btnUsers.UseVisualStyleBackColor = true;
-            this.btnUsers.Click += new System.EventHandler(this.btnUsers_Click);
             // 
             // btnProducts
             // 
-            this.btnProducts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnProducts.Font = new System.Drawing.Font("Segoe UI", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnProducts.Location = new System.Drawing.Point(3, 188);
-            this.btnProducts.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnProducts.Location = new System.Drawing.Point(0, 0);
             this.btnProducts.Name = "btnProducts";
-            this.btnProducts.Size = new System.Drawing.Size(251, 90);
+            this.btnProducts.Size = new System.Drawing.Size(75, 23);
             this.btnProducts.TabIndex = 2;
-            this.btnProducts.Text = "Produkter";
-            this.btnProducts.UseVisualStyleBackColor = true;
-            this.btnProducts.Click += new System.EventHandler(this.btnProducts_Click);
             // 
             // MainMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(257, 280);
-            this.Controls.Add(this.tableLayoutPanel1);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ClientSize = new System.Drawing.Size(282, 253);
             this.Name = "MainMenu";
-            this.Text = "Main Menu";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

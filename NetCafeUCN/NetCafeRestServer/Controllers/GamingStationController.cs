@@ -17,14 +17,14 @@ namespace NetCafeUCN.API.Controllers
            
         }
 
-        // GET: api/<ProductController>
+        // GET: api/<GamingStationController>
         [HttpGet]
         public ActionResult<IEnumerable<GamingStation>> GetAll()
         {
             return Ok(dataAccess.GetAll());
         }
 
-        // GET api/<ProductController>/74747
+        // GET api/<GamingStationController>/74747
         [HttpGet]
         [Route("{productNo}")]
         public ActionResult<GamingStation> Get(string productNo)
@@ -34,7 +34,7 @@ namespace NetCafeUCN.API.Controllers
             return Ok(dataAccess.Get(productNo));
         }
 
-        // POST api/<ProductController>
+        // POST api/<GamingStationController>
         [HttpPost]
         public ActionResult<bool> Add([FromBody]GamingStation p)
         {
@@ -42,14 +42,14 @@ namespace NetCafeUCN.API.Controllers
             return Ok(dataAccess.Add(p));
         }
 
-        // PUT api/<ProductController>/
+        // PUT api/<GamingStationController>/
         [HttpPut]
         public ActionResult<bool> Update(GamingStation product)
         {
             return Ok(dataAccess.Update(product));
         }
 
-        // DELETE api/<ProductController>/40559810
+        // DELETE api/<GamingStationController>/40559810
         [HttpDelete("{productNo}")]
         public ActionResult<bool> Delete(string productNo)
         {
