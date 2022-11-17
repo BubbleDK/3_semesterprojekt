@@ -32,11 +32,11 @@ namespace NetCafeUCN.DAL.DAO
                         {
                             foreach (var item in o.BookingLines)
                             {
-                                //bookingLineCommand.Parameters.AddWithValue("@bookingid", id);
-                                //bookingLineCommand.Parameters.AddWithValue("quantity", item.quantity);
-                                //bookingLineCommand.Parameters.AddWithValue("@stationid", item.stationid);
-                                //bookingLineCommand.Parameters.AddWithValue("@consumableid", item.consumableid);
-                                //bookingLineCommand.ExecuteNonQuery();
+                                bookingLineCommand.Parameters.AddWithValue("@bookingid", id);
+                                bookingLineCommand.Parameters.AddWithValue("quantity", item.Quantity);
+                                bookingLineCommand.Parameters.AddWithValue("@stationid", item.Stationid);
+                                bookingLineCommand.Parameters.AddWithValue("@consumableid", item.Consumableid);
+                                bookingLineCommand.ExecuteNonQuery();
                             }
                             trans.Commit();
                             return true;
@@ -62,18 +62,18 @@ namespace NetCafeUCN.DAL.DAO
                     {
                         conn.Open();
                         SqlDataReader reader = command.ExecuteReader();
-                        //while (reader.Read())
-                        //{
-                        //    Consumable product = new Consumable()
-                        //    {
-                        //        ProductNumber = (string)reader["productNo"],
-                        //        Name = (string)reader["name"],
-                        //        Description = (string)reader["description"],
-                        //        Type = (string)reader["productType"],
-                        //        IsActive = (bool)reader["isActive"],
-                        //    };
-                        //    return product;
-                        //}
+                        while (reader.Read())
+                        {
+                            Booking booking = new Booking()
+                            {
+                                Id = (int)reader["id"],
+                                BookingNo = (int)reader["bookingNo"],
+                                StartTime = (DateTime)reader["startTime"],
+                                EndTime = (DateTime)reader["endTime"],
+                                CustomerId = (int)reader["customerId"],
+                            };
+                            return booking;
+                        }
                     }
                     catch (DataAccessException)
                     {
