@@ -24,7 +24,7 @@ namespace NetCafeUCN.DAL.DAO
                         conn.Open();
                         id = (int)productCommand.ExecuteScalar();
                     }
-                    
+
                     if (p.Type == "gamingstation")
                     {
                         p = p as GamingStation;
@@ -35,7 +35,8 @@ namespace NetCafeUCN.DAL.DAO
                             command.Parameters.AddWithValue("@seatNo", p);
                             command.Parameters.AddWithValue("@description", p);
                         }
-                    } else if (p.Type == "consmuable")
+                    }
+                    else if (p.Type == "consmuable")
                     {
                         p = p as Consumable;
                         using (command = new SqlCommand(
@@ -57,8 +58,9 @@ namespace NetCafeUCN.DAL.DAO
 
         public Product? Get(dynamic productNo)
         {
-            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString)) {
-            using SqlCommand command = new SqlCommand("SELECT * FROM nc_Product, nc_GamingStation, nc_Consumables WHERE productNo = @productNo", conn);
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+            {
+                using SqlCommand command = new SqlCommand("SELECT * FROM nc_Product, nc_GamingStation, nc_Consumables WHERE productNo = @productNo", conn);
                 command.Parameters.AddWithValue("@productNo", productNo);
                 {
                     try
@@ -103,9 +105,9 @@ namespace NetCafeUCN.DAL.DAO
                     }
                 }
             }
-           return null;
+            return null;
         }
-    
+
 
         public IEnumerable<Product> GetAll()
         {

@@ -9,12 +9,12 @@ namespace NetCafeUCN.API.Controllers
     public class ProductController : ControllerBase
     {
         private INetCafeDataAccess<Product> dataAccess;
-        
+
 
         public ProductController(INetCafeDataAccess<Product> dataAccess)
         {
             this.dataAccess = dataAccess;
-           
+
         }
 
         // GET: api/<ProductController>
@@ -36,7 +36,8 @@ namespace NetCafeUCN.API.Controllers
             if (product.Type == "gamingstation")
             {
                 product = product as GamingStation;
-            } else
+            }
+            else
             {
                 product = product as Consumable;
             }
@@ -45,7 +46,7 @@ namespace NetCafeUCN.API.Controllers
 
         // POST api/<ProductController>
         [HttpPost]
-        public ActionResult<bool> Add([FromBody]Product p)
+        public ActionResult<bool> Add([FromBody] Product p)
         {
 
             return Ok(dataAccess.Add(p));
