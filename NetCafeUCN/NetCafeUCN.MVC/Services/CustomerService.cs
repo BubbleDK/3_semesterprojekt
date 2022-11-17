@@ -22,39 +22,28 @@ namespace NetCafeUCN.MVC.Services
         //
         public bool Add(Customer o)
         {
-            return RestClient.Execute<Customer>(new RestRequest($"api/Customer/{o}", Method.Post)).IsSuccessful;
+            return RestClient.Execute<Customer>(new RestRequest($"{BaseUri}/{o}", Method.Post)).IsSuccessful;
         }
 
         public Customer? Get(dynamic key)
         {
-            return RestClient.Execute<Customer>(new RestRequest($"api/Customer/{key}", Method.Get)).Data;
+            return RestClient.Execute<Customer>(new RestRequest($"{BaseUri}/{key}", Method.Get)).Data;
         }
 
         public IEnumerable<Customer> GetAll()
         {
-            return RestClient.Execute<IEnumerable<Customer>>(new RestRequest($"{BaseUri}/Customer"), Method.Get).Data;
-            //IEnumerable<Employee>? employees = RestClient.Execute<IEnumerable<Employee>>(new RestRequest($"{BaseUri}/Employee"), Method.Get).Data;
-            //try
-            //{
-            //    var joined = customers.ToList<Customer>();
-            //    //joined.AddRange(employees);
-            //    return joined;
-            //}
-            //catch (Exception)
-            //{
+            return RestClient.Execute<IEnumerable<Customer>>(new RestRequest($"{BaseUri}"), Method.Get).Data;
 
-            //    throw;
-            //}
         }
 
         public bool Remove(dynamic key)
         {
-            return RestClient.Execute<Person>(new RestRequest($"{key}", Method.Delete)).IsSuccessful;
+            return RestClient.Execute<Customer>(new RestRequest($"{key}", Method.Delete)).IsSuccessful;
         }
 
         public bool Update(Customer o)
         {
-            return RestClient.Execute<Person>(new RestRequest($"api/Person/{0}", Method.Put)).IsSuccessful;
+            return RestClient.Execute<Customer>(new RestRequest($"{BaseUri}/{0}", Method.Put)).IsSuccessful;
         }
 
 

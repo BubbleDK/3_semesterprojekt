@@ -2,15 +2,18 @@
 using Microsoft.AspNetCore.Mvc;
 using NetCafeUCN.MVC.Models;
 using NetCafeUCN.MVC.Services;
+using System.Dynamic;
 
 namespace NetCafeUCN.MVC.Controllers
 {
     public class CustomerController : Controller
     {
         INetCafeDataAccess<Customer> customerService = new CustomerService("https://localhost:7197/api/Customer");
+        INetCafeDataAccess<Employee> employeeService = new EmployeeService("https://localhost:7197/api/Employee");
         // GET: PersonController
         public ActionResult Index()
         {
+            
             return View(customerService.GetAll());
         }
 

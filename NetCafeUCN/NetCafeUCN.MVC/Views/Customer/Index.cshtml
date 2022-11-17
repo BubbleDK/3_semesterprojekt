@@ -1,12 +1,23 @@
-﻿@model IEnumerable<NetCafeUCN.MVC.Models.Person>
+﻿@model IEnumerable<NetCafeUCN.MVC.Models.Customer>
 
 @{
-    ViewData["Title"] = "Personer";
+    ViewData["Title"] = "Kunder";
 }
+<head>
+    <link rel="stylesheet" href="~/css/TabStyle.css" />
+    
+</head>
+<script src="~/js/TabScript.js"></script>
+<h1>Kunder</h1>
 
-<h1>Personer</h1>
-
-
+<div class="tab">
+    <button class="tablinks" onclick="openTab(event,'Customer')" id="defaultOpen">Kunder</button>
+    <button class="tablinks" onclick="openTab(event,'Employee')">Medarbejdere</button>
+</div>
+<script>
+    document.getElementById("defaultOpen").click();
+</script>
+<div class="tabcontent" id="Customer">
 <table class="table">
     <thead>
         <tr>
@@ -19,9 +30,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Phone)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PersonType)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -30,15 +38,15 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
+                
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
+                
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PersonType)
+                
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
@@ -49,3 +57,6 @@
 }
     </tbody>
 </table>
+</div>
+
+
