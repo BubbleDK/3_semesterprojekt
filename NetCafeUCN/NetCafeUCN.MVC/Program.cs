@@ -1,11 +1,13 @@
 using NetCafeUCN.MVC.Services;
 using NetCafeUCN.MVC.Models;
+using NetCafeUCN.MVC.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 //builder.Services.AddSingleton<INetCafeDataAccess<Product>, ProductService>();
 builder.Services.AddControllersWithViews();
+//builder.Services.AddSingleton<INetCafeDataAccess<Customer>, CustomerService>(_ => new CustomerService("https://localhost:7197/api/Customer"));
 
 var app = builder.Build();
 
