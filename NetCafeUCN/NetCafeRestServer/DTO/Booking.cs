@@ -11,5 +11,6 @@ namespace NetCafeUCN.API.DTO
         public int BookingNo { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
+        public int CustomerID { get; set; }
     }
 }
