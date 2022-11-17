@@ -30,7 +30,7 @@ namespace NetCafeUCN.DAL.DAO
                         using (SqlCommand command = new SqlCommand(
                             "INSERT INTO nc_Employee VALUES(@personid, @address, @role, @zipcode)", conn, trans))
                         {
-                            command.Parameters.AddWithValue("@person", id);
+                            command.Parameters.AddWithValue("@personid", id);
                             command.Parameters.AddWithValue("@address", o.Address);
                             command.Parameters.AddWithValue("@role", o.Role);
                             command.Parameters.AddWithValue("@zipcode", o.Zipcode);
@@ -50,12 +50,44 @@ namespace NetCafeUCN.DAL.DAO
 
         public Employee? Get(dynamic key)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+            {
+                using SqlCommand command = new SqlCommand(
+                    "SELECT name, phone, email, personType, address, role, zipCode FROM nc_Person INNER JOIN nc_Employee ON nc_Person.id = nc_Employee.personid WHERE phone = @phone;", conn);
+                command.Parameters.AddWithValue("@phone", key);
+                {
+                    try
+                    {
+                        conn.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            Employee person = new Employee()
+                            {
+                                Name = (string?)reader["name"],
+                                Email = (string?)reader["email"],
+                                Phone = (string?)reader["phone"],
+                                Role = (string?)reader["role"],
+                                Address = (string?)reader["address"],
+                                Zipcode = (int)reader["zipCode"],
+                                PersonType = (string)reader["personType"],
+                            };
+                            return person;
+                        }
+                    }
+                    catch (DataAccessException)
+                    {
+
+                        throw new DataAccessException("Can't access data");
+                    }
+                }
+            }
+            return null;
         }
 
         public IEnumerable<Employee> GetAll()
         {
-            string sqlStatement = "SELECT * FROM nc_Employee inner join nc_Person on nc_Person.id = nc_Employee.personid";
+            string sqlStatement = "SELECT name, phone, email, personType, address, role, zipCode FROM nc_Person INNER JOIN nc_Employee ON nc_Person.id = nc_Employee.personid;";
             List<Employee> list = new();
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
@@ -74,8 +106,8 @@ namespace NetCafeUCN.DAL.DAO
                             Phone = (string?)reader["phone"],
                             Role = (string?)reader["role"],
                             Address = (string?)reader["address"],
-                            City = (string?)reader["city"],
-                            Zipcode = (string?)reader["zipcode"]
+                            Zipcode = (int)reader["zipCode"],
+                            PersonType = (string)reader["personType"],
                         };
                         list.Add(employee);
                     }

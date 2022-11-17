@@ -10,7 +10,7 @@ namespace NetCafeUCN.DAL.Model
     {
         public string? Role { get; set; }
         public string? Address { get; set; }
-        public string? Zipcode { get; set; }
+        public int? Zipcode { get; set; }
         public string? City { get; set; }
     }
 }
