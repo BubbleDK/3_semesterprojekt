@@ -33,12 +33,18 @@
             this.btnCreateProduct = new System.Windows.Forms.Button();
             this.btnUpdateProduct = new System.Windows.Forms.Button();
             this.btnDeleteProduct = new System.Windows.Forms.Button();
-            this.lstProducts = new System.Windows.Forms.ListBox();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.lstConsumables = new System.Windows.Forms.ListBox();
+            this.lstGamingstations = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -54,7 +60,7 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.lstProducts);
+            this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
             this.splitContainer1.Size = new System.Drawing.Size(936, 625);
             this.splitContainer1.SplitterDistance = 312;
             this.splitContainer1.SplitterWidth = 5;
@@ -117,16 +123,42 @@
             this.btnDeleteProduct.UseVisualStyleBackColor = true;
             this.btnDeleteProduct.Click += new System.EventHandler(this.btnDeleteProduct_Click);
             // 
-            // lstProducts
+            // splitContainer2
             // 
-            this.lstProducts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lstProducts.FormattingEnabled = true;
-            this.lstProducts.ItemHeight = 20;
-            this.lstProducts.Location = new System.Drawing.Point(0, 0);
-            this.lstProducts.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.lstProducts.Name = "lstProducts";
-            this.lstProducts.Size = new System.Drawing.Size(619, 625);
-            this.lstProducts.TabIndex = 0;
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.lstConsumables);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.lstGamingstations);
+            this.splitContainer2.Size = new System.Drawing.Size(619, 625);
+            this.splitContainer2.SplitterDistance = 302;
+            this.splitContainer2.TabIndex = 0;
+            // 
+            // lstConsumables
+            // 
+            this.lstConsumables.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstConsumables.FormattingEnabled = true;
+            this.lstConsumables.ItemHeight = 20;
+            this.lstConsumables.Location = new System.Drawing.Point(0, 0);
+            this.lstConsumables.Name = "lstConsumables";
+            this.lstConsumables.Size = new System.Drawing.Size(302, 625);
+            this.lstConsumables.TabIndex = 0;
+            // 
+            // lstGamingstations
+            // 
+            this.lstGamingstations.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstGamingstations.FormattingEnabled = true;
+            this.lstGamingstations.ItemHeight = 20;
+            this.lstGamingstations.Location = new System.Drawing.Point(0, 0);
+            this.lstGamingstations.Name = "lstGamingstations";
+            this.lstGamingstations.Size = new System.Drawing.Size(313, 625);
+            this.lstGamingstations.TabIndex = 0;
             // 
             // ProductsForm
             // 
@@ -144,6 +176,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -155,6 +191,8 @@
         private Button btnCreateProduct;
         private Button btnUpdateProduct;
         private Button btnDeleteProduct;
-        private ListBox lstProducts;
+        private SplitContainer splitContainer2;
+        private ListBox lstConsumables;
+        private ListBox lstGamingstations;
     }
 }
