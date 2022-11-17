@@ -20,18 +20,18 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
         //
         public bool Add(Person o)
         {
-            return RestClient.Execute<Person>(new RestRequest($"api/Person/{o}", Method.Post)).IsSuccessful;
+            return RestClient.Execute<Person>(new RestRequest($"{BaseUri}{o}", Method.Post)).IsSuccessful;
         }
 
         public Person? Get(dynamic key)
         {
-            return RestClient.Execute<Customer>(new RestRequest($"api/Person/{key}", Method.Get)).Data;
+            return RestClient.Execute<Customer>(new RestRequest($"{BaseUri}{key}", Method.Get)).Data;
         }
 
         public IEnumerable<Person> GetAll()
         {
-            IEnumerable<Customer>? customers = RestClient.Execute<IEnumerable<Customer>>(new RestRequest($"{BaseUri}/Customer"), Method.Get).Data;
-            IEnumerable<Employee>? employees = RestClient.Execute<IEnumerable<Employee>>(new RestRequest($"{BaseUri}/Employee"), Method.Get).Data;
+            IEnumerable<Customer>? customers = RestClient.Execute<IEnumerable<Customer>>(new RestRequest($"{BaseUri}Customer"), Method.Get).Data;
+            IEnumerable<Employee>? employees = RestClient.Execute<IEnumerable<Employee>>(new RestRequest($"{BaseUri}Employee"), Method.Get).Data;
             try
             {
                 var joined = customers.ToList<Person>();
@@ -52,7 +52,7 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
 
         public bool Update(Person o)
         {
-            return RestClient.Execute<Person>(new RestRequest($"api/Person/{0}", Method.Put)).IsSuccessful;
+            return RestClient.Execute<Person>(new RestRequest($"{BaseUri}{0}", Method.Put)).IsSuccessful;
         }
     }
 }
