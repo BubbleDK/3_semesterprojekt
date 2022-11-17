@@ -6,7 +6,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddSingleton<INetCafeDAO<Booking>, BookingDAO>();
 builder.Services.AddSingleton<INetCafeDAO<Customer>, CustomerDAO>();
-builder.Services.AddSingleton<INetCafeDAO<Product>, ProductDataAccess>();
 builder.Services.AddSingleton<INetCafeDAO<Consumable>, ConsumableDAO>();
 builder.Services.AddSingleton<INetCafeDAO<GamingStation>, GamingStationDAO>();
 builder.Services.AddControllers();
