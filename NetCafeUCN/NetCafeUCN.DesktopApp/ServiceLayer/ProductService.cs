@@ -18,30 +18,27 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
         }
         public bool Add(Product o)
         {
-            return RestClient.Execute<Product>(new RestRequest($"api/Product/{o}", Method.Post)).IsSuccessful;
+            return RestClient.Execute<Product>(new RestRequest($"{BaseUri}{o}", Method.Post)).IsSuccessful;
         }
 
         public Product? Get(dynamic key)
         {
-            return RestClient.Execute<Product>(new RestRequest($"api/product/{key}",Method.Get)).Data;
+            return RestClient.Execute<Product>(new RestRequest($"{BaseUri}{key}",Method.Get)).Data;
         }
 
         public IEnumerable<Product> GetAll()
         {
             return RestClient.Execute<IEnumerable<Product>>(new RestRequest()).Data;
-            //var request = new RestRequest("/api/Product");
-            //var response = RestClient.Get<List<Product>>(request);
-            //return response;
         }
 
         public bool Remove(dynamic key)
         {
-            return RestClient.Execute<Product?>(new RestRequest($"api/Product/{key}", Method.Delete)).IsSuccessful;
+            return RestClient.Execute<Product?>(new RestRequest($"{BaseUri}{key}", Method.Delete)).IsSuccessful;
         }
 
         public bool Update(Product o)
         {
-            return RestClient.Execute<Product>(new RestRequest($"api/Person/{o}",Method.Put)).IsSuccessful;
+            return RestClient.Execute<Product>(new RestRequest($"{BaseUri}{o}",Method.Put)).IsSuccessful;
         }
     }
 }

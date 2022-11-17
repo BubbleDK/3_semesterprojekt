@@ -18,12 +18,12 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
         }
         public bool Add(Employee o)
         {
-            return RestClient.Execute<Employee>(new RestRequest($"{BaseUri}/{o}",Method.Post)).IsSuccessful;
+            return RestClient.Execute<Employee>(new RestRequest($"{BaseUri}{o}",Method.Post)).IsSuccessful;
         }
 
         public Employee? Get(dynamic key)
         {
-            return RestClient.Execute<Employee>(new RestRequest($"{BaseUri}/{key}",Method.Get)).Data;
+            return RestClient.Execute<Employee>(new RestRequest($"{BaseUri}{key}",Method.Get)).Data;
         }
 
         public IEnumerable<Employee> GetAll()
@@ -33,12 +33,12 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
 
         public bool Remove(dynamic key)
         {
-            return RestClient.Execute<Employee>(new RestRequest($"{BaseUri}/{key}", Method.Delete)).IsSuccessful;
+            return RestClient.Execute<Employee>(new RestRequest($"{BaseUri}{key}", Method.Delete)).IsSuccessful;
         }
 
         public bool Update(Employee o)
         {
-            return RestClient.Execute<Employee>(new RestRequest($"{BaseUri}/{o}",Method.Put)).IsSuccessful;
+            return RestClient.Execute<Employee>(new RestRequest($"{BaseUri}{o}",Method.Put)).IsSuccessful;
         }
     }
 }

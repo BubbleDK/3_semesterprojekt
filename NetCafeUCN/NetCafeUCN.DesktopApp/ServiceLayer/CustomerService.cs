@@ -18,12 +18,12 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
         }
         public bool Add(Customer o)
         {
-            return RestClient.Execute<Customer>(new RestRequest($"{BaseUri}/{o}", Method.Post)).IsSuccessful;
+            return RestClient.Execute<Customer>(new RestRequest($"{BaseUri}{o}", Method.Post)).IsSuccessful;
         }
 
         public Customer? Get(dynamic key)
         {
-            return RestClient.Execute<Customer>(new RestRequest($"{BaseUri}/{key}", Method.Get)).Data;
+            return RestClient.Execute<Customer>(new RestRequest($"{BaseUri}{key}", Method.Get)).Data;
         }
 
         public IEnumerable<Customer> GetAll()
@@ -33,12 +33,12 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
 
         public bool Remove(dynamic key)
         {
-            return RestClient.Execute<Customer>(new RestRequest($"{BaseUri}/{key}", Method.Delete)).IsSuccessful;
+            return RestClient.Execute<Customer>(new RestRequest($"{BaseUri}{key}", Method.Delete)).IsSuccessful;
         }
 
         public bool Update(Customer o)
         {
-            return RestClient.Execute<Customer>(new RestRequest($"{BaseUri}/{o}", Method.Put)).IsSuccessful;
+            return RestClient.Execute<Customer>(new RestRequest($"{BaseUri}{o}", Method.Put)).IsSuccessful;
         }
     }
 }
