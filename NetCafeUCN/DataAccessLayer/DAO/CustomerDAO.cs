@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 
 namespace NetCafeUCN.DAL.DAO
 {
-    public class CustomerDAO : INetCafeDataAccess<Customer>
+    public class CustomerDAO : INetCafeDAO<Customer>
     {
         public bool Add(Customer o)
         {

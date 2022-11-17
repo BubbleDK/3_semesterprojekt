@@ -8,9 +8,9 @@ namespace NetCafeUCN.API.Controllers
     [ApiController]
     public class BookingController : ControllerBase
     {
-        private INetCafeDataAccess<Booking> dataAccess;
+        private INetCafeDAO<Booking> dataAccess;
 
-        public BookingController(INetCafeDataAccess<Booking> dataAccess)
+        public BookingController(INetCafeDAO<Booking> dataAccess)
         {
             this.dataAccess = dataAccess;
         }

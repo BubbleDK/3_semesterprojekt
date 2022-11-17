@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NetCafeUCN.DAL.DAO
 {
-    public interface INetCafeDataAccess<TEntity>
+    public interface INetCafeDAO<TEntity>
     {
         public IEnumerable<TEntity> GetAll();
         public TEntity? Get(dynamic key);
