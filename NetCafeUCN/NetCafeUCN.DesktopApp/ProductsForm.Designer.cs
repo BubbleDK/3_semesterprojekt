@@ -34,9 +34,9 @@
             this.btnUpdateProduct = new System.Windows.Forms.Button();
             this.btnDeleteProduct = new System.Windows.Forms.Button();
             this.tbProducts = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tbConsumable = new System.Windows.Forms.TabPage();
             this.lstConsumables = new System.Windows.Forms.ListBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tbGamingstations = new System.Windows.Forms.TabPage();
             this.lstGamingstations = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -44,8 +44,8 @@
             this.splitContainer1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbProducts.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.tbConsumable.SuspendLayout();
+            this.tbGamingstations.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -126,8 +126,8 @@
             // 
             // tbProducts
             // 
-            this.tbProducts.Controls.Add(this.tabPage1);
-            this.tbProducts.Controls.Add(this.tabPage2);
+            this.tbProducts.Controls.Add(this.tbConsumable);
+            this.tbProducts.Controls.Add(this.tbGamingstations);
             this.tbProducts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbProducts.Location = new System.Drawing.Point(0, 0);
             this.tbProducts.Name = "tbProducts";
@@ -136,16 +136,16 @@
             this.tbProducts.TabIndex = 0;
             this.tbProducts.Deselected += new System.Windows.Forms.TabControlEventHandler(this.tbProducts_Deselected);
             // 
-            // tabPage1
+            // tbConsumable
             // 
-            this.tabPage1.Controls.Add(this.lstConsumables);
-            this.tabPage1.Location = new System.Drawing.Point(4, 29);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(611, 592);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tbConsumable.Controls.Add(this.lstConsumables);
+            this.tbConsumable.Location = new System.Drawing.Point(4, 29);
+            this.tbConsumable.Name = "tbConsumable";
+            this.tbConsumable.Padding = new System.Windows.Forms.Padding(3);
+            this.tbConsumable.Size = new System.Drawing.Size(611, 592);
+            this.tbConsumable.TabIndex = 0;
+            this.tbConsumable.Text = "Mad & Drikke";
+            this.tbConsumable.UseVisualStyleBackColor = true;
             // 
             // lstConsumables
             // 
@@ -157,16 +157,16 @@
             this.lstConsumables.Size = new System.Drawing.Size(605, 586);
             this.lstConsumables.TabIndex = 0;
             // 
-            // tabPage2
+            // tbGamingstations
             // 
-            this.tabPage2.Controls.Add(this.lstGamingstations);
-            this.tabPage2.Location = new System.Drawing.Point(4, 29);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(611, 592);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tbGamingstations.Controls.Add(this.lstGamingstations);
+            this.tbGamingstations.Location = new System.Drawing.Point(4, 29);
+            this.tbGamingstations.Name = "tbGamingstations";
+            this.tbGamingstations.Padding = new System.Windows.Forms.Padding(3);
+            this.tbGamingstations.Size = new System.Drawing.Size(611, 592);
+            this.tbGamingstations.TabIndex = 1;
+            this.tbGamingstations.Text = "Computere";
+            this.tbGamingstations.UseVisualStyleBackColor = true;
             // 
             // lstGamingstations
             // 
@@ -195,8 +195,8 @@
             this.splitContainer1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tbProducts.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
+            this.tbConsumable.ResumeLayout(false);
+            this.tbGamingstations.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -209,9 +209,9 @@
         private Button btnUpdateProduct;
         private Button btnDeleteProduct;
         private TabControl tbProducts;
-        private TabPage tabPage1;
+        private TabPage tbConsumable;
         private ListBox lstConsumables;
-        private TabPage tabPage2;
+        private TabPage tbGamingstations;
         private ListBox lstGamingstations;
     }
 }
