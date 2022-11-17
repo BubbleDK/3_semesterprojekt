@@ -5,7 +5,7 @@ namespace NetCafeUCN.DesktopApp
 {
     public partial class Form1 : Form
     {
-        INetCafeDataAccess<Person> UserService = new UserService("https://localhost:7197/api/Person");
+        INetCafeDataAccess<Customer> _userService = new CustomerService("https://localhost:7197/api/Customer/");
         public Form1()
         {
             InitializeComponent();
@@ -16,14 +16,14 @@ namespace NetCafeUCN.DesktopApp
         {
             lstAllusers.Items.Clear();
             try {
-                UserService.GetAll().ToList().ForEach(x => lstAllusers.Items.Add(x));
+                _userService.GetAll().ToList().ForEach(x => lstAllusers.Items.Add(x));
             }catch (Exception ex) {
                 MessageBox.Show(ex.Message);
             } }
 
         private void btnDeleteByPhoneNumber_Click(object sender, EventArgs e)
         {
-            if (UserService.Remove(txtPhoneNumber.Text))
+            if (_userService.Remove(txtPhoneNumber.Text))
             {
                 txtDeleteCheck.Text = "True";
             }
@@ -35,8 +35,8 @@ namespace NetCafeUCN.DesktopApp
 
         private void btnAddPerson_Click(object sender, EventArgs e)
         {
-            //AddCustomerForm addCustomerForm = new AddCustomerForm(CustomerService);
-            //addCustomerForm.ShowDialog();
+            AddCustomerForm addCustomerForm = new AddCustomerForm(_userService);
+            addCustomerForm.ShowDialog();
         }
     }
 }

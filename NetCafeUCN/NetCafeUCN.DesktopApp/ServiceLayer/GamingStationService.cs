@@ -19,7 +19,7 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
         }
         public bool Add(GamingStation o)
         {
-            return RestClient.Execute<GamingStation>(new RestRequest($"{BaseUri}{o}", Method.Post)).IsSuccessful;
+            return RestClient.Execute<GamingStation>(new RestRequest($"{BaseUri}", Method.Post).AddJsonBody(o)).IsSuccessful;
         }
 
         public GamingStation? Get(dynamic key)
@@ -39,7 +39,7 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
 
         public bool Update(GamingStation o)
         {
-            return RestClient.Execute<GamingStation>(new RestRequest($"{BaseUri}{o}", Method.Put)).IsSuccessful;
+            return RestClient.Execute<GamingStation>(new RestRequest($"{BaseUri}", Method.Put).AddJsonBody(o)).IsSuccessful;
         }
     }
 }
