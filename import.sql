@@ -71,14 +71,12 @@ CREATE TABLE nc_Consumables(
 CREATE TABLE nc_BookingLine(
     bookingid INT NOT NULL,
     quantity INT NOT NULL,
-    stationid INT NOT NULL,
+    stationid INT NOT NULL DEFAULT ,
     consumableid INT,
 
     CONSTRAINT fk_ncBookinglinebookingid foreign key (bookingid) references nc_Booking(id) ON DELETE CASCADE,
     CONSTRAINT fk_ncBookinglineStationid foreign key (stationid) references nc_Product(id),
-    CONSTRAINT fk_ncBookinglineConsumableid FOREIGN KEY (consumableid) references nc_Consumables(productid),
 );
-
 
 CREATE TABLE nc_GamingStation(
     stationid INT NOT NULL,

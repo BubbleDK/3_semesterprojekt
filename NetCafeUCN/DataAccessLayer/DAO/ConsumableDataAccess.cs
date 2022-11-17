@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer.Exceptions;
 using NetCafeUCN.DAL.Model;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 
 namespace NetCafeUCN.DAL.DAO
@@ -114,21 +115,29 @@ namespace NetCafeUCN.DAL.DAO
             return list;
         }
 
-        public bool Remove(dynamic productNo)
+        public bool Remove(dynamic key)
         {
+            SqlTransaction trans;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
-                using SqlCommand command = new SqlCommand("UPDATE nc_Product SET IsActive = 0 WHERE productNo = @productNo", conn);
-                command.Parameters.AddWithValue("@productNo", productNo);
-                try
+                conn.Open();
+                using (trans = conn.BeginTransaction())
                 {
-                    conn.Open();
-                    command.ExecuteNonQuery();
-                    return true;
-                }
-                catch (DataAccessException)
-                {
-                    throw new DataAccessException("Can't access data");
+                    try
+                    {
+                        using (SqlCommand deleteCommand = new SqlCommand("DELETE FROM nc_Product WHERE productNo = @productNo", conn, trans))
+                        {
+                            deleteCommand.Parameters.AddWithValue("@productNo", key);
+                            deleteCommand.ExecuteNonQuery();
+                            trans.Commit();
+                            return true;
+                        }
+                    }
+                    catch (DataAccessException)
+                    {
+                        trans.Rollback();
+                        throw new DataAccessException("Can't access data");
+                    }
                 }
             }
         }
