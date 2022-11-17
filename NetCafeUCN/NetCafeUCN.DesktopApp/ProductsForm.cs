@@ -1,5 +1,6 @@
 ﻿using NetCafeUCN.DesktopApp.DTO;
 using NetCafeUCN.DesktopApp.ServiceLayer;
+using System.Windows.Forms;
 
 namespace NetCafeUCN.DesktopApp
 {
@@ -10,9 +11,10 @@ namespace NetCafeUCN.DesktopApp
         public ProductsForm()
         {
             InitializeComponent();
-            RefreshList();
             consumableService = new ConsumableService("https://localhost:7197/api/Consumable/");
             gamingstationService = new GamingStationService("https://localhost:7197/api/Gamingstation/");
+
+            RefreshList();
         }
 
         private void RefreshList()
@@ -52,9 +54,18 @@ namespace NetCafeUCN.DesktopApp
 
         private void UpdateProduct()
         {
-            Product p = lstProducts.SelectedItem as Product;
-            Form gamingStationForm = new GamingstationForm(p.ProductNumber, p.Type, p.Name);
-            gamingStationForm.Show();
+            if(lstConsumables.SelectedIndex != -1)
+            {
+                Consumable c = lstConsumables.SelectedItem as Consumable;
+                Form consumableForm = new ConsumableForm(c.ProductNumber, c.Type, c.Name);
+                consumableForm.Show();
+            }
+            else if (lstGamingstations.SelectedIndex != -1)
+            {
+                GamingStation gs = lstGamingstations.SelectedItem as GamingStation;
+                Form gamingstationForm = new GamingstationForm(gs.ProductNumber, gs.Type, gs.Name);
+                gamingstationForm.Show();
+            }
         }
         private void ProductsForm_KeyUp(object sender, KeyEventArgs e)
         {
@@ -64,10 +75,16 @@ namespace NetCafeUCN.DesktopApp
             }
         }
 
-        private void btnDeleteProduct_Click(object sender, EventArgs e)
+        private void tbProducts_Deselected(object sender, TabControlEventArgs e)
         {
-            Product p = lstProducts.SelectedItem as Product;
-            productService.Remove(p.ProductNumber);
+            lstConsumables.SelectedIndex = -1;
+            lstGamingstations.SelectedIndex = -1;
         }
+
+        //private void btnDeleteProduct_Click(object sender, EventArgs e)
+        //{
+        //    Product p = lstProducts.SelectedItem as Product;
+        //    productService.Remove(p.ProductNumber);
+        //}
     }
 }

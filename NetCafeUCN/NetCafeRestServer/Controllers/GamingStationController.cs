@@ -8,10 +8,10 @@ namespace NetCafeUCN.API.Controllers
     [ApiController]
     public class GamingStationController : ControllerBase
     {
-        private INetCafeDataAccess<GamingStation> dataAccess;
+        private INetCafeDAO<GamingStation> dataAccess;
         
 
-        public GamingStationController(INetCafeDataAccess<GamingStation> dataAccess)
+        public GamingStationController(INetCafeDAO<GamingStation> dataAccess)
         {
             this.dataAccess = dataAccess;
            

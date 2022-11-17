@@ -2,7 +2,7 @@
 
 namespace NetCafeUCN.DAL.DAO
 {
-    public class BookingDataAccess : INetCafeDataAccess<Booking>
+    public class BookingDAO : INetCafeDAO<Booking>
     {
         public bool Add(Booking o)
         {

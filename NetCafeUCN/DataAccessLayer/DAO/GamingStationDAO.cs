@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NetCafeUCN.DAL.DAO
 {
-    public class GamingStationDataAccess : INetCafeDataAccess<GamingStation>
+    public class GamingStationDAO : INetCafeDAO<GamingStation>
     {
         public bool Add(GamingStation p)
         {
@@ -124,61 +124,66 @@ namespace NetCafeUCN.DAL.DAO
             return list;
         }
 
-        //public bool Remove(dynamic key)
-        //{
-        //    using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
-        //    {
-        //        using SqlCommand command = new SqlCommand("UPDATE nc_Product SET IsActive = 0 WHERE productNo = @productNo AND productType = 'gamingstation'", conn);
-        //        command.Parameters.AddWithValue("@productNo", key);
-        //        try
-        //        {
-        //            conn.Open();
-        //            command.ExecuteNonQuery();
-        //            return true;
-        //        }
-        //        catch (DataAccessException)
-        //        {
-        //            throw new DataAccessException("Can't access data");
-        //        }
-        //    }
-        //}
         public bool Remove(dynamic key)
         {
-            SqlTransaction trans;
-            int id = 0;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
-                conn.Open();
-                using (trans = conn.BeginTransaction())
+                using SqlCommand command = new SqlCommand("UPDATE nc_Product SET isActive = 0 WHERE productNo = @productNo AND productType = 'gamingstation'", conn);
+                command.Parameters.AddWithValue("@productNo", key);
+                try
                 {
-                    try
-                    {
-                        using (SqlCommand command = new SqlCommand("SELECT id FROM nc_Product WHERE productNo = @productNo", conn, trans)) 
-                        { 
-                            command.Parameters.AddWithValue("@productNo", key);
-                            id = command.ExecuteNonQuery();
-                        }
-                        using (SqlCommand updateCommand = new SqlCommand("UPDATE nc_BookingLine SET stationid = @id WHERE stationid = @id", conn, trans))
-                        {
-                            updateCommand.Parameters.AddWithValue("@id", id);
-                            updateCommand.ExecuteNonQuery();
-                        }
-                        using (SqlCommand deleteCommand = new SqlCommand("DELETE FROM nc_Product WHERE id = @id", conn, trans))
-                        {
-                            deleteCommand.Parameters.AddWithValue("@id", id);
-                            deleteCommand.ExecuteNonQuery();
-                            trans.Commit();
-                            return true;
-                        }
-                    }
-                    catch (DataAccessException)
-                    {
-                        trans.Rollback();
-                        throw new DataAccessException("Can't access data");
-                    }
+                    conn.Open();
+                    command.ExecuteNonQuery();
+                    return true;
+                }
+                catch (DataAccessException)
+                {
+                    throw new DataAccessException("Can't access data");
                 }
             }
         }
+        //public bool Remove(dynamic key)
+        //{
+        //    SqlTransaction trans;
+        //    int id = 0;
+        //    using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+        //    {
+        //        conn.Open();
+        //        using (trans = conn.BeginTransaction())
+        //        {
+        //            try
+        //            {
+        //                using (SqlCommand command = new SqlCommand("SELECT id FROM nc_Product WHERE productNo = @productNo", conn, trans)) 
+        //                { 
+        //                    command.Parameters.AddWithValue("@productNo", key);
+        //                    SqlDataReader reader = command.ExecuteReader();
+        //                    while (reader.Read())
+        //                    {
+        //                        id = (int)reader["id"];
+        //                    }
+        //                    reader.Close();
+        //                }
+        //                using (SqlCommand updateCommand = new SqlCommand("UPDATE nc_BookingLine SET stationid = @id WHERE stationid = @id", conn, trans))
+        //                {
+        //                    updateCommand.Parameters.AddWithValue("@id", id);
+        //                    updateCommand.ExecuteNonQuery();
+        //                }
+        //                using (SqlCommand deleteCommand = new SqlCommand("DELETE FROM nc_Product WHERE id = @id", conn, trans))
+        //                {
+        //                    deleteCommand.Parameters.AddWithValue("@id", id);
+        //                    deleteCommand.ExecuteNonQuery();
+        //                    trans.Commit();
+        //                    return true;
+        //                }
+        //            }
+        //            catch (DataAccessException)
+        //            {
+        //                trans.Rollback();
+        //                throw new DataAccessException("Can't access data");
+        //            }
+        //        }
+        //    }
+        //}
 
         public bool Update(GamingStation o)
         {

@@ -5,10 +5,12 @@ namespace NetCafeUCN.DesktopApp
 {
     public partial class UsersForm : Form
     {
-        
+        INetCafeDataAccess<Customer> customerService;
         public UsersForm()
         {
             InitializeComponent();
+            customerService = new CustomerService("https://localhost:7197/api/Customer/");
+            RefreshList();
         }
 
         private void RefreshList()
@@ -16,15 +18,10 @@ namespace NetCafeUCN.DesktopApp
             lstCustomers.Items.Clear();
             //TODO: List should contain Gamingstation and Consumable instead of Product
             List<Customer> customers = new();
-            consumables = consumableService.GetAll().ToList();
-            gamingstations = gamingstationService.GetAll().ToList();
-            foreach (Consumable c in consumables)
+            customers = customerService.GetAll().ToList();
+            foreach (Customer c in customers)
             {
-                lstConsumables.Items.Add(c);
-            }
-            foreach (GamingStation gs in gamingstations)
-            {
-                lstGamingstations.Items.Add(gs);
+                lstCustomers.Items.Add(c);
             }
         }
     }

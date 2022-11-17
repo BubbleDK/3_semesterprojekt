@@ -8,10 +8,10 @@ namespace NetCafeUCN.API.Controllers
     [ApiController]
     public class ConsumableController : ControllerBase
     {
-        private INetCafeDataAccess<Consumable> dataAccess;
+        private INetCafeDAO<Consumable> dataAccess;
 
 
-        public ConsumableController(INetCafeDataAccess<Consumable> dataAccess)
+        public ConsumableController(INetCafeDAO<Consumable> dataAccess)
         {
             this.dataAccess = dataAccess;
 

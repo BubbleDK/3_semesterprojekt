@@ -9,10 +9,10 @@ namespace NetCafeUCN.API.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
-        private INetCafeDataAccess<Customer> dataAccess;
+        private INetCafeDAO<Customer> dataAccess;
 
 
-        public CustomerController(INetCafeDataAccess<Customer> dataAccess)
+        public CustomerController(INetCafeDAO<Customer> dataAccess)
         {
             this.dataAccess = dataAccess;
 

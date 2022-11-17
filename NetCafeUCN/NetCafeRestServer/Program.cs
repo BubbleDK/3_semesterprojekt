@@ -4,11 +4,10 @@ using NetCafeUCN.DAL.Model;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddSingleton<INetCafeDataAccess<Booking>, BookingDataAccess>();
-builder.Services.AddSingleton<INetCafeDataAccess<Customer>, CustomerDAO>();
-builder.Services.AddSingleton<INetCafeDataAccess<Product>, ProductDataAccess>();
-builder.Services.AddSingleton<INetCafeDataAccess<Consumable>, ConsumableDataAccess>();
-builder.Services.AddSingleton<INetCafeDataAccess<GamingStation>, GamingStationDataAccess>();
+builder.Services.AddSingleton<INetCafeDAO<Booking>, BookingDAO>();
+builder.Services.AddSingleton<INetCafeDAO<Customer>, CustomerDAO>();
+builder.Services.AddSingleton<INetCafeDAO<Consumable>, ConsumableDAO>();
+builder.Services.AddSingleton<INetCafeDAO<GamingStation>, GamingStationDAO>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
