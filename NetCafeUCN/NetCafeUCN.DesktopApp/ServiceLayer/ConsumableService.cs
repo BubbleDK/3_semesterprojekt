@@ -29,7 +29,7 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
 
         public IEnumerable<Consumable> GetAll()
         {
-            return RestClient.Execute<IEnumerable<Consumable>>(new RestRequest()).Data;
+            return RestClient.Execute<IEnumerable<Consumable>>(new RestRequest($"{BaseUri}",Method.Get)).Data;
         }
 
         public bool Remove(dynamic key)
