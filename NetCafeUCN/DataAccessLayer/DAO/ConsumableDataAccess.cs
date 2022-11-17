@@ -60,17 +60,15 @@ namespace NetCafeUCN.DAL.DAO
                         SqlDataReader reader = command.ExecuteReader();
                         while (reader.Read())
                         {
-                            if ((int)reader["isActive"] != 0)
+                            Consumable product = new Consumable()
                             {
-                                Consumable product = new Consumable()
-                                {
-                                    ProductNumber = (string)reader["productNo"],
-                                    Name = (string)reader["name"],
-                                    Description = (string)reader["description"],
-                                    Type = (string)reader["productType"],
-                                };
-                                return product;
-                            }
+                                ProductNumber = (string)reader["productNo"],
+                                Name = (string)reader["name"],
+                                Description = (string)reader["description"],
+                                Type = (string)reader["productType"],
+                                IsActive = (bool)reader["isActive"],
+                            };
+                            return product;
                         }
                     }
                     catch (DataAccessException)
@@ -137,20 +135,37 @@ namespace NetCafeUCN.DAL.DAO
 
         public bool Update(Consumable o)
         {
+            SqlTransaction trans;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
-                using SqlCommand command = new SqlCommand("UPDATE nc_Product SET IsActive = 0 WHERE productNo = @productNo", conn);
-                using SqlCommand consumableCommand = new SqlCommand("UPDATE nc_Consumable SET description WHERE productNo = @productNo", conn);
-                command.Parameters.AddWithValue("@productNo", o.ProductNumber);
-                try
+                conn.Open();
+                using (trans = conn.BeginTransaction())
                 {
-                    conn.Open();
-                    command.ExecuteNonQuery();
-                    return true;
-                }
-                catch (DataAccessException)
-                {
-                    throw new DataAccessException("Can't access data");
+                    try
+                    { 
+                        using(SqlCommand productCommand = new SqlCommand("UPDATE nc_Product SET productType = @productType, name = @name, isActive = @isActive WHERE productNo = @productNo", conn, trans))
+                        {
+                            productCommand.Parameters.AddWithValue("@productType", o.Type);
+                            productCommand.Parameters.AddWithValue("@name", o.Name);
+                            productCommand.Parameters.AddWithValue("@isActive", o.IsActive);
+                            productCommand.Parameters.AddWithValue("@productNo", o.ProductNumber);
+                            productCommand.ExecuteNonQuery();
+                        }
+                        using(SqlCommand consumableCommand = new SqlCommand(
+                            "UPDATE nc_Consumables SET description = @description WHERE productid = (SELECT id FROM nc_Product WHERE productNo = @productNo)", conn, trans))
+                        {
+                            consumableCommand.Parameters.AddWithValue("@description", o.Description);
+                            consumableCommand.Parameters.AddWithValue("@productNo", o.ProductNumber);
+                            consumableCommand.ExecuteNonQuery();
+                            trans.Commit();
+                            return true;
+                        }
+                    }
+                    catch (DataAccessException)
+                    {
+                        trans.Rollback();
+                        throw new DataAccessException("Can't access data");
+                    }
                 }
             }
         }
