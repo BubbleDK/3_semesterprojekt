@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NetCafeUCN.DesktopApp.ServiceLayer
 {
-    internal class ConsumableService : INetCafeDataAccess<Consumable>
+    public class ConsumableService : INetCafeDataAccess<Consumable>
     {
         public string BaseUri { get; private set; }
         private RestClient RestClient { get; set; }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NetCafeUCN.DesktopApp.ServiceLayer
 {
-    internal class GamingStationService : INetCafeDataAccess<GamingStation>
+    public class GamingStationService : INetCafeDataAccess<GamingStation>
     {
         public string BaseUri { get; private set; }
         private RestClient RestClient { get; set; }

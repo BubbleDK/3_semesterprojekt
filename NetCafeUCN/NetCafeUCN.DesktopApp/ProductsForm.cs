@@ -5,22 +5,30 @@ namespace NetCafeUCN.DesktopApp
 {
     public partial class ProductsForm : Form
     {
-        INetCafeDataAccess<Product> productService = new ProductService("https://localhost:7197/api/Product");
+        INetCafeDataAccess<Consumable> consumableService = new ConsumableService("https://localhost:7197/api/Consumable/");
+        INetCafeDataAccess<GamingStation> gamingstationService = new GamingStationService("https://localhost:7197/api/Gamingstation/");
         public ProductsForm()
         {
             InitializeComponent();
-            UpdateList();
+            RefreshList();
         }
 
-        private void UpdateList()
+        private void RefreshList()
         {
-            lstProducts.Items.Clear();
+            lstConsumables.Items.Clear();
+            lstGamingstations.Items.Clear();
             //TODO: List should contain Gamingstation and Consumable instead of Product
-            List<Product> collection = new();
-            collection = productService.GetAll().ToList();
-            foreach (Product p in collection)
+            List<Consumable> consumables = new();
+            List<GamingStation> gamingstations = new();
+            consumables = consumableService.GetAll().ToList();
+            gamingstations = gamingstationService.GetAll().ToList();
+            foreach (Consumable c in consumables)
             {
-                lstProducts.Items.Add(p);
+                lstConsumables.Items.Add(c);
+            }
+            foreach (GamingStation gs in gamingstations)
+            {
+                lstGamingstations.Items.Add(gs);
             }
         }
 
@@ -50,7 +58,7 @@ namespace NetCafeUCN.DesktopApp
         {
             if(e.KeyCode == Keys.F5)
             {
-                UpdateList();
+                RefreshList();
             }
         }
 
