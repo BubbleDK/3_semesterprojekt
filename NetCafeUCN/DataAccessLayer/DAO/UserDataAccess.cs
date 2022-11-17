@@ -11,7 +11,7 @@
 //using System.Data;
 //using System.Transactions;
 
-//namespace DataAccessLayer.DAO
+//namespace NetCafeUCN.DAL.DAO
 //{
 //    public class UserDataAccess : INetCafeDataAccess<Person>
 //    {

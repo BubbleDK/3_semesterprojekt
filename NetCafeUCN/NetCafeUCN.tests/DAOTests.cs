@@ -1,10 +1,7 @@
-using DataAccessLayer.DAO;
-using DataAccessLayer.Model;
 using NetCafeUCN.DAL.DAO;
+using NetCafeUCN.DAL.Model;
 using System.Data;
-using System.Data.Common;
 using System.Data.SqlClient;
-using System.Security.Cryptography;
 
 namespace NetCafeUCN.tests
 {
@@ -33,8 +30,8 @@ namespace NetCafeUCN.tests
         public void TestGetAll()
         {
             //Arrange
-            UserDataAccess userDataAccess = new UserDataAccess();
-            List<Person> list = userDataAccess.GetAll().ToList();
+            CustomerDAO customerDAO = new CustomerDAO();
+            List<Customer> list = customerDAO.GetAll().ToList();
             //Assert
             Console.WriteLine(list);
             Assert.True(list.Count > 0);

@@ -1,13 +1,12 @@
 ﻿using NetCafeUCN.DesktopApp.DTO;
 using RestSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NetCafeUCN.DesktopApp.ServiceLayer
 {
+    /// <summary>
+    /// Handles CRUD functionality for objects of static type Product
+    /// Uses RestSharp to communicate with Controllers in the API
+    /// </summary>
     public class ProductService : INetCafeDataAccess<Product>
     {
         public string BaseUri { get; private set; }

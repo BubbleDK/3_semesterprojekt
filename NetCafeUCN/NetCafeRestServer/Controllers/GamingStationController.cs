@@ -1,7 +1,5 @@
-﻿using DataAccessLayer.DAO;
-using DataAccessLayer.Model;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using NetCafeUCN.DAL.DAO;
 using NetCafeUCN.DAL.Model;
 
 namespace NetCafeUCN.API.Controllers
