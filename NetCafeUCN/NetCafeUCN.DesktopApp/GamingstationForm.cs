@@ -8,18 +8,21 @@ namespace NetCafeUCN.DesktopApp
 
         INetCafeDataAccess<GamingStation> gamingstationService;
         GamingStation gs;
+        ProductsForm productsForm;
+
         //Type til at bestemme om man redigerer eller opretter nyt objekt
         private string type = "";
-        public GamingstationForm()
+        public GamingstationForm(ProductsForm productsForm)
         {
             InitializeComponent();
             gamingstationService = new GamingStationService("https://localhost:7197/api/Gamingstation/");
             type = "Create";
             gs = new();
             txtProductType.Text = "Gamingstation";
+            this.productsForm = productsForm;
         }
 
-        public GamingstationForm(GamingStation gs, INetCafeDataAccess<GamingStation> service)
+        public GamingstationForm(GamingStation gs, INetCafeDataAccess<GamingStation> service, ProductsForm productsForm)
         {
             InitializeComponent();
             txtProductName.Text = gs.Name;
@@ -30,6 +33,7 @@ namespace NetCafeUCN.DesktopApp
             gamingstationService = service;
             this.gs = gs;
             type = "Edit";
+            this.productsForm = productsForm;
         }
 
         private void btnConfirm_Click(object sender, EventArgs e)
@@ -40,7 +44,6 @@ namespace NetCafeUCN.DesktopApp
 
         private void confirmOption()
         {
-            //TODO: Call add gamingstation somehow somewhere
             gs.Name = txtProductName.Text;
             gs.ProductNumber = txtProductNum.Text;
             gs.Type = "Gamingstation";
@@ -49,9 +52,11 @@ namespace NetCafeUCN.DesktopApp
             if (type.Equals("Create"))
             {
                 gamingstationService.Add(gs);
+                productsForm.RefreshList();
             }else if (type.Equals("Edit"))
             {
                 gamingstationService.Update(gs);
+                productsForm.RefreshList();
             }
         }
     }

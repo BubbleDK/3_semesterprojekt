@@ -35,9 +35,9 @@
             this.btnDeleteProduct = new System.Windows.Forms.Button();
             this.tbProducts = new System.Windows.Forms.TabControl();
             this.tbConsumable = new System.Windows.Forms.TabPage();
-            this.dgwConsumables = new System.Windows.Forms.DataGridView();
+            this.dgvConsumables = new System.Windows.Forms.DataGridView();
             this.tbGamingstations = new System.Windows.Forms.TabPage();
-            this.dgwGamingstations = new System.Windows.Forms.DataGridView();
+            this.dgvGamingstations = new System.Windows.Forms.DataGridView();
             this.lstGamingstations = new System.Windows.Forms.ListView();
             this.colComputerName = new System.Windows.Forms.ColumnHeader();
             this.colProductNo = new System.Windows.Forms.ColumnHeader();
@@ -51,9 +51,9 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.tbProducts.SuspendLayout();
             this.tbConsumable.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgwConsumables)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvConsumables)).BeginInit();
             this.tbGamingstations.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgwGamingstations)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvGamingstations)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -147,7 +147,7 @@
             // 
             // tbConsumable
             // 
-            this.tbConsumable.Controls.Add(this.dgwConsumables);
+            this.tbConsumable.Controls.Add(this.dgvConsumables);
             this.tbConsumable.Location = new System.Drawing.Point(4, 29);
             this.tbConsumable.Name = "tbConsumable";
             this.tbConsumable.Padding = new System.Windows.Forms.Padding(3);
@@ -156,25 +156,26 @@
             this.tbConsumable.Text = "Mad & Drikke";
             this.tbConsumable.UseVisualStyleBackColor = true;
             // 
-            // dgwConsumables
+            // dgvConsumables
             // 
-            this.dgwConsumables.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgwConsumables.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dgwConsumables.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
-            this.dgwConsumables.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgwConsumables.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgwConsumables.Location = new System.Drawing.Point(3, 3);
-            this.dgwConsumables.MultiSelect = false;
-            this.dgwConsumables.Name = "dgwConsumables";
-            this.dgwConsumables.RowHeadersWidth = 51;
-            this.dgwConsumables.RowTemplate.Height = 29;
-            this.dgwConsumables.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgwConsumables.Size = new System.Drawing.Size(605, 586);
-            this.dgwConsumables.TabIndex = 0;
+            this.dgvConsumables.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvConsumables.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvConsumables.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
+            this.dgvConsumables.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvConsumables.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvConsumables.Location = new System.Drawing.Point(3, 3);
+            this.dgvConsumables.MultiSelect = false;
+            this.dgvConsumables.Name = "dgvConsumables";
+            this.dgvConsumables.ReadOnly = true;
+            this.dgvConsumables.RowHeadersWidth = 51;
+            this.dgvConsumables.RowTemplate.Height = 29;
+            this.dgvConsumables.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvConsumables.Size = new System.Drawing.Size(605, 586);
+            this.dgvConsumables.TabIndex = 0;
             // 
             // tbGamingstations
             // 
-            this.tbGamingstations.Controls.Add(this.dgwGamingstations);
+            this.tbGamingstations.Controls.Add(this.dgvGamingstations);
             this.tbGamingstations.Controls.Add(this.lstGamingstations);
             this.tbGamingstations.Location = new System.Drawing.Point(4, 29);
             this.tbGamingstations.Name = "tbGamingstations";
@@ -184,21 +185,21 @@
             this.tbGamingstations.Text = "Computere";
             this.tbGamingstations.UseVisualStyleBackColor = true;
             // 
-            // dgwGamingstations
+            // dgvGamingstations
             // 
-            this.dgwGamingstations.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgwGamingstations.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dgwGamingstations.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
-            this.dgwGamingstations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgwGamingstations.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgwGamingstations.Location = new System.Drawing.Point(3, 3);
-            this.dgwGamingstations.MultiSelect = false;
-            this.dgwGamingstations.Name = "dgwGamingstations";
-            this.dgwGamingstations.RowHeadersWidth = 51;
-            this.dgwGamingstations.RowTemplate.Height = 29;
-            this.dgwGamingstations.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgwGamingstations.Size = new System.Drawing.Size(605, 586);
-            this.dgwGamingstations.TabIndex = 1;
+            this.dgvGamingstations.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvGamingstations.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvGamingstations.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
+            this.dgvGamingstations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvGamingstations.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvGamingstations.Location = new System.Drawing.Point(3, 3);
+            this.dgvGamingstations.MultiSelect = false;
+            this.dgvGamingstations.Name = "dgvGamingstations";
+            this.dgvGamingstations.RowHeadersWidth = 51;
+            this.dgvGamingstations.RowTemplate.Height = 29;
+            this.dgvGamingstations.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvGamingstations.Size = new System.Drawing.Size(605, 586);
+            this.dgvGamingstations.TabIndex = 1;
             // 
             // lstGamingstations
             // 
@@ -255,9 +256,9 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tbProducts.ResumeLayout(false);
             this.tbConsumable.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgwConsumables)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvConsumables)).EndInit();
             this.tbGamingstations.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgwGamingstations)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvGamingstations)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -272,13 +273,13 @@
         private TabControl tbProducts;
         private TabPage tbConsumable;
         private TabPage tbGamingstations;
-        private DataGridView dgwConsumables;
+        private DataGridView dgvConsumables;
         private ListView lstGamingstations;
         private ColumnHeader colComputerName;
         private ColumnHeader colProductNo;
         private ColumnHeader colmProductType;
         private ColumnHeader colSeatNo;
         private ColumnHeader colDesc;
-        private DataGridView dgwGamingstations;
+        private DataGridView dgvGamingstations;
     }
 }
