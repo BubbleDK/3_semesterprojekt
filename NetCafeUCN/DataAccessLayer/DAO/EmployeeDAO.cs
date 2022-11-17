@@ -128,7 +128,42 @@ namespace NetCafeUCN.DAL.DAO
 
         public bool Update(Employee o)
         {
-            throw new NotImplementedException();
+            SqlTransaction trans;
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+            {
+                conn.Open();
+                using (trans = conn.BeginTransaction())
+                {
+                    try
+                    {
+                        using (SqlCommand command = new SqlCommand(
+                            "UPDATE nc_Person SET name = @name, phone = @phone, email = @email, personType = @personType WHERE phone = @phone", conn, trans))
+                        {
+                            command.Parameters.AddWithValue("@phone", o.Phone);
+                            command.Parameters.AddWithValue("@name", o.Name);
+                            command.Parameters.AddWithValue("@email", o.Email);
+                            command.Parameters.AddWithValue("@personType", o.PersonType);
+                            command.ExecuteNonQuery();
+                        }
+                        using (SqlCommand gcommand = new SqlCommand(
+                            "UPDATE nc_Employee SET address = @address, role = @role, zipCode = @zipCode WHERE personid = (SELECT id FROM nc_Person WHERE phone = @phone)", conn, trans))
+                        {
+                            gcommand.Parameters.AddWithValue("@phone", o.Phone);
+                            gcommand.Parameters.AddWithValue("@address", o.Address);
+                            gcommand.Parameters.AddWithValue("@role", o.Role);
+                            gcommand.Parameters.AddWithValue("@zipCode", o.Zipcode);
+                            gcommand.ExecuteNonQuery();
+                            trans.Commit();
+                            return true;
+                        }
+                    }
+                    catch (DataAccessException)
+                    {
+                        trans.Rollback();
+                        throw new DataAccessException("Can't access data");
+                    }
+                }
+            }
         }
     }
 }

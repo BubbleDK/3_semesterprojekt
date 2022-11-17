@@ -8,31 +8,36 @@ namespace NetCafeUCN.DAL.DAO
     {
         public bool Add(Customer o)
         {
+            SqlTransaction trans;
             int id = -1;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
-                try
+                conn.Open();
+                using (trans = conn.BeginTransaction())
                 {
-                    using (SqlCommand addToPersonCommand = new SqlCommand(
-                        "INSERT INTO nc_Person VALUES(@Name, @Phone, @Email, @PersonType) SELECT SCOPE_IDENTITY();", conn))
+                    try
                     {
-                        addToPersonCommand.Parameters.AddWithValue("@Name", o.Name);
-                        addToPersonCommand.Parameters.AddWithValue("@Email", o.Email);
-                        addToPersonCommand.Parameters.AddWithValue("@Phone", o.Phone);
-                        addToPersonCommand.Parameters.AddWithValue("@PersonType", o.PersonType);
-                        conn.Open();
-                        id = Convert.ToInt32(addToPersonCommand.ExecuteScalar());
+                        using (SqlCommand addToPersonCommand = new SqlCommand(
+                            "INSERT INTO nc_Person VALUES(@Name, @Phone, @Email, @PersonType) SELECT SCOPE_IDENTITY();", conn, trans))
+                        {
+                            addToPersonCommand.Parameters.AddWithValue("@Name", o.Name);
+                            addToPersonCommand.Parameters.AddWithValue("@Email", o.Email);
+                            addToPersonCommand.Parameters.AddWithValue("@Phone", o.Phone);
+                            addToPersonCommand.Parameters.AddWithValue("@PersonType", o.PersonType);
+                            id = Convert.ToInt32(addToPersonCommand.ExecuteScalar());
+                        }
+                        using (SqlCommand addToCustomerCommand = new SqlCommand("INSERT INTO nc_Customer VALUES(@id)", conn, trans))
+                        {
+                            addToCustomerCommand.Parameters.AddWithValue("@id", id);
+                            addToCustomerCommand.ExecuteNonQuery();
+                            trans.Commit();
+                        }
                     }
-                    using (SqlCommand addToCustomerCommand = new SqlCommand("INSERT INTO nc_Customer VALUES(@id)", conn))
+                    catch (Exception)
                     {
-                        addToCustomerCommand.Parameters.AddWithValue("@id", id);
-                        addToCustomerCommand.ExecuteNonQuery();
+                        trans.Rollback();
+                        throw;
                     }
-                }
-                catch (Exception)
-                {
-
-                    throw;
                 }
                 return true;
             }
@@ -57,7 +62,7 @@ namespace NetCafeUCN.DAL.DAO
                                 Name = (string)reader["Name"],
                                 Email = (string)reader["email"],
                                 Phone = (string)reader["phone"],
-                                PersonType = (string)reader["PersonType"]
+                                PersonType = (string)reader["personType"]
                             };
                         }
                         return customer;
@@ -78,7 +83,6 @@ namespace NetCafeUCN.DAL.DAO
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand(sqlStatement, conn);
-
                 try
                 {
                     conn.Open();
@@ -89,7 +93,8 @@ namespace NetCafeUCN.DAL.DAO
                         {
                             Name = (string?)reader["name"],
                             Email = (string?)reader["email"],
-                            Phone = (string?)reader["phone"]
+                            Phone = (string?)reader["phone"],
+                            PersonType = (string)reader["personType"]
                         };
                         list.Add(customer);
                     }
@@ -110,7 +115,33 @@ namespace NetCafeUCN.DAL.DAO
 
         public bool Update(Customer o)
         {
-            throw new NotImplementedException();
+            SqlTransaction trans;
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+            {
+                conn.Open();
+                using (trans = conn.BeginTransaction())
+                {
+                    try
+                    {
+                        using (SqlCommand command = new SqlCommand(
+                            "UPDATE nc_Person SET name = @name, phone = @phone, email = @email, personType = @personType WHERE phone = @phone AND personType = 'Customer'", conn, trans))
+                        {
+                            command.Parameters.AddWithValue("@phone", o.Phone);
+                            command.Parameters.AddWithValue("@name", o.Name);
+                            command.Parameters.AddWithValue("@email", o.Email);
+                            command.Parameters.AddWithValue("@personType", o.PersonType);
+                            command.ExecuteNonQuery();
+                            trans.Commit();
+                            return true;
+                        }
+                    }
+                    catch (DataAccessException)
+                    {
+                        trans.Rollback();
+                        throw new DataAccessException("Can't access data");
+                    }
+                }
+            }
         }
     }
 }
