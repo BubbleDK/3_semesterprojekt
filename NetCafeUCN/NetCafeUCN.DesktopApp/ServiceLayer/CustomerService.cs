@@ -14,7 +14,7 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
         public CustomerService(string baseUri)
         {
             BaseUri = baseUri;
-            RestClient = new RestClient();
+            RestClient = new RestClient(baseUri);
         }
         public bool Add(Customer o)
         {

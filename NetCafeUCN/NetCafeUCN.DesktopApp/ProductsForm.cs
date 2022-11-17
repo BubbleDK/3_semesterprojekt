@@ -57,13 +57,13 @@ namespace NetCafeUCN.DesktopApp
             if(lstConsumables.SelectedIndex != -1)
             {
                 Consumable c = lstConsumables.SelectedItem as Consumable;
-                Form consumableForm = new ConsumableForm(c.ProductNumber, c.Type, c.Name);
+                Form consumableForm = new ConsumableForm(c, consumableService);
                 consumableForm.Show();
             }
             else if (lstGamingstations.SelectedIndex != -1)
             {
                 GamingStation gs = lstGamingstations.SelectedItem as GamingStation;
-                Form gamingstationForm = new GamingstationForm(gs.ProductNumber, gs.Type, gs.Name);
+                Form gamingstationForm = new GamingstationForm(gs, gamingstationService);
                 gamingstationForm.Show();
             }
         }
@@ -81,10 +81,32 @@ namespace NetCafeUCN.DesktopApp
             lstGamingstations.SelectedIndex = -1;
         }
 
-        //private void btnDeleteProduct_Click(object sender, EventArgs e)
-        //{
-        //    Product p = lstProducts.SelectedItem as Product;
-        //    productService.Remove(p.ProductNumber);
-        //}
+        private void DeleteSelectedProduct()
+        {
+            if (lstConsumables.SelectedIndex != -1)
+            {
+                Consumable c = lstConsumables.SelectedItem as Consumable;
+                bool deleted = consumableService.Remove(c.ProductNumber);
+                if (deleted)
+                {
+                    MessageBox.Show("Slettede " + c.Name, "Fjernet produkt", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+            }
+            else if (lstGamingstations.SelectedIndex != -1)
+            {
+                GamingStation gs = lstGamingstations.SelectedItem as GamingStation;
+                bool deleted = gamingstationService.Remove(gs.ProductNumber);
+                if (deleted)
+                {
+                    MessageBox.Show("Slettede " + gs.Name, "Fjernet produkt", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void btnDeleteProduct_Click_1(object sender, EventArgs e)
+        {
+            DeleteSelectedProduct();
+        }
     }
 }

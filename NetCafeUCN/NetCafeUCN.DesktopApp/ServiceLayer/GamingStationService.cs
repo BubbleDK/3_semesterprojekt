@@ -15,7 +15,7 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
         public GamingStationService(string baseUri)
         {
             BaseUri = baseUri;
-            RestClient = new RestClient();
+            RestClient = new RestClient(baseUri);
         }
         public bool Add(GamingStation o)
         {

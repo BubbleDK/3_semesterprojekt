@@ -18,6 +18,7 @@
         private void btnConfirm_Click(object sender, EventArgs e)
         {
             confirmInupt();
+            this.Dispose();
         }
 
         private void confirmInupt()

@@ -19,7 +19,7 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
         public BookingService(string baseUri)
         {
             BaseUri = baseUri;
-            RestClient = new RestClient();
+            RestClient = new RestClient(baseUri);
         }
         
         public bool Add(Booking o)

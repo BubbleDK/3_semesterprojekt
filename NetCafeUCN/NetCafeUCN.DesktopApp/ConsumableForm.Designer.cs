@@ -68,6 +68,7 @@
             this.btnConfirm.TabIndex = 11;
             this.btnConfirm.Text = "Bekræft";
             this.btnConfirm.UseVisualStyleBackColor = true;
+            this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
             // 
             // lblDescription
             // 
@@ -115,6 +116,7 @@
             // 
             // txtProductType
             // 
+            this.txtProductType.Enabled = false;
             this.txtProductType.Location = new System.Drawing.Point(105, 64);
             this.txtProductType.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtProductType.Name = "txtProductType";
