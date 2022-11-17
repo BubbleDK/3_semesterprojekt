@@ -1,6 +1,4 @@
-﻿using DataAccessLayer.Model;
-
-namespace NetCafeUCN.API.DTO
+﻿namespace NetCafeUCN.API.DTO
 {
     public class Consumable : Product
     {

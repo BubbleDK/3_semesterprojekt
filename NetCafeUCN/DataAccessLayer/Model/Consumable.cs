@@ -1,6 +1,4 @@
-﻿using DataAccessLayer.Model;
-
-namespace NetCafeUCN.DAL.Model
+﻿namespace NetCafeUCN.DAL.Model
 {
     public class Consumable : Product
     {

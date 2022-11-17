@@ -1,12 +1,6 @@
-﻿using DataAccessLayer.DAO;
-using DataAccessLayer.Exceptions;
-using DataAccessLayer.Model;
-using System;
-using System.Collections.Generic;
+﻿using DataAccessLayer.Exceptions;
+using NetCafeUCN.DAL.Model;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NetCafeUCN.DAL.DAO
 {
@@ -14,12 +8,67 @@ namespace NetCafeUCN.DAL.DAO
     {
         public bool Add(Customer o)
         {
-            throw new NotImplementedException();
+            int id = -1;
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+            {
+                try
+                {
+                    using (SqlCommand addToPersonCommand = new SqlCommand(
+                        "INSERT INTO nc_Person VALUES(@Name, @Phone, @Email, @PersonType) SELECT SCOPE_IDENTITY();", conn))
+                    {
+                        addToPersonCommand.Parameters.AddWithValue("@Name", o.Name);
+                        addToPersonCommand.Parameters.AddWithValue("@Email", o.Email);
+                        addToPersonCommand.Parameters.AddWithValue("@Phone", o.Phone);
+                        addToPersonCommand.Parameters.AddWithValue("@PersonType", o.PersonType);
+                        conn.Open();
+                        id = Convert.ToInt32(addToPersonCommand.ExecuteScalar());
+                    }
+                    using (SqlCommand addToCustomerCommand = new SqlCommand("INSERT INTO nc_Customer VALUES(@id)", conn))
+                    {
+                        addToCustomerCommand.Parameters.AddWithValue("@id", id);
+                        addToCustomerCommand.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                return true;
+            }
         }
 
         public Customer? Get(dynamic key)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+            {
+                SqlCommand command = new SqlCommand("SELECT * FROM nc_Person WHERE phone = @phone",conn);
+                command.Parameters.AddWithValue("@phone", key);
+                {
+                    Customer? customer = null;
+                    try
+                    {
+                        conn.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            customer = new Customer()
+                            {
+                                Name = (string)reader["Name"],
+                                Email = (string)reader["email"],
+                                Phone = (string)reader["phone"],
+                                PersonType = (string)reader["PersonType"]
+                            };
+                        }
+                        return customer;
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
+                }
+            }
         }
 
         public IEnumerable<Customer> GetAll()

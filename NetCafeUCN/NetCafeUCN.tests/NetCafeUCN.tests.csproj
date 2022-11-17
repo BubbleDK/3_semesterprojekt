@@ -26,6 +26,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DataAccessLayer\NetCafeUCN.DAL.csproj" />
+    <ProjectReference Include="..\NetCafeRestServer\NetCafeUCN.API.csproj" />
+    <ProjectReference Include="..\NetCafeUCN.MVC\NetCafeUCN.MVC.csproj" />
   </ItemGroup>
 
 </Project>

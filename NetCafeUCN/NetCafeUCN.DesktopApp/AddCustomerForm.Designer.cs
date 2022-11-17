@@ -1,6 +1,6 @@
 ﻿namespace NetCafeUCN.DesktopApp
 {
-    partial class AddPersonForm
+    partial class AddCustomerForm
     {
         /// <summary>
         /// Required designer variable.

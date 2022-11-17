@@ -35,8 +35,8 @@ namespace NetCafeUCN.DesktopApp
 
         private void btnAddPerson_Click(object sender, EventArgs e)
         {
-            AddPersonForm addPersonForm = new AddPersonForm(UserService);
-            addPersonForm.ShowDialog();
+            //AddCustomerForm addCustomerForm = new AddCustomerForm(CustomerService);
+            //addCustomerForm.ShowDialog();
         }
     }
 }

@@ -1,15 +1,12 @@
 ﻿using NetCafeUCN.DesktopApp.DTO;
-using Newtonsoft.Json;
 using RestSharp;
-using System;
-using System.Collections.Generic;
-using System.DirectoryServices.ActiveDirectory;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NetCafeUCN.DesktopApp.ServiceLayer
 {
+    /// <summary>
+    /// Handles CRUD functionality for objects of static type Person
+    /// Uses RestSharp to communicate with Controllers in the API
+    /// </summary>
     public class UserService : INetCafeDataAccess<Person>
     {
         public string BaseUri { get; private set; }

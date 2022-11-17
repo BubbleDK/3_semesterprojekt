@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 
 namespace NetCafeUCN.DesktopApp.ServiceLayer
 {
+    /// <summary>
+    /// Handles CRUD functionality for objects of type Booking
+    /// Uses RestSharp to communicate with Controllers in the API
+    /// </summary>
     public class BookingService : INetCafeDataAccess<Booking>
     {
         public string BaseUri { get; private set; }
@@ -17,6 +21,7 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
             BaseUri = baseUri;
             RestClient = new RestClient();
         }
+        
         public bool Add(Booking o)
         {
             return RestClient.Execute<Booking>(new RestRequest($"{BaseUri}{0}", Method.Post)).IsSuccessful;

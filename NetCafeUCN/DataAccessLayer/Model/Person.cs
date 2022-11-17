@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccessLayer.Model
+namespace NetCafeUCN.DAL.Model
 {
     public abstract class Person
     {
