@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NetCafeUCN.MVC.Models;
+using NetCafeUCN.MVC.Models.DTO;
 using NetCafeUCN.MVC.Services;
 using System.Dynamic;
 
@@ -13,8 +14,11 @@ namespace NetCafeUCN.MVC.Controllers
         // GET: PersonController
         public ActionResult Index()
         {
+            CustomerEmployeeViewModel viewModel = new CustomerEmployeeViewModel();
+            viewModel.customers = customerService.GetAll();
+            viewModel.employees = employeeService.GetAll();
             
-            return View(customerService.GetAll());
+            return View(viewModel);
         }
 
         // GET: PersonController/Details/5

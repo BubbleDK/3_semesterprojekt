@@ -1,17 +1,22 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NetCafeUCN.MVC.Models;
+using NetCafeUCN.MVC.Models.DTO;
 using NetCafeUCN.MVC.Services;
 
 namespace NetCafeUCN.MVC.Controllers
 {
     public class ProductController : Controller
     {
-        INetCafeDataAccess<Product> productService = new ProductService("https://localhost:7197/api/Product");
+        INetCafeDataAccess<GamingStation> gamingStationService = new GamingstationService("https://localhost:7197/api/GamingStation");
+        INetCafeDataAccess<Consumable> consumableService = new ConsumableService("https://localhost:7197/api/Consumable");
         // GET: ProductController
         public ActionResult Index()
         {
-            return View(productService.GetAll());
+            GamingStationConsumableViewModel viewModel = new GamingStationConsumableViewModel();
+            viewModel.gamingStations = gamingStationService.GetAll();
+            viewModel.consumables = consumableService.GetAll();
+            return View(viewModel);
         }
 
         // GET: ProductController/Details/5
