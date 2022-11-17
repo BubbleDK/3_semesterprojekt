@@ -19,27 +19,27 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
         }
         public bool Add(GamingStation o)
         {
-            throw new NotImplementedException();
+            return RestClient.Execute<GamingStation>(new RestRequest($"{BaseUri}{o}", Method.Post)).IsSuccessful;
         }
 
         public GamingStation? Get(dynamic key)
         {
-            throw new NotImplementedException();
+            return RestClient.Execute<GamingStation>(new RestRequest($"{BaseUri}{key}", Method.Get)).Data;
         }
 
         public IEnumerable<GamingStation> GetAll()
         {
-            throw new NotImplementedException();
+            return RestClient.Execute<IEnumerable<GamingStation>>(new RestRequest()).Data;
         }
 
         public bool Remove(dynamic key)
         {
-            throw new NotImplementedException();
+            return RestClient.Execute<GamingStation>(new RestRequest($"{BaseUri}{key}", Method.Delete)).IsSuccessful;
         }
 
         public bool Update(GamingStation o)
         {
-            throw new NotImplementedException();
+            return RestClient.Execute<GamingStation>(new RestRequest($"{BaseUri}{o}", Method.Put)).IsSuccessful;
         }
     }
 }
