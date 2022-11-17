@@ -1,6 +1,8 @@
 ﻿using DataAccessLayer.Exceptions;
 using NetCafeUCN.DAL.Model;
+using System;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -54,7 +56,7 @@ namespace NetCafeUCN.DAL.DAO
         {
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
-                using SqlCommand command = new SqlCommand("SELECT productNo, name, description, productType, seatNo FROM nc_Product INNER JOIN nc_GamingStation ON nc_Product.id = nc_GamingStation.stationid WHERE productNo = @productNo;", conn);
+                using SqlCommand command = new SqlCommand("SELECT productNo, name, description, productType, seatNo, isActive FROM nc_Product INNER JOIN nc_GamingStation ON nc_Product.id = nc_GamingStation.stationid WHERE productNo = @productNo;", conn);
                 command.Parameters.AddWithValue("@productNo", key);
                 {
                     try
@@ -63,15 +65,16 @@ namespace NetCafeUCN.DAL.DAO
                         SqlDataReader reader = command.ExecuteReader();
                         while (reader.Read())
                         {
-                                    GamingStation product = new GamingStation()
-                                    {
-                                        ProductNumber = (string)reader["productNo"],
-                                        Name = (string)reader["name"],
-                                        Description = (string)reader["description"],
-                                        Type = (string)reader["productType"],
-                                        SeatNumber = (string)reader["seatNo"],
-                                    };
-                                    return product;
+                            GamingStation product = new GamingStation()
+                            {
+                                ProductNumber = (string)reader["productNo"],
+                                Name = (string)reader["name"],
+                                Description = (string)reader["description"],
+                                Type = (string)reader["productType"],
+                                SeatNumber = (string)reader["seatNo"],
+                                IsActive = (bool)reader["isActive"]
+                            };
+                            return product;
                         }
                     }
                     catch (DataAccessException)
@@ -83,12 +86,12 @@ namespace NetCafeUCN.DAL.DAO
             }
             return null;
         }
-    
+
 
         public IEnumerable<GamingStation> GetAll()
         {
 
-            string sqlStatement = "SELECT productNo, name, description, productType, seatNo FROM nc_Product INNER JOIN nc_GamingStation ON nc_Product.id = nc_GamingStation.stationid";
+            string sqlStatement = "SELECT productNo, name, description, productType, seatNo, IsActive FROM nc_Product INNER JOIN nc_GamingStation ON nc_Product.id = nc_GamingStation.stationid";
             List<GamingStation> list = new List<GamingStation>();
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
@@ -100,17 +103,17 @@ namespace NetCafeUCN.DAL.DAO
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                                GamingStation product = new()
-                                {
-                                    ProductNumber = (string)reader["productNo"],
-                                    Name = (string)reader["name"],
-                                    Description = (string)reader["description"],
-                                    Type = (string)reader["productType"],
-                                    SeatNumber = (string)reader["seatNo"],
-
-                                };
-                                list.Add(product);
-                      }
+                        GamingStation product = new()
+                        {
+                            ProductNumber = (string)reader["productNo"],
+                            Name = (string)reader["name"],
+                            Description = (string)reader["description"],
+                            Type = (string)reader["productType"],
+                            SeatNumber = (string)reader["seatNo"],
+                            IsActive = (bool)reader["isActive"]
+                        };
+                        list.Add(product);
+                    }
                 }
                 catch (DataAccessException)
                 {
@@ -143,25 +146,32 @@ namespace NetCafeUCN.DAL.DAO
         public bool Update(GamingStation o)
         {
             SqlTransaction trans;
-            int id = 0;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
                 conn.Open();
                 using (trans = conn.BeginTransaction())
                 {
-                    using SqlCommand command = new SqlCommand("UPDATE nc_Product SET name = @name, IsActive = @isactive WHERE productNo = @productNo; SCOPE_IDENTITY()", conn, trans);
-                    using SqlCommand gCommand = new SqlCommand("UPDATE nc_GamingStation SET seatNo = @seatNo, description = @description WHERE stationid = @id", conn, trans);
-                    command.Parameters.AddWithValue("@name", o.Name);
-                    command.Parameters.AddWithValue("@productNo", o.ProductNumber);
-                    command.Parameters.AddWithValue("@isActive", o.IsActive);
                     try
                     {
-                        id = Convert.ToInt32(command.ExecuteScalar());
-                        gCommand.Parameters.AddWithValue("@seatNo", o.SeatNumber);
-                        gCommand.Parameters.AddWithValue("@description", o.Description);
-                        gCommand.Parameters.AddWithValue("@stationid", id);
-                        gCommand.ExecuteNonQuery();
-                        trans.Commit();
+                        using(SqlCommand command = new SqlCommand(
+                            "UPDATE nc_Product SET productType = @productType, name = @name, isActive = @isActive WHERE productNo = @productNo", conn, trans))
+                        {
+                            command.Parameters.AddWithValue("@productNo", o.ProductNumber);
+                            command.Parameters.AddWithValue("@productType", o.Type);
+                            command.Parameters.AddWithValue("@name", o.Name);
+                            command.Parameters.AddWithValue("@isActive", o.IsActive);
+                            command.ExecuteNonQuery();
+                        }
+                        using (SqlCommand gcommand = new SqlCommand(
+                            "UPDATE nc_Gamingstation SET seatNo = @seatNo, description = @description where stationid = (SELECT id FROM nc_Product WHERE productNo = @productNo)", conn, trans))
+                        {
+                            gcommand.Parameters.AddWithValue("@productNo", o.ProductNumber);
+                            gcommand.Parameters.AddWithValue("@seatNo", o.SeatNumber);
+                            gcommand.Parameters.AddWithValue("@description", o.Description);
+                            gcommand.ExecuteNonQuery();
+                            trans.Commit();
+                            return true;
+                        }
                     }
                     catch (DataAccessException)
                     {
@@ -170,8 +180,9 @@ namespace NetCafeUCN.DAL.DAO
                     }
                 }
             }
-            return true;
         }
     }
 }
+
+
 
