@@ -8,38 +8,43 @@ namespace NetCafeUCN.DAL.DAO
     {
         public bool Add(Consumable o)
         {
+            SqlTransaction trans;
             int id = 0;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
-                try
+                conn.Open();
+                using (trans = conn.BeginTransaction())
                 {
-                    using (SqlCommand productCommand = new SqlCommand(
-                            "INSERT INTO nc_Product VALUES(@productNo, @productType, @name, @isActive); SELECT SCOPE_IDENTITY();", conn))
+                    try
                     {
-                        productCommand.Parameters.AddWithValue("@productNo", o.ProductNumber);
-                        productCommand.Parameters.AddWithValue("@productType", o.Type);
-                        productCommand.Parameters.AddWithValue("@name", o.Name);
-                        productCommand.Parameters.AddWithValue("@isActive", 1);
-                        conn.Open();
-                        id = Convert.ToInt32(productCommand.ExecuteScalar());
-                    }
+                        using (SqlCommand productCommand = new SqlCommand(
+                                "INSERT INTO nc_Product VALUES(@productNo, @productType, @name, @isActive); SELECT SCOPE_IDENTITY();", conn, trans))
+                        {
+                            productCommand.Parameters.AddWithValue("@productNo", o.ProductNumber);
+                            productCommand.Parameters.AddWithValue("@productType", o.Type);
+                            productCommand.Parameters.AddWithValue("@name", o.Name);
+                            productCommand.Parameters.AddWithValue("@isActive", "true");
+                            id = Convert.ToInt32(productCommand.ExecuteScalar());
+                        }
 
 
-                    using (SqlCommand consumableCommand = new SqlCommand(
-                            "INSERT INTO nc_Consumables VALUES(@productid, @description)", conn))
-                    {
-                        consumableCommand.Parameters.AddWithValue("@productid", id);
-                        consumableCommand.Parameters.AddWithValue("@description", o.Description);
-                        consumableCommand.ExecuteNonQuery();
+                        using (SqlCommand consumableCommand = new SqlCommand(
+                                "INSERT INTO nc_Consumables VALUES(@productid, @description)", conn, trans))
+                        {
+                            consumableCommand.Parameters.AddWithValue("@productid", id);
+                            consumableCommand.Parameters.AddWithValue("@description", o.Description);
+                            consumableCommand.ExecuteNonQuery();
+                            trans.Commit();
+                            return true;
+                        }
                     }
-                }
-                catch (DataAccessException)
-                {
-                    throw new DataAccessException("Can't access data");
+                    catch (DataAccessException)
+                    {
+                        trans.Rollback();
+                        throw new DataAccessException("Can't access data");
+                    }
                 }
             }
-
-            return false;
         }
 
         public Consumable? Get(dynamic productNo)
@@ -91,17 +96,15 @@ namespace NetCafeUCN.DAL.DAO
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        if ((int)reader["isActive"] != 0)
+                        Consumable product = new Consumable()
                         {
-                            Consumable product = new Consumable()
-                            {
-                                ProductNumber = (string)reader["productNo"],
-                                Name = (string)reader["name"],
-                                Description = (string)reader["description"],
-                                Type = (string)reader["productType"],
-                            };
-                            list.Add(product);
-                        }
+                            ProductNumber = (string)reader["productNo"],
+                            Name = (string)reader["name"],
+                            Description = (string)reader["description"],
+                            Type = (string)reader["productType"],
+                            IsActive = (bool)reader["isActive"],
+                        };
+                        list.Add(product);
                     }
                 }
                 catch (DataAccessException)
