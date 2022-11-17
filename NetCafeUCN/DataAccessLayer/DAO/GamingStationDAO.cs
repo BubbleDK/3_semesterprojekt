@@ -128,7 +128,7 @@ namespace NetCafeUCN.DAL.DAO
         {
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
-                using SqlCommand command = new SqlCommand("UPDATE nc_Product SET IsActive = 0 WHERE productNo = @productNo AND productType = 'gamingstation'", conn);
+                using SqlCommand command = new SqlCommand("UPDATE nc_Product SET isActive = 0 WHERE productNo = @productNo AND productType = 'gamingstation'", conn);
                 command.Parameters.AddWithValue("@productNo", key);
                 try
                 {

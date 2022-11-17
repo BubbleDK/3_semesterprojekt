@@ -1,4 +1,5 @@
-﻿@model IEnumerable<NetCafeUCN.MVC.Models.Product>
+﻿@using NetCafeUCN.MVC.Models.DTO;
+@model GamingStationConsumableViewModel;
 
 @{
     ViewData["Title"] = "Produkter";
@@ -11,16 +12,18 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ProductNumber)
+                @*@Html.DisplayNameFor(model => model.ProductNumber)*@
+                ProductNumber
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Type)
+                @*@Html.DisplayNameFor(model => model.Type)*@
+                Type
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (GamingStation item in Model.gamingStations) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.ProductNumber)
@@ -35,5 +38,23 @@
             </td>
         </tr>
 }
+    </tbody>
+    <tbody>
+        @foreach (Consumable item in Model.consumables)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
