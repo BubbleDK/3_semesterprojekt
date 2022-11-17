@@ -19,21 +19,24 @@ namespace NetCafeUCN.DesktopApp
 
         private void RefreshList()
         {
-            lstConsumables.Items.Clear();
-            lstGamingstations.Items.Clear();
+            //lstConsumables.Items.Clear();
+            dgwConsumables.Rows.Clear();
+            dgwGamingstations.Rows.Clear();
             //TODO: List should contain Gamingstation and Consumable instead of Product
             List<Consumable> consumables = new();
             List<GamingStation> gamingstations = new();
             consumables = consumableService.GetAll().ToList();
             gamingstations = gamingstationService.GetAll().ToList();
-            foreach (Consumable c in consumables)
-            {
-                lstConsumables.Items.Add(c);
-            }
-            foreach (GamingStation gs in gamingstations)
-            {
-                lstGamingstations.Items.Add(gs);
-            }
+            //foreach (Consumable c in consumables)
+            //{
+            //    dgwConsumables.Rows.Add(c.Name, c.ProductNumber, c.Description, c.Type);
+            //}
+            //foreach (GamingStation gs in gamingstations)
+            //{
+            //    dgwGamingstations.Rows.Add(gs.Name, gs.ProductNumber, gs.SeatNumber, gs.Description, gs.Type);
+            //}
+            dgwConsumables.DataSource = consumables;
+            dgwGamingstations.DataSource = gamingstations;
         }
 
         private void ShowInputDialog()
@@ -54,15 +57,15 @@ namespace NetCafeUCN.DesktopApp
 
         private void UpdateProduct()
         {
-            if(lstConsumables.SelectedIndex != -1)
+            if (dgwConsumables.CurrentRow != null)
             {
-                Consumable c = lstConsumables.SelectedItem as Consumable;
+                Consumable c = (Consumable)dgwConsumables.CurrentRow.DataBoundItem;
                 Form consumableForm = new ConsumableForm(c, consumableService);
                 consumableForm.Show();
             }
-            else if (lstGamingstations.SelectedIndex != -1)
+            else if (dgwGamingstations.CurrentRow != null)
             {
-                GamingStation gs = lstGamingstations.SelectedItem as GamingStation;
+                GamingStation gs = (GamingStation)dgwGamingstations.CurrentRow.DataBoundItem;
                 Form gamingstationForm = new GamingstationForm(gs, gamingstationService);
                 gamingstationForm.Show();
             }
@@ -77,15 +80,17 @@ namespace NetCafeUCN.DesktopApp
 
         private void tbProducts_Deselected(object sender, TabControlEventArgs e)
         {
-            lstConsumables.SelectedIndex = -1;
-            lstGamingstations.SelectedIndex = -1;
+            dgwConsumables.ClearSelection();
+            dgwConsumables.CurrentCell = null;
+            dgwGamingstations.ClearSelection();
+            dgwGamingstations.CurrentCell = null;
         }
 
         private void DeleteSelectedProduct()
         {
-            if (lstConsumables.SelectedIndex != -1)
+            if (dgwConsumables.CurrentRow != null)
             {
-                Consumable c = lstConsumables.SelectedItem as Consumable;
+                Consumable c = dgwConsumables.CurrentRow.DataBoundItem as Consumable;
                 bool deleted = consumableService.Remove(c.ProductNumber);
                 if (deleted)
                 {
@@ -93,9 +98,9 @@ namespace NetCafeUCN.DesktopApp
                 }
 
             }
-            else if (lstGamingstations.SelectedIndex != -1)
+            else if (dgwGamingstations.CurrentRow != null)
             {
-                GamingStation gs = lstGamingstations.SelectedItem as GamingStation;
+                GamingStation gs = dgwGamingstations.CurrentRow.DataBoundItem as GamingStation;
                 bool deleted = gamingstationService.Remove(gs.ProductNumber);
                 if (deleted)
                 {
