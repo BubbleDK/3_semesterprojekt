@@ -4,6 +4,7 @@ using NetCafeUCN.MVC.Models;
 using NetCafeUCN.MVC.Models.DTO;
 using NetCafeUCN.MVC.Services;
 using System.Dynamic;
+using System.Linq;
 
 namespace NetCafeUCN.MVC.Controllers
 {
@@ -49,9 +50,25 @@ namespace NetCafeUCN.MVC.Controllers
         }
 
         // GET: PersonController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string phone)
+
+            
         {
-            return View();
+            if (customerService.GetAll().ToList().First(customer => customer.Phone == phone) != null)
+            {
+                //Customer c = customerService.GetAll().ToList().First(customer => customer.Phone == phone);
+                return RedirectToAction("EditCustomer");
+            }else if(employeeService.GetAll().ToList().First(employee => employee.Phone == phone) != null)
+            {
+                //Employee e = employeeService.GetAll().ToList().First(employee => employee.Phone == phone);
+                return RedirectToAction("EditEmployee");
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+            
+            //return View();
         }
 
         // POST: PersonController/Edit/5
