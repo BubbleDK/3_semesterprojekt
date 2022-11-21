@@ -77,7 +77,7 @@ namespace NetCafeUCN.DAL.DAO
                                 isBookingCreated = true;
                             }
 
-                            booking.addToBookingLine(new BookingLine() { Quantity = (int)reader["quantity"], Stationid = (int)reader["stationid"], Consumableid = (int)reader["consumableid"] });
+                            booking?.addToBookingLine(new BookingLine() { Quantity = (int)reader["quantity"], Stationid = (int)reader["stationid"], Consumableid = (int)reader["consumableid"] });
                         }
                         return booking;
                     }
