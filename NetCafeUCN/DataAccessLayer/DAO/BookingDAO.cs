@@ -93,42 +93,51 @@ namespace NetCafeUCN.DAL.DAO
         public IEnumerable<Booking> GetAll()
         {
             string sqlStatement = "SELECT * FROM nc_Booking INNER JOIN nc_BookingLine ON nc_Booking.id = nc_BookingLine.bookingid";
-            //string sqlBookingLinesStatement = "SELECT * FROM nc_BookingLine WHERE bookingid = @id";
             List<Booking> list = new List<Booking>();
             int id = 0;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand(sqlStatement, conn);
-                //SqlCommand bookingLinesCMD = new SqlCommand(sqlBookingLinesStatement, conn);
                 try
                 {
                     conn.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        Booking booking = new Booking()
+                        if (list.Count > 0)
                         {
-                            BookingNo = (string)reader["bookingNo"],
-                            StartTime = (DateTime)reader["startTime"],
-                            EndTime = (DateTime)reader["endTime"],
-                            CustomerId = (int)reader["customerId"],
-                        };
-                        list.Add(booking);
-                        id = (int)reader["id"];
-
-                        //reader.Close();
-                        //bookingLinesCMD.Parameters.AddWithValue("@id", id);
-                        //SqlDataReader read = bookingLinesCMD.ExecuteReader();
-                        //while (read.Read())
-                        //{
-                        //    foreach (var item in list)
-                        //    {
-                        //        if (id == (int)read["bookingid"])
-                        //        {
-                        //            item.addToBookingLine(new BookingLine((int)read["quantity"], (int)read["stationid"], (int)read["consumableid"]));
-                        //        }
-                        //    }
-                        //}   
+                            foreach (var item in list.ToList())
+                            {
+                                if ((string)reader["bookingNo"] == item.BookingNo)
+                                {
+                                    item.addToBookingLine(new BookingLine() { Quantity = (int)reader["quantity"], Stationid = (int)reader["stationid"], Consumableid = (int)reader["consumableid"] });
+                                }
+                                else
+                                {
+                                    Booking newBooking = new Booking()
+                                    {
+                                        BookingNo = (string)reader["bookingNo"],
+                                        StartTime = (DateTime)reader["startTime"],
+                                        EndTime = (DateTime)reader["endTime"],
+                                        CustomerId = (int)reader["customerId"],
+                                    };
+                                    newBooking.addToBookingLine(new BookingLine() { Quantity = (int)reader["quantity"], Stationid = (int)reader["stationid"], Consumableid = (int)reader["consumableid"] });
+                                    list.Add(newBooking);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Booking newBooking = new Booking()
+                            {
+                                BookingNo = (string)reader["bookingNo"],
+                                StartTime = (DateTime)reader["startTime"],
+                                EndTime = (DateTime)reader["endTime"],
+                                CustomerId = (int)reader["customerId"],
+                            };
+                            newBooking.addToBookingLine(new BookingLine() { Quantity = (int)reader["quantity"], Stationid = (int)reader["stationid"], Consumableid = (int)reader["consumableid"] });
+                            list.Add(newBooking);
+                        }
                     }
                 }
                 catch (DataAccessException)
