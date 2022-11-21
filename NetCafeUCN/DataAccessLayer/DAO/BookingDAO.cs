@@ -77,7 +77,7 @@ namespace NetCafeUCN.DAL.DAO
                                 isBookingCreated = true;
                             }
 
-                            booking.addToBookingLine(new BookingLine() { Quantity = (int)reader["quantity"], Stationid = (int)reader["stationid"], Consumableid = (int)reader["consumableid"] });
+                            booking?.addToBookingLine(new BookingLine() { Quantity = (int)reader["quantity"], Stationid = (int)reader["stationid"], Consumableid = (int)reader["consumableid"] });
                         }
                         return booking;
                     }
@@ -94,13 +94,12 @@ namespace NetCafeUCN.DAL.DAO
         {
             string sqlStatement = "SELECT * FROM nc_Booking INNER JOIN nc_BookingLine ON nc_Booking.id = nc_BookingLine.bookingid";
             List<Booking> list = new List<Booking>();
-            int id = 0;
+            string? currentBoNo = null;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand(sqlStatement, conn);
                 try
                 {
-                    string ?currentBoNo = null;
                     conn.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
@@ -141,12 +140,71 @@ namespace NetCafeUCN.DAL.DAO
 
         public bool Remove(dynamic key)
         {
-            throw new NotImplementedException();
+            SqlTransaction trans;
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+            {
+                conn.Open();
+                using (trans = conn.BeginTransaction())
+                {
+                    try
+                    {
+                        using (SqlCommand deleteCommand = new SqlCommand("DELETE FROM nc_Booking WHERE BookingNo = @BookingNo", conn, trans))
+                        {
+                            deleteCommand.Parameters.AddWithValue("@BookingNo", key);
+                            deleteCommand.ExecuteNonQuery();
+                            trans.Commit();
+                            return true;
+                        }
+                    }
+                    catch (DataAccessException)
+                    {
+                        trans.Rollback();
+                        throw new DataAccessException("Can't access data");
+                    }
+                }
+            }
         }
 
         public bool Update(Booking o)
         {
-            throw new NotImplementedException();
+            SqlTransaction trans;
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+            {
+                conn.Open();
+                using (trans = conn.BeginTransaction())
+                {
+                    try
+                    {
+                        using (SqlCommand bookingCommand = new SqlCommand("UPDATE nc_Booking SET startTime = @startTime, endTime = @endTime WHERE BookingNo = @BookingNo", conn, trans))
+                        {
+                            bookingCommand.Parameters.AddWithValue("@BookingNo", o.BookingNo);
+                            bookingCommand.Parameters.AddWithValue("@startTime", o.StartTime);
+                            bookingCommand.Parameters.AddWithValue("@endTime", o.EndTime);
+                            bookingCommand.ExecuteNonQuery();
+                        }
+                        foreach (var item in o.BookingLines)
+                        {
+                            using (SqlCommand bookingLineCommand = new SqlCommand(
+                                "UPDATE nc_BookingLine SET quantity = @quantity, stationid = @stationid, consumableid = @consumableid WHERE bookingid = (SELECT id FROM nc_Booking WHERE BookingNo = @BookingNo)", conn, trans))
+                            {
+                                bookingLineCommand.Parameters.AddWithValue("@BookingNo", o.BookingNo);
+                                bookingLineCommand.Parameters.AddWithValue("@quantity", item.Quantity);
+                                bookingLineCommand.Parameters.AddWithValue("@stationid", item.Stationid);
+                                bookingLineCommand.Parameters.AddWithValue("@consumableid", item.Consumableid);
+                                bookingLineCommand.ExecuteNonQuery();
+                            }
+                        }
+
+                        trans.Commit();
+                        return true;
+                    }
+                    catch (DataAccessException)
+                    {
+                        trans.Rollback();
+                        throw new DataAccessException("Can't access data");
+                    }
+                }
+            }
         }
     }
 }
