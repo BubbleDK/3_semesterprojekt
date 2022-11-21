@@ -1,4 +1,4 @@
-﻿namespace NetCafeUCN.DAL.Model
+﻿namespace NetCafeUCN.API.DTO
 {
     public class BookingLine
     {
