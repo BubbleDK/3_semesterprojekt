@@ -34,18 +34,26 @@
             this.btnUpdateProduct = new System.Windows.Forms.Button();
             this.btnDeleteProduct = new System.Windows.Forms.Button();
             this.tbProducts = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.lstConsumables = new System.Windows.Forms.ListBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.lstGamingstations = new System.Windows.Forms.ListBox();
+            this.tbConsumable = new System.Windows.Forms.TabPage();
+            this.dgvConsumables = new System.Windows.Forms.DataGridView();
+            this.tbGamingstations = new System.Windows.Forms.TabPage();
+            this.dgvGamingstations = new System.Windows.Forms.DataGridView();
+            this.lstGamingstations = new System.Windows.Forms.ListView();
+            this.colComputerName = new System.Windows.Forms.ColumnHeader();
+            this.colProductNo = new System.Windows.Forms.ColumnHeader();
+            this.colmProductType = new System.Windows.Forms.ColumnHeader();
+            this.colSeatNo = new System.Windows.Forms.ColumnHeader();
+            this.colDesc = new System.Windows.Forms.ColumnHeader();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbProducts.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.tbConsumable.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvConsumables)).BeginInit();
+            this.tbGamingstations.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvGamingstations)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -126,57 +134,109 @@
             // 
             // tbProducts
             // 
-            this.tbProducts.Controls.Add(this.tabPage1);
-            this.tbProducts.Controls.Add(this.tabPage2);
+            this.tbProducts.Controls.Add(this.tbConsumable);
+            this.tbProducts.Controls.Add(this.tbGamingstations);
             this.tbProducts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbProducts.Location = new System.Drawing.Point(0, 0);
             this.tbProducts.Name = "tbProducts";
             this.tbProducts.SelectedIndex = 0;
             this.tbProducts.Size = new System.Drawing.Size(619, 625);
+            this.tbProducts.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tbProducts.TabIndex = 0;
             this.tbProducts.Deselected += new System.Windows.Forms.TabControlEventHandler(this.tbProducts_Deselected);
             // 
-            // tabPage1
+            // tbConsumable
             // 
-            this.tabPage1.Controls.Add(this.lstConsumables);
-            this.tabPage1.Location = new System.Drawing.Point(4, 29);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(611, 592);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tbConsumable.Controls.Add(this.dgvConsumables);
+            this.tbConsumable.Location = new System.Drawing.Point(4, 29);
+            this.tbConsumable.Name = "tbConsumable";
+            this.tbConsumable.Padding = new System.Windows.Forms.Padding(3);
+            this.tbConsumable.Size = new System.Drawing.Size(611, 592);
+            this.tbConsumable.TabIndex = 0;
+            this.tbConsumable.Text = "Mad & Drikke";
+            this.tbConsumable.UseVisualStyleBackColor = true;
             // 
-            // lstConsumables
+            // dgvConsumables
             // 
-            this.lstConsumables.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lstConsumables.FormattingEnabled = true;
-            this.lstConsumables.ItemHeight = 20;
-            this.lstConsumables.Location = new System.Drawing.Point(3, 3);
-            this.lstConsumables.Name = "lstConsumables";
-            this.lstConsumables.Size = new System.Drawing.Size(605, 586);
-            this.lstConsumables.TabIndex = 0;
+            this.dgvConsumables.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvConsumables.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvConsumables.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
+            this.dgvConsumables.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvConsumables.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvConsumables.Location = new System.Drawing.Point(3, 3);
+            this.dgvConsumables.MultiSelect = false;
+            this.dgvConsumables.Name = "dgvConsumables";
+            this.dgvConsumables.ReadOnly = true;
+            this.dgvConsumables.RowHeadersWidth = 51;
+            this.dgvConsumables.RowTemplate.Height = 29;
+            this.dgvConsumables.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvConsumables.Size = new System.Drawing.Size(605, 586);
+            this.dgvConsumables.TabIndex = 0;
             // 
-            // tabPage2
+            // tbGamingstations
             // 
-            this.tabPage2.Controls.Add(this.lstGamingstations);
-            this.tabPage2.Location = new System.Drawing.Point(4, 29);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(611, 592);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tbGamingstations.Controls.Add(this.dgvGamingstations);
+            this.tbGamingstations.Controls.Add(this.lstGamingstations);
+            this.tbGamingstations.Location = new System.Drawing.Point(4, 29);
+            this.tbGamingstations.Name = "tbGamingstations";
+            this.tbGamingstations.Padding = new System.Windows.Forms.Padding(3);
+            this.tbGamingstations.Size = new System.Drawing.Size(611, 592);
+            this.tbGamingstations.TabIndex = 1;
+            this.tbGamingstations.Text = "Computere";
+            this.tbGamingstations.UseVisualStyleBackColor = true;
+            // 
+            // dgvGamingstations
+            // 
+            this.dgvGamingstations.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvGamingstations.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvGamingstations.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
+            this.dgvGamingstations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvGamingstations.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvGamingstations.Location = new System.Drawing.Point(3, 3);
+            this.dgvGamingstations.MultiSelect = false;
+            this.dgvGamingstations.Name = "dgvGamingstations";
+            this.dgvGamingstations.RowHeadersWidth = 51;
+            this.dgvGamingstations.RowTemplate.Height = 29;
+            this.dgvGamingstations.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvGamingstations.Size = new System.Drawing.Size(605, 586);
+            this.dgvGamingstations.TabIndex = 1;
             // 
             // lstGamingstations
             // 
+            this.lstGamingstations.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.colComputerName,
+            this.colProductNo,
+            this.colmProductType,
+            this.colSeatNo,
+            this.colDesc});
             this.lstGamingstations.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lstGamingstations.FormattingEnabled = true;
-            this.lstGamingstations.ItemHeight = 20;
+            this.lstGamingstations.FullRowSelect = true;
+            this.lstGamingstations.GridLines = true;
             this.lstGamingstations.Location = new System.Drawing.Point(3, 3);
             this.lstGamingstations.Name = "lstGamingstations";
             this.lstGamingstations.Size = new System.Drawing.Size(605, 586);
             this.lstGamingstations.TabIndex = 0;
+            this.lstGamingstations.UseCompatibleStateImageBehavior = false;
+            // 
+            // colComputerName
+            // 
+            this.colComputerName.Text = "Produktnavn";
+            // 
+            // colProductNo
+            // 
+            this.colProductNo.Text = "Produkt nr:";
+            // 
+            // colmProductType
+            // 
+            this.colmProductType.Text = "Produkt Type";
+            // 
+            // colSeatNo
+            // 
+            this.colSeatNo.Text = "Plads nr:";
+            // 
+            // colDesc
+            // 
+            this.colDesc.Text = "Beskrivelse: ";
             // 
             // ProductsForm
             // 
@@ -195,8 +255,10 @@
             this.splitContainer1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tbProducts.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
+            this.tbConsumable.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvConsumables)).EndInit();
+            this.tbGamingstations.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvGamingstations)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -209,9 +271,15 @@
         private Button btnUpdateProduct;
         private Button btnDeleteProduct;
         private TabControl tbProducts;
-        private TabPage tabPage1;
-        private ListBox lstConsumables;
-        private TabPage tabPage2;
-        private ListBox lstGamingstations;
+        private TabPage tbConsumable;
+        private TabPage tbGamingstations;
+        private DataGridView dgvConsumables;
+        private ListView lstGamingstations;
+        private ColumnHeader colComputerName;
+        private ColumnHeader colProductNo;
+        private ColumnHeader colmProductType;
+        private ColumnHeader colSeatNo;
+        private ColumnHeader colDesc;
+        private DataGridView dgvGamingstations;
     }
 }

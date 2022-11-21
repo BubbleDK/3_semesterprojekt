@@ -70,7 +70,7 @@ CREATE TABLE nc_Consumables(
 
 CREATE TABLE nc_BookingLine(
     bookingid INT NOT NULL,
-    quantity INT NOT NULL,
+    quantity INT,
     stationid INT NOT NULL,
     consumableid INT,
 

@@ -13,32 +13,31 @@ namespace NetCafeUCN.DesktopApp
             InitializeComponent();
             consumableService = new ConsumableService("https://localhost:7197/api/Consumable/");
             gamingstationService = new GamingStationService("https://localhost:7197/api/Gamingstation/");
-
             RefreshList();
         }
 
-        private void RefreshList()
+        public void RefreshList()
         {
-            lstConsumables.Items.Clear();
-            lstGamingstations.Items.Clear();
-            //TODO: List should contain Gamingstation and Consumable instead of Product
+            dgvConsumables.DataSource = null;
+            dgvConsumables.Rows.Clear();
+            dgvGamingstations.DataSource = null;
+            dgvGamingstations.Rows.Clear();
             List<Consumable> consumables = new();
             List<GamingStation> gamingstations = new();
             consumables = consumableService.GetAll().ToList();
             gamingstations = gamingstationService.GetAll().ToList();
-            foreach (Consumable c in consumables)
-            {
-                lstConsumables.Items.Add(c);
-            }
-            foreach (GamingStation gs in gamingstations)
-            {
-                lstGamingstations.Items.Add(gs);
-            }
+            dgvConsumables.DataSource = consumables;
+            dgvGamingstations.DataSource = gamingstations;
+            dgvConsumables.ClearSelection();
+            dgvConsumables.CurrentCell = null;
+            dgvGamingstations.ClearSelection();
+            dgvGamingstations.CurrentCell = null;
+
         }
 
         private void ShowInputDialog()
         {
-            Form inputDialog = new InputDialog("Produkttype");
+            Form inputDialog = new InputDialog("Produkttype", this);
             inputDialog.ShowDialog();
         }
 
@@ -54,16 +53,16 @@ namespace NetCafeUCN.DesktopApp
 
         private void UpdateProduct()
         {
-            if(lstConsumables.SelectedIndex != -1)
+            if (dgvConsumables.CurrentRow != null)
             {
-                Consumable c = lstConsumables.SelectedItem as Consumable;
-                Form consumableForm = new ConsumableForm(c, consumableService);
+                Consumable c = (Consumable)dgvConsumables.CurrentRow.DataBoundItem;
+                Form consumableForm = new ConsumableForm(c, consumableService, this);
                 consumableForm.Show();
             }
-            else if (lstGamingstations.SelectedIndex != -1)
+            else if (dgvGamingstations.CurrentRow != null)
             {
-                GamingStation gs = lstGamingstations.SelectedItem as GamingStation;
-                Form gamingstationForm = new GamingstationForm(gs, gamingstationService);
+                GamingStation gs = (GamingStation)dgvGamingstations.CurrentRow.DataBoundItem;
+                Form gamingstationForm = new GamingstationForm(gs, gamingstationService, this);
                 gamingstationForm.Show();
             }
         }
@@ -77,28 +76,32 @@ namespace NetCafeUCN.DesktopApp
 
         private void tbProducts_Deselected(object sender, TabControlEventArgs e)
         {
-            lstConsumables.SelectedIndex = -1;
-            lstGamingstations.SelectedIndex = -1;
+            dgvConsumables.ClearSelection();
+            dgvConsumables.CurrentCell = null;
+            dgvGamingstations.ClearSelection();
+            dgvGamingstations.CurrentCell = null;
         }
 
         private void DeleteSelectedProduct()
         {
-            if (lstConsumables.SelectedIndex != -1)
+            if (dgvConsumables.CurrentRow != null)
             {
-                Consumable c = lstConsumables.SelectedItem as Consumable;
+                Consumable c = (Consumable)dgvConsumables.CurrentRow.DataBoundItem;
                 bool deleted = consumableService.Remove(c.ProductNumber);
                 if (deleted)
                 {
+                    RefreshList();
                     MessageBox.Show("Slettede " + c.Name, "Fjernet produkt", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
             }
-            else if (lstGamingstations.SelectedIndex != -1)
+            else if (dgvGamingstations.CurrentRow != null)
             {
-                GamingStation gs = lstGamingstations.SelectedItem as GamingStation;
+                GamingStation gs = (GamingStation)dgvGamingstations.CurrentRow.DataBoundItem;
                 bool deleted = gamingstationService.Remove(gs.ProductNumber);
                 if (deleted)
                 {
+                    RefreshList();
                     MessageBox.Show("Slettede " + gs.Name, "Fjernet produkt", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }

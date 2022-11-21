@@ -19,7 +19,12 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
         }
         public bool Add(Consumable o)
         {
-            return RestClient.Execute<Consumable>(new RestRequest($"{BaseUri}{o}", Method.Post)).IsSuccessful;
+            //var request = new RestRequest($"{BaseUri}", Method.Post);
+            //request.RequestFormat = DataFormat.Json;
+            //request.AddBody(o);
+            //var response = RestClient.Execute<Consumable>(request);
+            //return response.IsSuccessful;
+            return RestClient.Execute<Consumable>(new RestRequest($"{BaseUri}", Method.Post).AddJsonBody(o)).IsSuccessful;
         }
 
         public Consumable? Get(dynamic key)
@@ -39,7 +44,8 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
 
         public bool Update(Consumable o)
         {
-            return RestClient.Execute<Consumable>(new RestRequest($"{BaseUri}{o}", Method.Put)).IsSuccessful;
+
+            return RestClient.Execute<Consumable>(new RestRequest($"{BaseUri}", Method.Put).AddJsonBody(o)).IsSuccessful;
         }
     }
 }

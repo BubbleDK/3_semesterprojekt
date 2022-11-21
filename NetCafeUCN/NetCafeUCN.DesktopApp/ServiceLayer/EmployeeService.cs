@@ -18,7 +18,7 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
         }
         public bool Add(Employee o)
         {
-            return RestClient.Execute<Employee>(new RestRequest($"{BaseUri}{o}",Method.Post)).IsSuccessful;
+            return RestClient.Execute<Employee>(new RestRequest($"{BaseUri}{o}",Method.Post).AddJsonBody(o)).IsSuccessful;
         }
 
         public Employee? Get(dynamic key)
@@ -38,7 +38,7 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
 
         public bool Update(Employee o)
         {
-            return RestClient.Execute<Employee>(new RestRequest($"{BaseUri}{o}",Method.Put)).IsSuccessful;
+            return RestClient.Execute<Employee>(new RestRequest($"{BaseUri}",Method.Put).AddJsonBody(o)).IsSuccessful;
         }
     }
 }

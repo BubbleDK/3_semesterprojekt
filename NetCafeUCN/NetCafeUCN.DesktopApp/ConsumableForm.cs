@@ -7,18 +7,20 @@ namespace NetCafeUCN.DesktopApp
     {
         INetCafeDataAccess<Consumable> consumableService;
         Consumable c;
+        ProductsForm productsForm;
         //Type til at bestemme om man redigerer eller opretter nyt objekt
         private string type = "";
-        public ConsumableForm()
+        public ConsumableForm(ProductsForm productsForm)
         {
             InitializeComponent();
             consumableService = new ConsumableService("https://localhost:7197/api/Consumable/");
             type = "Create";
             c = new();
             txtProductType.Text = "Consumable";
+            this.productsForm = productsForm;
         }
 
-        public ConsumableForm(Consumable c, INetCafeDataAccess<Consumable> service)
+        public ConsumableForm(Consumable c, INetCafeDataAccess<Consumable> service, ProductsForm productsForm)
         {
             InitializeComponent();
             txtDescription.Text = c.Description;
@@ -28,11 +30,11 @@ namespace NetCafeUCN.DesktopApp
             this.c = c;
             consumableService = service;
             type = "Edit";
+            this.productsForm = productsForm;
         }
 
         private void confirmOption()
         {
-            //TODO: Call add gamingstation somehow somewhere
             c.Name = txtProductName.Text;
             c.ProductNumber = txtProductNum.Text;
             c.Type = "Consumable";
@@ -40,9 +42,12 @@ namespace NetCafeUCN.DesktopApp
             if (type.Equals("Create"))
             {
                 consumableService.Add(c);
-            }else if (type.Equals("Edit"))
+                productsForm.RefreshList();
+            }
+            else if (type.Equals("Edit"))
             {
                 consumableService.Update(c);
+                productsForm.RefreshList();
             }
         }
 
