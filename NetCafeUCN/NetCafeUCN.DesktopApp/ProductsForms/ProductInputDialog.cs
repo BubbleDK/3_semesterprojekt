@@ -1,6 +1,6 @@
 ﻿namespace NetCafeUCN.DesktopApp
 {
-    public partial class InputDialog : Form
+    public partial class ProductInputDialog : Form
     {
         ProductsForm productsForm;
         private enum Type
@@ -9,30 +9,30 @@
             Consumable = 1,
         };
 
-        public InputDialog(string inputFormIdentity, ProductsForm productsForm)
+        public ProductInputDialog(ProductsForm productsForm)
         {
             InitializeComponent();
-            lblInput.Text = inputFormIdentity;
             cmbInput.DataSource = Enum.GetValues(typeof(Type));
             this.productsForm = productsForm;
         }
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            confirmInupt();
+            this.Hide();
+            confirmInput();
             this.Dispose();
         }
 
-        private void confirmInupt()
+        private void confirmInput()
         {
             if(cmbInput.SelectedIndex == 0)
             {
                 Form gamingStationForm = new GamingstationForm(productsForm);
-                gamingStationForm.Show();
+                gamingStationForm.ShowDialog();
             }else if(cmbInput.SelectedIndex == 1)
             {
                 Form consumableForm = new ConsumableForm(productsForm);
-                consumableForm.Show();
+                consumableForm.ShowDialog();
             }
         }
     }

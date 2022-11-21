@@ -6,8 +6,8 @@ namespace NetCafeUCN.DesktopApp
     public partial class GamingstationForm : Form
     {
 
-        INetCafeDataAccess<GamingStation> gamingstationService;
-        GamingStation gs;
+        INetCafeDataAccess<GamingStationDTO> gamingstationService;
+        GamingStationDTO gs;
         ProductsForm productsForm;
 
         //Type til at bestemme om man redigerer eller opretter nyt objekt
@@ -20,9 +20,10 @@ namespace NetCafeUCN.DesktopApp
             gs = new();
             txtProductType.Text = "Gamingstation";
             this.productsForm = productsForm;
+            this.txtProductNum.Enabled = true;
         }
 
-        public GamingstationForm(GamingStation gs, INetCafeDataAccess<GamingStation> service, ProductsForm productsForm)
+        public GamingstationForm(GamingStationDTO gs, INetCafeDataAccess<GamingStationDTO> service, ProductsForm productsForm)
         {
             InitializeComponent();
             txtProductName.Text = gs.Name;

@@ -5,8 +5,8 @@ namespace NetCafeUCN.DesktopApp
 {
     public partial class ConsumableForm : Form
     {
-        INetCafeDataAccess<Consumable> consumableService;
-        Consumable c;
+        INetCafeDataAccess<ConsumableDTO> consumableService;
+        ConsumableDTO c;
         ProductsForm productsForm;
         //Type til at bestemme om man redigerer eller opretter nyt objekt
         private string type = "";
@@ -18,9 +18,10 @@ namespace NetCafeUCN.DesktopApp
             c = new();
             txtProductType.Text = "Consumable";
             this.productsForm = productsForm;
+            this.txtProductNum.Enabled = true;
         }
 
-        public ConsumableForm(Consumable c, INetCafeDataAccess<Consumable> service, ProductsForm productsForm)
+        public ConsumableForm(ConsumableDTO c, INetCafeDataAccess<ConsumableDTO> service, ProductsForm productsForm)
         {
             InitializeComponent();
             txtDescription.Text = c.Description;

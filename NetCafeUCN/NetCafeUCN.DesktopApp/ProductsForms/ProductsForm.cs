@@ -6,8 +6,8 @@ namespace NetCafeUCN.DesktopApp
 {
     public partial class ProductsForm : Form
     {
-        INetCafeDataAccess<Consumable> consumableService;
-        INetCafeDataAccess<GamingStation> gamingstationService;
+        INetCafeDataAccess<ConsumableDTO> consumableService;
+        INetCafeDataAccess<GamingStationDTO> gamingstationService;
         public ProductsForm()
         {
             InitializeComponent();
@@ -22,12 +22,8 @@ namespace NetCafeUCN.DesktopApp
             dgvConsumables.Rows.Clear();
             dgvGamingstations.DataSource = null;
             dgvGamingstations.Rows.Clear();
-            List<Consumable> consumables = new();
-            List<GamingStation> gamingstations = new();
-            consumables = consumableService.GetAll().ToList();
-            gamingstations = gamingstationService.GetAll().ToList();
-            dgvConsumables.DataSource = consumables;
-            dgvGamingstations.DataSource = gamingstations;
+            dgvConsumables.DataSource = consumableService.GetAll().ToList();
+            dgvGamingstations.DataSource = gamingstationService.GetAll().ToList();
             dgvConsumables.ClearSelection();
             dgvConsumables.CurrentCell = null;
             dgvGamingstations.ClearSelection();
@@ -37,7 +33,7 @@ namespace NetCafeUCN.DesktopApp
 
         private void ShowInputDialog()
         {
-            Form inputDialog = new InputDialog("Produkttype", this);
+            Form inputDialog = new ProductInputDialog(this);
             inputDialog.ShowDialog();
         }
 
@@ -55,15 +51,15 @@ namespace NetCafeUCN.DesktopApp
         {
             if (dgvConsumables.CurrentRow != null)
             {
-                Consumable c = (Consumable)dgvConsumables.CurrentRow.DataBoundItem;
+                ConsumableDTO c = (ConsumableDTO)dgvConsumables.CurrentRow.DataBoundItem;
                 Form consumableForm = new ConsumableForm(c, consumableService, this);
-                consumableForm.Show();
+                consumableForm.ShowDialog();
             }
             else if (dgvGamingstations.CurrentRow != null)
             {
-                GamingStation gs = (GamingStation)dgvGamingstations.CurrentRow.DataBoundItem;
+                GamingStationDTO gs = (GamingStationDTO)dgvGamingstations.CurrentRow.DataBoundItem;
                 Form gamingstationForm = new GamingstationForm(gs, gamingstationService, this);
-                gamingstationForm.Show();
+                gamingstationForm.ShowDialog();
             }
         }
         private void ProductsForm_KeyUp(object sender, KeyEventArgs e)
@@ -86,7 +82,7 @@ namespace NetCafeUCN.DesktopApp
         {
             if (dgvConsumables.CurrentRow != null)
             {
-                Consumable c = (Consumable)dgvConsumables.CurrentRow.DataBoundItem;
+                ConsumableDTO c = (ConsumableDTO)dgvConsumables.CurrentRow.DataBoundItem;
                 bool deleted = consumableService.Remove(c.ProductNumber);
                 if (deleted)
                 {
@@ -97,7 +93,7 @@ namespace NetCafeUCN.DesktopApp
             }
             else if (dgvGamingstations.CurrentRow != null)
             {
-                GamingStation gs = (GamingStation)dgvGamingstations.CurrentRow.DataBoundItem;
+                GamingStationDTO gs = (GamingStationDTO)dgvGamingstations.CurrentRow.DataBoundItem;
                 bool deleted = gamingstationService.Remove(gs.ProductNumber);
                 if (deleted)
                 {

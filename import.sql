@@ -17,6 +17,7 @@ CREATE TABLE nc_Person(
 	phone VARCHAR(50),
 	email VARCHAR(50) NOT NULL,
 	personType VARCHAR(50) NOT NULL,
+    password VARCHAR(50) NOT NULL,
 
 	PRIMARY KEY(id),
 );
@@ -41,12 +42,12 @@ CREATE TABLE nc_Employee(
 
 CREATE TABLE nc_Booking(
     id INT IDENTITY(1,1),
-    bookingNo INT NOT NULL,
-    startTime smalldateTime NOT NULL,
-    endTime smalldateTime NOT NULL,
-    customerid INT,
+    bookingNo VARCHAR(50) NOT NULL UNIQUE,
+    startTime DateTime NOT NULL,
+    endTime DateTime NOT NULL,
+    customerid INT DEFAULT 0,
 
-    CONSTRAINT fk_ncCustomer foreign key (customerid) references nc_Customer(personid) ON DELETE SET NULL,
+    CONSTRAINT fk_ncCustomer foreign key (customerid) references nc_Customer(personid) ON DELETE SET DEFAULT,
     PRIMARY KEY(id),
 );
 
@@ -107,9 +108,9 @@ CREATE TABLE nc_GamingStation(
 
 INSERT INTO nc_CityZipCode VALUES (9000, 'Aalborg');
 
-INSERT INTO nc_Person VALUES ('John', '88888888', 'john@gmail.com', 'Customer');
-INSERT INTO nc_Person VALUES ('Bodil', '88888889', 'bodil@gmail.com', 'Employee');
-INSERT INTO nc_Person VALUES ('Carsten', '99999999', 'carsten@gmail.com', 'Customer');
+INSERT INTO nc_Person VALUES ('John', '88888888', 'john@gmail.com', 'Customer', 'password');
+INSERT INTO nc_Person VALUES ('Bodil', '88888889', 'bodil@gmail.com', 'Employee', 'password');
+INSERT INTO nc_Person VALUES ('Carsten', '99999999', 'carsten@gmail.com', 'Customer', 'password');
 
 INSERT INTO nc_Customer VALUES (1);
 INSERT INTO nc_Customer VALUES (3);

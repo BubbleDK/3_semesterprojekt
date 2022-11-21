@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NetCafeUCN.API.DTO;
 using NetCafeUCN.DAL.DAO;
+using NetCafeUCN.DAL.Model;
 
 namespace NetCafeUCN.API.Controllers
 {
@@ -25,7 +25,7 @@ namespace NetCafeUCN.API.Controllers
         // GET api/<BookingController>/5
         [HttpGet]
         [Route("{bookingNo}")]
-        public ActionResult<Booking> Get(int bookingNo)
+        public ActionResult<Booking> Get(string bookingNo)
         {
             var booking = dataAccess.Get(bookingNo);
             if (booking == null) { return NotFound(); }
@@ -34,7 +34,7 @@ namespace NetCafeUCN.API.Controllers
 
         // POST api/<BookingController>
         [HttpPost]
-        public ActionResult<bool> Add(Booking booking)
+        public ActionResult<bool> Add([FromBody] Booking booking)
         {
             return Ok(dataAccess.Add(booking));
         }
@@ -48,7 +48,7 @@ namespace NetCafeUCN.API.Controllers
 
         // DELETE api/<BookingController>/5
         [HttpDelete("{bookingNo}")]
-        public ActionResult<bool> Delete(int bookingNo)
+        public ActionResult<bool> Delete(string bookingNo)
         {
             if (dataAccess.Remove(bookingNo))
             {

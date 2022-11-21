@@ -60,7 +60,6 @@
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -70,9 +69,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tbProducts);
-            this.splitContainer1.Size = new System.Drawing.Size(936, 625);
-            this.splitContainer1.SplitterDistance = 312;
-            this.splitContainer1.SplitterWidth = 5;
+            this.splitContainer1.Size = new System.Drawing.Size(819, 469);
+            this.splitContainer1.SplitterDistance = 273;
             this.splitContainer1.TabIndex = 0;
             // 
             // tableLayoutPanel1
@@ -84,23 +82,21 @@
             this.tableLayoutPanel1.Controls.Add(this.btnDeleteProduct, 0, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(312, 625);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(273, 469);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // btnCreateProduct
             // 
             this.btnCreateProduct.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnCreateProduct.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnCreateProduct.Location = new System.Drawing.Point(3, 4);
-            this.btnCreateProduct.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnCreateProduct.Location = new System.Drawing.Point(3, 3);
             this.btnCreateProduct.Name = "btnCreateProduct";
-            this.btnCreateProduct.Size = new System.Drawing.Size(306, 200);
+            this.btnCreateProduct.Size = new System.Drawing.Size(267, 150);
             this.btnCreateProduct.TabIndex = 0;
             this.btnCreateProduct.Text = "Nyt Produkt";
             this.btnCreateProduct.UseVisualStyleBackColor = true;
@@ -110,10 +106,9 @@
             // 
             this.btnUpdateProduct.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnUpdateProduct.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnUpdateProduct.Location = new System.Drawing.Point(3, 212);
-            this.btnUpdateProduct.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnUpdateProduct.Location = new System.Drawing.Point(3, 159);
             this.btnUpdateProduct.Name = "btnUpdateProduct";
-            this.btnUpdateProduct.Size = new System.Drawing.Size(306, 200);
+            this.btnUpdateProduct.Size = new System.Drawing.Size(267, 150);
             this.btnUpdateProduct.TabIndex = 1;
             this.btnUpdateProduct.Text = "Opdatér Produkt";
             this.btnUpdateProduct.UseVisualStyleBackColor = true;
@@ -123,10 +118,9 @@
             // 
             this.btnDeleteProduct.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnDeleteProduct.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnDeleteProduct.Location = new System.Drawing.Point(3, 420);
-            this.btnDeleteProduct.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnDeleteProduct.Location = new System.Drawing.Point(3, 315);
             this.btnDeleteProduct.Name = "btnDeleteProduct";
-            this.btnDeleteProduct.Size = new System.Drawing.Size(306, 201);
+            this.btnDeleteProduct.Size = new System.Drawing.Size(267, 151);
             this.btnDeleteProduct.TabIndex = 2;
             this.btnDeleteProduct.Text = "Slet";
             this.btnDeleteProduct.UseVisualStyleBackColor = true;
@@ -138,9 +132,10 @@
             this.tbProducts.Controls.Add(this.tbGamingstations);
             this.tbProducts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbProducts.Location = new System.Drawing.Point(0, 0);
+            this.tbProducts.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbProducts.Name = "tbProducts";
             this.tbProducts.SelectedIndex = 0;
-            this.tbProducts.Size = new System.Drawing.Size(619, 625);
+            this.tbProducts.Size = new System.Drawing.Size(542, 469);
             this.tbProducts.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tbProducts.TabIndex = 0;
             this.tbProducts.Deselected += new System.Windows.Forms.TabControlEventHandler(this.tbProducts_Deselected);
@@ -148,10 +143,11 @@
             // tbConsumable
             // 
             this.tbConsumable.Controls.Add(this.dgvConsumables);
-            this.tbConsumable.Location = new System.Drawing.Point(4, 29);
+            this.tbConsumable.Location = new System.Drawing.Point(4, 24);
+            this.tbConsumable.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbConsumable.Name = "tbConsumable";
-            this.tbConsumable.Padding = new System.Windows.Forms.Padding(3);
-            this.tbConsumable.Size = new System.Drawing.Size(611, 592);
+            this.tbConsumable.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tbConsumable.Size = new System.Drawing.Size(534, 441);
             this.tbConsumable.TabIndex = 0;
             this.tbConsumable.Text = "Mad & Drikke";
             this.tbConsumable.UseVisualStyleBackColor = true;
@@ -163,24 +159,26 @@
             this.dgvConsumables.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
             this.dgvConsumables.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvConsumables.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvConsumables.Location = new System.Drawing.Point(3, 3);
+            this.dgvConsumables.Location = new System.Drawing.Point(3, 2);
+            this.dgvConsumables.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvConsumables.MultiSelect = false;
             this.dgvConsumables.Name = "dgvConsumables";
             this.dgvConsumables.ReadOnly = true;
             this.dgvConsumables.RowHeadersWidth = 51;
             this.dgvConsumables.RowTemplate.Height = 29;
             this.dgvConsumables.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvConsumables.Size = new System.Drawing.Size(605, 586);
+            this.dgvConsumables.Size = new System.Drawing.Size(528, 437);
             this.dgvConsumables.TabIndex = 0;
             // 
             // tbGamingstations
             // 
             this.tbGamingstations.Controls.Add(this.dgvGamingstations);
             this.tbGamingstations.Controls.Add(this.lstGamingstations);
-            this.tbGamingstations.Location = new System.Drawing.Point(4, 29);
+            this.tbGamingstations.Location = new System.Drawing.Point(4, 24);
+            this.tbGamingstations.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbGamingstations.Name = "tbGamingstations";
-            this.tbGamingstations.Padding = new System.Windows.Forms.Padding(3);
-            this.tbGamingstations.Size = new System.Drawing.Size(611, 592);
+            this.tbGamingstations.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tbGamingstations.Size = new System.Drawing.Size(534, 441);
             this.tbGamingstations.TabIndex = 1;
             this.tbGamingstations.Text = "Computere";
             this.tbGamingstations.UseVisualStyleBackColor = true;
@@ -192,13 +190,15 @@
             this.dgvGamingstations.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
             this.dgvGamingstations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvGamingstations.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvGamingstations.Location = new System.Drawing.Point(3, 3);
+            this.dgvGamingstations.Location = new System.Drawing.Point(3, 2);
+            this.dgvGamingstations.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvGamingstations.MultiSelect = false;
             this.dgvGamingstations.Name = "dgvGamingstations";
+            this.dgvGamingstations.ReadOnly = true;
             this.dgvGamingstations.RowHeadersWidth = 51;
             this.dgvGamingstations.RowTemplate.Height = 29;
             this.dgvGamingstations.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvGamingstations.Size = new System.Drawing.Size(605, 586);
+            this.dgvGamingstations.Size = new System.Drawing.Size(528, 437);
             this.dgvGamingstations.TabIndex = 1;
             // 
             // lstGamingstations
@@ -212,9 +212,10 @@
             this.lstGamingstations.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lstGamingstations.FullRowSelect = true;
             this.lstGamingstations.GridLines = true;
-            this.lstGamingstations.Location = new System.Drawing.Point(3, 3);
+            this.lstGamingstations.Location = new System.Drawing.Point(3, 2);
+            this.lstGamingstations.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lstGamingstations.Name = "lstGamingstations";
-            this.lstGamingstations.Size = new System.Drawing.Size(605, 586);
+            this.lstGamingstations.Size = new System.Drawing.Size(528, 437);
             this.lstGamingstations.TabIndex = 0;
             this.lstGamingstations.UseCompatibleStateImageBehavior = false;
             // 
@@ -240,12 +241,11 @@
             // 
             // ProductsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(936, 625);
+            this.ClientSize = new System.Drawing.Size(819, 469);
             this.Controls.Add(this.splitContainer1);
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "ProductsForm";
             this.Text = "Products";
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductsForm_KeyUp);

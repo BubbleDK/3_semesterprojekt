@@ -110,7 +110,29 @@ namespace NetCafeUCN.DAL.DAO
 
         public bool Remove(dynamic key)
         {
-            throw new NotImplementedException();
+            SqlTransaction trans;
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+            {
+                conn.Open();
+                using (trans = conn.BeginTransaction())
+                {
+                    try
+                    {
+                        using (SqlCommand deleteCommand = new SqlCommand("DELETE FROM nc_Person WHERE phone = @phoneNo AND personType = 'Customer'", conn, trans))
+                        {
+                            deleteCommand.Parameters.AddWithValue("@phoneNo", key);
+                            deleteCommand.ExecuteNonQuery();
+                            trans.Commit();
+                            return true;
+                        }
+                    }
+                    catch (DataAccessException)
+                    {
+                        trans.Rollback();
+                        throw new DataAccessException("Can't access data");
+                    }
+                }
+            }
         }
 
         public bool Update(Customer o)

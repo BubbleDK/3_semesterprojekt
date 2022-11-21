@@ -5,8 +5,8 @@ namespace NetCafeUCN.DesktopApp
 {
     public partial class AddCustomerForm : Form
     {
-        INetCafeDataAccess<Customer> CustomerService;
-        public AddCustomerForm(INetCafeDataAccess<Customer> CustomerService)
+        INetCafeDataAccess<CustomerDTO> CustomerService;
+        public AddCustomerForm(INetCafeDataAccess<CustomerDTO> CustomerService)
         {
             this.CustomerService = CustomerService;
             InitializeComponent();
@@ -17,9 +17,9 @@ namespace NetCafeUCN.DesktopApp
             CustomerService.Add(AddCustomer());
         }
 
-        private Customer AddCustomer()
+        private CustomerDTO AddCustomer()
         {
-            Customer customer = new Customer();
+            CustomerDTO customer = new CustomerDTO();
             customer.Email = txtEmail.Text;
             customer.Name = txtName.Text;
             customer.Phone = txtPhoneNumber.Text;
