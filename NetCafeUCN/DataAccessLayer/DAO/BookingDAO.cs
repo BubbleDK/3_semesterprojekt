@@ -94,13 +94,12 @@ namespace NetCafeUCN.DAL.DAO
         {
             string sqlStatement = "SELECT * FROM nc_Booking INNER JOIN nc_BookingLine ON nc_Booking.id = nc_BookingLine.bookingid";
             List<Booking> list = new List<Booking>();
-            int id = 0;
+            string? currentBoNo = null;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand(sqlStatement, conn);
                 try
                 {
-                    string ?currentBoNo = null;
                     conn.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
