@@ -1,6 +1,6 @@
 ﻿namespace NetCafeUCN.DesktopApp.DTO
 {
-    public class Product
+    public class ProductDTO
     {
         public string? ProductNumber { get; set; }
         public string? Type { get; set; }

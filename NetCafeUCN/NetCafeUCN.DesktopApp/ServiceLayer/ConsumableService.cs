@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NetCafeUCN.DesktopApp.ServiceLayer
 {
-    public class ConsumableService : INetCafeDataAccess<Consumable>
+    public class ConsumableService : INetCafeDataAccess<ConsumableDTO>
     {
         public string BaseUri { get; private set; }
         private RestClient RestClient { get; set; }
@@ -17,35 +17,35 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
             BaseUri = baseUri;
             RestClient = new RestClient(baseUri);
         }
-        public bool Add(Consumable o)
+        public bool Add(ConsumableDTO o)
         {
             //var request = new RestRequest($"{BaseUri}", Method.Post);
             //request.RequestFormat = DataFormat.Json;
             //request.AddBody(o);
             //var response = RestClient.Execute<Consumable>(request);
             //return response.IsSuccessful;
-            return RestClient.Execute<Consumable>(new RestRequest($"{BaseUri}", Method.Post).AddJsonBody(o)).IsSuccessful;
+            return RestClient.Execute<ConsumableDTO>(new RestRequest($"{BaseUri}", Method.Post).AddJsonBody(o)).IsSuccessful;
         }
 
-        public Consumable? Get(dynamic key)
+        public ConsumableDTO? Get(dynamic key)
         {
-            return RestClient.Execute<Consumable>(new RestRequest($"{BaseUri}{key}", Method.Get)).Data;
+            return RestClient.Execute<ConsumableDTO>(new RestRequest($"{BaseUri}{key}", Method.Get)).Data;
         }
 
-        public IEnumerable<Consumable> GetAll()
+        public IEnumerable<ConsumableDTO> GetAll()
         {
-            return RestClient.Execute<IEnumerable<Consumable>>(new RestRequest($"{BaseUri}",Method.Get)).Data;
+            return RestClient.Execute<IEnumerable<ConsumableDTO>>(new RestRequest($"{BaseUri}",Method.Get)).Data;
         }
 
         public bool Remove(dynamic key)
         {
-            return RestClient.Execute<Consumable>(new RestRequest($"{BaseUri}{key}", Method.Delete)).IsSuccessful;
+            return RestClient.Execute<ConsumableDTO>(new RestRequest($"{BaseUri}{key}", Method.Delete)).IsSuccessful;
         }
 
-        public bool Update(Consumable o)
+        public bool Update(ConsumableDTO o)
         {
 
-            return RestClient.Execute<Consumable>(new RestRequest($"{BaseUri}", Method.Put).AddJsonBody(o)).IsSuccessful;
+            return RestClient.Execute<ConsumableDTO>(new RestRequest($"{BaseUri}", Method.Put).AddJsonBody(o)).IsSuccessful;
         }
     }
 }

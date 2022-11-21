@@ -7,7 +7,7 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
     /// Handles CRUD functionality for objects of static type Product
     /// Uses RestSharp to communicate with Controllers in the API
     /// </summary>
-    public class ProductService : INetCafeDataAccess<Product>
+    public class ProductService : INetCafeDataAccess<ProductDTO>
     {
         public string BaseUri { get; private set; }
         private RestClient RestClient { get; set; }
@@ -16,29 +16,29 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
             BaseUri = baseUri;
             RestClient = new RestClient(baseUri);
         }
-        public bool Add(Product o)
+        public bool Add(ProductDTO o)
         {
-            return RestClient.Execute<Product>(new RestRequest($"{BaseUri}", Method.Post).AddJsonBody(o)).IsSuccessful;
+            return RestClient.Execute<ProductDTO>(new RestRequest($"{BaseUri}", Method.Post).AddJsonBody(o)).IsSuccessful;
         }
 
-        public Product? Get(dynamic key)
+        public ProductDTO? Get(dynamic key)
         {
-            return RestClient.Execute<Product>(new RestRequest($"{BaseUri}{key}",Method.Get)).Data;
+            return RestClient.Execute<ProductDTO>(new RestRequest($"{BaseUri}{key}",Method.Get)).Data;
         }
 
-        public IEnumerable<Product> GetAll()
+        public IEnumerable<ProductDTO> GetAll()
         {
-            return RestClient.Execute<IEnumerable<Product>>(new RestRequest()).Data;
+            return RestClient.Execute<IEnumerable<ProductDTO>>(new RestRequest()).Data;
         }
 
         public bool Remove(dynamic key)
         {
-            return RestClient.Execute<Product?>(new RestRequest($"{BaseUri}{key}", Method.Delete)).IsSuccessful;
+            return RestClient.Execute<ProductDTO?>(new RestRequest($"{BaseUri}{key}", Method.Delete)).IsSuccessful;
         }
 
-        public bool Update(Product o)
+        public bool Update(ProductDTO o)
         {
-            return RestClient.Execute<Product>(new RestRequest($"{BaseUri}",Method.Put).AddJsonBody(o)).IsSuccessful;
+            return RestClient.Execute<ProductDTO>(new RestRequest($"{BaseUri}",Method.Put).AddJsonBody(o)).IsSuccessful;
         }
     }
 }

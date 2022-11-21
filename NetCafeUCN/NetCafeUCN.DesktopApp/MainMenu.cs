@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NetCafeUCN.DesktopApp.UserForms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,6 +22,12 @@ namespace NetCafeUCN.DesktopApp
         {
             ProductsForm productsForm = new ProductsForm();
             productsForm.Show();
+        }
+
+        private void btnUsers_Click(object sender, EventArgs e)
+        {
+            UsersForm usersForm = new UsersForm();
+            usersForm.Show();
         }
     }
 }
