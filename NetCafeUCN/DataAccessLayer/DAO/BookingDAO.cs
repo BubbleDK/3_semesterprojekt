@@ -1,6 +1,7 @@
 ﻿using DataAccessLayer.Exceptions;
 using NetCafeUCN.DAL.Model;
 using System.Data.SqlClient;
+using System.Globalization;
 
 namespace NetCafeUCN.DAL.DAO
 {
@@ -26,21 +27,20 @@ namespace NetCafeUCN.DAL.DAO
                             bookingCommand.Parameters.AddWithValue("@customerId", o.CustomerId);
                             id = Convert.ToInt32(bookingCommand.ExecuteScalar());
                         }
-
-                        using (SqlCommand bookingLineCommand = new SqlCommand(
-                                "INSERT INTO nc_BookingLine VALUES(@bookingid, @quantity, @stationid, @consumableid)", conn, trans))
+                        foreach (var item in o.BookingLines)
                         {
-                            foreach (var item in o.BookingLines)
+                            using (SqlCommand bookingLineCommand = new SqlCommand(
+                                "INSERT INTO nc_BookingLine VALUES(@bookingid, @quantity, @stationid, @consumableid)", conn, trans))
                             {
                                 bookingLineCommand.Parameters.AddWithValue("@bookingid", id);
-                                bookingLineCommand.Parameters.AddWithValue("quantity", item.Quantity);
+                                bookingLineCommand.Parameters.AddWithValue("@quantity", item.Quantity);
                                 bookingLineCommand.Parameters.AddWithValue("@stationid", item.Stationid);
                                 bookingLineCommand.Parameters.AddWithValue("@consumableid", item.Consumableid);
                                 bookingLineCommand.ExecuteNonQuery();
                             }
-                            trans.Commit();
-                            return true;
                         }
+                        trans.Commit();
+                        return true;
                     }
                     catch (DataAccessException)
                     {
@@ -53,10 +53,12 @@ namespace NetCafeUCN.DAL.DAO
 
         public Booking? Get(dynamic bookingNo)
         {
+            bool isBookingCreated = false;
+            Booking? booking = null;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
-                using SqlCommand command = new SqlCommand("SELECT nc_Consumables.description, nc_Product.productNo, nc_Product.productType, nc_Product.name, nc_Product.isActive FROM nc_Product INNER JOIN nc_Consumables ON nc_Product.id = nc_Consumables.productid WHERE productNo = @productNo", conn);
-                command.Parameters.AddWithValue("@productNo", bookingNo);
+                using SqlCommand command = new SqlCommand("SELECT * FROM nc_Booking INNER JOIN nc_BookingLine ON nc_Booking.id = nc_BookingLine.bookingid WHERE bookingNo = @bookingNo", conn);
+                command.Parameters.AddWithValue("@bookingNo", bookingNo);
                 {
                     try
                     {
@@ -64,16 +66,20 @@ namespace NetCafeUCN.DAL.DAO
                         SqlDataReader reader = command.ExecuteReader();
                         while (reader.Read())
                         {
-                            Booking booking = new Booking()
-                            {
-                                Id = (int)reader["id"],
-                                BookingNo = (int)reader["bookingNo"],
-                                StartTime = (DateTime)reader["startTime"],
-                                EndTime = (DateTime)reader["endTime"],
-                                CustomerId = (int)reader["customerId"],
-                            };
-                            return booking;
+                            if (!isBookingCreated) {
+                                booking = new Booking()
+                                {
+                                    BookingNo = (string)reader["bookingNo"],
+                                    StartTime = (DateTime)reader["startTime"],
+                                    EndTime = (DateTime)reader["endTime"],
+                                    CustomerId = (int)reader["customerId"],
+                                };
+                                isBookingCreated = true;
+                            }
+
+                            booking.addToBookingLine(new BookingLine() { Quantity = (int)reader["quantity"], Stationid = (int)reader["stationid"], Consumableid = (int)reader["consumableid"] });
                         }
+                        return booking;
                     }
                     catch (DataAccessException)
                     {
@@ -82,18 +88,18 @@ namespace NetCafeUCN.DAL.DAO
                     }
                 }
             }
-            return null;
         }
 
         public IEnumerable<Booking> GetAll()
         {
-            string sqlStatement = "SELECT * FROM nc_Booking";
-            string sqlBookingLinesStatement = "SELECT * FROM nc_BookingLine WHERE bookingid = @id";
+            string sqlStatement = "SELECT * FROM nc_Booking INNER JOIN nc_BookingLine ON nc_Booking.id = nc_BookingLine.bookingid";
+            //string sqlBookingLinesStatement = "SELECT * FROM nc_BookingLine WHERE bookingid = @id";
             List<Booking> list = new List<Booking>();
+            int id = 0;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand(sqlStatement, conn);
-                SqlCommand bookingLinesCMD = new SqlCommand(sqlBookingLinesStatement, conn);
+                //SqlCommand bookingLinesCMD = new SqlCommand(sqlBookingLinesStatement, conn);
                 try
                 {
                     conn.Open();
@@ -102,25 +108,27 @@ namespace NetCafeUCN.DAL.DAO
                     {
                         Booking booking = new Booking()
                         {
-                            Id = (int)reader["id"],
-                            BookingNo = (int)reader["bookingNo"],
+                            BookingNo = (string)reader["bookingNo"],
                             StartTime = (DateTime)reader["startTime"],
                             EndTime = (DateTime)reader["endTime"],
                             CustomerId = (int)reader["customerId"],
                         };
                         list.Add(booking);
+                        id = (int)reader["id"];
 
-                        SqlDataReader read = bookingLinesCMD.ExecuteReader();
-                        while (read.Read())
-                        {
-                            foreach (var item in list)
-                            {
-                                if ((int)reader["id"] == (int)read["bookingid"])
-                                {
-                                    item.addToBookingLine(new BookingLine((int)read["bookingid"], (int)read["quantity"], (int)read["stationid"], (int)read["consumableid"]));
-                                }
-                            }
-                        }
+                        //reader.Close();
+                        //bookingLinesCMD.Parameters.AddWithValue("@id", id);
+                        //SqlDataReader read = bookingLinesCMD.ExecuteReader();
+                        //while (read.Read())
+                        //{
+                        //    foreach (var item in list)
+                        //    {
+                        //        if (id == (int)read["bookingid"])
+                        //        {
+                        //            item.addToBookingLine(new BookingLine((int)read["quantity"], (int)read["stationid"], (int)read["consumableid"]));
+                        //        }
+                        //    }
+                        //}   
                     }
                 }
                 catch (DataAccessException)
