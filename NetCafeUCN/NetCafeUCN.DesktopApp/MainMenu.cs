@@ -29,5 +29,11 @@ namespace NetCafeUCN.DesktopApp
             UsersForm usersForm = new UsersForm();
             usersForm.Show();
         }
+
+        private void btnBookings_Click(object sender, EventArgs e)
+        {
+            BookingsForm bookingsForm = new BookingsForm();
+            bookingsForm.Show();
+        }
     }
 }
