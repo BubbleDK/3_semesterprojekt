@@ -8,17 +8,15 @@
     <link rel="stylesheet" href="~/css/TabStyle.css" />
     
 </head>
-<script src="~/js/TabScript.js"></script>
 
+<script src="~/js/TabScript.js"></script>
 <h1>Kunder</h1>
 
 <div class="tab">
-    <button class="tablinks" onclick="openTab(event,'Customer')" id="defaultOpen">Kunder</button>
-    <button class="tablinks" onclick="openTab(event,'Employee')">Medarbejdere</button>
+    <button class="tablinks btn btn-primary btn-lg" id="defaultOpen" onclick="openTab(event,'Customer')">Kunder</button>
+    <button class="tablinks btn btn-primary btn-lg" onclick="openTab(event,'Employee')">Medarbejdere</button>
 </div>
-<script>
-    document.getElementById("defaultOpen").click();
-</script>
+
 <div class="tabcontent" id="Customer">
 <table class="table">
     <thead>
@@ -51,14 +49,16 @@
                 
             </td>
             <td>
-                @Html.ActionLink("Details", "Details", new { item.Phone }) |
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>
 }
     </tbody>
 </table>
 </div>
-<div class="tabcontent" id="Customer">
+<div class="tabcontent" id="Employee">
     <table class="table">
     <thead>
         <tr>
@@ -117,12 +117,17 @@
                 @Html.DisplayFor(modelItem => item.PersonType)
             </td>
             <td>
-                @Html.ActionLink("Details", "Details", new { item.Phone }) |
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>
 }
     </tbody>
 </table>
 </div>
+<script>
+    document.getElementById("defaultOpen").click();
+</script>
 
 
