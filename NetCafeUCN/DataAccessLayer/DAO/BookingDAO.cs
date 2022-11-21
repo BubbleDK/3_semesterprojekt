@@ -146,7 +146,44 @@ namespace NetCafeUCN.DAL.DAO
 
         public bool Update(Booking o)
         {
-            throw new NotImplementedException();
+            SqlTransaction trans;
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+            {
+                conn.Open();
+                using (trans = conn.BeginTransaction())
+                {
+                    try
+                    {
+                        using (SqlCommand bookingCommand = new SqlCommand("UPDATE nc_Booking SET startTime = @startTime, endTime = @endTime WHERE BookingNo = @BookingNo", conn, trans))
+                        {
+                            bookingCommand.Parameters.AddWithValue("@BookingNo", o.BookingNo);
+                            bookingCommand.Parameters.AddWithValue("@startTime", o.StartTime);
+                            bookingCommand.Parameters.AddWithValue("@endTime", o.EndTime);
+                            bookingCommand.ExecuteNonQuery();
+                        }
+                        foreach (var item in o.BookingLines)
+                        {
+                            using (SqlCommand bookingLineCommand = new SqlCommand(
+                                "UPDATE nc_BookingLine SET quantity = @quantity, stationid = @stationid, consumableid = @consumableid WHERE bookingid = (SELECT id FROM nc_Booking WHERE BookingNo = @BookingNo)", conn, trans))
+                            {
+                                bookingLineCommand.Parameters.AddWithValue("@BookingNo", o.BookingNo);
+                                bookingLineCommand.Parameters.AddWithValue("@quantity", item.Quantity);
+                                bookingLineCommand.Parameters.AddWithValue("@stationid", item.Stationid);
+                                bookingLineCommand.Parameters.AddWithValue("@consumableid", item.Consumableid);
+                                bookingLineCommand.ExecuteNonQuery();
+                            }
+                        }
+
+                        trans.Commit();
+                        return true;
+                    }
+                    catch (DataAccessException)
+                    {
+                        trans.Rollback();
+                        throw new DataAccessException("Can't access data");
+                    }
+                }
+            }
         }
     }
 }
