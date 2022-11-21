@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NetCafeUCN.MVC.Models;
 using NetCafeUCN.MVC.Models.DTO;
@@ -6,11 +7,13 @@ using NetCafeUCN.MVC.Services;
 
 namespace NetCafeUCN.MVC.Controllers
 {
+    [Authorize]
     public class ProductController : Controller
     {
         INetCafeDataAccess<GamingStation> gamingStationService = new GamingstationService("https://localhost:7197/api/GamingStation");
         INetCafeDataAccess<Consumable> consumableService = new ConsumableService("https://localhost:7197/api/Consumable");
         // GET: ProductController
+        [AllowAnonymous]
         public ActionResult Index()
         {
             GamingStationConsumableViewModel viewModel = new GamingStationConsumableViewModel();
@@ -20,12 +23,14 @@ namespace NetCafeUCN.MVC.Controllers
         }
 
         // GET: ProductController/Details/5
+        [AllowAnonymous]
         public ActionResult Details(int id)
         {
             return View();
         }
 
         // GET: ProductController/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -34,6 +39,7 @@ namespace NetCafeUCN.MVC.Controllers
         // POST: ProductController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create(IFormCollection collection)
         {
             try
@@ -68,6 +74,7 @@ namespace NetCafeUCN.MVC.Controllers
         }
 
         // GET: ProductController/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             return View();
@@ -76,6 +83,7 @@ namespace NetCafeUCN.MVC.Controllers
         // POST: ProductController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id, IFormCollection collection)
         {
             try

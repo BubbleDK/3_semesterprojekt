@@ -1,4 +1,5 @@
-﻿using NetCafeUCN.MVC.Models;
+﻿using Microsoft.AspNetCore.Authorization;
+using NetCafeUCN.MVC.Models;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace NetCafeUCN.MVC.Services
 {
+    
     public class EmployeeService : INetCafeDataAccess<Employee>
     {
         public string BaseUri { get; private set; }
@@ -20,7 +22,7 @@ namespace NetCafeUCN.MVC.Services
             BaseUri = baseUri;
             RestClient = new RestClient(baseUri);
         }
-        //
+        
         public bool Add(Employee o)
         {
             return RestClient.Execute<Employee>(new RestRequest($"{BaseUri}/{o}", Method.Post)).IsSuccessful;
@@ -36,7 +38,7 @@ namespace NetCafeUCN.MVC.Services
             return RestClient.Execute<IEnumerable<Employee>>(new RestRequest($"{BaseUri}"), Method.Get).Data;
 
         }
-
+        
         public bool Remove(dynamic key)
         {
             return RestClient.Execute<Employee>(new RestRequest($"{key}", Method.Delete)).IsSuccessful;

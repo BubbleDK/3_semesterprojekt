@@ -1,10 +1,15 @@
 using NetCafeUCN.MVC.Services;
 using NetCafeUCN.MVC.Models;
 using NetCafeUCN.MVC.Controllers;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddSingleton <IUserProvider, UserProvider>(_ => new UserProvider("https://localhost:7197/api/User"));
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme);
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -22,6 +27,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

@@ -9,6 +9,7 @@ builder.Services.AddSingleton<INetCafeDAO<Customer>, CustomerDAO>();
 builder.Services.AddSingleton<INetCafeDAO<Consumable>, ConsumableDAO>();
 builder.Services.AddSingleton<INetCafeDAO<GamingStation>, GamingStationDAO>();
 builder.Services.AddSingleton<INetCafeDAO<Employee>, EmployeeDAO>();
+builder.Services.AddSingleton<UserDAO, UserDAO>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

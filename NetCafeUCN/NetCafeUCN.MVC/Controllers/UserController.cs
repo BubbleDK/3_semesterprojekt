@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NetCafeUCN.MVC.Models;
 using NetCafeUCN.MVC.Models.DTO;
@@ -8,7 +9,8 @@ using System.Linq;
 
 namespace NetCafeUCN.MVC.Controllers
 {
-    public class CustomerController : Controller
+    [Authorize]
+    public class UserController : Controller
     {
         INetCafeDataAccess<Customer> customerService = new CustomerService("https://localhost:7197/api/Customer");
         INetCafeDataAccess<Employee> employeeService = new EmployeeService("https://localhost:7197/api/Employee");

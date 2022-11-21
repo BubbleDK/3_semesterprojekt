@@ -10,7 +10,7 @@
 </head>
 
 <script src="~/js/TabScript.js"></script>
-<h1>Kunder</h1>
+<h1>Brugere</h1>
 
 <div class="tab">
     <button class="tablinks btn btn-primary btn-lg" id="defaultOpen" onclick="openTab(event,'Customer')">Kunder</button>
@@ -51,7 +51,7 @@
 
                         </td>
                         <td>
-                            @Html.ActionLink("Details", "Details", new { item.Phone }) |
+                            @Html.ActionLink("Details", "Details", new { item.Phone })
                         </td>
                     </tr>
                 }
@@ -121,7 +121,7 @@
                             @Html.DisplayFor(modelItem => item.PersonType)
                         </td>
                         <td>
-                            @Html.ActionLink("Details", "Details", new { item.Phone }) |
+                            @Html.ActionLink("Details", "Details", new { item.Phone })
                         </td>
                     </tr>
                 }

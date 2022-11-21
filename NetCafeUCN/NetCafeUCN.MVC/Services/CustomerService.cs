@@ -1,4 +1,5 @@
-﻿using NetCafeUCN.MVC.Models;
+﻿using Microsoft.AspNetCore.Authorization;
+using NetCafeUCN.MVC.Models;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace NetCafeUCN.MVC.Services
 {
+    
     public class CustomerService : INetCafeDataAccess<Customer>
     {
         public string BaseUri { get; private set; }
@@ -29,7 +31,7 @@ namespace NetCafeUCN.MVC.Services
         {
             return RestClient.Execute<Customer>(new RestRequest($"{BaseUri}/{key}", Method.Get)).Data;
         }
-
+        
         public IEnumerable<Customer> GetAll()
         {
             return RestClient.Execute<IEnumerable<Customer>>(new RestRequest($"{BaseUri}"), Method.Get).Data;

@@ -12,8 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Views\Customer\JavaScript.js" />
-    <None Remove="Views\Customer\TabStyle.css" />
+    <None Remove="Views\User\JavaScript.js" />
+    <None Remove="Views\User\TabStyle.css" />
   </ItemGroup>
 
   <ItemGroup>
