@@ -16,116 +16,119 @@
     <button class="tablinks btn btn-primary btn-lg" id="defaultOpen" onclick="openTab(event,'Customer')">Kunder</button>
     <button class="tablinks btn btn-primary btn-lg" onclick="openTab(event,'Employee')">Medarbejdere</button>
 </div>
+@if (Model.customers != null)
+{
+    <div class="tabcontent" id="Customer">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Phone
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Customer item in Model.customers)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
 
-<div class="tabcontent" id="Customer">
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Name
-            </th>
-            <th>
-                Email
-            </th>
-            <th>
-                Phone
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (Customer item in Model.customers) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-                
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-                
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-                
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Phone)
+
+                        </td>
+                        <td>
+                            @Html.ActionLink("Details", "Details", new { item.Phone }) |
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 }
-    </tbody>
-</table>
-</div>
-<div class="tabcontent" id="Employee">
-    <table class="table">
-    <thead>
-        <tr>
-            <th>
-                Role
-            </th>
-            <th>
-                Adresse
-            </th>
-            <th>
-                Zipcode
-            </th>
-            <th>
-                City
-            </th>
-            <th>
-                Name
-            </th>
-            <th>
-                Email
-            </th>
-            <th>
-                Phone
-            </th>
-            <th>
-                PersonType
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (Employee item in Model.employees) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Role)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Zipcode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PersonType)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
+@if (Model.employees != null)
+{
+    <div class="tabcontent" id="Employee">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Role
+                    </th>
+                    <th>
+                        Adresse
+                    </th>
+                    <th>
+                        Zipcode
+                    </th>
+                    <th>
+                        City
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Phone
+                    </th>
+                    <th>
+                        PersonType
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Employee item in Model.employees)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Role)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Zipcode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.City)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Phone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PersonType)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Details", "Details", new { item.Phone }) |
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 }
-    </tbody>
-</table>
-</div>
 <script>
     document.getElementById("defaultOpen").click();
 </script>
