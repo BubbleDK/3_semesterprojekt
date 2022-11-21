@@ -17,6 +17,7 @@ CREATE TABLE nc_Person(
 	phone VARCHAR(50),
 	email VARCHAR(50) NOT NULL,
 	personType VARCHAR(50) NOT NULL,
+    password VARCHAR(50) NOT NULL,
 
 	PRIMARY KEY(id),
 );
@@ -41,9 +42,9 @@ CREATE TABLE nc_Employee(
 
 CREATE TABLE nc_Booking(
     id INT IDENTITY(1,1),
-    bookingNo INT NOT NULL,
-    startTime smalldateTime NOT NULL,
-    endTime smalldateTime NOT NULL,
+    bookingNo VARCHAR(50) NOT NULL UNIQUE,
+    startTime DateTime NOT NULL,
+    endTime DateTime NOT NULL,
     customerid INT,
 
     CONSTRAINT fk_ncCustomer foreign key (customerid) references nc_Customer(personid) ON DELETE SET NULL,
