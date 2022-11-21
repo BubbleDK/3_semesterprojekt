@@ -17,7 +17,7 @@ namespace NetCafeUCN.MVC.Services
 
         public User? GetUserByLogin(string email, string password)
         {
-            return RestClient.Execute<User>(new RestRequest()).Data;
+            return RestClient.Execute<User>(new RestRequest($"{BaseUri}"), Method.Post).Data;
             
         }
     }
