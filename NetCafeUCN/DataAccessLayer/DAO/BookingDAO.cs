@@ -100,6 +100,7 @@ namespace NetCafeUCN.DAL.DAO
                 SqlCommand cmd = new SqlCommand(sqlStatement, conn);
                 try
                 {
+                    string ?currentBoNo = null;
                     conn.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
@@ -108,12 +109,13 @@ namespace NetCafeUCN.DAL.DAO
                         {
                             foreach (var item in list.ToList())
                             {
-                                if ((string)reader["bookingNo"] == item.BookingNo)
+                                if ((string)reader["bookingNo"] == currentBoNo)
                                 {
                                     item.addToBookingLine(new BookingLine() { Quantity = (int)reader["quantity"], Stationid = (int)reader["stationid"], Consumableid = (int)reader["consumableid"] });
                                 }
                                 else
                                 {
+                                    currentBoNo = (string)reader["bookingNo"];
                                     Booking newBooking = new Booking()
                                     {
                                         BookingNo = (string)reader["bookingNo"],
