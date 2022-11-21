@@ -28,7 +28,7 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
 
         public IEnumerable<EmployeeDTO> GetAll()
         {
-            return RestClient.Execute<IEnumerable<EmployeeDTO>>(new RestRequest()).Data;
+            return RestClient.Execute<IEnumerable<EmployeeDTO>>(new RestRequest($"{BaseUri}", Method.Get)).Data;
         }
 
         public bool Remove(dynamic key)

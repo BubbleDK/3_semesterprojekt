@@ -1,10 +1,6 @@
 ﻿using NetCafeUCN.DesktopApp.DTO;
 using RestSharp;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NetCafeUCN.DesktopApp.ServiceLayer
 {
@@ -34,6 +30,9 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
 
         public IEnumerable<BookingDTO> GetAll()
         {
+            //var request = new RestRequest($"{BaseUri}");
+            //var response = RestClient.Execute<BookingDTO>(request);
+            //var result = response.Content;
             return RestClient.Execute<IEnumerable<BookingDTO>>(new RestRequest()).Data;
         }
 
