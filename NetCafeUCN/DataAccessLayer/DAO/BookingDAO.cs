@@ -105,31 +105,19 @@ namespace NetCafeUCN.DAL.DAO
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        if (list.Count > 0)
+                        if ((string)reader["bookingNo"] == currentBoNo)
                         {
                             foreach (var item in list.ToList())
                             {
-                                if ((string)reader["bookingNo"] == currentBoNo)
+                                if (item.BookingNo == currentBoNo)
                                 {
                                     item.addToBookingLine(new BookingLine() { Quantity = (int)reader["quantity"], Stationid = (int)reader["stationid"], Consumableid = (int)reader["consumableid"] });
-                                }
-                                else
-                                {
-                                    currentBoNo = (string)reader["bookingNo"];
-                                    Booking newBooking = new Booking()
-                                    {
-                                        BookingNo = (string)reader["bookingNo"],
-                                        StartTime = (DateTime)reader["startTime"],
-                                        EndTime = (DateTime)reader["endTime"],
-                                        CustomerId = (int)reader["customerId"],
-                                    };
-                                    newBooking.addToBookingLine(new BookingLine() { Quantity = (int)reader["quantity"], Stationid = (int)reader["stationid"], Consumableid = (int)reader["consumableid"] });
-                                    list.Add(newBooking);
                                 }
                             }
                         }
                         else
                         {
+                            currentBoNo = (string)reader["bookingNo"];
                             Booking newBooking = new Booking()
                             {
                                 BookingNo = (string)reader["bookingNo"],
