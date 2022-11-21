@@ -4,57 +4,86 @@
 @{
     ViewData["Title"] = "Produkter";
 }
+<head>
+    <link rel="stylesheet" href="~/css/TabStyle.css" />
 
+</head>
+
+<script src="~/js/TabScript.js" > </script>
 <h1>Produkter</h1>
 
+<div class="tab">
+    <button class="tablinks btn btn-primary btn-lg" id="defaultOpen" onclick="openTab(event,'GamingStation')">Computere</button>
+    <button class="tablinks btn btn-primary btn-lg" onclick="openTab(event,'Consumable')">Mad & drikke</button>
+</div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @*@Html.DisplayNameFor(model => model.ProductNumber)*@
-                ProductNumber
-            </th>
-            <th>
-                @*@Html.DisplayNameFor(model => model.Type)*@
-                Type
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (GamingStation item in Model.gamingStations) {
-        <tr>
-            <td>
+<div class="tabcontent" id="GamingStation">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    ProductNumber
+                </th>
+                <th>
+                    Type
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (GamingStation item in Model.gamingStations)
+    {
+                <tr>
+                    <td>
                 @Html.DisplayFor(modelItem => item.ProductNumber)
-            </td>
-            <td>
+                    </td>
+                    <td>
                 @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
+                    </td>
+                    <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
-    </tbody>
-    <tbody>
-        @foreach (Consumable item in Model.consumables)
-        {
+                    </td>
+                </tr>
+    }
+        </tbody>
+
+    </table>
+</div>
+<div class="tabcontent" id="Consumable">
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Type)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                </td>
+                <th>
+                    ProductNumber
+                </th>
+                <th>
+                    Type
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+    @foreach (Consumable item in Model.consumables)
+    {
+                <tr>
+                    <td>
+                @Html.DisplayFor(modelItem => item.ProductNumber)
+                    </td>
+                    <td>
+                @Html.DisplayFor(modelItem => item.Type)
+                    </td>
+                    <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>
+                </tr>
+    }
+        </tbody>
+    </table>
+</div>
+<script>
+    document.getElementById("defaultOpen").click();
+</script>
