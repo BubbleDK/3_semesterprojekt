@@ -46,87 +46,83 @@
             // lblProductNum
             // 
             this.lblProductNum.AutoSize = true;
-            this.lblProductNum.Location = new System.Drawing.Point(16, 7);
+            this.lblProductNum.Location = new System.Drawing.Point(14, 5);
             this.lblProductNum.Name = "lblProductNum";
-            this.lblProductNum.Size = new System.Drawing.Size(80, 20);
+            this.lblProductNum.Size = new System.Drawing.Size(66, 15);
             this.lblProductNum.TabIndex = 0;
             this.lblProductNum.Text = "Produkt nr:";
             // 
             // txtProductNum
             // 
-            this.txtProductNum.Location = new System.Drawing.Point(105, 7);
-            this.txtProductNum.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtProductNum.Enabled = false;
+            this.txtProductNum.Location = new System.Drawing.Point(92, 5);
             this.txtProductNum.Name = "txtProductNum";
-            this.txtProductNum.Size = new System.Drawing.Size(114, 27);
+            this.txtProductNum.Size = new System.Drawing.Size(100, 23);
             this.txtProductNum.TabIndex = 1;
             // 
             // lblProductType
             // 
             this.lblProductType.AutoSize = true;
-            this.lblProductType.Location = new System.Drawing.Point(16, 68);
+            this.lblProductType.Location = new System.Drawing.Point(14, 51);
             this.lblProductType.Name = "lblProductType";
-            this.lblProductType.Size = new System.Drawing.Size(43, 20);
+            this.lblProductType.Size = new System.Drawing.Size(34, 15);
             this.lblProductType.TabIndex = 2;
             this.lblProductType.Text = "Type:";
             // 
             // txtProductType
             // 
             this.txtProductType.Enabled = false;
-            this.txtProductType.Location = new System.Drawing.Point(105, 64);
-            this.txtProductType.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtProductType.Location = new System.Drawing.Point(92, 48);
             this.txtProductType.Name = "txtProductType";
-            this.txtProductType.Size = new System.Drawing.Size(114, 27);
+            this.txtProductType.Size = new System.Drawing.Size(100, 23);
             this.txtProductType.TabIndex = 3;
             // 
             // lblProductName
             // 
             this.lblProductName.AutoSize = true;
-            this.lblProductName.Location = new System.Drawing.Point(16, 123);
+            this.lblProductName.Location = new System.Drawing.Point(14, 92);
             this.lblProductName.Name = "lblProductName";
-            this.lblProductName.Size = new System.Drawing.Size(46, 20);
+            this.lblProductName.Size = new System.Drawing.Size(38, 15);
             this.lblProductName.TabIndex = 4;
             this.lblProductName.Text = "Navn:";
             // 
             // txtProductName
             // 
-            this.txtProductName.Location = new System.Drawing.Point(105, 123);
-            this.txtProductName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtProductName.Location = new System.Drawing.Point(92, 92);
             this.txtProductName.Name = "txtProductName";
-            this.txtProductName.Size = new System.Drawing.Size(114, 27);
+            this.txtProductName.Size = new System.Drawing.Size(100, 23);
             this.txtProductName.TabIndex = 5;
             // 
             // txtSeatNumber
             // 
-            this.txtSeatNumber.Location = new System.Drawing.Point(105, 180);
-            this.txtSeatNumber.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtSeatNumber.Location = new System.Drawing.Point(92, 135);
             this.txtSeatNumber.Name = "txtSeatNumber";
-            this.txtSeatNumber.Size = new System.Drawing.Size(114, 27);
+            this.txtSeatNumber.Size = new System.Drawing.Size(100, 23);
             this.txtSeatNumber.TabIndex = 6;
             // 
             // txtDescription
             // 
-            this.txtDescription.Location = new System.Drawing.Point(105, 241);
-            this.txtDescription.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtDescription.Location = new System.Drawing.Point(92, 181);
             this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(114, 127);
+            this.txtDescription.Size = new System.Drawing.Size(100, 96);
             this.txtDescription.TabIndex = 8;
             this.txtDescription.Text = "";
             // 
             // lblSeatNum
             // 
             this.lblSeatNum.AutoSize = true;
-            this.lblSeatNum.Location = new System.Drawing.Point(16, 184);
+            this.lblSeatNum.Location = new System.Drawing.Point(14, 138);
             this.lblSeatNum.Name = "lblSeatNum";
-            this.lblSeatNum.Size = new System.Drawing.Size(64, 20);
+            this.lblSeatNum.Size = new System.Drawing.Size(52, 15);
             this.lblSeatNum.TabIndex = 9;
             this.lblSeatNum.Text = "Plads nr:";
             // 
             // lblDescription
             // 
             this.lblDescription.AutoSize = true;
-            this.lblDescription.Location = new System.Drawing.Point(16, 245);
+            this.lblDescription.Location = new System.Drawing.Point(14, 184);
             this.lblDescription.Name = "lblDescription";
-            this.lblDescription.Size = new System.Drawing.Size(84, 20);
+            this.lblDescription.Size = new System.Drawing.Size(67, 15);
             this.lblDescription.TabIndex = 10;
             this.lblDescription.Text = "Beskrivelse:";
             // 
@@ -145,17 +141,15 @@
             this.panel1.Controls.Add(this.lblProductName);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(289, 417);
+            this.panel1.Size = new System.Drawing.Size(253, 313);
             this.panel1.TabIndex = 11;
             // 
             // btnConfirm
             // 
-            this.btnConfirm.Location = new System.Drawing.Point(200, 377);
-            this.btnConfirm.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnConfirm.Location = new System.Drawing.Point(175, 283);
             this.btnConfirm.Name = "btnConfirm";
-            this.btnConfirm.Size = new System.Drawing.Size(86, 31);
+            this.btnConfirm.Size = new System.Drawing.Size(75, 23);
             this.btnConfirm.TabIndex = 11;
             this.btnConfirm.Text = "Bekræft";
             this.btnConfirm.UseVisualStyleBackColor = true;
@@ -163,11 +157,10 @@
             // 
             // GamingstationForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(289, 417);
+            this.ClientSize = new System.Drawing.Size(253, 313);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "GamingstationForm";
             this.Text = "Opret Gamingstation";
             this.panel1.ResumeLayout(false);

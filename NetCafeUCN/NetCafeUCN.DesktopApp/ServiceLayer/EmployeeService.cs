@@ -7,7 +7,7 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
     /// Handles CRUD functionality for objects of type Employee
     /// Uses RestSharp to communicate with Controllers in the API
     /// </summary>
-    internal class EmployeeService : INetCafeDataAccess<Employee>
+    internal class EmployeeService : INetCafeDataAccess<EmployeeDTO>
     {
         public string BaseUri { get; private set; }
         private RestClient RestClient { get; set; }
@@ -16,29 +16,29 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
             BaseUri = baseUri;
             RestClient = new RestClient(baseUri);
         }
-        public bool Add(Employee o)
+        public bool Add(EmployeeDTO o)
         {
-            return RestClient.Execute<Employee>(new RestRequest($"{BaseUri}{o}",Method.Post).AddJsonBody(o)).IsSuccessful;
+            return RestClient.Execute<EmployeeDTO>(new RestRequest($"{BaseUri}{o}",Method.Post).AddJsonBody(o)).IsSuccessful;
         }
 
-        public Employee? Get(dynamic key)
+        public EmployeeDTO? Get(dynamic key)
         {
-            return RestClient.Execute<Employee>(new RestRequest($"{BaseUri}{key}",Method.Get)).Data;
+            return RestClient.Execute<EmployeeDTO>(new RestRequest($"{BaseUri}{key}",Method.Get)).Data;
         }
 
-        public IEnumerable<Employee> GetAll()
+        public IEnumerable<EmployeeDTO> GetAll()
         {
-            return RestClient.Execute<IEnumerable<Employee>>(new RestRequest()).Data;
+            return RestClient.Execute<IEnumerable<EmployeeDTO>>(new RestRequest()).Data;
         }
 
         public bool Remove(dynamic key)
         {
-            return RestClient.Execute<Employee>(new RestRequest($"{BaseUri}{key}", Method.Delete)).IsSuccessful;
+            return RestClient.Execute<EmployeeDTO>(new RestRequest($"{BaseUri}{key}", Method.Delete)).IsSuccessful;
         }
 
-        public bool Update(Employee o)
+        public bool Update(EmployeeDTO o)
         {
-            return RestClient.Execute<Employee>(new RestRequest($"{BaseUri}",Method.Put).AddJsonBody(o)).IsSuccessful;
+            return RestClient.Execute<EmployeeDTO>(new RestRequest($"{BaseUri}",Method.Put).AddJsonBody(o)).IsSuccessful;
         }
     }
 }

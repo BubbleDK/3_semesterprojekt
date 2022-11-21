@@ -12,7 +12,7 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
     /// Handles CRUD functionality for objects of type Booking
     /// Uses RestSharp to communicate with Controllers in the API
     /// </summary>
-    public class BookingService : INetCafeDataAccess<Booking>
+    public class BookingService : INetCafeDataAccess<BookingDTO>
     {
         public string BaseUri { get; private set; }
         private RestClient RestClient { get; set; }
@@ -22,29 +22,29 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
             RestClient = new RestClient(baseUri);
         }
         
-        public bool Add(Booking o)
+        public bool Add(BookingDTO o)
         {
-            return RestClient.Execute<Booking>(new RestRequest($"{BaseUri}{0}", Method.Post)).IsSuccessful;
+            return RestClient.Execute<BookingDTO>(new RestRequest($"{BaseUri}{0}", Method.Post)).IsSuccessful;
         }
 
-        public Booking? Get(dynamic key)
+        public BookingDTO? Get(dynamic key)
         {
-            return RestClient.Execute<Booking>(new RestRequest($"{BaseUri}{key}", Method.Get)).Data;
+            return RestClient.Execute<BookingDTO>(new RestRequest($"{BaseUri}{key}", Method.Get)).Data;
         }
 
-        public IEnumerable<Booking> GetAll()
+        public IEnumerable<BookingDTO> GetAll()
         {
-            return RestClient.Execute<IEnumerable<Booking>>(new RestRequest()).Data;
+            return RestClient.Execute<IEnumerable<BookingDTO>>(new RestRequest()).Data;
         }
 
         public bool Remove(dynamic key)
         {
-            return RestClient.Execute<Booking>(new RestRequest($"{BaseUri}{key}", Method.Delete)).IsSuccessful;
+            return RestClient.Execute<BookingDTO>(new RestRequest($"{BaseUri}{key}", Method.Delete)).IsSuccessful;
         }
 
-        public bool Update(Booking o)
+        public bool Update(BookingDTO o)
         {
-            return RestClient.Execute<Booking>(new RestRequest($"{BaseUri}{o}", Method.Put)).IsSuccessful;
+            return RestClient.Execute<BookingDTO>(new RestRequest($"{BaseUri}{o}", Method.Put)).IsSuccessful;
         }
     }
 }

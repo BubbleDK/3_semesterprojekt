@@ -1,6 +1,6 @@
 ﻿namespace NetCafeUCN.DesktopApp
 {
-    partial class InputDialog
+    partial class ProductInputDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -39,9 +39,9 @@
             this.lblInput.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblInput.Location = new System.Drawing.Point(0, 0);
             this.lblInput.Name = "lblInput";
-            this.lblInput.Size = new System.Drawing.Size(49, 21);
+            this.lblInput.Size = new System.Drawing.Size(98, 21);
             this.lblInput.TabIndex = 1;
-            this.lblInput.Text = "Input:";
+            this.lblInput.Text = "Produkttype:";
             // 
             // btnConfirm
             // 
@@ -55,14 +55,14 @@
             // 
             // cmbInput
             // 
+            this.cmbInput.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbInput.FormattingEnabled = true;
             this.cmbInput.Location = new System.Drawing.Point(0, 24);
             this.cmbInput.Name = "cmbInput";
             this.cmbInput.Size = new System.Drawing.Size(192, 23);
             this.cmbInput.TabIndex = 3;
-            this.cmbInput.DropDownStyle = ComboBoxStyle.DropDownList;
             // 
-            // InputDialog
+            // ProductInputDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -70,7 +70,7 @@
             this.Controls.Add(this.cmbInput);
             this.Controls.Add(this.btnConfirm);
             this.Controls.Add(this.lblInput);
-            this.Name = "InputDialog";
+            this.Name = "ProductInputDialog";
             this.Text = "InputDialog";
             this.ResumeLayout(false);
             this.PerformLayout();

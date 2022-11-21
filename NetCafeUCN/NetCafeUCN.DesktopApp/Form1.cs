@@ -5,7 +5,7 @@ namespace NetCafeUCN.DesktopApp
 {
     public partial class Form1 : Form
     {
-        INetCafeDataAccess<Customer> _userService = new CustomerService("https://localhost:7197/api/Customer/");
+        INetCafeDataAccess<CustomerDTO> _userService = new CustomerService("https://localhost:7197/api/Customer/");
         public Form1()
         {
             InitializeComponent();

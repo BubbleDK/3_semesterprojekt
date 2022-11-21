@@ -1,6 +1,6 @@
 ﻿namespace NetCafeUCN.DesktopApp.DTO
 {
-    public class GamingStation : Product
+    public class GamingStationDTO : ProductDTO
     {
         public string? SeatNumber { get; set; }
         public string? Description { get; set; }

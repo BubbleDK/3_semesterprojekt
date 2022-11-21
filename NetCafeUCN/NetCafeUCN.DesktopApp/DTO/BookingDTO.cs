@@ -1,6 +1,6 @@
 ﻿namespace NetCafeUCN.DesktopApp.DTO
 {
-    public class Booking
+    public class BookingDTO
     {
         public int BookingNo { get; set; }
         public DateTime StartTime { get; set; }

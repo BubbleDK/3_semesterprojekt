@@ -1,6 +1,6 @@
 ﻿namespace NetCafeUCN.DesktopApp.DTO
 {
-    public class Employee:Person
+    public class EmployeeDTO:PersonDTO
     {
         
 
@@ -8,10 +8,10 @@
         public string? Address { get; set; }
         public int? Zipcode { get; set; }
         public string? City { get; set; }
-        public Employee(string name, string email, string phone, string personType) : base(name, email, phone, personType)
+        public EmployeeDTO(string name, string email, string phone, string personType) : base(name, email, phone, personType)
         {
         }
-        public Employee():base()
+        public EmployeeDTO():base()
         {
 
         }
