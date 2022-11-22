@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NetCafeUCN.API.Conversion;
 using NetCafeUCN.API.DTO;
 using NetCafeUCN.DAL.DAO;
 
@@ -16,12 +17,17 @@ namespace NetCafeUCN.API.Controllers
             this.userDAO = userDAO;
         }
 
+
+        [HttpGet]
+        public IEnumerable<UserDTO> GetUsers()
+        {
+            return userDAO.GetAll().ToDtos(); 
+        }
         // GET api/<UserController>/5
         [HttpPost]
-        public ActionResult<User?> Get(string email, string password)
+        public ActionResult<UserDTO?> Get(UserDTO user)
         {
-            return Ok(userDAO.GetUserByLogin(email, password));
+            return Ok(userDAO.GetUserByLogin(user.Email, user.Password).ToDto());
         }
-       
     }
 }

@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.DataProtection.KeyManagement;
+using Microsoft.Extensions.Hosting;
 using NetCafeUCN.MVC.Models.DTO;
+using System.Text.Json;
+using NuGet.Protocol;
 using RestSharp;
 using static NetCafeUCN.MVC.Models.DTO.User;
 
@@ -17,8 +20,13 @@ namespace NetCafeUCN.MVC.Services
 
         public User? GetUserByLogin(string email, string password)
         {
-            return RestClient.Execute<User>(new RestRequest($"{BaseUri}"), Method.Post).Data;
-            
+            User? body = new User { Email = email, Password = password };
+            RestRequest request = new RestRequest();
+            //request.AddHeader("Accept", "application/json");
+            request.AddJsonBody(body);
+            return RestClient.Post<User>(request);
+
+           
         }
     }
 }

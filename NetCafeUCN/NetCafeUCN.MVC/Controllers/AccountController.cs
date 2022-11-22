@@ -14,7 +14,8 @@ namespace NetCafeUCN.MVC.Controllers
     [AllowAnonymous]
     public class AccountController : Controller
     {
-        IUserProvider _userProvider = new UserProvider("https://localhost:7197/api/User");
+        IUserProvider _userProvider;
+        
         public AccountController(IUserProvider userProvider) => _userProvider = userProvider;
         // GET: AccountController
         [HttpGet]
@@ -69,6 +70,7 @@ namespace NetCafeUCN.MVC.Controllers
                 // The full path or absolute URI to be used as an http 
                 // redirect response value. 
                 #endregion
+                
             };
 
             await HttpContext.SignInAsync(
