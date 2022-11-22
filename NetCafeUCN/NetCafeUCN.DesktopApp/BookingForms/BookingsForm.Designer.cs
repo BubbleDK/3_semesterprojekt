@@ -98,6 +98,7 @@
             this.btnUpdateBooking.TabIndex = 1;
             this.btnUpdateBooking.Text = "Opdatér Booking";
             this.btnUpdateBooking.UseVisualStyleBackColor = true;
+            this.btnUpdateBooking.Click += new System.EventHandler(this.btnUpdateBooking_Click);
             // 
             // btnDeleteBooking
             // 
@@ -120,13 +121,13 @@
             this.dgvBookings.Size = new System.Drawing.Size(530, 450);
             this.dgvBookings.TabIndex = 0;
             // 
-            // BookingForm
+            // BookingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.splitContainer1);
-            this.Name = "BookingForm";
+            this.Name = "BookingsForm";
             this.Text = "Form2";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);

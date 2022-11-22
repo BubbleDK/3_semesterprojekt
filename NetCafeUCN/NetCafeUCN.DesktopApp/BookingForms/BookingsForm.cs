@@ -33,5 +33,10 @@ namespace NetCafeUCN.DesktopApp
             Form newBookingForm = new NewBookingForm();
             newBookingForm.ShowDialog();
         }
+
+        private void btnUpdateBooking_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
