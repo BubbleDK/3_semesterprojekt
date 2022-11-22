@@ -18,12 +18,13 @@ namespace NetCafeUCN.DAL.DAO
                     try
                     {
                         using (SqlCommand addToPersonCommand = new SqlCommand(
-                            "INSERT INTO nc_Person VALUES(@Name, @Phone, @Email, @PersonType) SELECT SCOPE_IDENTITY();", conn, trans))
+                            "INSERT INTO nc_Person VALUES(@name, @phone, @email, @personType, isActive) SELECT SCOPE_IDENTITY();", conn, trans))
                         {
                             addToPersonCommand.Parameters.AddWithValue("@Name", o.Name);
                             addToPersonCommand.Parameters.AddWithValue("@Email", o.Email);
                             addToPersonCommand.Parameters.AddWithValue("@Phone", o.Phone);
                             addToPersonCommand.Parameters.AddWithValue("@PersonType", o.PersonType);
+                            addToPersonCommand.Parameters.AddWithValue("@isActive", o.IsActive);
                             id = Convert.ToInt32(addToPersonCommand.ExecuteScalar());
                         }
                         using (SqlCommand addToCustomerCommand = new SqlCommand("INSERT INTO nc_Customer VALUES(@id)", conn, trans))
@@ -62,7 +63,8 @@ namespace NetCafeUCN.DAL.DAO
                                 Name = (string)reader["Name"],
                                 Email = (string)reader["email"],
                                 Phone = (string)reader["phone"],
-                                PersonType = (string)reader["personType"]
+                                PersonType = (string)reader["personType"],
+                                IsActive = (bool)reader["isActive"]
                             };
                         }
                         return customer;
@@ -94,7 +96,8 @@ namespace NetCafeUCN.DAL.DAO
                             Name = (string?)reader["name"],
                             Email = (string?)reader["email"],
                             Phone = (string?)reader["phone"],
-                            PersonType = (string)reader["personType"]
+                            PersonType = (string)reader["personType"],
+                            IsActive = (bool)reader["isActive"]
                         };
                         list.Add(customer);
                     }
@@ -146,12 +149,13 @@ namespace NetCafeUCN.DAL.DAO
                     try
                     {
                         using (SqlCommand command = new SqlCommand(
-                            "UPDATE nc_Person SET name = @name, phone = @phone, email = @email, personType = @personType WHERE phone = @phone AND personType = 'Customer'", conn, trans))
+                            "UPDATE nc_Person SET name = @name, phone = @phone, email = @email, personType = @personType, isActive = @isActive WHERE phone = @phone AND personType = 'Customer'", conn, trans))
                         {
                             command.Parameters.AddWithValue("@phone", o.Phone);
                             command.Parameters.AddWithValue("@name", o.Name);
                             command.Parameters.AddWithValue("@email", o.Email);
                             command.Parameters.AddWithValue("@personType", o.PersonType);
+                            command.Parameters.AddWithValue("@isActive", o.IsActive);
                             command.ExecuteNonQuery();
                             trans.Commit();
                             return true;

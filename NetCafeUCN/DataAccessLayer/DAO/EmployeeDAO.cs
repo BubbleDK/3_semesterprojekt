@@ -18,12 +18,13 @@ namespace NetCafeUCN.DAL.DAO
                     try
                     {
                         using (SqlCommand productCommand = new SqlCommand(
-                                "INSERT INTO nc_Person VALUES(@name, @phone, @email, @personType); SELECT SCOPE_IDENTITY();", conn, trans))
+                                "INSERT INTO nc_Person VALUES(@name, @phone, @email, @personType, @isActive); SELECT SCOPE_IDENTITY();", conn, trans))
                         {
                             productCommand.Parameters.AddWithValue("@name", o.Name);
                             productCommand.Parameters.AddWithValue("@phone", o.Phone);
                             productCommand.Parameters.AddWithValue("@email", o.Email);
                             productCommand.Parameters.AddWithValue("@personType", "Employee");
+                            productCommand.Parameters.AddWithValue("@isActive", o.IsActive);
                             id = Convert.ToInt32(productCommand.ExecuteScalar());
                         }
 
@@ -53,7 +54,7 @@ namespace NetCafeUCN.DAL.DAO
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
                 using SqlCommand command = new SqlCommand(
-                    "SELECT name, phone, email, personType, address, role, zipCode FROM nc_Person INNER JOIN nc_Employee ON nc_Person.id = nc_Employee.personid WHERE phone = @phone;", conn);
+                    "SELECT name, phone, email, personType, address, role, zipCode, isActive FROM nc_Person INNER JOIN nc_Employee ON nc_Person.id = nc_Employee.personid WHERE phone = @phone;", conn);
                 command.Parameters.AddWithValue("@phone", key);
                 {
                     try
@@ -71,6 +72,7 @@ namespace NetCafeUCN.DAL.DAO
                                 Address = (string?)reader["address"],
                                 Zipcode = (int)reader["zipCode"],
                                 PersonType = (string)reader["personType"],
+                                IsActive = (bool)reader["isActive"]
                             };
                             return person;
                         }
@@ -87,7 +89,7 @@ namespace NetCafeUCN.DAL.DAO
 
         public IEnumerable<Employee> GetAll()
         {
-            string sqlStatement = "SELECT name, phone, email, personType, address, role, zipCode FROM nc_Person INNER JOIN nc_Employee ON nc_Person.id = nc_Employee.personid;";
+            string sqlStatement = "SELECT name, phone, email, personType, address, role, zipCode, isActive FROM nc_Person INNER JOIN nc_Employee ON nc_Person.id = nc_Employee.personid;";
             List<Employee> list = new();
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
@@ -108,6 +110,7 @@ namespace NetCafeUCN.DAL.DAO
                             Address = (string?)reader["address"],
                             Zipcode = (int)reader["zipCode"],
                             PersonType = (string)reader["personType"],
+                            IsActive = (bool)reader["isActive"]
                         };
                         list.Add(employee);
                     }
@@ -159,7 +162,7 @@ namespace NetCafeUCN.DAL.DAO
                     try
                     {
                         using (SqlCommand command = new SqlCommand(
-                            "UPDATE nc_Person SET name = @name, phone = @phone, email = @email, personType = @personType WHERE phone = @phone", conn, trans))
+                            "UPDATE nc_Person SET name = @name, phone = @phone, email = @email, personType = @personType, isActive = @isActive WHERE phone = @phone", conn, trans))
                         {
                             command.Parameters.AddWithValue("@phone", o.Phone);
                             command.Parameters.AddWithValue("@name", o.Name);
