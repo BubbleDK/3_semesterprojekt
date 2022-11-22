@@ -89,22 +89,22 @@ CREATE TABLE nc_GamingStation(
 	PRIMARY KEY(stationid),
 );
 
---CREATE TABLE nc_Pack(
---    rentableid INT NOT NULL,
---    id INT IDENTITY(1,1),
+CREATE TABLE nc_Pack(
+   productid INT NOT NULL,
 
---    CONSTRAINT fk_ncPackproductid FOREIGN KEY (rentableid) REFERENCES nc_Product(productid),
---    PRIMARY KEY(id),
---);
+    CONSTRAINT fk_ncPackproductid FOREIGN KEY (productid) REFERENCES nc_Product(id),
+    PRIMARY KEY(productid),
+);
 
---CREATE TABLE nc_PackLine(
---    productid INT NOT NULL,
---    quantity INT NOT NULL,
---    packid INT NOT NULL,
+CREATE TABLE nc_PackLine(
+    productid INT NOT NULL,
+    quantity INT,
+    packid INT NOT NULL,
 
---    CONSTRAINT fk_ncPackLineproductid FOREIGN KEY (productid) REFERENCES nc_Product(productid),
---    CONSTRAINT fk_ncPackLinepackid FOREIGN KEY (packid) REFERENCES nc_Pack(id),
---);
+    CONSTRAINT fk_ncPackLineproductid FOREIGN KEY (productid) REFERENCES nc_Product(id),
+    CONSTRAINT fk_ncPackLinepackid FOREIGN KEY (packid) REFERENCES nc_Pack(productid),
+    PRIMARY KEY(productid)
+);
 
 
 INSERT INTO nc_CityZipCode VALUES (9000, 'Aalborg');
@@ -128,3 +128,4 @@ INSERT INTO nc_Consumables VALUES (2, 'Et eller andet nice');
 INSERT INTO nc_BookingLine VALUES (1, 5, 1, 2);
 
 INSERT INTO nc_GamingStation VALUES (1, 'EtNiceSted', 'Sindssyg pc');
+
