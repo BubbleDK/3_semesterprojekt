@@ -39,15 +39,16 @@
             this.lblInput.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblInput.Location = new System.Drawing.Point(0, 0);
             this.lblInput.Name = "lblInput";
-            this.lblInput.Size = new System.Drawing.Size(98, 21);
+            this.lblInput.Size = new System.Drawing.Size(125, 28);
             this.lblInput.TabIndex = 1;
             this.lblInput.Text = "Produkttype:";
             // 
             // btnConfirm
             // 
-            this.btnConfirm.Location = new System.Drawing.Point(117, 62);
+            this.btnConfirm.Location = new System.Drawing.Point(134, 83);
+            this.btnConfirm.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnConfirm.Name = "btnConfirm";
-            this.btnConfirm.Size = new System.Drawing.Size(75, 23);
+            this.btnConfirm.Size = new System.Drawing.Size(86, 31);
             this.btnConfirm.TabIndex = 2;
             this.btnConfirm.Text = "Bekræft";
             this.btnConfirm.UseVisualStyleBackColor = true;
@@ -57,19 +58,21 @@
             // 
             this.cmbInput.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbInput.FormattingEnabled = true;
-            this.cmbInput.Location = new System.Drawing.Point(0, 24);
+            this.cmbInput.Location = new System.Drawing.Point(0, 32);
+            this.cmbInput.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cmbInput.Name = "cmbInput";
-            this.cmbInput.Size = new System.Drawing.Size(192, 23);
+            this.cmbInput.Size = new System.Drawing.Size(219, 28);
             this.cmbInput.TabIndex = 3;
             // 
             // ProductInputDialog
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(204, 97);
+            this.ClientSize = new System.Drawing.Size(233, 129);
             this.Controls.Add(this.cmbInput);
             this.Controls.Add(this.btnConfirm);
             this.Controls.Add(this.lblInput);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "ProductInputDialog";
             this.Text = "InputDialog";
             this.ResumeLayout(false);
