@@ -11,6 +11,50 @@ namespace NetCafeUCN.DAL.DAO
 {
     public class UserDAO
     {
+        public IEnumerable<User> GetAll()
+        {
+            UserRole tempRole;
+            string sqlStatement = "SELECT * FROM nc_Person";
+            List<User> list = new();
+            using(SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand(sqlStatement, conn);
+                try
+                {
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        string stringRole = (string)reader["PersonType"];
+                        if (string.Equals(stringRole, "Employee", StringComparison.OrdinalIgnoreCase))
+                        {
+                            tempRole = UserRole.Administrator;
+                        }
+                        else
+                        {
+                            tempRole = UserRole.User;
+                        }
+                        User user = new User()
+                        {
+                            Id = (int)reader["Id"],
+                            Name = (string)reader["Name"],
+                            Email = (string)reader["Email"],
+                            Password = (string)reader["Password"],
+                            Role = tempRole
+                        };
+                        list.Add(user);
+                    }
+                    return list;
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            }
+        }
+
         public User? GetUserByLogin(string Email, string password)
         {
             string sqlStatement = "SELECT * FROM nc_Person WHERE @email = Email and @password = PASSWORD";
@@ -29,7 +73,7 @@ namespace NetCafeUCN.DAL.DAO
                     while (reader.Read())
                     {
                         string stringRole = (string)reader["PersonType"];
-                        if (string.Equals(stringRole, "Admin", StringComparison.OrdinalIgnoreCase))
+                        if (string.Equals(stringRole, "Employee", StringComparison.OrdinalIgnoreCase))
                         {
                             tempRole = UserRole.Administrator;
                         }

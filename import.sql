@@ -17,7 +17,8 @@ CREATE TABLE nc_Person(
 	phone VARCHAR(50),
 	email VARCHAR(50) NOT NULL,
 	personType VARCHAR(50) NOT NULL,
-    password VARCHAR(50) NOT NULL,
+    	password VARCHAR(50) NOT NULL,
+	isActive BIT,
 
 	PRIMARY KEY(id),
 );
@@ -108,9 +109,9 @@ CREATE TABLE nc_GamingStation(
 
 INSERT INTO nc_CityZipCode VALUES (9000, 'Aalborg');
 
-INSERT INTO nc_Person VALUES ('John', '88888888', 'john@gmail.com', 'Customer', 'password');
-INSERT INTO nc_Person VALUES ('Bodil', '88888889', 'bodil@gmail.com', 'Employee', 'password');
-INSERT INTO nc_Person VALUES ('Carsten', '99999999', 'carsten@gmail.com', 'Customer', 'password');
+INSERT INTO nc_Person VALUES ('John', '88888888', 'john@gmail.com', 'Customer', 'password', 1);
+INSERT INTO nc_Person VALUES ('Bodil', '88888889', 'bodil@gmail.com', 'Employee', 'password', 1);
+INSERT INTO nc_Person VALUES ('Carsten', '99999999', 'carsten@gmail.com', 'Customer', 'password', 1);
 
 INSERT INTO nc_Customer VALUES (1);
 INSERT INTO nc_Customer VALUES (3);

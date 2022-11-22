@@ -1,6 +1,6 @@
 ﻿namespace NetCafeUCN.API.DTO
 {
-    public class User
+    public class UserDTO
     {
         public enum UserRole { User, Administrator }
         public int Id { get; set; }
