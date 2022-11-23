@@ -8,9 +8,9 @@ namespace NetCafeUCN.API.DTO
 {
     public abstract class Product
     {
-        public string ProductNumber { get; set; }
+        public string ProductNumber { get; set; } = string.Empty;
         public string? Type { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } = String.Empty;
         public bool IsActive { get; set; }
 
         public Product(string productNumber, string type, string name)
