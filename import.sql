@@ -1,7 +1,7 @@
 USE [DMA-CSD-S212_10182474];
 
 --DROP TABLE nc_PackLine, nc_Pack, nc_GamingStation, nc_BookingLine, nc_Rentable, nc_Consumables, nc_Product, nc_Booking, nc_Customer, nc_Employee, nc_Person, nc_CityZipCode;
-DROP TABLE nc_GamingStation, nc_BookingLine, nc_Consumables, nc_Product, nc_Booking, nc_Customer, nc_Employee, nc_Person, nc_CityZipCode;
+DROP TABLE nc_GamingStation, nc_BookingLine, nc_Consumables, nc_PackLine, nc_Pack, nc_Product, nc_Booking, nc_Customer, nc_Employee, nc_Person, nc_CityZipCode;
 go
 
 CREATE TABLE nc_CityZipCode(
@@ -17,7 +17,7 @@ CREATE TABLE nc_Person(
 	phone VARCHAR(50),
 	email VARCHAR(50) NOT NULL,
 	personType VARCHAR(50) NOT NULL,
-    password VARCHAR(50),
+    passwordHash nCHAR(60),
 	isActive BIT,
 
 	PRIMARY KEY(id),
@@ -109,9 +109,9 @@ CREATE TABLE nc_PackLine(
 
 INSERT INTO nc_CityZipCode VALUES (9000, 'Aalborg');
 
-INSERT INTO nc_Person VALUES ('John', '88888888', 'john@gmail.com', 'Customer', 'password', 1);
-INSERT INTO nc_Person VALUES ('Bodil', '88888889', 'bodil@gmail.com', 'Employee', 'password', 1);
-INSERT INTO nc_Person VALUES ('Carsten', '99999999', 'carsten@gmail.com', 'Customer', 'password', 1);
+INSERT INTO nc_Person VALUES ('John', '88888888', 'john@gmail.com', 'Customer', '012345678901234567890123456789012345678901234567890123456789', 1);
+INSERT INTO nc_Person VALUES ('Bodil', '88888889', 'bodil@gmail.com', 'Employee', '012345678901234567890123456789012345678901234567890123456789', 1);
+INSERT INTO nc_Person VALUES ('Carsten', '99999999', 'carsten@gmail.com', 'Customer', '012345678901234567890123456789012345678901234567890123456789', 1);
 
 INSERT INTO nc_Customer VALUES (1);
 INSERT INTO nc_Customer VALUES (3);
