@@ -21,13 +21,14 @@ namespace NetCafeUCN.API.Controllers
         [HttpGet]
         public IEnumerable<UserDTO> GetUsers()
         {
-            return userDAO.GetAll().ToDtos(); 
+            return userDAO.GetAll().ToDtos();
         }
-        // GET api/<UserController>/5
+
+        
         [HttpPost]
-        public ActionResult<UserDTO?> Get(UserDTO user)
+        public ActionResult<UserDTO?> Get([FromBody] UserDTO user)
         {
-            return Ok(userDAO.GetUserByLogin(user.Email, user.Password).ToDto());
+            return Ok(userDAO.GetUserByLogin(user.Email, user.Password));
         }
     }
 }

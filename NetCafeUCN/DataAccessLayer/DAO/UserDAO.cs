@@ -13,7 +13,7 @@ namespace NetCafeUCN.DAL.DAO
     {
         public IEnumerable<User> GetAll()
         {
-            UserRole tempRole;
+            UserRole tempRole = UserRole.Administrator;
             string sqlStatement = "SELECT * FROM nc_Person";
             List<User> list = new();
             using(SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
