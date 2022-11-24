@@ -122,7 +122,7 @@ namespace NetCafeUCN.DAL.DAO
                 {
                     try
                     {
-                        using (SqlCommand deleteCommand = new SqlCommand("DELETE FROM nc_Person WHERE phone = @phoneNo AND personType = 'Customer'", conn, trans))
+                        using (SqlCommand deleteCommand = new SqlCommand("UPDATE nc_Person SET isActive = 0 WHERE phone = @phoneNo AND personType = 'Customer'", conn, trans))
                         {
                             deleteCommand.Parameters.AddWithValue("@phoneNo", key);
                             deleteCommand.ExecuteNonQuery();
