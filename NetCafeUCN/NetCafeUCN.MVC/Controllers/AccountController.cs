@@ -42,7 +42,7 @@ namespace NetCafeUCN.MVC.Controllers
             new Claim(ClaimTypes.Email, user.Email),
             new Claim(ClaimTypes.Role, user.Role.ToString())
         };
-
+            
             var claimsIdentity = new ClaimsIdentity(
                 claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
@@ -90,7 +90,7 @@ namespace NetCafeUCN.MVC.Controllers
 
         //displayed if an area is off-limits, based on an authenticated user's claims
 
-        public IActionResult AccessDenied() => View();
+        //public IActionResult AccessDenied() => View();
 
     }
 }
