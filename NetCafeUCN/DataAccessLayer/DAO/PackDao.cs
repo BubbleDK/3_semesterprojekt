@@ -115,7 +115,7 @@ namespace NetCafeUCN.DAL.DAO
                     }
                 }
             }
-            return 0;
+            return null;
         }
     }
 }
