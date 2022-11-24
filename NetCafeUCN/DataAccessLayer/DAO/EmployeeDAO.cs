@@ -18,12 +18,13 @@ namespace NetCafeUCN.DAL.DAO
                     try
                     {
                         using (SqlCommand productCommand = new SqlCommand(
-                                "INSERT INTO nc_Person VALUES(@name, @phone, @email, @personType, @isActive); SELECT SCOPE_IDENTITY();", conn, trans))
+                                "INSERT INTO nc_Person VALUES(@name, @phone, @email, @personType, @password, @isActive); SELECT SCOPE_IDENTITY();", conn, trans))
                         {
                             productCommand.Parameters.AddWithValue("@name", o.Name);
                             productCommand.Parameters.AddWithValue("@phone", o.Phone);
                             productCommand.Parameters.AddWithValue("@email", o.Email);
                             productCommand.Parameters.AddWithValue("@personType", "Employee");
+                            productCommand.Parameters.AddWithValue("@password", "Ikke Oprettet");
                             productCommand.Parameters.AddWithValue("@isActive", o.IsActive);
                             id = Convert.ToInt32(productCommand.ExecuteScalar());
                         }
