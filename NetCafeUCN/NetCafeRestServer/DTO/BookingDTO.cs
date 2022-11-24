@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace NetCafeUCN.API.DTO
 {
-    public class Booking
+    public class BookingDTO
     {
         public string BookingNo { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public int CustomerId { get; set; }
-        public List<BookingLine> BookingLines { get; set; }
-        public Booking()
+        public List<BookingLineDTO> BookingLines { get; set; }
+        public BookingDTO()
         {
-            BookingLines = new List<BookingLine>();
+            BookingLines = new List<BookingLineDTO>();
         }
 
-        public void addToBookingLine(BookingLine bl)
+        public void addToBookingLine(BookingLineDTO bl)
         {
             BookingLines.Add(bl);
         }

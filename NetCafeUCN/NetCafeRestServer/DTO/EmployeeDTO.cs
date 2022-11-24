@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NetCafeUCN.API.DTO
 {
-    public class Employee:Person
+    public class EmployeeDTO:PersonDTO
     {
         public string Role { get; set; }
         public string Address { get; set; }
