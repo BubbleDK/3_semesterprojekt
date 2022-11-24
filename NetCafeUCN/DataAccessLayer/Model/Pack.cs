@@ -8,10 +8,10 @@ namespace NetCafeUCN.DAL.Model
 {
     public class Pack : Product
     {
-        public List<PackLine> PackLines { get; set; } = new List<PackLine>();
+        public List<PackLine> PackLines { get; set; }
         public Pack()
         {
-
+            PackLines = new List<PackLine>();
         }
         public override string ToString()
         {

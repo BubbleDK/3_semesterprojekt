@@ -40,10 +40,10 @@ namespace NetCafeUCN.DAL.DAO
                         foreach(var item in o.PackLines)
                         {
                             using (SqlCommand packCommand = new SqlCommand(
-                                "INSERT INTO nc_PackLine VALUES(productid = (SELECT id FROM nc_Product WHERE productNo = @productNo), @quantity, @packid);", conn, trans))
+                                "INSERT INTO nc_PackLine VALUES(@productid, @quantity, @packid);", conn, trans))
                             {
-                                Product productid = GetProductById(item.Product.ProductNumber);
-                                packCommand.Parameters.AddWithValue("@productNo", productid.ProductNumber);
+                                int productid = GetProductById(item.Product.ProductNumber);
+                                packCommand.Parameters.AddWithValue("@productid", productid);
                                 packCommand.Parameters.AddWithValue("@quantity", item.Quantity);
                                 packCommand.Parameters.AddWithValue("@packid", id);
                                 packCommand.ExecuteNonQuery();
@@ -81,7 +81,7 @@ namespace NetCafeUCN.DAL.DAO
             throw new NotImplementedException();
         }
 
-        private Product GetProductById(dynamic key)
+        private int GetProductById(dynamic key)
         {
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
@@ -94,18 +94,8 @@ namespace NetCafeUCN.DAL.DAO
                         SqlDataReader reader = command.ExecuteReader();
                         while (reader.Read())
                         {
-                            if ((string)reader["type"] == "gamingstation")
-                            {
-                                Product gamingstation = new GamingStation();
-                                int id = Convert.ToInt32(reader["ID"]);
-                                return gamingstation;
-                            }
-                            else
-                            {
-                                Product consumable = new Consumable();
-                                int id = Convert.ToInt32(reader["ID"]);
-                                return consumable;
-                            }
+                                int id = Convert.ToInt32(reader["id"]);
+                                return id;
                         }
                     }
                     catch (DataAccessException)
@@ -115,7 +105,7 @@ namespace NetCafeUCN.DAL.DAO
                     }
                 }
             }
-            return null;
+            return 0;
         }
     }
 }
