@@ -19,8 +19,8 @@ namespace NetCafeUCN.DesktopApp.UserForms
         int personType = -1;
         //0 for create, 1 for update
         int actionType = -1;
-        EmployeeDTO _employee;
-        CustomerDTO _customer;
+        EmployeeDTO? _employee;
+        CustomerDTO? _customer;
 
         //Constructor til at oprette customer/employee
         public CreateUpdateUser(UsersForm usersForm, int type)
@@ -109,6 +109,7 @@ namespace NetCafeUCN.DesktopApp.UserForms
                 _customer.Email = txtEmail.Text;
                 _customer.Phone = txtPhone.Text;
                 _customer.PersonType = txtPersonType.Text;
+                _customer.isActive = true;
                 if(actionType == 0)
                 {
                     customerService.Add(_customer);
@@ -131,6 +132,7 @@ namespace NetCafeUCN.DesktopApp.UserForms
                 _employee.Role = txtRole.Text;
                 _employee.Address = txtAddress.Text;
                 _employee.Zipcode = int.Parse(txtZipCode.Text);
+                _employee.isActive = true;
                 if (actionType == 0)
                 {
                     employeeService.Add(_employee);

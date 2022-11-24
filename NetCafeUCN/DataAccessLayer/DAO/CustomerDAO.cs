@@ -18,18 +18,18 @@ namespace NetCafeUCN.DAL.DAO
                     try
                     {
                         using (SqlCommand addToPersonCommand = new SqlCommand(
-                            "INSERT INTO nc_Person VALUES(@name, @phone, @email, @personType, isActive) SELECT SCOPE_IDENTITY();", conn, trans))
+                            "INSERT INTO nc_Person VALUES(@name, @phone, @email, @personType, @isActive); SELECT SCOPE_IDENTITY();", conn, trans))
                         {
-                            addToPersonCommand.Parameters.AddWithValue("@Name", o.Name);
-                            addToPersonCommand.Parameters.AddWithValue("@Email", o.Email);
-                            addToPersonCommand.Parameters.AddWithValue("@Phone", o.Phone);
-                            addToPersonCommand.Parameters.AddWithValue("@PersonType", o.PersonType);
+                            addToPersonCommand.Parameters.AddWithValue("@name", o.Name);
+                            addToPersonCommand.Parameters.AddWithValue("@email", o.Email);
+                            addToPersonCommand.Parameters.AddWithValue("@phone", o.Phone);
+                            addToPersonCommand.Parameters.AddWithValue("@personType", o.PersonType);
                             addToPersonCommand.Parameters.AddWithValue("@isActive", o.IsActive);
                             id = Convert.ToInt32(addToPersonCommand.ExecuteScalar());
                         }
-                        using (SqlCommand addToCustomerCommand = new SqlCommand("INSERT INTO nc_Customer VALUES(@id)", conn, trans))
+                        using (SqlCommand addToCustomerCommand = new SqlCommand("INSERT INTO nc_Customer VALUES(@personid)", conn, trans))
                         {
-                            addToCustomerCommand.Parameters.AddWithValue("@id", id);
+                            addToCustomerCommand.Parameters.AddWithValue("@personid", id);
                             addToCustomerCommand.ExecuteNonQuery();
                             trans.Commit();
                         }

@@ -18,7 +18,11 @@ namespace NetCafeUCN.DesktopApp
         {
             dgvBookings.DataSource = null;
             dgvBookings.Rows.Clear();
-            dgvBookings.DataSource = bookingService.GetAll().ToList();
+            List<BookingDTO> bookings = bookingService.GetAll().ToList();
+            if(bookings != null)
+            {
+                dgvBookings.DataSource = bookingService.GetAll().ToList();
+            }
             dgvBookings.ClearSelection();
             dgvBookings.CurrentCell = null;
         }
