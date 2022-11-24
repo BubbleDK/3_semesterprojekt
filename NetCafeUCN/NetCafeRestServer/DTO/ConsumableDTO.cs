@@ -1,9 +1,9 @@
 ﻿namespace NetCafeUCN.API.DTO
 {
-    public class Consumable : Product
+    public class ConsumableDTO : ProductDTO
     {
         public string ?Description { get; set; }
-        public Consumable() : base()
+        public ConsumableDTO() : base()
         {
 
         }

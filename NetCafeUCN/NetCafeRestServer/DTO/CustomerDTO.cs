@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NetCafeUCN.API.DTO
 {
-    public class Customer : Person
+    public class CustomerDTO : PersonDTO
     {
     }
 }
