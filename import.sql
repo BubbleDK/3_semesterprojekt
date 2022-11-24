@@ -17,7 +17,7 @@ CREATE TABLE nc_Person(
 	phone VARCHAR(50),
 	email VARCHAR(50) NOT NULL,
 	personType VARCHAR(50) NOT NULL,
-    	password VARCHAR(50) NOT NULL,
+    password VARCHAR(50),
 	isActive BIT,
 
 	PRIMARY KEY(id),
