@@ -93,6 +93,7 @@
             // 
             this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox2.Location = new System.Drawing.Point(134, 21);
+            this.textBox2.MaxLength = 8;
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(115, 23);
             this.textBox2.TabIndex = 3;
@@ -102,9 +103,9 @@
             this.lblPhone.AutoSize = true;
             this.lblPhone.Location = new System.Drawing.Point(12, 24);
             this.lblPhone.Name = "lblPhone";
-            this.lblPhone.Size = new System.Drawing.Size(45, 15);
+            this.lblPhone.Size = new System.Drawing.Size(48, 15);
             this.lblPhone.TabIndex = 1;
-            this.lblPhone.Text = "Telefon";
+            this.lblPhone.Text = "Telefon:";
             // 
             // cmbEndTime
             // 
@@ -122,9 +123,9 @@
             this.lblEndTime.AutoSize = true;
             this.lblEndTime.Location = new System.Drawing.Point(12, 253);
             this.lblEndTime.Name = "lblEndTime";
-            this.lblEndTime.Size = new System.Drawing.Size(41, 15);
+            this.lblEndTime.Size = new System.Drawing.Size(44, 15);
             this.lblEndTime.TabIndex = 3;
-            this.lblEndTime.Text = "Sluttid";
+            this.lblEndTime.Text = "Sluttid:";
             // 
             // lblStartTime
             // 
@@ -154,6 +155,7 @@
             this.clndPicker.MinDate = new System.DateTime(1971, 1, 1, 0, 0, 0, 0);
             this.clndPicker.Name = "clndPicker";
             this.clndPicker.TabIndex = 0;
+            this.clndPicker.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.clndPicker_DateChanged);
             // 
             // dgvAvailableGamingstations
             // 

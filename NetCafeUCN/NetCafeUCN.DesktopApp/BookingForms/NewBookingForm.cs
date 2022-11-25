@@ -32,6 +32,11 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             dgvAvailableGamingstations.DataSource = availableGamingStations;
             dgvAvailableGamingstations.Columns["productID"].Visible = false;
             dgvAvailableGamingstations.Columns["isActive"].Visible = false;
+            dgvAvailableGamingstations.Columns["Type"].Visible = false;
+            dgvAvailableGamingstations.Columns["SeatNumber"].HeaderText = "Plads nr:";
+            dgvAvailableGamingstations.Columns["Description"].HeaderText = "Beskrivelse:";
+            dgvAvailableGamingstations.Columns["Name"].HeaderText = "Produkt navn:";
+            dgvAvailableGamingstations.Columns["ProductNumber"].HeaderText = "Produkt nr:";
         }
 
         private void InitializeTimes()
@@ -46,6 +51,25 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             {
                 cmbEndTime.SelectedIndex = cmbStartTime.SelectedIndex + 1;
             }
+            RefreshGamingStationsTimeChanged();
+        }
+
+        private void cmbEndTime_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            if (cmbEndTime.SelectedIndex <= cmbStartTime.SelectedIndex)
+            {
+                cmbEndTime.SelectedIndex = cmbStartTime.SelectedIndex + 1;
+            }
+            RefreshGamingStationsTimeChanged();
+        }
+
+        private void clndPicker_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            RefreshGamingStationsTimeChanged();
+        }
+
+        private void RefreshGamingStationsTimeChanged()
+        {
             DateTime currDate = clndPicker.SelectionStart;
             TimeSpan startTime = (TimeSpan)cmbStartTime.SelectedItem;
             TimeSpan endTime = (TimeSpan)cmbEndTime.SelectedItem;
@@ -88,61 +112,6 @@ namespace NetCafeUCN.DesktopApp.BookingForms
                     }
                 }
                 if (res)
-                {
-                    _availableGamingStations.Add(item);
-                }
-            }
-            RefreshGamingStations(_availableGamingStations);
-        }
-
-        private void cmbEndTime_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            if (cmbEndTime.SelectedIndex <= cmbStartTime.SelectedIndex)
-            {
-                cmbEndTime.SelectedIndex = cmbStartTime.SelectedIndex + 1;
-            }
-            DateTime currDate = clndPicker.SelectionStart;
-            TimeSpan startTime = (TimeSpan)cmbStartTime.SelectedItem;
-            TimeSpan endTime = (TimeSpan)cmbEndTime.SelectedItem;
-            DateTime selectedStartTime = currDate.Date.Add(startTime);
-            DateTime selectedEndTime = currDate.Date.Add(endTime);
-            _availableGamingStations = new List<GamingStationDTO>();
-            List<GamingStationDTO> allGamingStations = gamingStationService.GetAll().ToList();
-            List<BookingDTO> allBookings = bookingService.GetAll().ToList();
-            List<BookingDTO> bookingsWithinSelectedTimeSpan = new List<BookingDTO>();
-            //Find alle bookings som er i det tidsrum man har indtastet
-            foreach (var item in allBookings)
-            {
-                if ((item.StartTime < selectedStartTime && item.EndTime > selectedStartTime) || 
-                    (item.StartTime < selectedEndTime && item.EndTime > selectedEndTime) || 
-                    (item.StartTime > selectedStartTime && item.EndTime < selectedEndTime))
-                {
-                    //Tilføj det fundne bookings til ny liste
-                    bookingsWithinSelectedTimeSpan.Add(item);
-                }
-            }
-            List<int> stationProductIds = new List<int>();
-            //Gå igennem de fundne bookings for at finde de optagede gamingstation IDs
-            foreach (var item in bookingsWithinSelectedTimeSpan)
-            {
-                foreach (var bl in item.BookingLines)
-                {
-                    stationProductIds.Add(bl.StationId);
-                }
-            }
-            //Se på hver gamingstation om den ligger i listen af bookinglines
-            foreach (var item in allGamingStations)
-            {
-                bool res = true;
-                foreach (int id in stationProductIds)
-                {
-                    if(item.productID == id)
-                    {
-                        res = false;
-                        break;
-                    }
-                }
-                if(res)
                 {
                     _availableGamingStations.Add(item);
                 }
