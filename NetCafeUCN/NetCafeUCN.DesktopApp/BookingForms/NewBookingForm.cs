@@ -51,7 +51,9 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             //Find alle bookings som er i det tidsrum man har indtastet
             foreach (var item in allBookings)
             {
-                if (item.StartTime < selectedEndTime || item.EndTime > selectedStartTime)
+                if ((item.StartTime < selectedStartTime && item.EndTime > selectedStartTime) ||
+                    (item.StartTime < selectedEndTime && item.EndTime > selectedEndTime) ||
+                    (item.StartTime > selectedStartTime && item.EndTime < selectedEndTime))
                 {
                     //Tilføj det fundne bookings til ny liste
                     bookingsWithinSelectedTimeSpan.Add(item);
@@ -63,7 +65,7 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             {
                 foreach (var bl in item.BookingLines)
                 {
-                    stationProductIds.Add(bl.StationProductId);
+                    stationProductIds.Add(bl.StationId);
                 }
             }
             //Se på hver gamingstation om den ligger i listen af bookinglines
@@ -104,7 +106,9 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             //Find alle bookings som er i det tidsrum man har indtastet
             foreach (var item in allBookings)
             {
-                if (item.StartTime < selectedEndTime || item.EndTime > selectedStartTime)
+                if ((item.StartTime < selectedStartTime && item.EndTime > selectedStartTime) || 
+                    (item.StartTime < selectedEndTime && item.EndTime > selectedEndTime) || 
+                    (item.StartTime > selectedStartTime && item.EndTime < selectedEndTime))
                 {
                     //Tilføj det fundne bookings til ny liste
                     bookingsWithinSelectedTimeSpan.Add(item);
@@ -116,7 +120,7 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             {
                 foreach (var bl in item.BookingLines)
                 {
-                    stationProductIds.Add(bl.StationProductId);
+                    stationProductIds.Add(bl.StationId);
                 }
             }
             //Se på hver gamingstation om den ligger i listen af bookinglines
