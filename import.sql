@@ -90,7 +90,7 @@ CREATE TABLE nc_GamingStation(
 );
 
 CREATE TABLE nc_Pack(
-   productid INT NOT NULL,
+    productid INT NOT NULL,
 
     CONSTRAINT fk_ncPackproductid FOREIGN KEY (productid) REFERENCES nc_Product(id),
     PRIMARY KEY(productid),
