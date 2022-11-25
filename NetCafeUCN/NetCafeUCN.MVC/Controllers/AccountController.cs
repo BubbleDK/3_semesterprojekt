@@ -8,6 +8,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using NetCafeUCN.MVC.Models.DTO;
 using NetCafeUCN.MVC.Services;
+using NetCafeUCN.MVC.Authentication;
 
 namespace NetCafeUCN.MVC.Controllers
 {
@@ -27,6 +28,7 @@ namespace NetCafeUCN.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Login([FromForm] LoginModel loginInfo, [FromQuery] string returnUrl)
         {
+            
             User? user = _userProvider.GetUserByLogin(loginInfo.Email, loginInfo.Password);
 
             if (user != null) { await SignIn(user); }

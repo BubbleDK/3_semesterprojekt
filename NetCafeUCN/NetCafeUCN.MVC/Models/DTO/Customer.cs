@@ -8,12 +8,14 @@ namespace NetCafeUCN.MVC.Models
 {
     public class Customer : Person
     {
-        public Customer(string name, string email, string phone, string personType) : base(name, email, phone, personType)
+        public Customer(string name, string email, string phone, string personType, string password, bool isActive) : base(name, email, phone, personType, password, isActive)
         {
+            isActive = true;
+            PersonType = "Customer";
         }
         public Customer() : base()
         {
-
+            
         }
     }
 }

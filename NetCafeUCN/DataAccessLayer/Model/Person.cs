@@ -13,14 +13,16 @@ namespace NetCafeUCN.DAL.Model
         public string? Phone { get; set; }
         public string? PersonType { get; set; }
         public bool IsActive { get; set; }
+        public string? Password { get; set; }
 
-        public Person(string name, string email, string phone, string personType)
+        public Person(string name, string email, string phone, string personType, string password)
         {
             Name = name;
             Email = email;
             Phone = phone;
             PersonType = personType;
             IsActive = true;
+            Password = password;    
         }
         public Person()
         {

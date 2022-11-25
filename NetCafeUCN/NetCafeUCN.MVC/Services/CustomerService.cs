@@ -24,7 +24,8 @@ namespace NetCafeUCN.MVC.Services
         //
         public bool Add(Customer o)
         {
-            return RestClient.Execute<Customer>(new RestRequest($"{BaseUri}/{o}", Method.Post)).IsSuccessful;
+            return RestClient.Execute<Customer>(new RestRequest($"{BaseUri}", Method.Post).AddJsonBody(o)).IsSuccessful;
+
         }
 
         public Customer? Get(dynamic key)
