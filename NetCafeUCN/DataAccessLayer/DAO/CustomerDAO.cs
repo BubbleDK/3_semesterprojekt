@@ -4,8 +4,20 @@ using System.Data.SqlClient;
 
 namespace NetCafeUCN.DAL.DAO
 {
+    /* @authors Rasmus Gudiksen, Jakob Kjeldsteen, Emil Tolstrup Petersen, Christian Funder og Mark Drongesen
+     * <summary>
+     * Denne klasse styrer kontakten mellem database og systemet omhandlende Customer
+     * <summary/>
+     */
     public class CustomerDAO : INetCafeDAO<Customer>
     {
+        /*
+        * <summary>
+	    * Metoden tilføjer en Customer en til databasen.
+	    * <summary/>
+	    * <param name="o">Er den Customer der bliver tilføjet til databasen</param>
+	    * <returns>En bool<returns/>
+	    */
         public bool Add(Customer o)
         {
             SqlTransaction trans;
@@ -44,7 +56,13 @@ namespace NetCafeUCN.DAL.DAO
                 return true;
             }
         }
-
+        /*
+        * <summary>
+	    * Metoden henter en specifik Customer fra databasen.
+	    * <summary/>
+	    * <param name="key">Er et telefon nummer der bliver brugt til at finde en Customer</param>
+	    * <returns>En Customer<returns/>
+	    */
         public Customer? Get(dynamic key)
         {
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
@@ -78,7 +96,12 @@ namespace NetCafeUCN.DAL.DAO
                 }
             }
         }
-
+        /*
+        * <summary>
+	    * Metoden henter alle Customers fra databasen.
+	    * <summary/>
+	    * <returns>En liste af Customers<returns/>
+	    */
         public IEnumerable<Customer> GetAll()
         {
             string sqlStatement = "SELECT * FROM nc_Customer inner join nc_Person on nc_Person.id = nc_Customer.personid";
@@ -111,7 +134,13 @@ namespace NetCafeUCN.DAL.DAO
             }
             return list;
         }
-
+        /*
+        * <summary>
+	    * Metoden opdaterer isActive på en Customer.
+	    * <summary/>
+	    * <param name="key">Er et telefon nummer der bliver brugt til at finde en Customer</param>
+	    * <returns>En bool<returns/>
+	    */
         public bool Remove(dynamic key)
         {
             SqlTransaction trans;
@@ -138,7 +167,13 @@ namespace NetCafeUCN.DAL.DAO
                 }
             }
         }
-
+        /*
+        * <summary>
+	    * Metoden opdaterer en Customer fra databasen.
+	    * <summary/>
+	    * <param name="o">Er den opdateret Customer</param>
+	    * <returns>En bool<returns/>
+	    */
         public bool Update(Customer o)
         {
             SqlTransaction trans;

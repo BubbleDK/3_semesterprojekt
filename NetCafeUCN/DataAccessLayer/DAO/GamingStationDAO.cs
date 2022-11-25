@@ -9,8 +9,20 @@ using System.Threading.Tasks;
 
 namespace NetCafeUCN.DAL.DAO
 {
+    /* @authors Rasmus Gudiksen, Jakob Kjeldsteen, Emil Tolstrup Petersen, Christian Funder og Mark Drongesen
+     * <summary>
+     * Denne klasse styrer kontakten mellem database og systemet omhandlende Gamingstation
+     * <summary/>
+     */
     public class GamingStationDAO : INetCafeDAO<GamingStation>
     {
+        /*
+        * <summary>
+	    * Metoden tilføjer en GamingStation en til databasen.
+	    * <summary/>
+	    * <param name="p">Er den GamingStation der bliver tilføjet til databasen</param>
+	    * <returns>En bool<returns/>
+	    */
         public bool Add(GamingStation p)
         {
             SqlTransaction trans;
@@ -51,7 +63,13 @@ namespace NetCafeUCN.DAL.DAO
             }
             return true;
         }
-
+        /*
+        * <summary>
+	    * Metoden henter en specifik GamingStation fra databasen.
+	    * <summary/>
+	    * <param name="key">Er et produkt nummer der bliver brugt til at finde en GamingStation</param>
+	    * <returns>En GamingStation<returns/>
+	    */
         public GamingStation? Get(dynamic key)
         {
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
@@ -86,8 +104,12 @@ namespace NetCafeUCN.DAL.DAO
             }
             return null;
         }
-
-
+        /*
+        * <summary>
+	    * Metoden henter alle GamingStations fra databasen.
+	    * <summary/>
+	    * <returns>En liste af GamingStations<returns/>
+	    */
         public IEnumerable<GamingStation> GetAll()
         {
 
@@ -123,7 +145,13 @@ namespace NetCafeUCN.DAL.DAO
             }
             return list;
         }
-
+        /*
+        * <summary>
+	    * Metoden opdaterer isActive på en GamingStation.
+	    * <summary/>
+	    * <param name="key">Er et produkt nummer der bliver brugt til at finde en GamingStation</param>
+	    * <returns>En bool<returns/>
+	    */
         public bool Remove(dynamic key)
         {
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
@@ -185,6 +213,13 @@ namespace NetCafeUCN.DAL.DAO
         //    }
         //}
 
+        /*
+        * <summary>
+	    * Metoden opdaterer en GamingStation fra databasen.
+	    * <summary/>
+	    * <param name="o">Er den opdateret GamingStation</param>
+	    * <returns>En bool<returns/>
+	    */
         public bool Update(GamingStation o)
         {
             SqlTransaction trans;

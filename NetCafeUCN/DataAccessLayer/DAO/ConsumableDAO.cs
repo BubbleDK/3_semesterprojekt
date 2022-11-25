@@ -5,8 +5,20 @@ using System.Data.SqlClient;
 
 namespace NetCafeUCN.DAL.DAO
 {
+    /* @authors Rasmus Gudiksen, Jakob Kjeldsteen, Emil Tolstrup Petersen, Christian Funder og Mark Drongesen
+     * <summary>
+     * Denne klasse styrer kontakten mellem database og systemet omhandlende Consumable
+     * <summary/>
+     */
     public class ConsumableDAO : INetCafeDAO<Consumable>
     {
+        /*
+        * <summary>
+	    * Metoden tilføjer en Consumable en til databasen.
+	    * <summary/>
+	    * <param name="o">Er den Consumable der bliver tilføjet til databasen</param>
+	    * <returns>En bool<returns/>
+	    */
         public bool Add(Consumable o)
         {
             SqlTransaction trans;
@@ -47,7 +59,13 @@ namespace NetCafeUCN.DAL.DAO
                 }
             }
         }
-
+        /*
+        * <summary>
+	    * Metoden henter en specifik Consumable fra databasen.
+	    * <summary/>
+	    * <param name="productNo">Er et produkt nummer der bliver brugt til at finde en Consumable</param>
+	    * <returns>En Consumable<returns/>
+	    */
         public Consumable? Get(dynamic productNo)
         {
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
@@ -81,7 +99,12 @@ namespace NetCafeUCN.DAL.DAO
             }
             return null;
         }
-
+        /*
+        * <summary>
+	    * Metoden henter alle Consumable fra databasen.
+	    * <summary/>
+	    * <returns>En liste af Consumable<returns/>
+	    */
         public IEnumerable<Consumable> GetAll()
         {
             string sqlStatement = "SELECT nc_Consumables.description, nc_Product.productNo, nc_Product.productType, nc_Product.name, nc_Product.isActive FROM nc_Product INNER JOIN nc_Consumables ON nc_Product.id = nc_Consumables.productid";
@@ -114,7 +137,13 @@ namespace NetCafeUCN.DAL.DAO
             }
             return list;
         }
-
+        /*
+        * <summary>
+	    * Metoden opdaterer isActive på en Consumable.
+	    * <summary/>
+	    * <param name="key">Er et produkt nummer der bliver brugt til at finde en Consumable</param>
+	    * <returns>En bool<returns/>
+	    */
         public bool Remove(dynamic key)
         {
             SqlTransaction trans;
@@ -141,7 +170,13 @@ namespace NetCafeUCN.DAL.DAO
                 }
             }
         }
-
+        /*
+        * <summary>
+	    * Metoden opdaterer en Consumable fra databasen.
+	    * <summary/>
+	    * <param name="o">Er den opdateret Consumable</param>
+	    * <returns>En bool<returns/>
+	    */
         public bool Update(Consumable o)
         {
             SqlTransaction trans;

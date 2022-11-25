@@ -4,8 +4,20 @@ using System.Data.SqlClient;
 
 namespace NetCafeUCN.DAL.DAO
 {
+    /* @authors Rasmus Gudiksen, Jakob Kjeldsteen, Emil Tolstrup Petersen, Christian Funder og Mark Drongesen
+     * <summary>
+     * Denne klasse styrer kontakten mellem database og systemet omhandlende Employee
+     * <summary/>
+     */
     public class EmployeeDAO : INetCafeDAO<Employee>
     {
+        /*
+        * <summary>
+	    * Metoden tilføjer en Employee en til databasen.
+	    * <summary/>
+	    * <param name="o">Er den Employee der bliver tilføjet til databasen</param>
+	    * <returns>En bool<returns/>
+	    */
         public bool Add(Employee o)
         {
             SqlTransaction trans;
@@ -49,7 +61,13 @@ namespace NetCafeUCN.DAL.DAO
             }
             return true;
         }
-
+        /*
+        * <summary>
+	    * Metoden henter en specifik Employee fra databasen.
+	    * <summary/>
+	    * <param name="key">Er et telefon nummer der bliver brugt til at finde en Employee</param>
+	    * <returns>En Employee<returns/>
+	    */
         public Employee? Get(dynamic key)
         {
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
@@ -87,7 +105,12 @@ namespace NetCafeUCN.DAL.DAO
             }
             return null;
         }
-
+        /*
+        * <summary>
+	    * Metoden henter alle Employees fra databasen.
+	    * <summary/>
+	    * <returns>En liste af Employee<returns/>
+	    */
         public IEnumerable<Employee> GetAll()
         {
             string sqlStatement = "SELECT name, phone, email, personType, address, role, zipCode, isActive FROM nc_Person INNER JOIN nc_Employee ON nc_Person.id = nc_Employee.personid;";
@@ -124,7 +147,13 @@ namespace NetCafeUCN.DAL.DAO
             }
             return list;
         }
-
+        /*
+        * <summary>
+	    * Metoden opdaterer isActive på en Employee.
+	    * <summary/>
+	    * <param name="key">Er et telefon nummer der bliver brugt til at finde en Employee</param>
+	    * <returns>En bool<returns/>
+	    */
         public bool Remove(dynamic key)
         {
             SqlTransaction trans;
