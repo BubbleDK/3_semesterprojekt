@@ -157,6 +157,8 @@
             // 
             // dgvAvailableGamingstations
             // 
+            this.dgvAvailableGamingstations.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvAvailableGamingstations.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvAvailableGamingstations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAvailableGamingstations.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvAvailableGamingstations.Location = new System.Drawing.Point(0, 0);

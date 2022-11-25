@@ -113,6 +113,8 @@
             // 
             // dgvBookings
             // 
+            this.dgvBookings.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvBookings.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvBookings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBookings.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvBookings.Location = new System.Drawing.Point(0, 0);

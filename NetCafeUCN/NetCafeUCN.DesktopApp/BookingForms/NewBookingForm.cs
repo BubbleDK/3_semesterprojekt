@@ -24,7 +24,14 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             clndPicker.MinDate = DateTime.Now;
             gamingStationService = new GamingStationService("https://localhost:7197/api/Gamingstation/");
             bookingService = new BookingService("https://localhost:7197/api/Booking/");
-            dgvAvailableGamingstations.DataSource = gamingStationService.GetAll();
+            RefreshGamingStations(gamingStationService.GetAll().ToList());
+        }
+
+        private void RefreshGamingStations(List<GamingStationDTO> availableGamingStations)
+        {
+            dgvAvailableGamingstations.DataSource = availableGamingStations;
+            dgvAvailableGamingstations.Columns["productID"].Visible = false;
+            dgvAvailableGamingstations.Columns["isActive"].Visible = false;
         }
 
         private void InitializeTimes()
@@ -85,7 +92,7 @@ namespace NetCafeUCN.DesktopApp.BookingForms
                     _availableGamingStations.Add(item);
                 }
             }
-            dgvAvailableGamingstations.DataSource = _availableGamingStations;
+            RefreshGamingStations(_availableGamingStations);
         }
 
         private void cmbEndTime_SelectionChangeCommitted(object sender, EventArgs e)
@@ -140,8 +147,7 @@ namespace NetCafeUCN.DesktopApp.BookingForms
                     _availableGamingStations.Add(item);
                 }
             }
-            dgvAvailableGamingstations.DataSource = null;
-            dgvAvailableGamingstations.DataSource = _availableGamingStations;
+            RefreshGamingStations(_availableGamingStations);
         }
     }
 }
