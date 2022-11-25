@@ -56,7 +56,8 @@ namespace NetCafeUCN.DAL.DAO
         {
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
-                using SqlCommand command = new SqlCommand("SELECT productNo, name, description, productType, seatNo, isActive FROM nc_Product INNER JOIN nc_GamingStation ON nc_Product.id = nc_GamingStation.stationid WHERE productNo = @productNo;", conn);
+                using SqlCommand command = new SqlCommand("SELECT id, productNo, name, description, productType, seatNo, isActive FROM " +
+                    "nc_Product INNER JOIN nc_GamingStation ON nc_Product.id = nc_GamingStation.stationid WHERE productNo = @productNo;", conn);
                 command.Parameters.AddWithValue("@productNo", key);
                 {
                     try
@@ -67,6 +68,7 @@ namespace NetCafeUCN.DAL.DAO
                         {
                             GamingStation product = new GamingStation()
                             {
+                                ProductID = (int)reader["id"],
                                 ProductNumber = (string)reader["productNo"],
                                 Name = (string)reader["name"],
                                 Description = (string)reader["description"],
@@ -91,7 +93,8 @@ namespace NetCafeUCN.DAL.DAO
         public IEnumerable<GamingStation> GetAll()
         {
 
-            string sqlStatement = "SELECT productNo, name, description, productType, seatNo, IsActive FROM nc_Product INNER JOIN nc_GamingStation ON nc_Product.id = nc_GamingStation.stationid";
+            string sqlStatement = "SELECT id, productNo, name, description, productType, seatNo, IsActive FROM nc_Product " +
+                "INNER JOIN nc_GamingStation ON nc_Product.id = nc_GamingStation.stationid";
             List<GamingStation> list = new List<GamingStation>();
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
@@ -105,6 +108,7 @@ namespace NetCafeUCN.DAL.DAO
                     {
                         GamingStation product = new()
                         {
+                            ProductID= (int)reader["id"],
                             ProductNumber = (string)reader["productNo"],
                             Name = (string)reader["name"],
                             Description = (string)reader["description"],

@@ -45,16 +45,45 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             DateTime selectedStartTime = currDate.Date.Add(startTime);
             DateTime selectedEndTime = currDate.Date.Add(endTime);
             _availableGamingStations = new List<GamingStationDTO>();
-            _availableGamingStations = gamingStationService.GetAll().ToList();
+            List<GamingStationDTO> allGamingStations = gamingStationService.GetAll().ToList();
             List<BookingDTO> allBookings = bookingService.GetAll().ToList();
             List<BookingDTO> bookingsWithinSelectedTimeSpan = new List<BookingDTO>();
+            //Find alle bookings som er i det tidsrum man har indtastet
             foreach (var item in allBookings)
             {
-                if(item.StartTime < selectedEndTime || item.EndTime > selectedStartTime)
+                if (item.StartTime < selectedEndTime || item.EndTime > selectedStartTime)
                 {
+                    //Tilføj det fundne bookings til ny liste
                     bookingsWithinSelectedTimeSpan.Add(item);
                 }
             }
+            List<int> stationProductIds = new List<int>();
+            //Gå igennem de fundne bookings for at finde de optagede gamingstation IDs
+            foreach (var item in bookingsWithinSelectedTimeSpan)
+            {
+                foreach (var bl in item.BookingLines)
+                {
+                    stationProductIds.Add(bl.StationProductId);
+                }
+            }
+            //Se på hver gamingstation om den ligger i listen af bookinglines
+            foreach (var item in allGamingStations)
+            {
+                bool res = true;
+                foreach (int id in stationProductIds)
+                {
+                    if (item.productID == id)
+                    {
+                        res = false;
+                        break;
+                    }
+                }
+                if (res)
+                {
+                    _availableGamingStations.Add(item);
+                }
+            }
+            dgvAvailableGamingstations.DataSource = _availableGamingStations;
         }
 
         private void cmbEndTime_SelectionChangeCommitted(object sender, EventArgs e)
@@ -81,27 +110,34 @@ namespace NetCafeUCN.DesktopApp.BookingForms
                     bookingsWithinSelectedTimeSpan.Add(item);
                 }
             }
-            List<int> stationIDs = new List<int>();
+            List<int> stationProductIds = new List<int>();
             //Gå igennem de fundne bookings for at finde de optagede gamingstation IDs
             foreach (var item in bookingsWithinSelectedTimeSpan)
             {
                 foreach (var bl in item.BookingLines)
                 {
-                    stationIDs.Add(bl.Stationid);
+                    stationProductIds.Add(bl.StationProductId);
                 }
             }
-            //Gå igennem alle gamingstations og fjern de optagede fra listen eller tilføj de 
-            //ikkeoptagede til en ny liste
+            //Se på hver gamingstation om den ligger i listen af bookinglines
             foreach (var item in allGamingStations)
             {
                 bool res = true;
-                for (int i = 0; i < stationIDs.Count; i++)
+                foreach (int id in stationProductIds)
                 {
-                    if(item.ProductNumber != stationIDs[i])
+                    if(item.productID == id)
                     {
+                        res = false;
+                        break;
                     }
                 }
+                if(res)
+                {
+                    _availableGamingStations.Add(item);
+                }
             }
+            dgvAvailableGamingstations.DataSource = null;
+            dgvAvailableGamingstations.DataSource = _availableGamingStations;
         }
     }
 }
