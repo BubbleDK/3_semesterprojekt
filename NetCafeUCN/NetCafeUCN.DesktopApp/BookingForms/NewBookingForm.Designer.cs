@@ -30,7 +30,7 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtPhoneNo = new System.Windows.Forms.TextBox();
             this.lblPhone = new System.Windows.Forms.Label();
             this.cmbEndTime = new System.Windows.Forms.ComboBox();
             this.lblEndTime = new System.Windows.Forms.Label();
@@ -38,6 +38,7 @@
             this.cmbStartTime = new System.Windows.Forms.ComboBox();
             this.clndPicker = new System.Windows.Forms.MonthCalendar();
             this.dgvAvailableGamingstations = new System.Windows.Forms.DataGridView();
+            this.btnConfirm = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -75,11 +76,12 @@
             // 
             // splitContainer2.Panel1
             // 
-            this.splitContainer2.Panel1.Controls.Add(this.textBox2);
+            this.splitContainer2.Panel1.Controls.Add(this.txtPhoneNo);
             this.splitContainer2.Panel1.Controls.Add(this.lblPhone);
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.Controls.Add(this.btnConfirm);
             this.splitContainer2.Panel2.Controls.Add(this.cmbEndTime);
             this.splitContainer2.Panel2.Controls.Add(this.lblEndTime);
             this.splitContainer2.Panel2.Controls.Add(this.lblStartTime);
@@ -89,14 +91,14 @@
             this.splitContainer2.SplitterDistance = 73;
             this.splitContainer2.TabIndex = 0;
             // 
-            // textBox2
+            // txtPhoneNo
             // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.Location = new System.Drawing.Point(134, 21);
-            this.textBox2.MaxLength = 8;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(115, 23);
-            this.textBox2.TabIndex = 3;
+            this.txtPhoneNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPhoneNo.Location = new System.Drawing.Point(134, 21);
+            this.txtPhoneNo.MaxLength = 8;
+            this.txtPhoneNo.Name = "txtPhoneNo";
+            this.txtPhoneNo.Size = new System.Drawing.Size(115, 23);
+            this.txtPhoneNo.TabIndex = 3;
             // 
             // lblPhone
             // 
@@ -173,6 +175,16 @@
             this.dgvAvailableGamingstations.Size = new System.Drawing.Size(789, 604);
             this.dgvAvailableGamingstations.TabIndex = 0;
             // 
+            // btnConfirm
+            // 
+            this.btnConfirm.Location = new System.Drawing.Point(201, 492);
+            this.btnConfirm.Name = "btnConfirm";
+            this.btnConfirm.Size = new System.Drawing.Size(75, 23);
+            this.btnConfirm.TabIndex = 5;
+            this.btnConfirm.Text = "Bekræft";
+            this.btnConfirm.UseVisualStyleBackColor = true;
+            this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
+            // 
             // NewBookingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -199,7 +211,7 @@
         #endregion
 
         private SplitContainer splitContainer1;
-        private TextBox textBox2;
+        private TextBox txtPhoneNo;
         private Label lblPhone;
         private SplitContainer splitContainer2;
         private ComboBox cmbEndTime;
@@ -208,5 +220,6 @@
         private ComboBox cmbStartTime;
         private MonthCalendar clndPicker;
         private DataGridView dgvAvailableGamingstations;
+        private Button btnConfirm;
     }
 }

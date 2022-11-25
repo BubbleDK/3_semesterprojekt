@@ -118,5 +118,32 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             }
             RefreshGamingStations(_availableGamingStations);
         }
+
+        private void btnConfirm_Click(object sender, EventArgs e)
+        {
+            ConfirmBooking();
+        }
+
+        private void ConfirmBooking()
+        {
+            BookingDTO bookingDTO = new BookingDTO();
+            DateTime currDate = clndPicker.SelectionStart;
+            TimeSpan startTime = (TimeSpan)cmbStartTime.SelectedItem;
+            TimeSpan endTime = (TimeSpan)cmbEndTime.SelectedItem;
+            DateTime selectedStartTime = currDate.Date.Add(startTime);
+            DateTime selectedEndTime = currDate.Date.Add(endTime);
+            bookingDTO.StartTime = selectedStartTime;
+            bookingDTO.EndTime = selectedEndTime;
+            bookingDTO.PhoneNo = txtPhoneNo.Text;
+            //TODO: Udfyld booking number
+            //bookingDTO.BookingNo
+            //dgvAvailableGamingstations.ForEach(row => rows.SelectedRows(new BookingLineDTO { StationId = row.id, Quantity = 1, ConsumableId =-1 }));
+
+            foreach (GamingStationDTO row in dgvAvailableGamingstations.SelectedRows)
+            {
+                bookingDTO.BookingLines.Add(new BookingLineDTO { Quantity = 1, StationId = row.productID, ConsumableId = -1 });
+            }
+            bookingService.Add(bookingDTO);
+        }
     }
 }
