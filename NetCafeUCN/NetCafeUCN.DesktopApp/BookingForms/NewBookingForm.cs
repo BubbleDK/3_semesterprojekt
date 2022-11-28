@@ -28,6 +28,20 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             RefreshGamingStations(gamingStationService.GetAll().ToList());
         }
 
+        public NewBookingForm(BookingDTO bookingToUpdate)
+        {
+            InitializeComponent();
+            InitializeTimes();
+            clndPicker.MinDate = bookingToUpdate.StartTime.Date;
+            //TODO: SKAL RUNDES AF
+            cmbStartTime.SelectedValue = bookingToUpdate.StartTime;
+            //TODO: SKAL RUNDES AF
+            cmbEndTime.SelectedValue = bookingToUpdate.EndTime;
+            gamingStationService = new GamingStationService("https://localhost:7197/api/Gamingstation/");
+            bookingService = new BookingService("https://localhost:7197/api/Booking/");
+            RefreshGamingStations(gamingStationService.GetAll().ToList());
+        }
+
         private void RefreshGamingStations(List<GamingStationDTO> availableGamingStations)
         {
             dgvAvailableGamingstations.DataSource = availableGamingStations;
@@ -130,6 +144,7 @@ namespace NetCafeUCN.DesktopApp.BookingForms
         private void ConfirmBooking()
         {
             BookingDTO bookingDTO = new BookingDTO();
+            bookingDTO.BookingLines = new List<BookingLineDTO>();
             DateTime currDate = clndPicker.SelectionStart;
             TimeSpan startTime = (TimeSpan)cmbStartTime.SelectedItem;
             TimeSpan endTime = (TimeSpan)cmbEndTime.SelectedItem;
@@ -140,13 +155,21 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             bookingDTO.PhoneNo = txtPhoneNo.Text;
             //dgvAvailableGamingstations.ForEach(row => rows.SelectedRows(new BookingLineDTO { StationId = row.id, Quantity = 1, ConsumableId =-1 }));
 
-            foreach (GamingStationDTO row in dgvAvailableGamingstations.SelectedRows)
+            foreach (DataGridViewRow row in dgvAvailableGamingstations.SelectedRows)
             {
-                bookingDTO.BookingLines.Add(new BookingLineDTO { Quantity = 1, StationId = row.productID, ConsumableId = -1 });
+                GamingStationDTO currentGamingstation = (GamingStationDTO)row.DataBoundItem;
+                bookingDTO.addToBookingLine(new BookingLineDTO { Quantity = 1, StationId = currentGamingstation.productID, ConsumableId = -1 });
             }
             if (CheckPhoneNo(txtPhoneNo.Text))
             {
-                bookingService.Add(bookingDTO);
+                if(bookingDTO.BookingLines.Count > 0)
+                {
+                    bookingService.Add(bookingDTO);
+                }
+                else
+                {
+                    MessageBox.Show("Du skal vælge minimum en PC", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             else
             {
@@ -156,7 +179,7 @@ namespace NetCafeUCN.DesktopApp.BookingForms
 
         private bool CheckPhoneNo(string phoneNo)
         {
-            Regex validatePhoneNoRegex = new Regex("^\\[1-9][0-9]{7}$");
+            Regex validatePhoneNoRegex = new Regex("^\\+?[1-9][0-9]{7}$");
             return validatePhoneNoRegex.IsMatch(phoneNo);
         }
     }

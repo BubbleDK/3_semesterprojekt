@@ -2,7 +2,7 @@
 {
     public class BookingDTO
     {
-        public int BookingNo { get; set; }
+        public string? BookingNo { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public string PhoneNo { get; set; }
