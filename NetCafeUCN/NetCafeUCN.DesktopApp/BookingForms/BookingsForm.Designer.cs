@@ -120,7 +120,9 @@
             this.dgvBookings.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvBookings.Location = new System.Drawing.Point(0, 0);
             this.dgvBookings.Name = "dgvBookings";
+            this.dgvBookings.ReadOnly = true;
             this.dgvBookings.RowTemplate.Height = 25;
+            this.dgvBookings.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvBookings.Size = new System.Drawing.Size(530, 450);
             this.dgvBookings.TabIndex = 0;
             // 
