@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -47,6 +48,7 @@ namespace NetCafeUCN.DesktopApp.BookingForms
 
         private void cmbStartTime_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            //TODO: Check om tidspunkt ligger efter nuværende tidspunkt på datetime.now
             if (cmbEndTime.SelectedIndex <= cmbStartTime.SelectedIndex)
             {
                 cmbEndTime.SelectedIndex = cmbStartTime.SelectedIndex + 1;
@@ -56,6 +58,7 @@ namespace NetCafeUCN.DesktopApp.BookingForms
 
         private void cmbEndTime_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            //TODO: Check om tidspunkt ligger efter nuværende tidspunkt på datetime.now
             if (cmbEndTime.SelectedIndex <= cmbStartTime.SelectedIndex)
             {
                 cmbEndTime.SelectedIndex = cmbStartTime.SelectedIndex + 1;
@@ -135,15 +138,26 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             bookingDTO.StartTime = selectedStartTime;
             bookingDTO.EndTime = selectedEndTime;
             bookingDTO.PhoneNo = txtPhoneNo.Text;
-            //TODO: Udfyld booking number
-            //bookingDTO.BookingNo
             //dgvAvailableGamingstations.ForEach(row => rows.SelectedRows(new BookingLineDTO { StationId = row.id, Quantity = 1, ConsumableId =-1 }));
 
             foreach (GamingStationDTO row in dgvAvailableGamingstations.SelectedRows)
             {
                 bookingDTO.BookingLines.Add(new BookingLineDTO { Quantity = 1, StationId = row.productID, ConsumableId = -1 });
             }
-            bookingService.Add(bookingDTO);
+            if (CheckPhoneNo(txtPhoneNo.Text))
+            {
+                bookingService.Add(bookingDTO);
+            }
+            else
+            {
+                MessageBox.Show("Det indtastede telefonnr er ugyldigt", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private bool CheckPhoneNo(string phoneNo)
+        {
+            Regex validatePhoneNoRegex = new Regex("^\\[1-9][0-9]{7}$");
+            return validatePhoneNoRegex.IsMatch(phoneNo);
         }
     }
 }
