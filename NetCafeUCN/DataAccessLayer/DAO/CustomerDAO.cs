@@ -205,5 +205,59 @@ namespace NetCafeUCN.DAL.DAO
                 }
             }
         }
+        public int GetId(dynamic key)
+        {
+            int id = 0;
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+            {
+                SqlCommand command = new SqlCommand("SELECT id FROM nc_Person WHERE phone = @phone", conn);
+                command.Parameters.AddWithValue("@phone", key);
+                {
+                    try
+                    {
+                        conn.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            id = (int)reader["id"];
+                            
+                        }
+                        return id;
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
+                }
+            }
+        }
+        public string GetPhoneNo(dynamic key)
+        {
+            string phoneNo = string.Empty;
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+            {
+                SqlCommand command = new SqlCommand("SELECT phone FROM nc_Person WHERE id = @id", conn);
+                command.Parameters.AddWithValue("@id", key);
+                {
+                    try
+                    {
+                        conn.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            phoneNo = (string)reader["phone"];
+
+                        }
+                        return phoneNo;
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
+                }
+            }
+        }
     }
 }

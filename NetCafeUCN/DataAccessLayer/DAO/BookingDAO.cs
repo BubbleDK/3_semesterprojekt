@@ -5,12 +5,25 @@ using System.Globalization;
 
 namespace NetCafeUCN.DAL.DAO
 {
+    /* @authors Rasmus Gudiksen, Jakob Kjeldsteen, Emil Tolstrup Petersen, Christian Funder og Mark Drongesen
+     * <summary>
+     * Denne klasse styrer kontakten mellem database og systemet omhandlende Booking
+     * <summary/>
+     */
     public class BookingDAO : INetCafeDAO<Booking>
     {
+        /*
+       * <summary>
+       * Metoden tilføjer en Booking en til databasen.
+       * <summary/>
+       * <param name="o">Er den Booking der bliver tilføjet til databasen</param>
+       * <returns>En bool<returns/>
+       */
         public bool Add(Booking o)
         {
             SqlTransaction trans;
             int id = 0;
+            CustomerDAO customerDAO = new CustomerDAO();
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
                 conn.Open();
@@ -24,7 +37,7 @@ namespace NetCafeUCN.DAL.DAO
                             bookingCommand.Parameters.AddWithValue("@bookingNo", o.GenerateBookingNo());
                             bookingCommand.Parameters.AddWithValue("@startTime", o.StartTime);
                             bookingCommand.Parameters.AddWithValue("@endTime", o.EndTime);
-                            bookingCommand.Parameters.AddWithValue("@customerId", o.CustomerId);
+                            bookingCommand.Parameters.AddWithValue("@customerId", customerDAO.GetId(o.PhoneNo));
                             id = Convert.ToInt32(bookingCommand.ExecuteScalar());
                         }
                         foreach (var item in o.BookingLines)
@@ -53,6 +66,7 @@ namespace NetCafeUCN.DAL.DAO
 
         public Booking? Get(dynamic bookingNo)
         {
+            CustomerDAO customerDAO = new CustomerDAO();
             bool isBookingCreated = false;
             Booking? booking = null;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
@@ -72,7 +86,7 @@ namespace NetCafeUCN.DAL.DAO
                                     BookingNo = (string)reader["bookingNo"],
                                     StartTime = (DateTime)reader["startTime"],
                                     EndTime = (DateTime)reader["endTime"],
-                                    CustomerId = (int)reader["customerId"],
+                                    PhoneNo = customerDAO.GetPhoneNo((int)reader["customerId"]),
                                 };
                                 isBookingCreated = true;
                             }
@@ -93,6 +107,7 @@ namespace NetCafeUCN.DAL.DAO
         public IEnumerable<Booking> GetAll()
         {
             string sqlStatement = "SELECT * FROM nc_Booking INNER JOIN nc_BookingLine ON nc_Booking.id = nc_BookingLine.bookingid";
+            CustomerDAO customerDAO = new CustomerDAO();
             List<Booking> list = new List<Booking>();
             string? currentBoNo = null;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
@@ -122,7 +137,7 @@ namespace NetCafeUCN.DAL.DAO
                                 BookingNo = (string)reader["bookingNo"],
                                 StartTime = (DateTime)reader["startTime"],
                                 EndTime = (DateTime)reader["endTime"],
-                                CustomerId = (int)reader["customerId"],
+                                PhoneNo = customerDAO.GetPhoneNo((int)reader["customerId"]),
                             };
                             newBooking.addToBookingLine(new BookingLine() { Quantity = (int)reader["quantity"], Stationid = (int)reader["stationid"], Consumableid = (int)reader["consumableid"] });
                             list.Add(newBooking);
