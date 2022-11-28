@@ -14,7 +14,7 @@ namespace NetCafeUCN.DesktopApp
             RefreshList();
         }
 
-        private void RefreshList()
+        public void RefreshList()
         {
             dgvBookings.DataSource = null;
             dgvBookings.Rows.Clear();
@@ -34,7 +34,7 @@ namespace NetCafeUCN.DesktopApp
 
         private void ShowNewBookingForm()
         {
-            Form newBookingForm = new NewBookingForm();
+            Form newBookingForm = new NewBookingForm(this);
             newBookingForm.ShowDialog();
         }
 
@@ -47,6 +47,18 @@ namespace NetCafeUCN.DesktopApp
         {
             Form getBookingByNumber = new BookingNumberInputForm();
             getBookingByNumber.ShowDialog();
+            RefreshList();
+        }
+
+        private void btnDeleteBooking_Click(object sender, EventArgs e)
+        {
+            DeleteBooking();
+        }
+
+        private void DeleteBooking()
+        {
+            //bookingService.Remove();
+            RefreshList();
         }
     }
 }
