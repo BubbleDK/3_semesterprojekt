@@ -24,11 +24,18 @@ namespace NetCafeUCN.API.Controllers
             return userDAO.GetAll().ToDtos();
         }
 
-        
+
         [HttpPost]
         public ActionResult<UserDTO?> Get([FromBody] UserDTO user)
         {
             return Ok(userDAO.GetUserByLogin(user.Email, user.Password));
+        }
+
+        [HttpPost]
+        [Route("GetHashByEmail")]
+        public ActionResult<UserLoginDto?> GetHashByEmail([FromBody] UserLoginDto user)
+        {
+            return Ok(userDAO.GetHashByEmail(user.Email));
         }
     }
 }

@@ -40,7 +40,7 @@ namespace NetCafeUCN.DAL.DAO
                             Id = (int)reader["Id"],
                             Name = (string)reader["Name"],
                             Email = (string)reader["Email"],
-                            Password = (string)reader["Password"],
+                            PasswordHash = (string)reader["Password"],
                             Role = tempRole
                         };
                         list.Add(user);
@@ -52,6 +52,36 @@ namespace NetCafeUCN.DAL.DAO
 
                     throw;
                 }
+            }
+        }
+
+        public UserLogin? GetHashByEmail(string email)
+        {
+            string sqlStatement = "SELECT Email, passwordHash from nc_person where @email = email";
+            UserLogin? user = null;
+            using(SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand(sqlStatement, conn);
+                cmd.Parameters.AddWithValue("@email", email);
+                try
+                {
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        user = new UserLogin()
+                        {
+                            Email = (string)reader["email"],
+                            PasswordHash = (string)reader["PasswordHash"]
+                        };
+                    }
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                return user;
             }
         }
 
@@ -86,7 +116,7 @@ namespace NetCafeUCN.DAL.DAO
                             Id = (int)reader["Id"],
                             Name = (string)reader["Name"],
                             Email = (string)reader["Email"],
-                            Password = (string)reader["Password"],
+                            PasswordHash = (string)reader["Password"],
                             Role = tempRole
                         };
                     }

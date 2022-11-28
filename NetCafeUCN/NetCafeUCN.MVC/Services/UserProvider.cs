@@ -2,7 +2,7 @@
 using System.Text.Json;
 using NuGet.Protocol;
 using RestSharp;
-using static NetCafeUCN.MVC.Models.DTO.User;
+using static NetCafeUCN.MVC.Models.DTO.UserDto;
 
 namespace NetCafeUCN.MVC.Services
 {
@@ -16,14 +16,12 @@ namespace NetCafeUCN.MVC.Services
             RestClient = new RestClient(baseUri);
         }
 
-        public User? GetUserByLogin(string email, string password)
+        public UserDto? GetUserByLogin(string email, string passwordHash)
         {
-            User? body = new User { Id = 0, Email = email, Password = password, Name = "", Role = 0 };
+            UserDto? body = new UserDto { Id = 0, Email = email, PasswordHash = password, Name = "", Role = 0 };
             RestRequest request = new RestRequest();
             request.AddJsonBody(body);
-            return RestClient.Post<User>(request);
-
-
+            return RestClient.Post<UserDto>(request);
         }
     }
 }
