@@ -20,7 +20,7 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
         
         public bool Add(BookingDTO o)
         {
-            return RestClient.Execute<BookingDTO>(new RestRequest($"{BaseUri}{0}", Method.Post)).IsSuccessful;
+            return RestClient.Execute<BookingDTO>(new RestRequest($"{BaseUri}{o}", Method.Post)).IsSuccessful;
         }
 
         public BookingDTO? Get(dynamic key)

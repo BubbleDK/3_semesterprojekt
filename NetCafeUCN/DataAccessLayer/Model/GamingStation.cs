@@ -2,6 +2,7 @@
 {
     public class GamingStation : Product
     {
+        public int ProductID { get; set; }
         public string ?SeatNumber { get; set; }
         public string ?Description { get; set; }
         public GamingStation(string productNumber, string type, string name, string seatNumber, string description) : base(productNumber, type, name)

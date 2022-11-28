@@ -113,6 +113,8 @@
             // 
             // dgvBookings
             // 
+            this.dgvBookings.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvBookings.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvBookings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBookings.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvBookings.Location = new System.Drawing.Point(0, 0);
@@ -128,7 +130,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.splitContainer1);
             this.Name = "BookingsForm";
-            this.Text = "Form2";
+            this.Text = "Bookings";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
