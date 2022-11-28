@@ -110,6 +110,7 @@
             this.btnDeleteBooking.TabIndex = 2;
             this.btnDeleteBooking.Text = "Slet";
             this.btnDeleteBooking.UseVisualStyleBackColor = true;
+            this.btnDeleteBooking.Click += new System.EventHandler(this.btnDeleteBooking_Click);
             // 
             // dgvBookings
             // 
