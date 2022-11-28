@@ -40,7 +40,7 @@ namespace NetCafeUCN.DAL.DAO
                             Id = (int)reader["Id"],
                             Name = (string)reader["Name"],
                             Email = (string)reader["Email"],
-                            PasswordHash = (string)reader["Password"],
+                            PasswordHash = (string)reader["PasswordHash"],
                             Role = tempRole
                         };
                         list.Add(user);
@@ -85,16 +85,16 @@ namespace NetCafeUCN.DAL.DAO
             }
         }
 
-        public User? GetUserByLogin(string Email, string password)
+        public User? GetUserByLogin(string Email, string passwordHash)
         {
-            string sqlStatement = "SELECT * FROM nc_Person WHERE @email = Email and @password = PASSWORD";
+            string sqlStatement = "SELECT * FROM nc_Person WHERE @email = Email and @passwordHash = passwordHash";
             User? user = null;
             UserRole tempRole;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand(sqlStatement, conn);
                 cmd.Parameters.AddWithValue("@email", Email);
-                cmd.Parameters.AddWithValue("@password", password);
+                cmd.Parameters.AddWithValue("@passwordHash", passwordHash);
                 try
                 {
                     conn.Open();
@@ -116,7 +116,7 @@ namespace NetCafeUCN.DAL.DAO
                             Id = (int)reader["Id"],
                             Name = (string)reader["Name"],
                             Email = (string)reader["Email"],
-                            PasswordHash = (string)reader["Password"],
+                            PasswordHash = (string)reader["PasswordHash"],
                             Role = tempRole
                         };
                     }

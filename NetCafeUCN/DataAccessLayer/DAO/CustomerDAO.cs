@@ -35,8 +35,8 @@ namespace NetCafeUCN.DAL.DAO
                             addToPersonCommand.Parameters.AddWithValue("@name", o.Name);
                             addToPersonCommand.Parameters.AddWithValue("@email", o.Email);
                             addToPersonCommand.Parameters.AddWithValue("@phone", o.Phone);
-                            addToPersonCommand.Parameters.AddWithValue("@personType", "Customer");
-                            addToPersonCommand.Parameters.AddWithValue("@password", "Ikke Oprettet");
+                            addToPersonCommand.Parameters.AddWithValue("@personType", o.PersonType);
+                            addToPersonCommand.Parameters.AddWithValue("@password", o.Password);
                             addToPersonCommand.Parameters.AddWithValue("@isActive", o.IsActive);
                             id = Convert.ToInt32(addToPersonCommand.ExecuteScalar());
                         }

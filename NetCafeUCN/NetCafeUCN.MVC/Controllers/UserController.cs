@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NetCafeUCN.MVC.Authentication;
 using NetCafeUCN.MVC.Models;
 using NetCafeUCN.MVC.Models.DTO;
 using NetCafeUCN.MVC.Services;
@@ -29,26 +30,41 @@ namespace NetCafeUCN.MVC.Controllers
         {
             return View();
         }
-
+        [AllowAnonymous]
         // GET: PersonController/Create
         public ActionResult Create()
         {
             return View();
         }
-
         // POST: PersonController/Create
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create([FromForm]Customer customer)
         {
-            try
+            customer.IsActive = true;
+            customer.PersonType = "Customer";
+            if (!ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                var errors = ModelState.SelectMany(x => x.Value.Errors.Select(z => z.Exception));
+                ViewBag.ErrorMessage = "Bruger ikke oprettet - fejl i oplysninger";
             }
-            catch
+            else
             {
-                return View();
+                try
+                {
+                    customer.Password = BCryptTool.HashPassword(customer.Password);
+                    customerService.Add(customer);
+                    return RedirectToAction("Login", "Account");
+                }
+                catch (Exception)
+                {
+
+                    ViewBag.ErrorMassage = "Bruger ikke oprettet";
+                }
             }
+            return View();
+           
         }
 
         // GET: PersonController/Edit/5

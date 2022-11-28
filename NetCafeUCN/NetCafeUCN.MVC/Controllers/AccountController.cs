@@ -8,6 +8,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using NetCafeUCN.MVC.Models.DTO;
 using NetCafeUCN.MVC.Services;
+using NetCafeUCN.MVC.Authentication;
 
 namespace NetCafeUCN.MVC.Controllers
 {

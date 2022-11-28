@@ -14,7 +14,7 @@ namespace NetCafeUCN.MVC.Models
         public string? Address { get; set; }
         public int? Zipcode { get; set; }
         public string? City { get; set; }
-        public Employee(string name, string email, string phone, string personType) : base(name, email, phone, personType)
+        public Employee(string name, string email, string phone, string personType, string password, bool isActive) : base(name, email, phone, personType, password, isActive)
         {
         }
         public Employee():base()
