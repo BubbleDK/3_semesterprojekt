@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -24,7 +25,33 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             clndPicker.MinDate = DateTime.Now;
             gamingStationService = new GamingStationService("https://localhost:7197/api/Gamingstation/");
             bookingService = new BookingService("https://localhost:7197/api/Booking/");
-            dgvAvailableGamingstations.DataSource = gamingStationService.GetAll();
+            RefreshGamingStations(gamingStationService.GetAll().ToList());
+        }
+
+        public NewBookingForm(BookingDTO bookingToUpdate)
+        {
+            InitializeComponent();
+            InitializeTimes();
+            clndPicker.MinDate = bookingToUpdate.StartTime.Date;
+            //TODO: SKAL RUNDES AF
+            cmbStartTime.SelectedValue = bookingToUpdate.StartTime;
+            //TODO: SKAL RUNDES AF
+            cmbEndTime.SelectedValue = bookingToUpdate.EndTime;
+            gamingStationService = new GamingStationService("https://localhost:7197/api/Gamingstation/");
+            bookingService = new BookingService("https://localhost:7197/api/Booking/");
+            RefreshGamingStations(gamingStationService.GetAll().ToList());
+        }
+
+        private void RefreshGamingStations(List<GamingStationDTO> availableGamingStations)
+        {
+            dgvAvailableGamingstations.DataSource = availableGamingStations;
+            dgvAvailableGamingstations.Columns["productID"].Visible = false;
+            dgvAvailableGamingstations.Columns["isActive"].Visible = false;
+            dgvAvailableGamingstations.Columns["Type"].Visible = false;
+            dgvAvailableGamingstations.Columns["SeatNumber"].HeaderText = "Plads nr:";
+            dgvAvailableGamingstations.Columns["Description"].HeaderText = "Beskrivelse:";
+            dgvAvailableGamingstations.Columns["Name"].HeaderText = "Produkt navn:";
+            dgvAvailableGamingstations.Columns["ProductNumber"].HeaderText = "Produkt nr:";
         }
 
         private void InitializeTimes()
@@ -35,34 +62,31 @@ namespace NetCafeUCN.DesktopApp.BookingForms
 
         private void cmbStartTime_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            //TODO: Check om tidspunkt ligger efter nuværende tidspunkt på datetime.now
             if (cmbEndTime.SelectedIndex <= cmbStartTime.SelectedIndex)
             {
                 cmbEndTime.SelectedIndex = cmbStartTime.SelectedIndex + 1;
             }
-            DateTime currDate = clndPicker.SelectionStart;
-            TimeSpan startTime = (TimeSpan)cmbStartTime.SelectedItem;
-            TimeSpan endTime = (TimeSpan)cmbEndTime.SelectedItem;
-            DateTime selectedStartTime = currDate.Date.Add(startTime);
-            DateTime selectedEndTime = currDate.Date.Add(endTime);
-            _availableGamingStations = new List<GamingStationDTO>();
-            _availableGamingStations = gamingStationService.GetAll().ToList();
-            List<BookingDTO> allBookings = bookingService.GetAll().ToList();
-            List<BookingDTO> bookingsWithinSelectedTimeSpan = new List<BookingDTO>();
-            foreach (var item in allBookings)
-            {
-                if(item.StartTime < selectedEndTime || item.EndTime > selectedStartTime)
-                {
-                    bookingsWithinSelectedTimeSpan.Add(item);
-                }
-            }
+            RefreshGamingStationsTimeChanged();
         }
 
         private void cmbEndTime_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            //TODO: Check om tidspunkt ligger efter nuværende tidspunkt på datetime.now
             if (cmbEndTime.SelectedIndex <= cmbStartTime.SelectedIndex)
             {
                 cmbEndTime.SelectedIndex = cmbStartTime.SelectedIndex + 1;
             }
+            RefreshGamingStationsTimeChanged();
+        }
+
+        private void clndPicker_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            RefreshGamingStationsTimeChanged();
+        }
+
+        private void RefreshGamingStationsTimeChanged()
+        {
             DateTime currDate = clndPicker.SelectionStart;
             TimeSpan startTime = (TimeSpan)cmbStartTime.SelectedItem;
             TimeSpan endTime = (TimeSpan)cmbEndTime.SelectedItem;
@@ -75,33 +99,88 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             //Find alle bookings som er i det tidsrum man har indtastet
             foreach (var item in allBookings)
             {
-                if (item.StartTime < selectedEndTime || item.EndTime > selectedStartTime)
+                if ((item.StartTime < selectedStartTime && item.EndTime > selectedStartTime) ||
+                    (item.StartTime < selectedEndTime && item.EndTime > selectedEndTime) ||
+                    (item.StartTime > selectedStartTime && item.EndTime < selectedEndTime))
                 {
                     //Tilføj det fundne bookings til ny liste
                     bookingsWithinSelectedTimeSpan.Add(item);
                 }
             }
-            List<int> stationIDs = new List<int>();
+            List<int> stationProductIds = new List<int>();
             //Gå igennem de fundne bookings for at finde de optagede gamingstation IDs
             foreach (var item in bookingsWithinSelectedTimeSpan)
             {
                 foreach (var bl in item.BookingLines)
                 {
-                    stationIDs.Add(bl.Stationid);
+                    stationProductIds.Add(bl.StationId);
                 }
             }
-            //Gå igennem alle gamingstations og fjern de optagede fra listen eller tilføj de 
-            //ikkeoptagede til en ny liste
+            //Se på hver gamingstation om den ligger i listen af bookinglines
             foreach (var item in allGamingStations)
             {
                 bool res = true;
-                for (int i = 0; i < stationIDs.Count; i++)
+                foreach (int id in stationProductIds)
                 {
-                    if(item.ProductNumber != stationIDs[i])
+                    if (item.productID == id)
                     {
+                        res = false;
+                        break;
                     }
                 }
+                if (res)
+                {
+                    _availableGamingStations.Add(item);
+                }
             }
+            RefreshGamingStations(_availableGamingStations);
+        }
+
+        private void btnConfirm_Click(object sender, EventArgs e)
+        {
+            ConfirmBooking();
+        }
+
+        private void ConfirmBooking()
+        {
+            BookingDTO bookingDTO = new BookingDTO();
+            bookingDTO.BookingLines = new List<BookingLineDTO>();
+            DateTime currDate = clndPicker.SelectionStart;
+            TimeSpan startTime = (TimeSpan)cmbStartTime.SelectedItem;
+            TimeSpan endTime = (TimeSpan)cmbEndTime.SelectedItem;
+            DateTime selectedStartTime = currDate.Date.Add(startTime);
+            DateTime selectedEndTime = currDate.Date.Add(endTime);
+            bookingDTO.StartTime = selectedStartTime;
+            bookingDTO.EndTime = selectedEndTime;
+            bookingDTO.PhoneNo = txtPhoneNo.Text;
+            //dgvAvailableGamingstations.ForEach(row => rows.SelectedRows(new BookingLineDTO { StationId = row.id, Quantity = 1, ConsumableId =-1 }));
+
+            foreach (DataGridViewRow row in dgvAvailableGamingstations.SelectedRows)
+            {
+                GamingStationDTO currentGamingstation = (GamingStationDTO)row.DataBoundItem;
+                bookingDTO.addToBookingLine(new BookingLineDTO { Quantity = 1, StationId = currentGamingstation.productID, ConsumableId = -1 });
+            }
+            if (CheckPhoneNo(txtPhoneNo.Text))
+            {
+                if(bookingDTO.BookingLines.Count > 0)
+                {
+                    bookingService.Add(bookingDTO);
+                }
+                else
+                {
+                    MessageBox.Show("Du skal vælge minimum en PC", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Det indtastede telefonnr er ugyldigt", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private bool CheckPhoneNo(string phoneNo)
+        {
+            Regex validatePhoneNoRegex = new Regex("^\\+?[1-9][0-9]{7}$");
+            return validatePhoneNoRegex.IsMatch(phoneNo);
         }
     }
 }
