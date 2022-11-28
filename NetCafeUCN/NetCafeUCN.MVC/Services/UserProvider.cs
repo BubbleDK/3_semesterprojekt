@@ -3,6 +3,7 @@ using System.Text.Json;
 using NuGet.Protocol;
 using RestSharp;
 using static NetCafeUCN.MVC.Models.DTO.UserDto;
+using Microsoft.AspNetCore.Components;
 
 namespace NetCafeUCN.MVC.Services
 {
@@ -15,17 +16,19 @@ namespace NetCafeUCN.MVC.Services
             BaseUri = baseUri;
             RestClient = new RestClient(baseUri);
         }
+        
         public UserLoginDto? GetHashByEmail(string email)
         {
-            UserLoginDto? body = new UserLoginDto {Email = email, PasswordHash = string.Empty };
-            RestRequest request = new RestRequest();
+            UserLoginDto? body = new UserLoginDto {Email = email, PasswordHash = "" };
+            RestRequest request = new RestRequest($"{BaseUri}/GetHashByEmail");
             request.AddJsonBody(body);
+            var result = RestClient.Post<UserLoginDto>(request);
             return RestClient.Post<UserLoginDto>(request);
         }
         public UserDto? GetUserByLogin(string email, string passwordHash)
         {
             UserDto? body = new UserDto { Id = 0, Email = email, PasswordHash = passwordHash, Name = "", Role = 0 };
-            RestRequest request = new RestRequest();
+            RestRequest request = new RestRequest($"{BaseUri}");
             request.AddJsonBody(body);
             return RestClient.Post<UserDto>(request);
         }

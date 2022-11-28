@@ -28,7 +28,7 @@ namespace NetCafeUCN.API.Controllers
         [HttpPost]
         public ActionResult<UserDTO?> Get([FromBody] UserDTO user)
         {
-            return Ok(userDAO.GetUserByLogin(user.Email, user.Password));
+            return Ok(userDAO.GetUserByLogin(user.Email, user.PasswordHash).ToDto());
         }
 
         [HttpPost]

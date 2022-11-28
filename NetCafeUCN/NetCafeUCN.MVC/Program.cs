@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddScoped <IUserProvider, UserProvider>(_ => new UserProvider("https://localhost:7197/api/UserDto"));
+builder.Services.AddScoped <IUserProvider, UserProvider>(_ => new UserProvider("https://localhost:7197/api/User"));
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme);
 builder.Services.AddControllersWithViews();

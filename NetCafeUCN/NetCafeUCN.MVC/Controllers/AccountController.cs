@@ -28,12 +28,15 @@ namespace NetCafeUCN.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Login([FromForm] LoginModel loginInfo, [FromQuery] string returnUrl)
         {
-            UserLoginDto userLoginDto = _userProvider.GetHashByEmail(loginInfo.Email);
-            
-            UserDto? user = _userProvider.GetUserByLogin(loginInfo.Email, loginInfo.Password);
+            UserLoginDto? userLoginDto = _userProvider.GetHashByEmail(loginInfo.Email);
+            if (BCryptTool.ValidatePassword(loginInfo.Password, userLoginDto.PasswordHash))
+            {
+                UserDto? user = _userProvider.GetUserByLogin(loginInfo.Email, userLoginDto.PasswordHash);
 
-            if (user != null) { await SignIn(user); }
-            if (string.IsNullOrEmpty(returnUrl)) { return RedirectToAction(); }
+                if (user != null) { await SignIn(user); }
+            }
+                if (string.IsNullOrEmpty(returnUrl)) { return RedirectToAction(); }
+            
             return View();
         }
         private async Task SignIn(UserDto user)
