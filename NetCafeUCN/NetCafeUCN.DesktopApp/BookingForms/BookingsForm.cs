@@ -45,8 +45,10 @@ namespace NetCafeUCN.DesktopApp
 
         private void ShowUpdateBookingForm()
         {
-            Form getBookingByNumber = new BookingNumberInputForm();
-            getBookingByNumber.ShowDialog();
+            //TODO: TAG FAT I DEN MARKEREDE BOOKING
+            BookingDTO bookingToUpdate = (BookingDTO)dgvBookings.CurrentRow.DataBoundItem;
+            NewBookingForm updateBooking = new NewBookingForm(bookingToUpdate);
+            updateBooking.ShowDialog();
             RefreshList();
         }
 

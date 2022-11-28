@@ -40,9 +40,9 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             InitializeTimes();
             clndPicker.MinDate = bookingToUpdate.StartTime.Date;
             //TODO: SKAL RUNDES AF
-            cmbStartTime.SelectedValue = bookingToUpdate.StartTime;
+            //cmbStartTime.SelectedValue = bookingToUpdate.StartTime;
             //TODO: SKAL RUNDES AF
-            cmbEndTime.SelectedValue = bookingToUpdate.EndTime;
+            //cmbEndTime.SelectedValue = bookingToUpdate.EndTime;
             gamingStationService = new GamingStationService("https://localhost:7197/api/Gamingstation/");
             bookingService = new BookingService("https://localhost:7197/api/Booking/");
             RefreshGamingStations(gamingStationService.GetAll().ToList());
