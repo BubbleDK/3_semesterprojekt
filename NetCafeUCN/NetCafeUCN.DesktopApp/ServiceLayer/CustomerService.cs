@@ -23,7 +23,13 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
 
         public CustomerDTO? Get(dynamic key)
         {
-            return RestClient.Execute<CustomerDTO>(new RestRequest($"{BaseUri}{key}", Method.Get)).Data;
+            CustomerDTO customer = null;
+            customer = RestClient.Execute<CustomerDTO>(new RestRequest($"{BaseUri}{key}", Method.Get)).Data;
+            if(customer.Phone == null)
+            {
+                return null;
+            }
+            return customer;
         }
 
         public IEnumerable<CustomerDTO> GetAll()

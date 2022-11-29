@@ -59,7 +59,8 @@ namespace NetCafeUCN.DesktopApp
 
         private void DeleteBooking()
         {
-            //bookingService.Remove();
+            BookingDTO bookingToRemove = (BookingDTO)dgvBookings.CurrentRow.DataBoundItem;
+            bookingService.Remove(bookingToRemove.BookingNo);
             RefreshList();
         }
     }
