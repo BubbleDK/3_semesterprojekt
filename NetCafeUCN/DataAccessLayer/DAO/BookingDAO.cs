@@ -24,10 +24,6 @@ namespace NetCafeUCN.DAL.DAO
         {
             CustomerDAO customerDAO = new CustomerDAO();
             if (customerDAO.GetId(o.PhoneNo) == 0) return false;
-            foreach(var item in o.BookingLines)
-            {
-                if (BookingCheck(o.StartTime, o.EndTime, item.Stationid)) return false;
-            }
             SqlTransaction trans;
             int id = 0;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
@@ -35,6 +31,10 @@ namespace NetCafeUCN.DAL.DAO
                 conn.Open();
                 using (trans = conn.BeginTransaction(IsolationLevel.RepeatableRead))
                 {
+                    foreach (var item in o.BookingLines)
+                    {
+                        if (BookingCheck(o.StartTime, o.EndTime, item.Stationid)) return false;
+                    }
                     try
                     {
                         using (SqlCommand bookingCommand = new SqlCommand(
