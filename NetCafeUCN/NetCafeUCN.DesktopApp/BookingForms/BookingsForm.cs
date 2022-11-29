@@ -63,5 +63,13 @@ namespace NetCafeUCN.DesktopApp
             bookingService.Remove(bookingToRemove.BookingNo);
             RefreshList();
         }
+
+        private void BookingsForm_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.F5)
+            {
+                RefreshList();
+            }
+        }
     }
 }
