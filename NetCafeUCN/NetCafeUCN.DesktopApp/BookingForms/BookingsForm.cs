@@ -14,7 +14,7 @@ namespace NetCafeUCN.DesktopApp
             RefreshList();
         }
 
-        private void RefreshList()
+        public void RefreshList()
         {
             dgvBookings.DataSource = null;
             dgvBookings.Rows.Clear();
@@ -34,7 +34,7 @@ namespace NetCafeUCN.DesktopApp
 
         private void ShowNewBookingForm()
         {
-            Form newBookingForm = new NewBookingForm();
+            Form newBookingForm = new NewBookingForm(this);
             newBookingForm.ShowDialog();
         }
 
@@ -45,8 +45,23 @@ namespace NetCafeUCN.DesktopApp
 
         private void ShowUpdateBookingForm()
         {
-            Form getBookingByNumber = new BookingNumberInputForm();
-            getBookingByNumber.ShowDialog();
+            //TODO: TAG FAT I DEN MARKEREDE BOOKING
+            BookingDTO bookingToUpdate = (BookingDTO)dgvBookings.CurrentRow.DataBoundItem;
+            NewBookingForm updateBooking = new NewBookingForm(bookingToUpdate);
+            updateBooking.ShowDialog();
+            RefreshList();
+        }
+
+        private void btnDeleteBooking_Click(object sender, EventArgs e)
+        {
+            DeleteBooking();
+        }
+
+        private void DeleteBooking()
+        {
+            BookingDTO bookingToRemove = (BookingDTO)dgvBookings.CurrentRow.DataBoundItem;
+            bookingService.Remove(bookingToRemove.BookingNo);
+            RefreshList();
         }
     }
 }

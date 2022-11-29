@@ -17,29 +17,39 @@ namespace NetCafeUCN.DesktopApp.BookingForms
     {
         INetCafeDataAccess<GamingStationDTO> gamingStationService;
         INetCafeDataAccess<BookingDTO> bookingService;
+        INetCafeDataAccess<CustomerDTO> customerService;
         List<GamingStationDTO> _availableGamingStations;
-        public NewBookingForm()
+        BookingsForm bookingsForm;
+        BookingDTO bookingDTO;
+        string windowStatus;
+        public NewBookingForm(BookingsForm bookingsFormWeCameFrom)
         {
             InitializeComponent();
             InitializeTimes();
             clndPicker.MinDate = DateTime.Now;
             gamingStationService = new GamingStationService("https://localhost:7197/api/Gamingstation/");
             bookingService = new BookingService("https://localhost:7197/api/Booking/");
+            customerService = new CustomerService("https://localhost:7197/api/Customer/");
             RefreshGamingStations(gamingStationService.GetAll().ToList());
+            bookingsForm = bookingsFormWeCameFrom;
+            windowStatus = "Create";
         }
 
         public NewBookingForm(BookingDTO bookingToUpdate)
         {
+            //TODO: SKAL MARKERE ALLE GAMINGSTATIONS I LISTEN SOM ER PÅ BOOKINGEN 
             InitializeComponent();
             InitializeTimes();
             clndPicker.MinDate = bookingToUpdate.StartTime.Date;
             //TODO: SKAL RUNDES AF
-            cmbStartTime.SelectedValue = bookingToUpdate.StartTime;
+            //cmbStartTime.SelectedValue = bookingToUpdate.StartTime;
             //TODO: SKAL RUNDES AF
-            cmbEndTime.SelectedValue = bookingToUpdate.EndTime;
+            //cmbEndTime.SelectedValue = bookingToUpdate.EndTime;
             gamingStationService = new GamingStationService("https://localhost:7197/api/Gamingstation/");
             bookingService = new BookingService("https://localhost:7197/api/Booking/");
             RefreshGamingStations(gamingStationService.GetAll().ToList());
+            bookingDTO = bookingToUpdate;
+            windowStatus = "Update";
         }
 
         private void RefreshGamingStations(List<GamingStationDTO> availableGamingStations)
@@ -138,10 +148,50 @@ namespace NetCafeUCN.DesktopApp.BookingForms
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            ConfirmBooking();
+            if (windowStatus.Equals("Create"))
+            {
+                CreateBooking();
+            }else if (windowStatus.Equals("Update"))
+            {
+                UpdateBooking();
+            }
         }
 
-        private void ConfirmBooking()
+        private void UpdateBooking()
+        {
+            DateTime currDate = clndPicker.SelectionStart;
+            TimeSpan startTime = (TimeSpan)cmbStartTime.SelectedItem;
+            TimeSpan endTime = (TimeSpan)cmbEndTime.SelectedItem;
+            DateTime selectedStartTime = currDate.Date.Add(startTime);
+            DateTime selectedEndTime = currDate.Date.Add(endTime);
+            bookingDTO.StartTime = selectedStartTime;
+            bookingDTO.EndTime = selectedEndTime;
+            bookingDTO.PhoneNo = txtPhoneNo.Text;
+            foreach (DataGridViewRow row in dgvAvailableGamingstations.SelectedRows)
+            {
+                GamingStationDTO currentGamingstation = (GamingStationDTO)row.DataBoundItem;
+                bookingDTO.addToBookingLine(new BookingLineDTO { Quantity = 1, StationId = currentGamingstation.productID, ConsumableId = -1 });
+            }
+            if (CheckPhoneNo(txtPhoneNo.Text))
+            {
+                if (bookingDTO.BookingLines.Count > 0)
+                {
+                    bookingService.Update(bookingDTO);
+                    bookingsForm.RefreshList();
+                    this.Dispose();
+                }
+                else
+                {
+                    MessageBox.Show("Du skal vælge minimum en PC", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Det indtastede telefonnr er ugyldigt", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void CreateBooking()
         {
             BookingDTO bookingDTO = new BookingDTO();
             bookingDTO.BookingLines = new List<BookingLineDTO>();
@@ -162,18 +212,28 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             }
             if (CheckPhoneNo(txtPhoneNo.Text))
             {
-                if(bookingDTO.BookingLines.Count > 0)
+                CustomerDTO searchedCustomer = customerService.Get(txtPhoneNo.Text);
+                if (searchedCustomer != null)
                 {
-                    bookingService.Add(bookingDTO);
+                    if (bookingDTO.BookingLines.Count > 0)
+                    {
+                        bookingService.Add(bookingDTO);
+                        bookingsForm.RefreshList();
+                        this.Dispose();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Du skal vælge minimum en PC", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Du skal vælge minimum en PC", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Telefonnummer er ikke i databasen", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else
             {
-                MessageBox.Show("Det indtastede telefonnr er ugyldigt", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Det indtastede telefonnummer er ugyldigt", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

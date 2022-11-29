@@ -2,6 +2,7 @@
 using NetCafeUCN.DAL.Model;
 using System.Data.SqlClient;
 using System.Globalization;
+using System.Data;
 
 namespace NetCafeUCN.DAL.DAO
 {
@@ -21,13 +22,14 @@ namespace NetCafeUCN.DAL.DAO
        */
         public bool Add(Booking o)
         {
+            CustomerDAO customerDAO = new CustomerDAO();
+            if (customerDAO.GetId(o.PhoneNo) == 0) return false;
             SqlTransaction trans;
             int id = 0;
-            CustomerDAO customerDAO = new CustomerDAO();
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
                 conn.Open();
-                using (trans = conn.BeginTransaction())
+                using (trans = conn.BeginTransaction(IsolationLevel.RepeatableRead))
                 {
                     try
                     {
@@ -183,6 +185,7 @@ namespace NetCafeUCN.DAL.DAO
         public bool Update(Booking o)
         {
             SqlTransaction trans;
+            int rows = -1;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
                 conn.Open();
@@ -195,7 +198,7 @@ namespace NetCafeUCN.DAL.DAO
                             bookingCommand.Parameters.AddWithValue("@BookingNo", o.BookingNo);
                             bookingCommand.Parameters.AddWithValue("@startTime", o.StartTime);
                             bookingCommand.Parameters.AddWithValue("@endTime", o.EndTime);
-                            bookingCommand.ExecuteNonQuery();
+                            rows = bookingCommand.ExecuteNonQuery();
                         }
                         foreach (var item in o.BookingLines)
                         {
@@ -209,9 +212,14 @@ namespace NetCafeUCN.DAL.DAO
                                 bookingLineCommand.ExecuteNonQuery();
                             }
                         }
-
                         trans.Commit();
-                        return true;
+                        if (rows > 0)
+                        {
+                            return true;
+                        }
+                        
+                        return false;
+                        
                     }
                     catch (DataAccessException)
                     {

@@ -179,6 +179,7 @@ namespace NetCafeUCN.DAL.DAO
 	    */
         public bool Update(Consumable o)
         {
+            int rows = -1;
             SqlTransaction trans;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
@@ -193,7 +194,7 @@ namespace NetCafeUCN.DAL.DAO
                             productCommand.Parameters.AddWithValue("@name", o.Name);
                             productCommand.Parameters.AddWithValue("@isActive", o.IsActive);
                             productCommand.Parameters.AddWithValue("@productNo", o.ProductNumber);
-                            productCommand.ExecuteNonQuery();
+                            rows = productCommand.ExecuteNonQuery();
                         }
                         using(SqlCommand consumableCommand = new SqlCommand(
                             "UPDATE nc_Consumables SET description = @description WHERE productid = (SELECT id FROM nc_Product WHERE productNo = @productNo)", conn, trans))
@@ -201,9 +202,13 @@ namespace NetCafeUCN.DAL.DAO
                             consumableCommand.Parameters.AddWithValue("@description", o.Description);
                             consumableCommand.Parameters.AddWithValue("@productNo", o.ProductNumber);
                             consumableCommand.ExecuteNonQuery();
-                            trans.Commit();
+                        }
+                        trans.Commit();
+                        if (rows > 0)
+                        {
                             return true;
                         }
+                        return false;
                     }
                     catch (DataAccessException)
                     {
