@@ -243,6 +243,7 @@ namespace NetCafeUCN.DAL.DAO
                     {
                         conn.Open();
                         SqlDataReader reader = command.ExecuteReader();
+                        Console.WriteLine(reader.HasRows);
                         return reader.HasRows;
                     }
                     catch (DataAccessException)
