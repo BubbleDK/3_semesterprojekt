@@ -183,6 +183,7 @@ namespace NetCafeUCN.DAL.DAO
 
         public bool Update(Employee o)
         {
+            int rows = -1;
             SqlTransaction trans;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
@@ -198,7 +199,7 @@ namespace NetCafeUCN.DAL.DAO
                             command.Parameters.AddWithValue("@name", o.Name);
                             command.Parameters.AddWithValue("@email", o.Email);
                             command.Parameters.AddWithValue("@personType", o.PersonType);
-                            command.ExecuteNonQuery();
+                            rows = command.ExecuteNonQuery();
                         }
                         using (SqlCommand gcommand = new SqlCommand(
                             "UPDATE nc_Employee SET address = @address, role = @role, zipCode = @zipCode WHERE personid = (SELECT id FROM nc_Person WHERE phone = @phone)", conn, trans))
@@ -208,9 +209,13 @@ namespace NetCafeUCN.DAL.DAO
                             gcommand.Parameters.AddWithValue("@role", o.Role);
                             gcommand.Parameters.AddWithValue("@zipCode", o.Zipcode);
                             gcommand.ExecuteNonQuery();
-                            trans.Commit();
+                        }
+                        trans.Commit();
+                        if (rows > 0)
+                        {
                             return true;
                         }
+                        return false;
                     }
                     catch (DataAccessException)
                     {
