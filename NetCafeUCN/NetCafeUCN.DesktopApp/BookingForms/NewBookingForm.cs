@@ -109,9 +109,10 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             //Find alle bookings som er i det tidsrum man har indtastet
             foreach (var item in allBookings)
             {
-                if ((item.StartTime < selectedStartTime && item.EndTime > selectedStartTime) ||
-                    (item.StartTime < selectedEndTime && item.EndTime > selectedEndTime) ||
-                    (item.StartTime > selectedStartTime && item.EndTime < selectedEndTime))
+                if ((item.StartTime <= selectedStartTime && item.EndTime > selectedStartTime) || //Er vores valgte tidsrum imellem bookings starttid og sluttid
+                    (item.StartTime < selectedEndTime && item.EndTime > selectedEndTime) || // Er vores valgte sluttidspunkt efter b's starttid og vores valgte sluttid før b's sluttid
+                    (item.StartTime >= selectedStartTime && item.EndTime < selectedEndTime) // Er vores valgte tidsrum på begge sider af b's tidsrum
+                                                                                            )
                 {
                     //Tilføj det fundne bookings til ny liste
                     bookingsWithinSelectedTimeSpan.Add(item);
@@ -217,9 +218,15 @@ namespace NetCafeUCN.DesktopApp.BookingForms
                 {
                     if (bookingDTO.BookingLines.Count > 0)
                     {
-                        bookingService.Add(bookingDTO);
-                        bookingsForm.RefreshList();
-                        this.Dispose();
+                        if(bookingService.Add(bookingDTO))
+                        {
+                            bookingsForm.RefreshList();
+                            this.Dispose();
+                        }
+                        else
+                        {
+                            RefreshGamingStationsTimeChanged();
+                        }
                     }
                     else
                     {
