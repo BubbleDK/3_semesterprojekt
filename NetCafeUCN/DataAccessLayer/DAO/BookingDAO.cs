@@ -31,12 +31,12 @@ namespace NetCafeUCN.DAL.DAO
                 conn.Open();
                 using (trans = conn.BeginTransaction(IsolationLevel.RepeatableRead))
                 {
-                    foreach (var item in o.BookingLines)
-                    {
-                        if (BookingCheck(o.StartTime, o.EndTime, item.Stationid)) return false;
-                    }
                     try
                     {
+                        foreach (var item in o.BookingLines)
+                        {
+                            if (BookingCheck(o.StartTime, o.EndTime, item.Stationid)) return false;
+                        }
                         using (SqlCommand bookingCommand = new SqlCommand(
                                 "INSERT INTO nc_Booking VALUES(@bookingNo, @startTime, @endTime, @customerId); SELECT SCOPE_IDENTITY();", conn, trans))
                         {
