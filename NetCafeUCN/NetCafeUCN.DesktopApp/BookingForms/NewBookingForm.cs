@@ -17,6 +17,7 @@ namespace NetCafeUCN.DesktopApp.BookingForms
     {
         INetCafeDataAccess<GamingStationDTO> gamingStationService;
         INetCafeDataAccess<BookingDTO> bookingService;
+        INetCafeDataAccess<CustomerDTO> customerService;
         List<GamingStationDTO> _availableGamingStations;
         BookingsForm bookingsForm;
         BookingDTO bookingDTO;
@@ -28,6 +29,7 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             clndPicker.MinDate = DateTime.Now;
             gamingStationService = new GamingStationService("https://localhost:7197/api/Gamingstation/");
             bookingService = new BookingService("https://localhost:7197/api/Booking/");
+            customerService = new CustomerService("https://localhost:7197/api/Customer/");
             RefreshGamingStations(gamingStationService.GetAll().ToList());
             bookingsForm = bookingsFormWeCameFrom;
             windowStatus = "Create";
@@ -210,20 +212,28 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             }
             if (CheckPhoneNo(txtPhoneNo.Text))
             {
-                if(bookingDTO.BookingLines.Count > 0)
+                CustomerDTO searchedCustomer = customerService.Get(txtPhoneNo.Text);
+                if (searchedCustomer != null)
                 {
-                    bookingService.Add(bookingDTO);
-                    bookingsForm.RefreshList();
-                    this.Dispose();
+                    if (bookingDTO.BookingLines.Count > 0)
+                    {
+                        bookingService.Add(bookingDTO);
+                        bookingsForm.RefreshList();
+                        this.Dispose();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Du skal vælge minimum en PC", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Du skal vælge minimum en PC", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Telefonnummer er ikke i databasen", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else
             {
-                MessageBox.Show("Det indtastede telefonnr er ugyldigt", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Det indtastede telefonnummer er ugyldigt", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
