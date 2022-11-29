@@ -35,6 +35,7 @@ namespace NetCafeUCN.DAL.DAO
                     {
                         foreach (var item in o.BookingLines)
                         {
+                            Console.WriteLine(BookingCheck(o.StartTime, o.EndTime, item.Stationid));
                             if (BookingCheck(o.StartTime, o.EndTime, item.Stationid)) return false;
                         }
                         using (SqlCommand bookingCommand = new SqlCommand(
@@ -247,7 +248,6 @@ namespace NetCafeUCN.DAL.DAO
                     {
                         conn.Open();
                         SqlDataReader reader = command.ExecuteReader();
-                        Console.WriteLine(reader.HasRows);
                         return reader.HasRows;
                     }
                     catch (DataAccessException)
