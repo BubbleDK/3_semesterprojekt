@@ -226,6 +226,7 @@ namespace NetCafeUCN.DAL.DAO
 	    */
         public bool Update(GamingStation o)
         {
+            int rows = -1;
             SqlTransaction trans;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
@@ -241,7 +242,7 @@ namespace NetCafeUCN.DAL.DAO
                             command.Parameters.AddWithValue("@productType", o.Type);
                             command.Parameters.AddWithValue("@name", o.Name);
                             command.Parameters.AddWithValue("@isActive", o.IsActive);
-                            command.ExecuteNonQuery();
+                            rows = command.ExecuteNonQuery();
                         }
                         using (SqlCommand gcommand = new SqlCommand(
                             "UPDATE nc_Gamingstation SET seatNo = @seatNo, description = @description where stationid = (SELECT id FROM nc_Product WHERE productNo = @productNo)", conn, trans))
@@ -250,9 +251,13 @@ namespace NetCafeUCN.DAL.DAO
                             gcommand.Parameters.AddWithValue("@seatNo", o.SeatNumber);
                             gcommand.Parameters.AddWithValue("@description", o.Description);
                             gcommand.ExecuteNonQuery();
-                            trans.Commit();
+                        }
+                        trans.Commit();
+                        if (rows > 0)
+                        {
                             return true;
                         }
+                        return false;
                     }
                     catch (DataAccessException)
                     {

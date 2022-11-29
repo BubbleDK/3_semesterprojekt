@@ -176,6 +176,7 @@ namespace NetCafeUCN.DAL.DAO
 	    */
         public bool Update(Customer o)
         {
+            int rows = -1;
             SqlTransaction trans;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
@@ -192,9 +193,13 @@ namespace NetCafeUCN.DAL.DAO
                             command.Parameters.AddWithValue("@email", o.Email);
                             command.Parameters.AddWithValue("@personType", o.PersonType);
                             command.Parameters.AddWithValue("@isActive", o.IsActive);
-                            command.ExecuteNonQuery();
+                            rows = command.ExecuteNonQuery();
                             trans.Commit();
-                            return true;
+                            if (rows > 0)
+                            {
+                                return true;
+                            }
+                            return false;
                         }
                     }
                     catch (DataAccessException)
