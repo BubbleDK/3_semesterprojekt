@@ -33,6 +33,11 @@ namespace NetCafeUCN.DAL.DAO
                 {
                     try
                     {
+                        foreach (var item in o.BookingLines)
+                        {
+                            Console.WriteLine(BookingCheck(o.StartTime, o.EndTime, item.Stationid));
+                            if (BookingCheck(o.StartTime, o.EndTime, item.Stationid)) return false;
+                        }
                         using (SqlCommand bookingCommand = new SqlCommand(
                                 "INSERT INTO nc_Booking VALUES(@bookingNo, @startTime, @endTime, @customerId); SELECT SCOPE_IDENTITY();", conn, trans))
                         {
@@ -224,6 +229,30 @@ namespace NetCafeUCN.DAL.DAO
                     catch (DataAccessException)
                     {
                         trans.Rollback();
+                        throw new DataAccessException("Can't access data");
+                    }
+                }
+            }
+        }
+        public bool BookingCheck(DateTime startTime, DateTime endTime, int stationid)
+        {
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+            {
+                using SqlCommand command = new SqlCommand("SELECT stationid, startTime, endTime FROM nc_Booking INNER JOIN nc_BookingLine ON " +
+                    "nc_Booking.id = nc_BookingLine.bookingid where startTime = @startTime AND endTime = @endTime AND stationid = @stationid", conn);
+                command.Parameters.AddWithValue("@startTime", startTime);
+                command.Parameters.AddWithValue("@endTime", endTime);
+                command.Parameters.AddWithValue("@stationid", stationid);
+                {
+                    try
+                    {
+                        conn.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        return reader.HasRows;
+                    }
+                    catch (DataAccessException)
+                    {
+
                         throw new DataAccessException("Can't access data");
                     }
                 }
