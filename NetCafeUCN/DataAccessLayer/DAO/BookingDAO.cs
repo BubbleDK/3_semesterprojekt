@@ -2,6 +2,7 @@
 using NetCafeUCN.DAL.Model;
 using System.Data.SqlClient;
 using System.Globalization;
+using System.Data;
 
 namespace NetCafeUCN.DAL.DAO
 {
@@ -28,7 +29,7 @@ namespace NetCafeUCN.DAL.DAO
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
                 conn.Open();
-                using (trans = conn.BeginTransaction())
+                using (trans = conn.BeginTransaction(IsolationLevel.RepeatableRead))
                 {
                     try
                     {
