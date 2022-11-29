@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NetCafeUCN.MVC.Models
 {
-    public class GamingStation : Product
+    public class GamingStationDto : ProductDto
     {
         public string? SeatNumber { get; set; }
         public string? Description { get; set; }

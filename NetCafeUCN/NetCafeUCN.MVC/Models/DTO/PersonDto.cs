@@ -9,7 +9,7 @@ using RequiredAttribute = System.ComponentModel.DataAnnotations.RequiredAttribut
 
 namespace NetCafeUCN.MVC.Models
 {
-    public abstract class Person
+    public abstract class PersonDto
     {
         [Required]
         public string Name { get; set; }
@@ -24,7 +24,7 @@ namespace NetCafeUCN.MVC.Models
         [DataType(DataType.Password)]
         public string Password { get; set; }
         public bool IsActive { get; set; }
-        public Person(string name, string email, string phone, string? personType, string password, bool isActive)
+        public PersonDto(string name, string email, string phone, string? personType, string password, bool isActive)
         {
             Name = name;
             Email = email;
@@ -33,7 +33,7 @@ namespace NetCafeUCN.MVC.Models
             Password = password;
             IsActive = isActive;    
         }
-        public Person()
+        public PersonDto()
         {
 
         }

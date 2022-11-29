@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace NetCafeUCN.MVC.Services
 {
     
-    public class ConsumableService : INetCafeDataAccess<Consumable>
+    public class ConsumableService : INetCafeDataAccessService<ConsumableDto>
     {
         public string BaseUri { get; private set; }
         private RestClient RestClient { get; set; }
@@ -19,29 +19,29 @@ namespace NetCafeUCN.MVC.Services
             BaseUri = baseUri;
             RestClient = new RestClient(baseUri);
         }
-        public bool Add(Consumable o)
+        public bool Add(ConsumableDto o)
         {
-            return RestClient.Execute<Consumable>(new RestRequest($"{BaseUri}/{o}", Method.Post)).IsSuccessful;
+            return RestClient.Execute<ConsumableDto>(new RestRequest($"{BaseUri}/{o}", Method.Post)).IsSuccessful;
         }
 
-        public Consumable? Get(dynamic key)
+        public ConsumableDto? Get(dynamic key)
         {
-            return RestClient.Execute<Consumable>(new RestRequest($"{BaseUri}/{key}",Method.Get)).Data;
+            return RestClient.Execute<ConsumableDto>(new RestRequest($"{BaseUri}/{key}",Method.Get)).Data;
         }
         
-        public IEnumerable<Consumable> GetAll()
+        public IEnumerable<ConsumableDto> GetAll()
         {
-            return RestClient.Execute<IEnumerable<Consumable>>(new RestRequest($"{BaseUri}"), Method.Get).Data;
+            return RestClient.Execute<IEnumerable<ConsumableDto>>(new RestRequest($"{BaseUri}"), Method.Get).Data;
         }
 
         public bool Remove(dynamic key)
         {
-            return RestClient.Execute<Consumable?>(new RestRequest($"{BaseUri}/{key}", Method.Delete)).IsSuccessful;
+            return RestClient.Execute<ConsumableDto?>(new RestRequest($"{BaseUri}/{key}", Method.Delete)).IsSuccessful;
         }
 
-        public bool Update(Consumable o)
+        public bool Update(ConsumableDto o)
         {
-            return RestClient.Execute<Consumable>(new RestRequest($"{BaseUri}/{o}",Method.Put)).IsSuccessful;
+            return RestClient.Execute<ConsumableDto>(new RestRequest($"{BaseUri}/{o}",Method.Put)).IsSuccessful;
         }
     }
 }

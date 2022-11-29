@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NetCafeUCN.MVC.Services
 {
-    public interface INetCafeDataAccess<TEntity>
+    public interface INetCafeDataAccessService<TEntity>
     {
         public IEnumerable<TEntity> GetAll();
         public TEntity? Get(dynamic key);

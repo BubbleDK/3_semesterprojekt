@@ -1,9 +1,9 @@
 ﻿namespace NetCafeUCN.MVC.Models;
 
-public class Consumable : Product
+public class ConsumableDto : ProductDto
 {
     public string ?Description { get; set; }
-    public Consumable() : base()
+    public ConsumableDto() : base()
     {
 
     }

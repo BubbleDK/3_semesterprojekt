@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Components;
 
 namespace NetCafeUCN.MVC.Services
 {
-    public class UserProvider : IUserProvider
+    public class UserProviderService : IUserProviderService
     {
         public string BaseUri { get; private set; }
         private RestClient RestClient { get; set; }
-        public UserProvider(string baseUri)
+        public UserProviderService(string baseUri)
         {
             BaseUri = baseUri;
             RestClient = new RestClient(baseUri);

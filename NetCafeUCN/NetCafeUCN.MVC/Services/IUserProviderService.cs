@@ -2,7 +2,7 @@
 
 namespace NetCafeUCN.MVC.Services
 {
-    public interface IUserProvider
+    public interface IUserProviderService
     {
         UserLoginDto? GetHashByEmail(string email);
         UserDto? GetUserByLogin(string email, string password);

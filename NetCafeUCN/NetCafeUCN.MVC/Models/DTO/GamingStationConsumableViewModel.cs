@@ -2,7 +2,7 @@
 {
     public class GamingStationConsumableViewModel
     {
-        public IEnumerable<GamingStation> gamingStations { get; set; }
-        public IEnumerable<Consumable> consumables { get; set; }
+        public IEnumerable<GamingStationDto> gamingStations { get; set; }
+        public IEnumerable<ConsumableDto> consumables { get; set; }
     }
 }

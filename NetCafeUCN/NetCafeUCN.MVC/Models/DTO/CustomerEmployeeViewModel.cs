@@ -2,7 +2,7 @@
 {
     public class CustomerEmployeeViewModel
     {
-        public IEnumerable<Employee> employees { get; set;}
-        public IEnumerable<Customer> customers { get; set;}
+        public IEnumerable<EmployeeDto> employees { get; set;}
+        public IEnumerable<CustomerDto> customers { get; set;}
     }
 }

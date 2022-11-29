@@ -13,8 +13,8 @@ namespace NetCafeUCN.MVC.Controllers
     [Authorize]
     public class UserController : Controller
     {
-        INetCafeDataAccess<Customer> customerService = new CustomerService("https://localhost:7197/api/Customer");
-        INetCafeDataAccess<Employee> employeeService = new EmployeeService("https://localhost:7197/api/Employee");
+        INetCafeDataAccessService<CustomerDto> customerService = new CustomerService("https://localhost:7197/api/Customer");
+        INetCafeDataAccessService<EmployeeDto> employeeService = new EmployeeService("https://localhost:7197/api/Employee");
         // GET: PersonController
         [Authorize("Administrator")]
         public ActionResult Index()
@@ -41,7 +41,7 @@ namespace NetCafeUCN.MVC.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([FromForm]Customer customer)
+        public ActionResult Create([FromForm]CustomerDto customer)
         {
             customer.IsActive = true;
             customer.PersonType = "Customer";

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace NetCafeUCN.MVC.Services
 {
     
-    public class EmployeeService : INetCafeDataAccess<Employee>
+    public class EmployeeService : INetCafeDataAccessService<EmployeeDto>
     {
         public string BaseUri { get; private set; }
         private RestClient RestClient { get; set; }
@@ -23,30 +23,30 @@ namespace NetCafeUCN.MVC.Services
             RestClient = new RestClient(baseUri);
         }
         
-        public bool Add(Employee o)
+        public bool Add(EmployeeDto o)
         {
-            return RestClient.Execute<Employee>(new RestRequest($"{BaseUri}/{o}", Method.Post)).IsSuccessful;
+            return RestClient.Execute<EmployeeDto>(new RestRequest($"{BaseUri}/{o}", Method.Post)).IsSuccessful;
         }
 
-        public Employee? Get(dynamic key)
+        public EmployeeDto? Get(dynamic key)
         {
-            return RestClient.Execute<Employee>(new RestRequest($"{BaseUri}/{key}", Method.Get)).Data;
+            return RestClient.Execute<EmployeeDto>(new RestRequest($"{BaseUri}/{key}", Method.Get)).Data;
         }
 
-        public IEnumerable<Employee> GetAll()
+        public IEnumerable<EmployeeDto> GetAll()
         {
-            return RestClient.Execute<IEnumerable<Employee>>(new RestRequest($"{BaseUri}"), Method.Get).Data;
+            return RestClient.Execute<IEnumerable<EmployeeDto>>(new RestRequest($"{BaseUri}"), Method.Get).Data;
 
         }
         
         public bool Remove(dynamic key)
         {
-            return RestClient.Execute<Employee>(new RestRequest($"{key}", Method.Delete)).IsSuccessful;
+            return RestClient.Execute<EmployeeDto>(new RestRequest($"{key}", Method.Delete)).IsSuccessful;
         }
 
-        public bool Update(Employee o)
+        public bool Update(EmployeeDto o)
         {
-            return RestClient.Execute<Employee>(new RestRequest($"{BaseUri}/{0}", Method.Put)).IsSuccessful;
+            return RestClient.Execute<EmployeeDto>(new RestRequest($"{BaseUri}/{0}", Method.Put)).IsSuccessful;
         }
 
 

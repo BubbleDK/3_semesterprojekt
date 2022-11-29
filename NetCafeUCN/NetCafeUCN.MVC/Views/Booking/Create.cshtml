@@ -13,6 +13,23 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (Context.User.Identity.IsAuthenticated)
+            {
+                <div class="form-group">
+                    <label asp-for="PhoneNo" class="control-label"></label>
+                    <input asp-for="PhoneNo" class="form-control" value="@Context.User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.MobilePhone)?.Value" />
+                    <span asp-validation-for="PhoneNo" class="text-danger"></span>
+                </div>
+            }
+            else
+            {
+                <div class="form-group">
+                    <label asp-for="PhoneNo" class="control-label"></label>
+                    <input asp-for="PhoneNo" class="form-control" />
+                    <span asp-validation-for="PhoneNo" class="text-danger"></span>
+                </div>
+            }
+           
             <div class="form-group">
                 <label asp-for="StartTime" class="control-label"></label>
                 <input asp-for="StartTime" class="form-control" />
@@ -23,20 +40,7 @@
                 <input asp-for="EndTime" class="form-control" />
                 <span asp-validation-for="EndTime" class="text-danger"></span>
             </div>
-            @if (Context.User.Identity.IsAuthenticated)
-            {
-                <div class="form-group">
-                    <label asp-for="PhoneNo" class="control-label"></label>
-                    <input asp-for="PhoneNo" class="form-control" value="@Context.User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.MobilePhone)?.Value"/>
-                    <span asp-validation-for="PhoneNo" class="text-danger"></span>
-                </div>
-            }else{
-                <div class="form-group">
-                    <label asp-for="PhoneNo" class="control-label"></label>
-                    <input asp-for="PhoneNo" class="form-control"/>
-                    <span asp-validation-for="PhoneNo" class="text-danger"></span>
-                </div>
-            }
+            
 
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

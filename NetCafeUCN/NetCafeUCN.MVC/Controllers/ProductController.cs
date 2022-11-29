@@ -10,8 +10,8 @@ namespace NetCafeUCN.MVC.Controllers
     [Authorize]
     public class ProductController : Controller
     {
-        INetCafeDataAccess<GamingStation> gamingStationService = new GamingstationService("https://localhost:7197/api/GamingStation");
-        INetCafeDataAccess<Consumable> consumableService = new ConsumableService("https://localhost:7197/api/Consumable");
+        INetCafeDataAccessService<GamingStationDto> gamingStationService = new GamingstationService("https://localhost:7197/api/GamingStation");
+        INetCafeDataAccessService<ConsumableDto> consumableService = new ConsumableService("https://localhost:7197/api/Consumable");
         // GET: ProductController
         [AllowAnonymous]
         public ActionResult Index()
@@ -39,7 +39,7 @@ namespace NetCafeUCN.MVC.Controllers
         // POST: ProductController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create(IFormCollection collection)
         {
             try
