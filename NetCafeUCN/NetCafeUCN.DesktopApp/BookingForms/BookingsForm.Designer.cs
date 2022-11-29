@@ -132,8 +132,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.splitContainer1);
+            this.KeyPreview = true;
             this.Name = "BookingsForm";
             this.Text = "Bookings";
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.BookingsForm_KeyUp);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
