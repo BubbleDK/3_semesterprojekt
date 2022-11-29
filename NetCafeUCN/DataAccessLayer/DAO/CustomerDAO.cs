@@ -237,7 +237,7 @@ namespace NetCafeUCN.DAL.DAO
                 }
             }
         }
-        private string GetPhoneNo(dynamic key)
+        public string GetPhoneNo(dynamic key)
         {
             string phoneNo = string.Empty;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
