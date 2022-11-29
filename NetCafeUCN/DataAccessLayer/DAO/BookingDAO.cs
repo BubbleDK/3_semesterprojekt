@@ -24,7 +24,7 @@ namespace NetCafeUCN.DAL.DAO
         {
             CustomerDAO customerDAO = new CustomerDAO();
             if (customerDAO.GetId(o.PhoneNo) == 0) return false;
-            if(BookingCheck(o.StartTime, o.EndTime)) return false;
+            if (BookingCheck(o.StartTime, o.EndTime) == true) return false;
             SqlTransaction trans;
             int id = 0;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
