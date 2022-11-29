@@ -16,6 +16,7 @@ namespace NetCafeUCN.MVC.Controllers
         INetCafeDataAccess<Customer> customerService = new CustomerService("https://localhost:7197/api/Customer");
         INetCafeDataAccess<Employee> employeeService = new EmployeeService("https://localhost:7197/api/Employee");
         // GET: PersonController
+        [Authorize("Administrator")]
         public ActionResult Index()
         {
             CustomerEmployeeViewModel viewModel = new CustomerEmployeeViewModel();

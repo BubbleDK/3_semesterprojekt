@@ -27,7 +27,7 @@ namespace NetCafeUCN.MVC.Services
         }
         public UserDto? GetUserByLogin(string email, string passwordHash)
         {
-            UserDto? body = new UserDto { Id = 0, Email = email, PasswordHash = passwordHash, Name = "", Role = 0 };
+            UserDto? body = new UserDto { Id = 0, Email = email, PasswordHash = passwordHash, PhoneNo = "", Name = "", Role = 0 };
             RestRequest request = new RestRequest($"{BaseUri}");
             request.AddJsonBody(body);
             return RestClient.Post<UserDto>(request);

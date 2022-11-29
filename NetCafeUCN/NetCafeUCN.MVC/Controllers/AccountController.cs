@@ -29,13 +29,16 @@ namespace NetCafeUCN.MVC.Controllers
         public async Task<IActionResult> Login([FromForm] LoginModel loginInfo, [FromQuery] string returnUrl)
         {
             UserLoginDto? userLoginDto = _userProvider.GetHashByEmail(loginInfo.Email);
-            if (BCryptTool.ValidatePassword(loginInfo.Password, userLoginDto.PasswordHash))
+            if (userLoginDto != null)
             {
-                UserDto? user = _userProvider.GetUserByLogin(loginInfo.Email, userLoginDto.PasswordHash);
+                if (BCryptTool.ValidatePassword(loginInfo.Password, userLoginDto.PasswordHash))
+                {
+                    UserDto? user = _userProvider.GetUserByLogin(loginInfo.Email, userLoginDto.PasswordHash);
 
-                if (user != null) { await SignIn(user); }
+                    if (user != null) { await SignIn(user); }
+                }
             }
-                if (string.IsNullOrEmpty(returnUrl)) { return RedirectToAction(); }
+            if (string.IsNullOrEmpty(returnUrl)) { return RedirectToAction(); }
             
             return View();
         }
@@ -46,6 +49,7 @@ namespace NetCafeUCN.MVC.Controllers
             new Claim("id", user.Id.ToString()),
             new Claim(ClaimTypes.Name, user.Name),
             new Claim(ClaimTypes.Email, user.Email),
+            new Claim(ClaimTypes.MobilePhone, user.PhoneNo),
             new Claim(ClaimTypes.Role, user.Role.ToString())
         };
             
