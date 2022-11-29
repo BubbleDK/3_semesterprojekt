@@ -24,7 +24,10 @@ namespace NetCafeUCN.DAL.DAO
         {
             CustomerDAO customerDAO = new CustomerDAO();
             if (customerDAO.GetId(o.PhoneNo) == 0) return false;
-            if(BookingCheck(o.StartTime, o.EndTime)) return false;
+            foreach(var item in o.BookingLines)
+            {
+                if (BookingCheck(o.StartTime, o.EndTime, item.Stationid)) return false;
+            }
             SqlTransaction trans;
             int id = 0;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
@@ -230,19 +233,21 @@ namespace NetCafeUCN.DAL.DAO
                 }
             }
         }
-        public bool BookingCheck(DateTime startTime, DateTime endTime)
+        public bool BookingCheck(DateTime startTime, DateTime endTime, int stationid)
         {
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
                 using SqlCommand command = new SqlCommand("SELECT stationid, startTime, endTime FROM nc_Booking INNER JOIN nc_BookingLine ON " +
-                    "nc_Booking.id = nc_BookingLine.bookingid where startTime = @startTime AND endTime = @endTime", conn);
+                    "nc_Booking.id = nc_BookingLine.bookingid where startTime = @startTime AND endTime = @endTime AND stationid = @stationid", conn);
                 command.Parameters.AddWithValue("@startTime", startTime);
                 command.Parameters.AddWithValue("@endTime", endTime);
+                command.Parameters.AddWithValue("@stationid", stationid);
                 {
                     try
                     {
                         conn.Open();
                         SqlDataReader reader = command.ExecuteReader();
+                        Console.WriteLine(reader.HasRows);
                         return reader.HasRows;
                     }
                     catch (DataAccessException)
