@@ -234,7 +234,7 @@ namespace NetCafeUCN.DAL.DAO
                 }
             }
         }
-        public bool BookingCheck(DateTime startTime, DateTime endTime, int stationid)
+        private bool BookingCheck(DateTime startTime, DateTime endTime, int stationid)
         {
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
