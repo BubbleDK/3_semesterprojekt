@@ -1,16 +1,23 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NetCafeUCN.MVC.Models;
+using NetCafeUCN.MVC.Models.DTO;
+using NetCafeUCN.MVC.Services;
 
 namespace NetCafeUCN.MVC.Controllers
 {
     [AllowAnonymous]
     public class BookingController : Controller
     {
+        INetCafeDataAccessService<GamingStationDto> gamingStationService = new GamingstationService("https://localhost:7197/api/GamingStation");
         // GET: BookingController
         public ActionResult Index()
         {
-            return View();
+            BookingGamingStationViewModel viewModel = new BookingGamingStationViewModel();
+            viewModel.gamingStations = gamingStationService.GetAll();
+
+            return View(viewModel);
         }
 
         // GET: BookingController/Details/5
@@ -22,7 +29,12 @@ namespace NetCafeUCN.MVC.Controllers
         // GET: BookingController/Create
         public ActionResult Create()
         {
-            return View();
+            BookingGamingStationViewModel viewModel = new BookingGamingStationViewModel();
+            viewModel.gamingStations = gamingStationService.GetAll();
+
+
+
+            return View(viewModel);
         }
 
         // POST: BookingController/Create
