@@ -32,6 +32,8 @@ namespace NetCafeUCN.MVC.Controllers
             BookingGamingStationViewModel viewModel = new BookingGamingStationViewModel();
             viewModel.gamingStations = gamingStationService.GetAll();
 
+
+
             return View(viewModel);
         }
 
