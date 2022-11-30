@@ -40,6 +40,7 @@ namespace NetCafeUCN.DAL.DAO
                             Id = (int)reader["Id"],
                             Name = (string)reader["Name"],
                             Email = (string)reader["Email"],
+                            PhoneNo = (string)reader["Phone"],
                             PasswordHash = (string)reader["PasswordHash"],
                             Role = tempRole
                         };

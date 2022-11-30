@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NetCafeUCN.API.Conversion;
+using NetCafeUCN.API.DTO;
 using NetCafeUCN.DAL.DAO;
 using NetCafeUCN.DAL.Model;
 
@@ -19,7 +21,7 @@ namespace NetCafeUCN.API.Controllers
         [HttpGet]
         public ActionResult <IEnumerable<Booking>> Get()
         {
-            return Ok(dataAccess.GetAll());
+            return Ok(dataAccess.GetAll().BookingToDtos());
         }
 
         // GET api/<BookingController>/5
@@ -27,22 +29,24 @@ namespace NetCafeUCN.API.Controllers
         [Route("{bookingNo}")]
         public ActionResult<Booking> Get(string bookingNo)
         {
-            var booking = dataAccess.Get(bookingNo);
+            var booking = dataAccess.Get(bookingNo).BookingToDto();
             if (booking == null) { return NotFound(); }
             return Ok(booking);
         }
 
         // POST api/<BookingController>
         [HttpPost]
-        public ActionResult<bool> Add([FromBody] Booking booking)
+        public ActionResult<bool> Add([FromBody] BookingDTO bookingdto)
         {
+            Booking booking = bookingdto.BookingFromDto();
             return Ok(dataAccess.Add(booking));
         }
 
         // PUT api/<BookingController>/5
         [HttpPut]
-        public ActionResult<bool> Update(Booking booking)
+        public ActionResult<bool> Update(BookingDTO bookingdto)
         {
+            Booking booking = bookingdto.BookingFromDto();
             return Ok(dataAccess.Update(booking));
         }
 

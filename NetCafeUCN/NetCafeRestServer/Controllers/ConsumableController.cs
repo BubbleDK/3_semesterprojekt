@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NetCafeUCN.API.Conversion;
+using NetCafeUCN.API.DTO;
 using NetCafeUCN.DAL.DAO;
 using NetCafeUCN.DAL.Model;
 
@@ -19,9 +21,9 @@ namespace NetCafeUCN.API.Controllers
 
         // GET: api/<ConsumableController>
         [HttpGet]
-        public ActionResult<IEnumerable<Consumable>> GetAll()
+        public ActionResult<IEnumerable<ConsumableDTO>> GetAll()
         {
-            return Ok(dataAccess.GetAll());
+            return Ok(dataAccess.GetAll().CSToDtos());
         }
 
         // GET api/<ConsumableController>/74747
@@ -29,23 +31,25 @@ namespace NetCafeUCN.API.Controllers
         [Route("{productNo}")]
         public ActionResult<Consumable> Get(string productNo)
         {
-            var product = dataAccess.Get(productNo);
+            var product = dataAccess.Get(productNo).CSToDto();
             if (product == null) { return NotFound(); }
             return Ok(product);
         }
 
         // POST api/<ConsumableController>
         [HttpPost]
-        public ActionResult<bool> Add([FromBody] Consumable p)
+        public ActionResult<bool> Add([FromBody] ConsumableDTO p)
         {
-            return Ok(dataAccess.Add(p));
+            Consumable data = p.CSFromDto();
+            return Ok(dataAccess.Add(data));
         }
 
         // PUT api/<ConsumableController>/
         [HttpPut]
-        public ActionResult<bool> Update(Consumable product)
+        public ActionResult<bool> Update(ConsumableDTO p)
         {
-            return Ok(dataAccess.Update(product));
+            Consumable data = p.CSFromDto();
+            return Ok(dataAccess.Update(data));
         }
 
         // DELETE api/<ConsumableController>/40559810

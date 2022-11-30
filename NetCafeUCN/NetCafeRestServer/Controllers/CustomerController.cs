@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NetCafeUCN.API.Conversion;
+using NetCafeUCN.API.DTO;
 using NetCafeUCN.DAL.DAO;
 using NetCafeUCN.DAL.Model;
 
@@ -22,7 +24,7 @@ namespace NetCafeUCN.API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Customer>> GetAll()
         {
-            return Ok(dataAccess.GetAll());
+            return Ok(dataAccess.GetAll().CustomerToDtos());
         }
 
         // GET api/<ProductController>/74747
@@ -30,7 +32,7 @@ namespace NetCafeUCN.API.Controllers
         [Route("{phoneNo}")]
         public ActionResult<Person> Get(string phoneNo)
         {
-            var product = dataAccess.Get(phoneNo);
+            var product = dataAccess.Get(phoneNo).CustomerToDto();
             if (product == null) { return NotFound(); }
 
             return Ok(product);
@@ -38,17 +40,18 @@ namespace NetCafeUCN.API.Controllers
 
         // POST api/<CustomerController>
         [HttpPost]
-        public ActionResult<bool> Add([FromBody] Customer p)
+        public ActionResult<bool> Add([FromBody] CustomerDTO p)
         {
-
-            return Ok(dataAccess.Add(p));
+            Customer customer = p.CustomerFromDto();
+            return Ok(dataAccess.Add(customer));
         }
 
         // PUT api/<ProductController>/
         [HttpPut]
-        public ActionResult<bool> Update(Customer person)
+        public ActionResult<bool> Update(CustomerDTO p)
         {
-            return Ok(dataAccess.Update(person));
+            Customer customer = p.CustomerFromDto();
+            return Ok(dataAccess.Update(customer));
         }
 
         // DELETE api/<CustomerController>/40559810

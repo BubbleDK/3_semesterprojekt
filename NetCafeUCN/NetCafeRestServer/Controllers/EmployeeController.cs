@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NetCafeUCN.API.Conversion;
+using NetCafeUCN.API.DTO;
 using NetCafeUCN.DAL.DAO;
 using NetCafeUCN.DAL.Model;
 
@@ -18,7 +20,7 @@ namespace NetCafeUCN.API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Employee>> GetAll()
         {
-            return Ok(dataAccess.GetAll());
+            return Ok(dataAccess.GetAll().EmployeeToDtos());
         }
 
         // GET api/<Employee>/74747
@@ -26,7 +28,7 @@ namespace NetCafeUCN.API.Controllers
         [Route("{phoneNo}")]
         public ActionResult<Employee> Get(string phoneNo)
         {
-            var product = dataAccess.Get(phoneNo);
+            var product = dataAccess.Get(phoneNo).EmployeeToDto();
             if (product == null) { return NotFound(); }
 
             return Ok(product);
@@ -34,16 +36,18 @@ namespace NetCafeUCN.API.Controllers
 
         // POST api/<EmployeeController>
         [HttpPost]
-        public ActionResult<bool> Add([FromBody] Employee p)
+        public ActionResult<bool> Add([FromBody] EmployeeDTO p)
         {
-            return Ok(dataAccess.Add(p));
+            Employee employee = p.EmployeeFromDto();
+            return Ok(dataAccess.Add(employee));
         }
 
         // PUT api/<EmployeeController>/
         [HttpPut]
-        public ActionResult<bool> Update(Employee person)
+        public ActionResult<bool> Update(EmployeeDTO p)
         {
-            return Ok(dataAccess.Update(person));
+            Employee employee = p.EmployeeFromDto();
+            return Ok(dataAccess.Update(employee));
         }
 
         // DELETE api/<EmployeeController>/40559810
