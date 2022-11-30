@@ -19,35 +19,35 @@ namespace NetCafeUCN.API.Controllers
 
         // GET: api/<BookingController>
         [HttpGet]
-        public ActionResult <IEnumerable<BookingDTO>> Get()
+        public ActionResult <IEnumerable<Booking>> Get()
         {
-            return Ok(dataAccess.GetAll().BookingToDtos());
+            return Ok(dataAccess.GetAll());
         }
 
         // GET api/<BookingController>/5
         [HttpGet]
         [Route("{bookingNo}")]
-        public ActionResult<BookingDTO> Get(string bookingNo)
+        public ActionResult<Booking> Get(string bookingNo)
         {
-            var booking = dataAccess.Get(bookingNo).BookingToDto();
+            var booking = dataAccess.Get(bookingNo);
             if (booking == null) { return NotFound(); }
             return Ok(booking);
         }
 
         // POST api/<BookingController>
         [HttpPost]
-        public ActionResult<bool> Add([FromBody] BookingDTO bookingdto)
+        public ActionResult<bool> Add([FromBody] Booking bookingdto)
         {
-            Booking booking = bookingdto.BookingFromDto();
-            return Ok(dataAccess.Add(booking));
+            //Booking booking = bookingdto.BookingFromDto();
+            return Ok(dataAccess.Add(bookingdto));
         }
 
         // PUT api/<BookingController>/5
         [HttpPut]
-        public ActionResult<bool> Update(BookingDTO bookingdto)
+        public ActionResult<bool> Update(Booking bookingdto)
         {
-            Booking booking = bookingdto.BookingFromDto();
-            return Ok(dataAccess.Update(booking));
+            //Booking booking = bookingdto.BookingFromDto();
+            return Ok(dataAccess.Update(bookingdto));
         }
 
         // DELETE api/<BookingController>/5
