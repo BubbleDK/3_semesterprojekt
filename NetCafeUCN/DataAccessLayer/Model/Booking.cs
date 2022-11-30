@@ -12,7 +12,7 @@ namespace NetCafeUCN.DAL.Model
         public string ?BookingNo { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
-        public string PhoneNo { get; set; }
+        public string PhoneNo { get; set; } = string.Empty;
         public List<BookingLine> BookingLines { get; set; }
         public Booking()
         {
