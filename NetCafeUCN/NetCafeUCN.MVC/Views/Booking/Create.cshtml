@@ -62,18 +62,10 @@
                         <ol class="seats">
                             @foreach (GamingStationDto item in Model.gamingStations)
                             {
-                                @if (item.booked) {
-                                    <li class="seat">
-                                        <input type="checkbox" disabled id="@item.SeatNumber" />
-                                        <label for="@item.SeatNumber">@item.SeatNumber</label>
-                                    </li>
-                                } else
-                                {
-                                    <li class="seat">
-                                        <input type="checkbox" id="@item.SeatNumber" />
-                                        <label for="@item.SeatNumber">@item.SeatNumber</label>
-                                    </li>
-                                }
+                                <li class="seat">
+                                    <input type="checkbox" id="@item.SeatNumber" />
+                                    <label for="@item.SeatNumber">@item.SeatNumber</label>
+                                </li>
                             }
                         </ol>
                     </li>

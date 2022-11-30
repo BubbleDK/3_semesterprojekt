@@ -8,7 +8,9 @@ namespace NetCafeUCN.MVC.Models
 {
     public class ProductDto
     {
+        public string? Name { get; set; }
         public string? ProductNumber { get; set; }
         public string? Type { get; set; }
+        public bool IsActive { get; set; }
     }
 }

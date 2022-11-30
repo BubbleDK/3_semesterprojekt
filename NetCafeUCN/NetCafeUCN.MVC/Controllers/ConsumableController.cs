@@ -50,11 +50,15 @@ namespace NetCafeUCN.MVC.Controllers
         // POST: ConsumableController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(ConsumableDto editedConsumable)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var consumable = consumableService.Get(editedConsumable.ProductNumber);
+                consumable.Description = editedConsumable.Description;
+                consumable.Name = editedConsumable.Name;
+                consumableService.Update(consumable);
+                return RedirectToAction(nameof(Index), "Product");
             }
             catch
             {

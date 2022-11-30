@@ -40,7 +40,8 @@ namespace NetCafeUCN.MVC.Services
         
         public bool Update(GamingStationDto o)
         {
-            return RestClient.Execute<GamingStationDto>(new RestRequest($"{BaseUri}/{o}",Method.Put)).IsSuccessful;
+            return RestClient.Execute<GamingStationDto>(new RestRequest($"{BaseUri}/", Method.Put).AddJsonBody(o)).IsSuccessful;
+            //return RestClient.Execute<GamingStationDto>(new RestRequest($"{BaseUri}/{o}",Method.Put)).IsSuccessful;
         }
     }
 }
