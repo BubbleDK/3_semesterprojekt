@@ -10,7 +10,7 @@ namespace NetCafeUCN.API.DTO
     {
         public string? SeatNumber { get; set; }
         public string? Description { get; set; }
-        public bool isActive { get; set; }
+        public bool IsActive { get; set; }
 
         public override string ToString()
         {
