@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NetCafeUCN.API.Conversion;
+using NetCafeUCN.API.DTO;
 using NetCafeUCN.DAL.DAO;
 using NetCafeUCN.DAL.Model;
 
@@ -19,34 +21,33 @@ namespace NetCafeUCN.API.Controllers
 
         // GET: api/<GamingStationController>
         [HttpGet]
-        public ActionResult<IEnumerable<GamingStation>> GetAll()
+        public ActionResult<IEnumerable<GamingStationDTO>> GetAll()
         {
-            return Ok(dataAccess.GetAll());
+            return Ok(dataAccess.GetAll().GSToDtos());
         }
 
         // GET api/<GamingStationController>/74747
         [HttpGet]
         [Route("{productNo}")]
-        public ActionResult<GamingStation> Get(string productNo)
+        public ActionResult<GamingStationDTO> Get(string productNo)
         {
-            
-
-            return Ok(dataAccess.Get(productNo));
+            return Ok(dataAccess.Get(productNo).GSToDto());
         }
 
         // POST api/<GamingStationController>
         [HttpPost]
-        public ActionResult<bool> Add([FromBody]GamingStation p)
+        public ActionResult<bool> Add([FromBody]GamingStationDTO p)
         {
-
-            return Ok(dataAccess.Add(p));
+            GamingStation g = p.GSFromDto();
+            return Ok(dataAccess.Add(g));
         }
 
         // PUT api/<GamingStationController>/
         [HttpPut]
-        public ActionResult<bool> Update(GamingStation product)
+        public ActionResult<GamingStation> Update(GamingStationDTO product)
         {
-            return Ok(dataAccess.Update(product));
+            GamingStation g = product.GSFromDto();
+            return Ok(dataAccess.Update(g));
         }
 
         // DELETE api/<GamingStationController>/40559810
