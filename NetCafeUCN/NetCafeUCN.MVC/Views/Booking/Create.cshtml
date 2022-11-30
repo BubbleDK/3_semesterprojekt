@@ -1,5 +1,6 @@
 ﻿@using System.Security.Claims;
-@model NetCafeUCN.MVC.Models.BookingDto
+@using NetCafeUCN.MVC.Models.DTO;
+@model BookingGamingStationViewModel;
 
 @section SeatBookingStyles {
     <link href="@Url.Content("~/css/SeatBooking.css")" rel="stylesheet" type="text/css" />
@@ -53,58 +54,35 @@
     </div>
     <div class="col-lg">
         <h4>Vælg din plads her</h4>
-        <div class="seats-container">
-            <ol>
-                <li class="row">
-                    <ol class="seats">
-                        <li class="seat">
-                            <input type="checkbox" id="1A" />
-                            <label for="1A">1A</label>
-                        </li>
-                        <li class="seat">
-                            <input type="checkbox" id="1B" />
-                            <label for="1B">1B</label>
-                        </li>
-                        <li class="seat">
-                            <input type="checkbox" id="1C" />
-                            <label for="1C">1C</label>
-                        </li>
-                        <li class="seat">
-                            <input type="checkbox" disabled id="1D" />
-                            <label for="1D">1D</label>
-                        </li>
-                        <li class="seat">
-                            <input type="checkbox" id="1E" />
-                            <label for="1E">1E</label>
-                        </li>
-                        <li class="seat">
-                            <input type="checkbox" id="1F" />
-                            <label for="1F">1F</label>
-                        </li>
-                        <li class="seat">
-                            <input type="checkbox" id="1G" />
-                            <label for="1G">1G</label>
-                        </li>
-                        <li class="seat">
-                            <input type="checkbox" id="1H" />
-                            <label for="1H">1H</label>
-                        </li>
-                        <li class="seat">
-                            <input type="checkbox" id="1I" />
-                            <label for="1I">1I</label>
-                        </li>
-                        <li class="seat">
-                            <input type="checkbox" id="1J" />
-                            <label for="1J">1J</label>
-                        </li>
-                        <li class="seat">
-                            <input type="checkbox" id="1K" />
-                            <label for="1K">1K</label>
-                        </li>
-                    </ol>
-                </li>
-            </ol>
-        </div>
+        @if (Model.gamingStations != null)
+        {
+            <div class="seats-container">
+                <ol>
+                    <li class="row">
+                        <ol class="seats">
+                            @foreach (GamingStationDto item in Model.gamingStations)
+                            {
+                                @if (item.isActive) {
+                                    <li class="seat">
+                                        <input type="checkbox" disabled id="@item.SeatNumber" />
+                                        <label for="@item.SeatNumber">@item.SeatNumber</label>
+                                    </li>
+                                } else
+                                {
+                                    <li class="seat">
+                                        <input type="checkbox" id="@item.SeatNumber" />
+                                        <label for="@item.SeatNumber">@item.SeatNumber</label>
+                                    </li>
+                                }
+                            }
+                        </ol>
+                    </li>
+                </ol>
+            </div>
+        } else
+        {
+            <p>Ingen gamingstations</p>
+        }
     </div>
 </div>
 
