@@ -32,12 +32,13 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.txtPhoneNo = new System.Windows.Forms.TextBox();
             this.lblPhone = new System.Windows.Forms.Label();
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.clndPicker = new System.Windows.Forms.MonthCalendar();
             this.btnConfirm = new System.Windows.Forms.Button();
             this.cmbEndTime = new System.Windows.Forms.ComboBox();
             this.lblEndTime = new System.Windows.Forms.Label();
             this.lblStartTime = new System.Windows.Forms.Label();
             this.cmbStartTime = new System.Windows.Forms.ComboBox();
-            this.clndPicker = new System.Windows.Forms.MonthCalendar();
             this.dgvAvailableGamingstations = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -47,6 +48,10 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
+            this.splitContainer3.Panel1.SuspendLayout();
+            this.splitContainer3.Panel2.SuspendLayout();
+            this.splitContainer3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAvailableGamingstations)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,7 +69,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.dgvAvailableGamingstations);
             this.splitContainer1.Size = new System.Drawing.Size(984, 561);
-            this.splitContainer1.SplitterDistance = 256;
+            this.splitContainer1.SplitterDistance = 227;
             this.splitContainer1.TabIndex = 0;
             // 
             // splitContainer2
@@ -83,20 +88,15 @@
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.btnConfirm);
-            this.splitContainer2.Panel2.Controls.Add(this.cmbEndTime);
-            this.splitContainer2.Panel2.Controls.Add(this.lblEndTime);
-            this.splitContainer2.Panel2.Controls.Add(this.lblStartTime);
-            this.splitContainer2.Panel2.Controls.Add(this.cmbStartTime);
-            this.splitContainer2.Panel2.Controls.Add(this.clndPicker);
-            this.splitContainer2.Size = new System.Drawing.Size(256, 561);
+            this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
+            this.splitContainer2.Size = new System.Drawing.Size(227, 561);
             this.splitContainer2.SplitterDistance = 67;
             this.splitContainer2.TabIndex = 0;
             // 
             // txtPhoneNo
             // 
             this.txtPhoneNo.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtPhoneNo.Location = new System.Drawing.Point(129, 16);
+            this.txtPhoneNo.Location = new System.Drawing.Point(100, 16);
             this.txtPhoneNo.MaxLength = 8;
             this.txtPhoneNo.Name = "txtPhoneNo";
             this.txtPhoneNo.Size = new System.Drawing.Size(115, 23);
@@ -111,10 +111,42 @@
             this.lblPhone.TabIndex = 1;
             this.lblPhone.Text = "Telefon:";
             // 
+            // splitContainer3
+            // 
+            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer3.Name = "splitContainer3";
+            this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer3.Panel1
+            // 
+            this.splitContainer3.Panel1.Controls.Add(this.clndPicker);
+            // 
+            // splitContainer3.Panel2
+            // 
+            this.splitContainer3.Panel2.Controls.Add(this.btnConfirm);
+            this.splitContainer3.Panel2.Controls.Add(this.cmbEndTime);
+            this.splitContainer3.Panel2.Controls.Add(this.lblEndTime);
+            this.splitContainer3.Panel2.Controls.Add(this.lblStartTime);
+            this.splitContainer3.Panel2.Controls.Add(this.cmbStartTime);
+            this.splitContainer3.Size = new System.Drawing.Size(227, 490);
+            this.splitContainer3.SplitterDistance = 195;
+            this.splitContainer3.TabIndex = 0;
+            // 
+            // clndPicker
+            // 
+            this.clndPicker.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.clndPicker.Location = new System.Drawing.Point(0, 0);
+            this.clndPicker.MaxSelectionCount = 1;
+            this.clndPicker.MinDate = new System.DateTime(1971, 1, 1, 0, 0, 0, 0);
+            this.clndPicker.Name = "clndPicker";
+            this.clndPicker.TabIndex = 0;
+            this.clndPicker.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.clndPicker_DateChanged);
+            // 
             // btnConfirm
             // 
             this.btnConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnConfirm.Location = new System.Drawing.Point(169, 455);
+            this.btnConfirm.Location = new System.Drawing.Point(149, 256);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.Size = new System.Drawing.Size(75, 23);
             this.btnConfirm.TabIndex = 5;
@@ -128,9 +160,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbEndTime.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbEndTime.FormattingEnabled = true;
-            this.cmbEndTime.Location = new System.Drawing.Point(19, 271);
+            this.cmbEndTime.Location = new System.Drawing.Point(9, 124);
             this.cmbEndTime.Name = "cmbEndTime";
-            this.cmbEndTime.Size = new System.Drawing.Size(225, 23);
+            this.cmbEndTime.Size = new System.Drawing.Size(215, 23);
             this.cmbEndTime.TabIndex = 4;
             this.cmbEndTime.SelectionChangeCommitted += new System.EventHandler(this.cmbEndTime_SelectionChangeCommitted);
             // 
@@ -139,7 +171,7 @@
             this.lblEndTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblEndTime.AutoSize = true;
-            this.lblEndTime.Location = new System.Drawing.Point(22, 253);
+            this.lblEndTime.Location = new System.Drawing.Point(12, 106);
             this.lblEndTime.Name = "lblEndTime";
             this.lblEndTime.Size = new System.Drawing.Size(44, 15);
             this.lblEndTime.TabIndex = 3;
@@ -150,7 +182,7 @@
             this.lblStartTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblStartTime.AutoSize = true;
-            this.lblStartTime.Location = new System.Drawing.Point(18, 180);
+            this.lblStartTime.Location = new System.Drawing.Point(12, 15);
             this.lblStartTime.Name = "lblStartTime";
             this.lblStartTime.Size = new System.Drawing.Size(48, 15);
             this.lblStartTime.TabIndex = 2;
@@ -162,22 +194,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbStartTime.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbStartTime.FormattingEnabled = true;
-            this.cmbStartTime.Location = new System.Drawing.Point(18, 198);
+            this.cmbStartTime.Location = new System.Drawing.Point(8, 33);
             this.cmbStartTime.Name = "cmbStartTime";
-            this.cmbStartTime.Size = new System.Drawing.Size(226, 23);
+            this.cmbStartTime.Size = new System.Drawing.Size(216, 23);
             this.cmbStartTime.TabIndex = 1;
             this.cmbStartTime.SelectionChangeCommitted += new System.EventHandler(this.cmbStartTime_SelectionChangeCommitted);
-            // 
-            // clndPicker
-            // 
-            this.clndPicker.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.clndPicker.Location = new System.Drawing.Point(17, 9);
-            this.clndPicker.MaxSelectionCount = 1;
-            this.clndPicker.MinDate = new System.DateTime(1971, 1, 1, 0, 0, 0, 0);
-            this.clndPicker.Name = "clndPicker";
-            this.clndPicker.TabIndex = 0;
-            this.clndPicker.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.clndPicker_DateChanged);
             // 
             // dgvAvailableGamingstations
             // 
@@ -192,7 +213,7 @@
             this.dgvAvailableGamingstations.RowHeadersWidth = 51;
             this.dgvAvailableGamingstations.RowTemplate.Height = 29;
             this.dgvAvailableGamingstations.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAvailableGamingstations.Size = new System.Drawing.Size(724, 561);
+            this.dgvAvailableGamingstations.Size = new System.Drawing.Size(753, 561);
             this.dgvAvailableGamingstations.TabIndex = 0;
             // 
             // NewBookingForm
@@ -212,9 +233,13 @@
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel1.PerformLayout();
             this.splitContainer2.Panel2.ResumeLayout(false);
-            this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.splitContainer3.Panel1.ResumeLayout(false);
+            this.splitContainer3.Panel2.ResumeLayout(false);
+            this.splitContainer3.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
+            this.splitContainer3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAvailableGamingstations)).EndInit();
             this.ResumeLayout(false);
 
@@ -233,5 +258,6 @@
         private MonthCalendar clndPicker;
         private DataGridView dgvAvailableGamingstations;
         private Button btnConfirm;
+        private SplitContainer splitContainer3;
     }
 }
