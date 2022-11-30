@@ -8,10 +8,10 @@ namespace NetCafeUCN.API.DTO
 {
     public class BookingDTO
     {
-        public string BookingNo { get; set; }
+        public string BookingNo { get; set; } = string.Empty;
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
-        public string PhoneNo { get; set; }
+        public string PhoneNo { get; set; } = string.Empty;
         public List<BookingLineDTO> BookingLines { get; set; }
         public BookingDTO()
         {

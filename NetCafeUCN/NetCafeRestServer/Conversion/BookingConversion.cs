@@ -14,7 +14,14 @@ namespace NetCafeUCN.API.Conversion
         }
         public static BookingDTO BookingToDto(this Booking booking)
         {
-            return booking.CopyPropertiesTo(new BookingDTO());
+            List<BookingLineDTO> result = new();
+            foreach(var item in booking.BookingLines)
+            {
+                result.Add(item.CopyPropertiesTo(new BookingLineDTO()));
+            }
+            BookingDTO b = booking.CopyPropertiesTo(new BookingDTO());
+            b.BookingLines = result;
+            return b;
         }
         public static IEnumerable<Booking> BookingFromDtos(this IEnumerable<BookingDTO> bookingDTOs)
         {
@@ -26,7 +33,14 @@ namespace NetCafeUCN.API.Conversion
 
         public static Booking BookingFromDto(this BookingDTO bookingDTO)
         {
-            return bookingDTO.CopyPropertiesTo(new Booking());
+            List<BookingLine> result = new();
+            foreach (var item in bookingDTO.BookingLines)
+            {
+                result.Add(item.CopyPropertiesTo(new BookingLine()));
+            }
+            Booking b = bookingDTO.CopyPropertiesTo(new Booking());
+            b.BookingLines = result;
+            return b;
         }
     }
 }

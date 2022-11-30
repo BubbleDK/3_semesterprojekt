@@ -21,7 +21,7 @@ namespace NetCafeUCN.API.Controllers
         [HttpGet]
         public ActionResult <IEnumerable<Booking>> Get()
         {
-            return Ok(dataAccess.GetAll());
+            return Ok(dataAccess.GetAll().BookingToDtos());
         }
 
         // GET api/<BookingController>/5
@@ -29,7 +29,7 @@ namespace NetCafeUCN.API.Controllers
         [Route("{bookingNo}")]
         public ActionResult<Booking> Get(string bookingNo)
         {
-            var booking = dataAccess.Get(bookingNo);
+            var booking = dataAccess.Get(bookingNo).BookingToDto();
             if (booking == null) { return NotFound(); }
             return Ok(booking);
         }
