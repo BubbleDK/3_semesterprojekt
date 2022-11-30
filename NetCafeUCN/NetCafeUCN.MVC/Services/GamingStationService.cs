@@ -35,7 +35,7 @@ namespace NetCafeUCN.MVC.Services
         }
         public bool Remove(dynamic key)
         {
-            return RestClient.Execute<GamingStationDto?>(new RestRequest($"{BaseUri}/{key}", Method.Delete)).IsSuccessful;
+            return RestClient.Execute<GamingStationDto>(new RestRequest($"{BaseUri}/{key}", Method.Delete)).IsSuccessful;
         }
         
         public bool Update(GamingStationDto o)

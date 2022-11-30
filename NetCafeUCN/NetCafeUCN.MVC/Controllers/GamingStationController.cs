@@ -57,6 +57,7 @@ namespace NetCafeUCN.MVC.Controllers
                 var gamingstation = gamingStationService.Get(editedGamingstation.ProductNumber);
                 gamingstation.SeatNumber = editedGamingstation.SeatNumber;
                 gamingstation.Description = editedGamingstation.Description;
+                gamingstation.Name = editedGamingstation.Name;
                 gamingStationService.Update(gamingstation);
                 return RedirectToAction(nameof(Index), "Product");
             }
@@ -67,19 +68,21 @@ namespace NetCafeUCN.MVC.Controllers
         }
 
         // GET: GamingStationController/Delete/5
-        public ActionResult Delete(string productNumber)
+        [HttpGet]
+        public ActionResult Delete(string? productNumber)
         {
-            return View(gamingStationService.Get(productNumber));
+            GamingStationDto gamingStation = gamingStationService.Get(productNumber);
+            return View(gamingStation);
         }
 
         // POST: GamingStationController/Delete/5
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(GamingStationDto gamingstationToDelete)
+        public ActionResult DeleteConfirmed(string ProductNumber)
         {
             try
             {
-                gamingStationService.Remove(gamingstationToDelete.ProductNumber);
+                gamingStationService.Remove(ProductNumber);
                 return RedirectToAction(nameof(Index), "Product");
             }
             catch
