@@ -30,7 +30,7 @@ namespace NetCafeUCN.API.Controllers
         // GET api/<ProductController>/74747
         [HttpGet]
         [Route("{phoneNo}")]
-        public ActionResult<Person> Get(string phoneNo)
+        public ActionResult<Customer> Get(string phoneNo)
         {
             var product = dataAccess.Get(phoneNo).CustomerToDto();
             if (product == null) { return NotFound(); }
