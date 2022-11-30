@@ -75,11 +75,12 @@ namespace NetCafeUCN.MVC.Controllers
         // POST: ConsumableController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(ConsumableDto consumableToDelete)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                consumableService.Remove(consumableToDelete.ProductNumber);
+                return RedirectToAction(nameof(Index), "Product");
             }
             catch
             {

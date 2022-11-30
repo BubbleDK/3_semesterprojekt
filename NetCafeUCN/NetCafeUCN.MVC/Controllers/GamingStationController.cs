@@ -79,7 +79,7 @@ namespace NetCafeUCN.MVC.Controllers
         {
             try
             {
-                gamingStationService.Remove(gamingstationToDelete);
+                gamingStationService.Remove(gamingstationToDelete.ProductNumber);
                 return RedirectToAction(nameof(Index), "Product");
             }
             catch
