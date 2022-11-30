@@ -7,6 +7,8 @@
     <title>@ViewData["Title"] - UCN NetCafé</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link href="@Url.Content("~/css/SeatBooking.css")" rel="stylesheet" type="text/css" />
+    @RenderSection("SeatBookingStyles", false)
     <link rel="stylesheet" href="~/NetCafeUCN.MVC.styles.css" asp-append-version="true" />
 </head>
 <body>

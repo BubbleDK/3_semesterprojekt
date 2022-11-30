@@ -17,6 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\css\SeatBooking.css" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\css\TabStyle.css" />
     <None Include="wwwroot\js\TabScript.js" />
   </ItemGroup>
