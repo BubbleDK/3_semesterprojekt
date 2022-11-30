@@ -1,45 +1,34 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NetCafeUCN.MVC.Models;
-using NetCafeUCN.MVC.Models.DTO;
 using NetCafeUCN.MVC.Services;
 
 namespace NetCafeUCN.MVC.Controllers
 {
-    [Authorize]
-    public class ProductController : Controller
+    public class ConsumableController : Controller
     {
-        INetCafeDataAccessService<GamingStationDto> gamingStationService = new GamingstationService("https://localhost:7197/api/GamingStation");
         INetCafeDataAccessService<ConsumableDto> consumableService = new ConsumableService("https://localhost:7197/api/Consumable");
-        static GamingStationConsumableViewModel viewModel = new GamingStationConsumableViewModel();
-        // GET: ProductController
-        [AllowAnonymous]
+        // GET: ConsumableController
         public ActionResult Index()
         {
-            viewModel.gamingStations = gamingStationService.GetAll();
-            viewModel.consumables = consumableService.GetAll();
-            return View(viewModel);
+            return View();
         }
 
-        // GET: ProductController/Details/5
-        [AllowAnonymous]
+        // GET: ConsumableController/Details/5
         public ActionResult Details(string productNumber)
         {
-            return View();
+            return View(consumableService.Get(productNumber));
         }
 
-        // GET: ProductController/Create
-        [Authorize(Roles = "Administrator")]
-        public ActionResult Create()
+        // GET: ConsumableController/Create
+        public ActionResult Create(string productNumber)
         {
-            return View();
+            return View(consumableService.Get(productNumber));
         }
 
-        // POST: ProductController/Create
+        // POST: ConsumableController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Administrator")]
         public ActionResult Create(IFormCollection collection)
         {
             try
@@ -51,13 +40,14 @@ namespace NetCafeUCN.MVC.Controllers
                 return View();
             }
         }
-        // GET: ProductController/Edit/5
-        public ActionResult Edit(int id)
+
+        // GET: ConsumableController/Edit/5
+        public ActionResult Edit(string productNumber)
         {
-            return View();
+            return View(consumableService.Get(productNumber));
         }
 
-        // POST: ProductController/Edit/5
+        // POST: ConsumableController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -72,17 +62,15 @@ namespace NetCafeUCN.MVC.Controllers
             }
         }
 
-        // GET: ProductController/Delete/5
-        [Authorize(Roles = "Administrator")]
-        public ActionResult Delete(int id)
+        // GET: ConsumableController/Delete/5
+        public ActionResult Delete(string productNumber)
         {
-            return View();
+            return View(consumableService.Get(productNumber));
         }
 
-        // POST: ProductController/Delete/5
+        // POST: ConsumableController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(int id, IFormCollection collection)
         {
             try

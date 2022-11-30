@@ -40,7 +40,8 @@ namespace NetCafeUCN.DesktopApp
 
         private void btnUpdateBooking_Click(object sender, EventArgs e)
         {
-            ShowUpdateBookingForm();
+            //ShowUpdateBookingForm();
+            MessageBox.Show("Denne funktion er ikke tilgængelig", "Ikke implementeret", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         private void ShowUpdateBookingForm()
