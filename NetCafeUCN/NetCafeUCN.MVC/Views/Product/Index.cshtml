@@ -6,16 +6,26 @@
 }
 <head>
     <link rel="stylesheet" href="~/css/TabStyle.css" />
-
+    <link rel="stylesheet" href="~/css/DropdownStyle.css" />
 </head>
 
 <script src="~/js/TabScript.js" > </script>
 <h1>Produkter</h1>
 
+<div class="dropdown">
+  <button class="dropbtn">Opret</button>
+  <div class="dropdown-content">
+    <a asp-action="Create" asp-controller="Gamingstation">Gamingstation</a>
+    <a asp-action="Create" asp-controller="Consumable">Consumable</a>
+  </div>
+</div>
+
 <div class="tab">
     <button class="tablinks btn btn-outline-primary btn-lg" id="defaultOpen" onclick="openTab(event,'GamingStation')">Computere</button>
     <button class="tablinks btn btn-outline-primary btn-lg" onclick="openTab(event,'Consumable')">Mad & drikke</button>
+    
 </div>
+
 @if (Model.gamingStations != null)
 {
     <div class="tabcontent" id="GamingStation">
