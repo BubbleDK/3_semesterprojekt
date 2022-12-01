@@ -110,7 +110,7 @@ namespace NetCafeUCN.DAL.DAO
                 }
             }
         }
-
+        //TODO: FIX: Skal ikke hente bookinglines her, da bookinglines gør det slow. Samtidigt skal telefonnumre gemmes på ordren i stedet for id, så man ikke skal lave flere kald. DET ER FUCKING SLOW
         public IEnumerable<Booking> GetAll()
         {
             string sqlStatement = "SELECT * FROM nc_Booking INNER JOIN nc_BookingLine ON nc_Booking.id = nc_BookingLine.bookingid";
