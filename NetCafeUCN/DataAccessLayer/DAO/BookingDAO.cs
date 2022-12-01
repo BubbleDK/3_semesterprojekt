@@ -93,7 +93,7 @@ namespace NetCafeUCN.DAL.DAO
                                     BookingNo = (string)reader["bookingNo"],
                                     StartTime = (DateTime)reader["startTime"],
                                     EndTime = (DateTime)reader["endTime"],
-                                    PhoneNo = customerDAO.GetPhoneNo((int)reader["customerId"]),
+                                    PhoneNo = (string)reader["phone"],
                                 };
                                 isBookingCreated = true;
                             }
