@@ -222,8 +222,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 561);
             this.Controls.Add(this.splitContainer1);
-            this.MaximumSize = new System.Drawing.Size(1000, 600);
-            this.MinimumSize = new System.Drawing.Size(1000, 600);
             this.Name = "NewBookingForm";
             this.Text = "NewBookingForm";
             this.splitContainer1.Panel1.ResumeLayout(false);
