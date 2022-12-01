@@ -133,7 +133,7 @@ namespace NetCafeUCN.DesktopApp.BookingForms
                 bool res = true;
                 foreach (int id in stationProductIds)
                 {
-                    if (item.productID == id)
+                    if (item.ProductID == id)
                     {
                         res = false;
                         break;
@@ -171,7 +171,7 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             foreach (DataGridViewRow row in dgvAvailableGamingstations.SelectedRows)
             {
                 GamingStationDTO currentGamingstation = (GamingStationDTO)row.DataBoundItem;
-                bookingDTO.addToBookingLine(new BookingLineDTO { Quantity = 1, StationId = currentGamingstation.productID, ConsumableId = -1 });
+                bookingDTO.addToBookingLine(new BookingLineDTO { Quantity = 1, StationId = currentGamingstation.ProductID, ConsumableId = -1 });
             }
             if (CheckPhoneNo(txtPhoneNo.Text))
             {
@@ -209,7 +209,7 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             foreach (DataGridViewRow row in dgvAvailableGamingstations.SelectedRows)
             {
                 GamingStationDTO currentGamingstation = (GamingStationDTO)row.DataBoundItem;
-                bookingDTO.addToBookingLine(new BookingLineDTO { Quantity = 1, StationId = currentGamingstation.productID, ConsumableId = -1 });
+                bookingDTO.addToBookingLine(new BookingLineDTO { Quantity = 1, StationId = currentGamingstation.ProductID, ConsumableId = -1 });
             }
             if (CheckPhoneNo(txtPhoneNo.Text))
             {

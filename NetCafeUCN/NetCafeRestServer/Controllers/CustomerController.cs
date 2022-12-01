@@ -22,7 +22,7 @@ namespace NetCafeUCN.API.Controllers
 
         // GET: api/<CustomerController>
         [HttpGet]
-        public ActionResult<IEnumerable<Customer>> GetAll()
+        public ActionResult<IEnumerable<CustomerDTO>> GetAll()
         {
             return Ok(dataAccess.GetAll().CustomerToDtos());
         }
@@ -30,7 +30,7 @@ namespace NetCafeUCN.API.Controllers
         // GET api/<ProductController>/74747
         [HttpGet]
         [Route("{phoneNo}")]
-        public ActionResult<Customer> Get(string phoneNo)
+        public ActionResult<CustomerDTO> Get(string phoneNo)
         {
             var product = dataAccess.Get(phoneNo).CustomerToDto();
             if (product == null) { return NotFound(); }
@@ -42,16 +42,14 @@ namespace NetCafeUCN.API.Controllers
         [HttpPost]
         public ActionResult<bool> Add([FromBody] CustomerDTO p)
         {
-            Customer customer = p.CustomerFromDto();
-            return Ok(dataAccess.Add(customer));
+            return Ok(dataAccess.Add(p.CustomerFromDto()));
         }
 
         // PUT api/<ProductController>/
         [HttpPut]
         public ActionResult<bool> Update(CustomerDTO p)
         {
-            Customer customer = p.CustomerFromDto();
-            return Ok(dataAccess.Update(customer));
+            return Ok(dataAccess.Update(p.CustomerFromDto()));
         }
 
         // DELETE api/<CustomerController>/40559810
