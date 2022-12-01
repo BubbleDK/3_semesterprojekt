@@ -242,5 +242,38 @@ namespace NetCafeUCN.DAL.DAO
                 }
             }
         }
+
+        //TODO: Skal den ligge her eller skal den i en "BookinglineDAO"? Og skal den kaldes gennem Bookingservice?
+        public IEnumerable<BookingLine> GetBookingLinesByBooking(int bookingId)
+        {
+            List<BookingLine> bookingLines = new List<BookingLine>();
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+            {
+                using SqlCommand command = new SqlCommand("SELECT * FROM nc_BookingLine where bookingid = @bookingid", conn);
+                command.Parameters.AddWithValue("@startTime", bookingId);
+                {
+                    try
+                    {
+                        conn.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            bookingLines.Add(new BookingLine()
+                            {
+                                Quantity = (int)reader["quantity"],
+                                Stationid = (int)reader["stationid"],
+                                Consumableid = (int)reader["consumableid"],
+                            });
+                        }
+                        return bookingLines;
+                    }
+                    catch (DataAccessException)
+                    {
+
+                        throw new DataAccessException("Can't access data");
+                    }
+                }
+            }
+        }
     }
 }

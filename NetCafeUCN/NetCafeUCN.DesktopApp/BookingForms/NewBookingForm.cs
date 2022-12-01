@@ -126,6 +126,10 @@ namespace NetCafeUCN.DesktopApp.BookingForms
                 {
                     stationProductIds.Add(bl.StationId);
                 }
+
+                //TODO: IMPLEMENTÉR
+                //Hent alle bookinglines på bookings i tidsrummet
+                //bookingLines.AddRange(bookingService.GetBookingLinesByBooking(item.BookingNo).ToList());
             }
             //Se på hver gamingstation om den ligger i listen af bookinglines
             foreach (var item in allGamingStations)
@@ -139,6 +143,18 @@ namespace NetCafeUCN.DesktopApp.BookingForms
                         break;
                     }
                 }
+
+                //TODO: IMPLEMENTÉR
+                //Kør igennem bookinglines fra metoden før
+                //foreach (var bl in bookingLines)
+                //{
+                //    if(item.ProductID == bl.StationID)
+                //    {
+                //        res = false;
+                //        break;
+                //    }
+                //}
+
                 if (res)
                 {
                     _availableGamingStations.Add(item);
