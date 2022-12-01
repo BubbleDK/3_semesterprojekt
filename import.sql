@@ -20,25 +20,25 @@ CREATE TABLE nc_Person(
     passwordHash nCHAR(60),
 	isActive BIT,
 
-	PRIMARY KEY(id),
+	PRIMARY KEY(phone),
 );
 
 CREATE TABLE nc_Customer(
-    personid INT,
+    phone VARCHAR(50),
 
-    CONSTRAINT fk_ncPerson foreign key (personid) references nc_Person(id) ON DELETE CASCADE,
-    PRIMARY KEY(personid),
+    CONSTRAINT fk_ncCustomerToPerson foreign key (phone) references nc_Person(phone) ON DELETE CASCADE,
+    PRIMARY KEY(phone),
 );
 
 CREATE TABLE nc_Employee(
-    personid INT,
+    phone VARCHAR(50),
     address VARCHAR(50), 
     role VARCHAR(15) NOT NULL,
     zipCode INT NOT NULL,
 
     CONSTRAINT fk_ncZipCode foreign key (zipCode) references nc_CityZipCode(zipCode),
-    CONSTRAINT fk_ncEmployeepersonid foreign key (personid) references nc_Person(id) ON DELETE CASCADE,
-    PRIMARY KEY(personid),
+    CONSTRAINT fk_ncEmployeeToPerson foreign key (phone) references nc_Person(phone) ON DELETE CASCADE,
+    PRIMARY KEY(phone),
 );
 
 CREATE TABLE nc_Booking(
@@ -46,9 +46,9 @@ CREATE TABLE nc_Booking(
     bookingNo VARCHAR(50) NOT NULL UNIQUE,
     startTime DateTime NOT NULL,
     endTime DateTime NOT NULL,
-    customerid INT DEFAULT 0,
+	phone VARCHAR(50) NOT NULL,
 
-    CONSTRAINT fk_ncCustomer foreign key (customerid) references nc_Customer(personid) ON DELETE SET DEFAULT,
+    CONSTRAINT fk_ncCustomer foreign key (phone) references nc_Customer(phone),
     PRIMARY KEY(id),
 );
 
@@ -113,12 +113,12 @@ INSERT INTO nc_Person VALUES ('John', '88888888', 'john@gmail.com', 'Customer', 
 INSERT INTO nc_Person VALUES ('Bodil', '88888889', 'bodil@gmail.com', 'Employee', '012345678901234567890123456789012345678901234567890123456789', 1);
 INSERT INTO nc_Person VALUES ('Carsten', '99999999', 'carsten@gmail.com', 'Customer', '012345678901234567890123456789012345678901234567890123456789', 1);
 
-INSERT INTO nc_Customer VALUES (1);
-INSERT INTO nc_Customer VALUES (3);
+INSERT INTO nc_Customer VALUES ('88888888');
+INSERT INTO nc_Customer VALUES ('99999999');
 
-INSERT INTO nc_Employee VALUES (2, 'bodilvej 2', 'Admin', 9000);
+INSERT INTO nc_Employee VALUES ('88888889', 'bodilvej 2', 'Admin', 9000);
 
-INSERT INTO nc_Booking VALUES (40, '1955-12-13 12:43:00', '1955-12-13 14:43:00', 3);
+INSERT INTO nc_Booking VALUES ('bookingnummer','1955-12-13 12:43:00', '1955-12-13 14:43:00', '99999999');
 
 INSERT INTO nc_Product VALUES ('FEDTFEDT', 'Gamingstation', 'Produkt1', 1)
 INSERT INTO nc_Product VALUES ('FEDTNICE', 'Consumable', 'Produkt2', 1)
