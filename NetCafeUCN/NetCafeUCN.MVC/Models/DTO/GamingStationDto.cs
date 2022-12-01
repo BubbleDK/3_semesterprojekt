@@ -10,5 +10,6 @@ namespace NetCafeUCN.MVC.Models
     {
         public string? SeatNumber { get; set; }
         public string? Description { get; set; }
+        public bool Booked { get; set; }
     }
 }

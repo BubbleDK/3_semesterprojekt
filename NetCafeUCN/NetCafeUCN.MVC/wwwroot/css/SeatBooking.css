@@ -33,7 +33,7 @@ ol {
 .seat {
     display: flex;
     flex: 0 0 14.28571%;
-    padding: 5px;
+    padding: 4px;
     position: relative;
 }
 
@@ -78,7 +78,7 @@ ol {
     font-size: 14px;
     font-weight: bold;
     line-height: 1.5rem;
-    padding: 4px 0;
+    padding: 4px;
     color: #fff;
     background: #007bff;
     border-radius: 2px;

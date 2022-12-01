@@ -10,6 +10,8 @@
     ViewData["Title"] = "Booking";
 }
 
+<script src="~/js/CreateBooking.js"></script>
+
 <h1>Create</h1>
 
 <h4>Book</h4>
@@ -62,10 +64,20 @@
                         <ol class="seats">
                             @foreach (GamingStationDto item in Model.gamingStations)
                             {
-                                <li class="seat">
-                                    <input type="checkbox" id="@item.SeatNumber" />
-                                    <label for="@item.SeatNumber">@item.SeatNumber</label>
-                                </li>
+                                @if (item.Booked)
+                                {
+                                    <li class="seat">
+                                        <input type="checkbox" disabled id="@item.SeatNumber" />
+                                        <label class="seatLabel" for="@item.SeatNumber">@item.SeatNumber</label>
+                                    </li>
+                                }
+                                else 
+                                {
+                                    <li class="seat">
+                                        <input type="checkbox" id="@item.SeatNumber" />
+                                        <label class="seatLabel" for="@item.SeatNumber">@item.SeatNumber</label>
+                                    </li>
+                                }
                             }
                         </ol>
                     </li>
@@ -73,7 +85,7 @@
             </div>
         } else
         {
-            <p>Ingen gamingstations</p>
+            <p>Ingen gamingstations tilgængelige</p>
         }
     </div>
 </div>
