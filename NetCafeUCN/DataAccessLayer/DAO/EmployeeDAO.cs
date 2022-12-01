@@ -113,7 +113,7 @@ namespace NetCafeUCN.DAL.DAO
 	    */
         public IEnumerable<Employee> GetAll()
         {
-            string sqlStatement = "SELECT name, phone, email, personType, address, role, zipCode, isActive FROM nc_Person INNER JOIN nc_Employee ON nc_Person.id = nc_Employee.personid;";
+            string sqlStatement = "SELECT name, nc_Person.phone, email, personType, address, role, zipCode, isActive FROM nc_Person INNER JOIN nc_Employee ON nc_Person.phone = nc_Employee.phone;";
             List<Employee> list = new();
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {

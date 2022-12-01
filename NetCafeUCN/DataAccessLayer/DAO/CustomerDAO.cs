@@ -104,7 +104,7 @@ namespace NetCafeUCN.DAL.DAO
 	    */
         public IEnumerable<Customer> GetAll()
         {
-            string sqlStatement = "SELECT * FROM nc_Customer inner join nc_Person on nc_Person.id = nc_Customer.personid";
+            string sqlStatement = "SELECT * FROM nc_Customer inner join nc_Person on nc_Person.phone = nc_Customer.phone";
             List<Customer> list = new();
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
