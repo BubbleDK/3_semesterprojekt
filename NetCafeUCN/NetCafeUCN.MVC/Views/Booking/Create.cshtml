@@ -23,7 +23,7 @@
             @if (Context.User.Identity.IsAuthenticated)
             {
                 <div class="form-group">
-                    <label asp-for="PhoneNo" class="control-label"></label>
+                    <label class="control-label">Telefon</label>
                     <input asp-for="PhoneNo" class="form-control" value="@Context.User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.MobilePhone)?.Value" />
                     <span asp-validation-for="PhoneNo" class="text-danger"></span>
                 </div>
@@ -31,23 +31,36 @@
             else
             {
                 <div class="form-group">
-                    <label asp-for="PhoneNo" class="control-label"></label>
+                    <label class="control-label">Telefon</label>
                     <input asp-for="PhoneNo" class="form-control" />
                     <span asp-validation-for="PhoneNo" class="text-danger"></span>
                 </div>
             }
            
             <div class="form-group">
-                <label asp-for="StartTime" class="control-label"></label>
-                <input asp-for="StartTime" class="form-control" value="@string.Format("{0:yyyy-MM-dd}", DateTime.Now)" min="@string.Format("{0:yyyy-MM-dd}", DateTime.Now)" />
+                <label class="control-label">Start tid</label>
+                <input asp-for="StartTime" required class="form-control" value="@string.Format("{0:yyyy-MM-dd}", DateTime.Now)" min="@string.Format("{0:yyyy-MM-dd}", DateTime.Now)" />
                 <span asp-validation-for="StartTime" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="EndTime" class="control-label"></label>
-                <input asp-for="EndTime" class="form-control" value="@string.Format("{0:yyyy-MM-dd}", DateTime.Now)" min="@string.Format("{0:yyyy-MM-dd}", DateTime.Now)" />
-                <span asp-validation-for="EndTime" class="text-danger"></span>
+                <div class="slider" style="margin-top: 5px;">
+                    <input type="range" min="0.5" max="8" value="0.5" id="fader"
+                           step="0.5" list="volsettings" oninput="rangeValue.innerText = this.value">
+                    <datalist id="volsettings">
+                        <option>30 min</option>
+                        <option>1 time</option>
+                        <option>1,5 time</option>
+                        <option>2 timer</option>
+                        <option>2,5 time</option>
+                        <option>3 timer</option>
+                        <option>3,5 time</option>
+                        <option>4 timer</option>
+                    </datalist>
+                    <p style="margin: 0;">Antal valgte timer:</p>
+                    <p id="rangeValue">0</p>
+                </div>
             </div>
-            
 
             <div class="form-group" style="margin-top: 5px">
                 <input type="submit" value="Create" class="btn btn-primary" />
