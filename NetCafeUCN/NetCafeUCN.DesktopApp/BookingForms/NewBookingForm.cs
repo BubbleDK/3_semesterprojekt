@@ -55,8 +55,8 @@ namespace NetCafeUCN.DesktopApp.BookingForms
         private void RefreshGamingStations(List<GamingStationDTO> availableGamingStations)
         {
             dgvAvailableGamingstations.DataSource = availableGamingStations;
-            dgvAvailableGamingstations.Columns["productID"].Visible = false;
-            dgvAvailableGamingstations.Columns["isActive"].Visible = false;
+            dgvAvailableGamingstations.Columns["ProductID"].Visible = false;
+            dgvAvailableGamingstations.Columns["IsActive"].Visible = false;
             dgvAvailableGamingstations.Columns["Type"].Visible = false;
             dgvAvailableGamingstations.Columns["SeatNumber"].HeaderText = "Plads nr:";
             dgvAvailableGamingstations.Columns["Description"].HeaderText = "Beskrivelse:";
