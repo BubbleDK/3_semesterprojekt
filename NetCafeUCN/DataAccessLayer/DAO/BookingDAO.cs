@@ -141,51 +141,7 @@ namespace NetCafeUCN.DAL.DAO
                     throw;
                 }
             }
-            //string sqlStatement = "SELECT * FROM nc_Booking INNER JOIN nc_BookingLine ON nc_Booking.id = nc_BookingLine.bookingid";
-            //CustomerDAO customerDAO = new CustomerDAO();
-            //List<Booking> list = new List<Booking>();
-            //string? currentBoNo = null;
-            //using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
-            //{
-            //    SqlCommand cmd = new SqlCommand(sqlStatement, conn);
-            //    try
-            //    {
-            //        conn.Open();
-            //        SqlDataReader reader = cmd.ExecuteReader();
-            //        while (reader.Read())
-            //        {
-            //            if ((string)reader["bookingNo"] == currentBoNo)
-            //            {
-            //                foreach (var item in list.ToList())
-            //                {
-            //                    if (item.BookingNo == currentBoNo)
-            //                    {
-            //                        item.addToBookingLine(new BookingLine() { Quantity = (int)reader["quantity"], Stationid = (int)reader["stationid"], Consumableid = (int)reader["consumableid"] });
-            //                    }
-            //                }
-            //            }
-            //            else
-            //            {
-            //                currentBoNo = (string)reader["bookingNo"];
-            //                Booking newBooking = new Booking()
-            //                {
-            //                    BookingNo = (string)reader["bookingNo"],
-            //                    StartTime = (DateTime)reader["startTime"],
-            //                    EndTime = (DateTime)reader["endTime"],
-            //                    PhoneNo = customerDAO.GetPhoneNo((int)reader["customerId"]),
-            //                };
-            //                newBooking.addToBookingLine(new BookingLine() { Quantity = (int)reader["quantity"], Stationid = (int)reader["stationid"], Consumableid = (int)reader["consumableid"] });
-            //                list.Add(newBooking);
-            //            }
-            //        }
-            //    }
-            //    catch (DataAccessException)
-            //    {
-
-            //        throw new DataAccessException("Can't access data");
-            //    }
-            //}
-            //return list;
+            
         }
 
         public bool Remove(dynamic key)
