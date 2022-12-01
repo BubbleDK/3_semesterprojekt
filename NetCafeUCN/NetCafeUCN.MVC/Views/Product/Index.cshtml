@@ -12,6 +12,8 @@
 <script src="~/js/TabScript.js" > </script>
 <h1>Produkter</h1>
 
+@if(Context.User.IsInRole("Administrator"))
+{
 <div class="dropdown">
   <button class="dropbtn">Opret</button>
   <div class="dropdown-content">
@@ -19,11 +21,11 @@
     <a asp-action="Create" asp-controller="Consumable">Consumable</a>
   </div>
 </div>
+}
 
 <div class="tab">
     <button class="tablinks btn btn-outline-primary btn-lg" id="defaultOpen" onclick="openTab(event,'GamingStation')">Computere</button>
     <button class="tablinks btn btn-outline-primary btn-lg" onclick="openTab(event,'Consumable')">Mad & drikke</button>
-    
 </div>
 
 @if (Model.gamingStations != null)
@@ -52,9 +54,13 @@
                             @Html.DisplayFor(modelItem => item.Type)
                         </td>
                         <td>
-                            @Html.ActionLink("Redigér", "Edit", "GamingStation", new { item.ProductNumber }, null) |
-                            @Html.ActionLink("Oplysninger", "Details", "GamingStation", new { item.ProductNumber }, null) |
-                            @Html.ActionLink("Slet", "Delete", "GamingStation", new { item.ProductNumber }, null)
+                            @if(Context.User.IsInRole("Administrator"))
+                            {
+                                @Html.ActionLink("Redigér", "Edit", "GamingStation", new { item.ProductNumber }, null)
+                                @Html.ActionLink("Slet", "Delete", "GamingStation", new { item.ProductNumber }, null)
+                            }
+                            @Html.ActionLink("Oplysninger", "Details", "GamingStation", new { item.ProductNumber }, null)
+                            
                         </td>
                     </tr>
                 }
@@ -89,9 +95,12 @@
                             @Html.DisplayFor(modelItem => item.Type)
                         </td>
                         <td>
-                            @Html.ActionLink("Redigér", "Edit", "Consumable", new { item.ProductNumber }, null) |
-                            @Html.ActionLink("Oplysninger", "Details", "Consumable", new { item.ProductNumber }, null) |
-                            @Html.ActionLink("Slet", "Delete", "Consumable", new { item.ProductNumber }, null)
+                            @if(Context.User.IsInRole("Administrator"))
+                            {
+                                @Html.ActionLink("Redigér", "Edit", "Consumable", new { item.ProductNumber }, null)
+                                @Html.ActionLink("Slet", "Delete", "Consumable", new { item.ProductNumber }, null)
+                            }
+                            @Html.ActionLink("Oplysninger", "Details", "Consumable", new { item.ProductNumber }, null)
                         </td>
                     </tr>
                 }
