@@ -51,6 +51,7 @@
     
     <form asp-action="Delete">
         <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <input asp-for="ProductNumber" type="hidden" />
         <a asp-action="Index" asp-controller="Product">Back to List</a>
     </form>
 </div>
