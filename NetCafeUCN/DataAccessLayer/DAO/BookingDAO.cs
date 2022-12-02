@@ -29,7 +29,7 @@ namespace NetCafeUCN.DAL.DAO
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
                 conn.Open();
-                using (trans = conn.BeginTransaction(IsolationLevel.RepeatableRead))
+                using (trans = conn.BeginTransaction(IsolationLevel.ReadCommitted))
                 {
                     try
                     {
