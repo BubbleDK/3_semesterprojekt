@@ -3,7 +3,7 @@ using NetCafeUCN.DAL.Model;
 
 namespace NetCafeUCN.API.Conversion
 {
-    public static class EmployeeCoversion
+    public static class EmployeeToDtoCoversion
     {
         public static IEnumerable<EmployeeDTO> EmployeeToDtos(this IEnumerable<Employee> employees)
         {

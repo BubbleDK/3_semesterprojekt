@@ -3,7 +3,7 @@ using NetCafeUCN.DAL.Model;
 
 namespace NetCafeUCN.API.Conversion
 {
-    public static class BookingConversion
+    public static class BookingToDtoConversion
     {
         public static IEnumerable<BookingDTO> BookingToDtos(this IEnumerable<Booking> bookings)
         {
