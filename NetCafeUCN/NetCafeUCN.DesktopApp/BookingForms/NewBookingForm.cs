@@ -1,4 +1,5 @@
-﻿using NetCafeUCN.DesktopApp.DTO;
+﻿using NetCafeUCN.DAL.DAO;
+using NetCafeUCN.DesktopApp.DTO;
 using NetCafeUCN.DesktopApp.ServiceLayer;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace NetCafeUCN.DesktopApp.BookingForms
         INetCafeDataAccess<GamingStationDTO> gamingStationService;
         INetCafeDataAccess<BookingDTO> bookingService;
         INetCafeDataAccess<CustomerDTO> customerService;
+        BookingLineService bookingLineService;
         List<GamingStationDTO> _availableGamingStations;
         BookingsForm bookingsForm;
         BookingDTO bookingDTO;
@@ -30,6 +32,7 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             gamingStationService = new GamingStationService("https://localhost:7197/api/Gamingstation/");
             bookingService = new BookingService("https://localhost:7197/api/Booking/");
             customerService = new CustomerService("https://localhost:7197/api/Customer/");
+            bookingLineService = new BookingLineService("https://localhost:7197/api/BookingLine/");
             RefreshGamingStations(gamingStationService.GetAll().ToList());
             bookingsForm = bookingsFormWeCameFrom;
             windowStatus = "Create";
@@ -106,6 +109,7 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             List<GamingStationDTO> allGamingStations = gamingStationService.GetAll().ToList();
             List<BookingDTO> allBookings = bookingService.GetAll().ToList();
             List<BookingDTO> bookingsWithinSelectedTimeSpan = new List<BookingDTO>();
+            List<BookingLineDTO> bookingLines = new List<BookingLineDTO>();
             //Find alle bookings som er i det tidsrum man har indtastet
             foreach (var item in allBookings)
             {
@@ -122,38 +126,38 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             //Gå igennem de fundne bookings for at finde de optagede gamingstation IDs
             foreach (var item in bookingsWithinSelectedTimeSpan)
             {
-                foreach (var bl in item.BookingLines)
-                {
-                    stationProductIds.Add(bl.StationId);
-                }
+                //foreach (var bl in item.BookingLines)
+                //{
+                //    stationProductIds.Add(bl.StationId);
+                //}
 
                 //TODO: IMPLEMENTÉR
                 //Hent alle bookinglines på bookings i tidsrummet
-                //bookingLines.AddRange(bookingService.GetBookingLinesByBooking(item.BookingNo).ToList());
+                bookingLines.AddRange(bookingLineService.GetAll(item.BookingNo).ToList());
             }
             //Se på hver gamingstation om den ligger i listen af bookinglines
             foreach (var item in allGamingStations)
             {
                 bool res = true;
-                foreach (int id in stationProductIds)
-                {
-                    if (item.ProductID == id)
-                    {
-                        res = false;
-                        break;
-                    }
-                }
-
-                //TODO: IMPLEMENTÉR
-                //Kør igennem bookinglines fra metoden før
-                //foreach (var bl in bookingLines)
+                //foreach (int id in stationProductIds)
                 //{
-                //    if(item.ProductID == bl.StationID)
+                //    if (item.ProductID == id)
                 //    {
                 //        res = false;
                 //        break;
                 //    }
                 //}
+
+                //TODO: IMPLEMENTÉR
+                //Kør igennem bookinglines fra metoden før
+                foreach (var bl in bookingLines)
+                {
+                    if (item.ProductID == bl.StationId)
+                    {
+                        res = false;
+                        break;
+                    }
+                }
 
                 if (res)
                 {
