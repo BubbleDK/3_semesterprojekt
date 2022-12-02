@@ -38,11 +38,11 @@ namespace NetCafeUCN.DAL.DAO
                             addToPersonCommand.Parameters.AddWithValue("@personType", o.PersonType);
                             addToPersonCommand.Parameters.AddWithValue("@password", o.Password);
                             addToPersonCommand.Parameters.AddWithValue("@isActive", o.IsActive);
-                            id = Convert.ToInt32(addToPersonCommand.ExecuteScalar());
+                            addToPersonCommand.ExecuteNonQuery();
                         }
-                        using (SqlCommand addToCustomerCommand = new SqlCommand("INSERT INTO nc_Customer VALUES(@personid)", conn, trans))
+                        using (SqlCommand addToCustomerCommand = new SqlCommand("INSERT INTO nc_Customer VALUES(@phone)", conn, trans))
                         {
-                            addToCustomerCommand.Parameters.AddWithValue("@personid", id);
+                            addToCustomerCommand.Parameters.AddWithValue("@phone", o.Phone);
                             addToCustomerCommand.ExecuteNonQuery();
                             trans.Commit();
                         }
