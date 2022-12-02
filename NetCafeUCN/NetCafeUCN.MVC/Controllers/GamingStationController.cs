@@ -85,14 +85,13 @@ namespace NetCafeUCN.MVC.Controllers
         }
 
         // POST: GamingStationController/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Administrator")]
         public ActionResult DeleteConfirmed(string ProductNumber)
         {
             try
             {
-                gamingStationService.Remove(ProductNumber);
+                gamingStationService.Remove(productNumber);
                 return RedirectToAction(nameof(Index), "Product");
             }
             catch
