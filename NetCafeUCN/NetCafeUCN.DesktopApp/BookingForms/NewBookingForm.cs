@@ -126,29 +126,15 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             //Gå igennem de fundne bookings for at finde de optagede gamingstation IDs
             foreach (var item in bookingsWithinSelectedTimeSpan)
             {
-                //foreach (var bl in item.BookingLines)
-                //{
-                //    stationProductIds.Add(bl.StationId);
-                //}
 
-                //TODO: IMPLEMENTÉR
+                
                 //Hent alle bookinglines på bookings i tidsrummet
-                bookingLines.AddRange(bookingLineService.GetAll(item.BookingNo).ToList());
+                bookingLines.AddRange(bookingLineService.GetAll(item.BookingNo));
             }
             //Se på hver gamingstation om den ligger i listen af bookinglines
             foreach (var item in allGamingStations)
             {
                 bool res = true;
-                //foreach (int id in stationProductIds)
-                //{
-                //    if (item.ProductID == id)
-                //    {
-                //        res = false;
-                //        break;
-                //    }
-                //}
-
-                //TODO: IMPLEMENTÉR
                 //Kør igennem bookinglines fra metoden før
                 foreach (var bl in bookingLines)
                 {
@@ -159,6 +145,8 @@ namespace NetCafeUCN.DesktopApp.BookingForms
                     }
                 }
 
+                //Hvis gamingstationen ikke bliver fundet på nogle af de bookinglines vi kigger på
+                //Så skal den tilføjes til listen over tilgængelige
                 if (res)
                 {
                     _availableGamingStations.Add(item);

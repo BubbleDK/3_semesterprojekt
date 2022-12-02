@@ -25,8 +25,8 @@ namespace NetCafeUCN.API.Controllers
         }
 
         // GET api/<BookingLineController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet]
+        public string GetAll()
         {
             return "value";
         }

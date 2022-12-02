@@ -22,7 +22,11 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
 
         public IEnumerable<BookingLineDTO> GetAll(string bookingNo)
         {
-            return RestClient.Execute<IEnumerable<BookingLineDTO>>(new RestRequest($"{BaseUri}{bookingNo}", Method.Get)).Data;
+            var request = new RestRequest($"{BaseUri}{bookingNo}", Method.Get);
+            var response = RestClient.Execute<IEnumerable<BookingLineDTO>>(request);
+            var result = response.Content;
+            return response.Data;
+            //return RestClient.Execute<IEnumerable<BookingLineDTO>>(new RestRequest($"{BaseUri}{bookingNo}", Method.Get)).Data;
         }
     }
 }
