@@ -28,8 +28,8 @@ namespace NetCafeUCN.DAL.DAO
                             bookingLines.Add(new BookingLine()
                             {
                                 Quantity = (int)reader["quantity"],
-                                Stationid = (int)reader["stationid"],
-                                Consumableid = (int)reader["consumableid"],
+                                StationId = (int)reader["stationid"],
+                                ConsumableId = (int)reader["consumableid"],
                             });
                         }
                         return bookingLines;

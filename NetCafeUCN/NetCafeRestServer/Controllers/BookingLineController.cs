@@ -18,7 +18,7 @@ namespace NetCafeUCN.API.Controllers
             this.dataAccess = dataAccess;
         }
         // GET: api/<BookingLineController>
-        [HttpGet]
+        [HttpGet("{bookingno}")]
         public ActionResult<IEnumerable<BookingLine>> GetAll(string bookingNo)
         {
             return Ok(dataAccess.GetBookingLinesByBooking(bookingNo));

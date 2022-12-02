@@ -85,9 +85,10 @@ namespace NetCafeUCN.MVC.Controllers
         }
 
         // POST: GamingStationController/Delete/5
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string ProductNumber)
+        [Authorize(Roles = "Administrator")]
+        public ActionResult DeleteConfirmed(string productNumber)
         {
             try
             {

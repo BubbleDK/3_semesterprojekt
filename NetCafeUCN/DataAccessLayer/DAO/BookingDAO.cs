@@ -35,8 +35,8 @@ namespace NetCafeUCN.DAL.DAO
                     {
                         foreach (var item in o.BookingLines)
                         {
-                            Console.WriteLine(BookingCheck(o.StartTime, o.EndTime, item.Stationid));
-                            if (BookingCheck(o.StartTime, o.EndTime, item.Stationid)) return false;
+                            Console.WriteLine(BookingCheck(o.StartTime, o.EndTime, item.StationId));
+                            if (BookingCheck(o.StartTime, o.EndTime, item.StationId)) return false;
                         }
                         using (SqlCommand bookingCommand = new SqlCommand(
                                 "INSERT INTO nc_Booking VALUES(@bookingNo, @startTime, @endTime, @phoneNo); SELECT SCOPE_IDENTITY();", conn, trans))
@@ -54,8 +54,8 @@ namespace NetCafeUCN.DAL.DAO
                             {
                                 bookingLineCommand.Parameters.AddWithValue("@bookingid", id);
                                 bookingLineCommand.Parameters.AddWithValue("@quantity", item.Quantity);
-                                bookingLineCommand.Parameters.AddWithValue("@stationid", item.Stationid);
-                                bookingLineCommand.Parameters.AddWithValue("@consumableid", item.Consumableid);
+                                bookingLineCommand.Parameters.AddWithValue("@stationid", item.StationId);
+                                bookingLineCommand.Parameters.AddWithValue("@consumableid", item.ConsumableId);
                                 bookingLineCommand.ExecuteNonQuery();
                             }
                         }
@@ -98,7 +98,7 @@ namespace NetCafeUCN.DAL.DAO
                                 isBookingCreated = true;
                             }
 
-                            booking?.addToBookingLine(new BookingLine() { Quantity = (int)reader["quantity"], Stationid = (int)reader["stationid"], Consumableid = (int)reader["consumableid"] });
+                            booking?.addToBookingLine(new BookingLine() { Quantity = (int)reader["quantity"], StationId = (int)reader["stationid"], ConsumableId = (int)reader["consumableid"] });
                         }
                         return booking;
                     }
@@ -196,8 +196,8 @@ namespace NetCafeUCN.DAL.DAO
                             {
                                 bookingLineCommand.Parameters.AddWithValue("@BookingNo", o.BookingNo);
                                 bookingLineCommand.Parameters.AddWithValue("@quantity", item.Quantity);
-                                bookingLineCommand.Parameters.AddWithValue("@stationid", item.Stationid);
-                                bookingLineCommand.Parameters.AddWithValue("@consumableid", item.Consumableid);
+                                bookingLineCommand.Parameters.AddWithValue("@stationid", item.StationId);
+                                bookingLineCommand.Parameters.AddWithValue("@consumableid", item.ConsumableId);
                                 bookingLineCommand.ExecuteNonQuery();
                             }
                         }
