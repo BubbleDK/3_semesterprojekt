@@ -1,26 +1,31 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NetCafeUCN.MVC.Models;
 using NetCafeUCN.MVC.Services;
 
 namespace NetCafeUCN.MVC.Controllers
 {
+    [Authorize]
     public class ConsumableController : Controller
     {
         INetCafeDataAccessService<ConsumableDto> consumableService = new ConsumableService("https://localhost:7197/api/Consumable");
         // GET: ConsumableController
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View();
         }
 
         // GET: ConsumableController/Details/5
+        [AllowAnonymous]
         public ActionResult Details(string productNumber)
         {
             return View(consumableService.Get(productNumber));
         }
 
         // GET: ConsumableController/Create
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create(string productNumber)
         {
             return View(consumableService.Get(productNumber));
@@ -29,6 +34,7 @@ namespace NetCafeUCN.MVC.Controllers
         // POST: ConsumableController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create(IFormCollection collection)
         {
             try
@@ -42,6 +48,7 @@ namespace NetCafeUCN.MVC.Controllers
         }
 
         // GET: ConsumableController/Edit/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(string productNumber)
         {
             return View(consumableService.Get(productNumber));
@@ -50,6 +57,7 @@ namespace NetCafeUCN.MVC.Controllers
         // POST: ConsumableController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(ConsumableDto editedConsumable)
         {
             try
@@ -67,6 +75,7 @@ namespace NetCafeUCN.MVC.Controllers
         }
 
         // GET: ConsumableController/Delete/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(string productNumber)
         {
             return View(consumableService.Get(productNumber));
@@ -75,6 +84,7 @@ namespace NetCafeUCN.MVC.Controllers
         // POST: ConsumableController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(ConsumableDto consumableToDelete)
         {
             try

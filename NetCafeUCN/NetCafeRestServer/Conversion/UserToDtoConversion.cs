@@ -3,7 +3,7 @@ using NetCafeUCN.DAL.Model;
 
 namespace NetCafeUCN.API.Conversion
 {
-    public static class UserConversionExtensionMethods
+    public static class UserToDtoConversion
     {
         public static IEnumerable<UserDTO> ToDtos(this IEnumerable<User> users)
         {

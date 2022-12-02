@@ -38,16 +38,14 @@ namespace NetCafeUCN.API.Controllers
         [HttpPost]
         public ActionResult<bool> Add([FromBody]GamingStationDTO p)
         {
-            GamingStation g = p.GSFromDto();
-            return Ok(dataAccess.Add(g));
+            return Ok(dataAccess.Add(p.GSFromDto()));
         }
 
         // PUT api/<GamingStationController>/
         [HttpPut]
         public ActionResult<GamingStation> Update(GamingStationDTO product)
         {
-            GamingStation g = product.GSFromDto();
-            return Ok(dataAccess.Update(g));
+            return Ok(dataAccess.Update(product.GSFromDto()));
         }
 
         // DELETE api/<GamingStationController>/40559810

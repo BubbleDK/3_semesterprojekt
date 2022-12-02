@@ -29,7 +29,7 @@ namespace NetCafeUCN.DAL.DAO
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
                 conn.Open();
-                using (trans = conn.BeginTransaction(IsolationLevel.RepeatableRead))
+                using (trans = conn.BeginTransaction(IsolationLevel.ReadCommitted))
                 {
                     try
                     {
@@ -39,12 +39,12 @@ namespace NetCafeUCN.DAL.DAO
                             if (BookingCheck(o.StartTime, o.EndTime, item.Stationid)) return false;
                         }
                         using (SqlCommand bookingCommand = new SqlCommand(
-                                "INSERT INTO nc_Booking VALUES(@bookingNo, @startTime, @endTime, @customerId); SELECT SCOPE_IDENTITY();", conn, trans))
+                                "INSERT INTO nc_Booking VALUES(@bookingNo, @startTime, @endTime, @phoneNo); SELECT SCOPE_IDENTITY();", conn, trans))
                         {
                             bookingCommand.Parameters.AddWithValue("@bookingNo", o.GenerateBookingNo());
                             bookingCommand.Parameters.AddWithValue("@startTime", o.StartTime);
                             bookingCommand.Parameters.AddWithValue("@endTime", o.EndTime);
-                            bookingCommand.Parameters.AddWithValue("@customerId", customerDAO.GetId(o.PhoneNo));
+                            bookingCommand.Parameters.AddWithValue("@phoneNo", o.PhoneNo);
                             id = Convert.ToInt32(bookingCommand.ExecuteScalar());
                         }
                         foreach (var item in o.BookingLines)
@@ -93,7 +93,7 @@ namespace NetCafeUCN.DAL.DAO
                                     BookingNo = (string)reader["bookingNo"],
                                     StartTime = (DateTime)reader["startTime"],
                                     EndTime = (DateTime)reader["endTime"],
-                                    PhoneNo = customerDAO.GetPhoneNo((int)reader["customerId"]),
+                                    PhoneNo = (string)reader["phone"],
                                 };
                                 isBookingCreated = true;
                             }
@@ -110,13 +110,12 @@ namespace NetCafeUCN.DAL.DAO
                 }
             }
         }
-
+        //TODO: FIX: Skal ikke hente bookinglines her, da bookinglines gør det slow. Samtidigt skal telefonnumre gemmes på ordren i stedet for id.
         public IEnumerable<Booking> GetAll()
         {
-            string sqlStatement = "SELECT * FROM nc_Booking INNER JOIN nc_BookingLine ON nc_Booking.id = nc_BookingLine.bookingid";
-            CustomerDAO customerDAO = new CustomerDAO();
-            List<Booking> list = new List<Booking>();
-            string? currentBoNo = null;
+            string sqlStatement = "SELECT * FROM nc_Booking";
+            List<Booking> bookingList = new List<Booking>();
+
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand(sqlStatement, conn);
@@ -126,38 +125,23 @@ namespace NetCafeUCN.DAL.DAO
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        if ((string)reader["bookingNo"] == currentBoNo)
+                        bookingList.Add(new Booking()
                         {
-                            foreach (var item in list.ToList())
-                            {
-                                if (item.BookingNo == currentBoNo)
-                                {
-                                    item.addToBookingLine(new BookingLine() { Quantity = (int)reader["quantity"], Stationid = (int)reader["stationid"], Consumableid = (int)reader["consumableid"] });
-                                }
-                            }
-                        }
-                        else
-                        {
-                            currentBoNo = (string)reader["bookingNo"];
-                            Booking newBooking = new Booking()
-                            {
-                                BookingNo = (string)reader["bookingNo"],
-                                StartTime = (DateTime)reader["startTime"],
-                                EndTime = (DateTime)reader["endTime"],
-                                PhoneNo = customerDAO.GetPhoneNo((int)reader["customerId"]),
-                            };
-                            newBooking.addToBookingLine(new BookingLine() { Quantity = (int)reader["quantity"], Stationid = (int)reader["stationid"], Consumableid = (int)reader["consumableid"] });
-                            list.Add(newBooking);
-                        }
+                            BookingNo = (string)reader["BookingNo"],
+                            StartTime = (DateTime)reader["startTime"],
+                            EndTime = (DateTime)reader["endTime"],
+                            PhoneNo = (string)reader["Phone"]
+                        });
                     }
+                    return bookingList;
                 }
-                catch (DataAccessException)
+                catch (Exception)
                 {
 
-                    throw new DataAccessException("Can't access data");
+                    throw;
                 }
             }
-            return list;
+            
         }
 
         public bool Remove(dynamic key)
@@ -249,6 +233,39 @@ namespace NetCafeUCN.DAL.DAO
                         conn.Open();
                         SqlDataReader reader = command.ExecuteReader();
                         return reader.HasRows;
+                    }
+                    catch (DataAccessException)
+                    {
+
+                        throw new DataAccessException("Can't access data");
+                    }
+                }
+            }
+        }
+
+        //TODO: Skal den ligge her eller skal den i en "BookinglineDAO"? Og skal den kaldes gennem Bookingservice?
+        public IEnumerable<BookingLine> GetBookingLinesByBooking(int bookingId)
+        {
+            List<BookingLine> bookingLines = new List<BookingLine>();
+            using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+            {
+                using SqlCommand command = new SqlCommand("SELECT * FROM nc_BookingLine where bookingid = @bookingid", conn);
+                command.Parameters.AddWithValue("@startTime", bookingId);
+                {
+                    try
+                    {
+                        conn.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            bookingLines.Add(new BookingLine()
+                            {
+                                Quantity = (int)reader["quantity"],
+                                Stationid = (int)reader["stationid"],
+                                Consumableid = (int)reader["consumableid"],
+                            });
+                        }
+                        return bookingLines;
                     }
                     catch (DataAccessException)
                     {

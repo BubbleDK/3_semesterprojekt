@@ -1,26 +1,32 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NetCafeUCN.MVC.Models;
 using NetCafeUCN.MVC.Services;
 
 namespace NetCafeUCN.MVC.Controllers
 {
+    [Authorize]
     public class GamingStationController : Controller
     {
         INetCafeDataAccessService<GamingStationDto> gamingStationService = new GamingstationService("https://localhost:7197/api/GamingStation");
         // GET: GamingStationController
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View();
         }
 
         // GET: GamingStationController/Details/5
+        [AllowAnonymous]
         public ActionResult Details(string productNumber)
         {
             return View(gamingStationService.Get(productNumber));
         }
 
+
         // GET: GamingStationController/Create
+        [Authorize(Roles ="Administrator")]
         public ActionResult Create()
         {
             return View();
@@ -29,6 +35,7 @@ namespace NetCafeUCN.MVC.Controllers
         // POST: GamingStationController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create(IFormCollection collection)
         {
             try
@@ -42,6 +49,7 @@ namespace NetCafeUCN.MVC.Controllers
         }
 
         // GET: GamingStationController/Edit/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(string productNumber)
         {
             return View(gamingStationService.Get(productNumber));
@@ -50,6 +58,7 @@ namespace NetCafeUCN.MVC.Controllers
         // POST: GamingStationController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(GamingStationDto editedGamingstation)
         {
             try
@@ -68,7 +77,7 @@ namespace NetCafeUCN.MVC.Controllers
         }
 
         // GET: GamingStationController/Delete/5
-        [HttpGet]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(string? productNumber)
         {
             GamingStationDto gamingStation = gamingStationService.Get(productNumber);
@@ -76,13 +85,14 @@ namespace NetCafeUCN.MVC.Controllers
         }
 
         // POST: GamingStationController/Delete/5
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string productNumber)
+        [Authorize(Roles = "Administrator")]
+        public ActionResult DeleteConfirmed(string ProductNumber)
         {
             try
             {
-                gamingStationService.Remove(productNumber);
+                gamingStationService.Remove(ProductNumber);
                 return RedirectToAction(nameof(Index), "Product");
             }
             catch

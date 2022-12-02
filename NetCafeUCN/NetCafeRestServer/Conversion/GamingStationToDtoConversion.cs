@@ -3,7 +3,7 @@ using NetCafeUCN.DAL.Model;
 
 namespace NetCafeUCN.API.Conversion
 {
-    public static class GSDTOConversionExtensionMethods
+    public static class GamingStationToDtoConversion
     {
         public static IEnumerable<GamingStationDTO> GSToDtos(this IEnumerable<GamingStation> gamingStations)
         {

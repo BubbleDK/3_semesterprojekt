@@ -55,8 +55,8 @@ namespace NetCafeUCN.DesktopApp.BookingForms
         private void RefreshGamingStations(List<GamingStationDTO> availableGamingStations)
         {
             dgvAvailableGamingstations.DataSource = availableGamingStations;
-            dgvAvailableGamingstations.Columns["productID"].Visible = false;
-            dgvAvailableGamingstations.Columns["isActive"].Visible = false;
+            dgvAvailableGamingstations.Columns["ProductID"].Visible = false;
+            dgvAvailableGamingstations.Columns["IsActive"].Visible = false;
             dgvAvailableGamingstations.Columns["Type"].Visible = false;
             dgvAvailableGamingstations.Columns["SeatNumber"].HeaderText = "Plads nr:";
             dgvAvailableGamingstations.Columns["Description"].HeaderText = "Beskrivelse:";
@@ -126,6 +126,10 @@ namespace NetCafeUCN.DesktopApp.BookingForms
                 {
                     stationProductIds.Add(bl.StationId);
                 }
+
+                //TODO: IMPLEMENTÉR
+                //Hent alle bookinglines på bookings i tidsrummet
+                //bookingLines.AddRange(bookingService.GetBookingLinesByBooking(item.BookingNo).ToList());
             }
             //Se på hver gamingstation om den ligger i listen af bookinglines
             foreach (var item in allGamingStations)
@@ -133,12 +137,24 @@ namespace NetCafeUCN.DesktopApp.BookingForms
                 bool res = true;
                 foreach (int id in stationProductIds)
                 {
-                    if (item.productID == id)
+                    if (item.ProductID == id)
                     {
                         res = false;
                         break;
                     }
                 }
+
+                //TODO: IMPLEMENTÉR
+                //Kør igennem bookinglines fra metoden før
+                //foreach (var bl in bookingLines)
+                //{
+                //    if(item.ProductID == bl.StationID)
+                //    {
+                //        res = false;
+                //        break;
+                //    }
+                //}
+
                 if (res)
                 {
                     _availableGamingStations.Add(item);
@@ -171,7 +187,7 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             foreach (DataGridViewRow row in dgvAvailableGamingstations.SelectedRows)
             {
                 GamingStationDTO currentGamingstation = (GamingStationDTO)row.DataBoundItem;
-                bookingDTO.addToBookingLine(new BookingLineDTO { Quantity = 1, StationId = currentGamingstation.productID, ConsumableId = -1 });
+                bookingDTO.addToBookingLine(new BookingLineDTO { Quantity = 1, StationId = currentGamingstation.ProductID, ConsumableId = -1 });
             }
             if (CheckPhoneNo(txtPhoneNo.Text))
             {
@@ -209,7 +225,7 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             foreach (DataGridViewRow row in dgvAvailableGamingstations.SelectedRows)
             {
                 GamingStationDTO currentGamingstation = (GamingStationDTO)row.DataBoundItem;
-                bookingDTO.addToBookingLine(new BookingLineDTO { Quantity = 1, StationId = currentGamingstation.productID, ConsumableId = -1 });
+                bookingDTO.addToBookingLine(new BookingLineDTO { Quantity = 1, StationId = currentGamingstation.ProductID, ConsumableId = -1 });
             }
             if (CheckPhoneNo(txtPhoneNo.Text))
             {

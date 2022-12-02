@@ -29,7 +29,7 @@ namespace NetCafeUCN.API.Controllers
         // GET api/<ConsumableController>/74747
         [HttpGet]
         [Route("{productNo}")]
-        public ActionResult<Consumable> Get(string productNo)
+        public ActionResult<ConsumableDTO> Get(string productNo)
         {
             var product = dataAccess.Get(productNo).CSToDto();
             if (product == null) { return NotFound(); }
@@ -40,16 +40,14 @@ namespace NetCafeUCN.API.Controllers
         [HttpPost]
         public ActionResult<bool> Add([FromBody] ConsumableDTO p)
         {
-            Consumable data = p.CSFromDto();
-            return Ok(dataAccess.Add(data));
+            return Ok(dataAccess.Add(p.CSFromDto()));
         }
 
         // PUT api/<ConsumableController>/
         [HttpPut]
         public ActionResult<bool> Update(ConsumableDTO p)
         {
-            Consumable data = p.CSFromDto();
-            return Ok(dataAccess.Update(data));
+            return Ok(dataAccess.Update(p.CSFromDto()));
         }
 
         // DELETE api/<ConsumableController>/40559810

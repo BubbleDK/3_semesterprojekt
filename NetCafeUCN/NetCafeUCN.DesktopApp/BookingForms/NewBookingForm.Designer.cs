@@ -69,7 +69,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.dgvAvailableGamingstations);
             this.splitContainer1.Size = new System.Drawing.Size(984, 561);
-            this.splitContainer1.SplitterDistance = 227;
+            this.splitContainer1.SplitterDistance = 226;
             this.splitContainer1.TabIndex = 0;
             // 
             // splitContainer2
@@ -89,8 +89,8 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
-            this.splitContainer2.Size = new System.Drawing.Size(227, 561);
-            this.splitContainer2.SplitterDistance = 67;
+            this.splitContainer2.Size = new System.Drawing.Size(226, 561);
+            this.splitContainer2.SplitterDistance = 66;
             this.splitContainer2.TabIndex = 0;
             // 
             // txtPhoneNo
@@ -113,7 +113,6 @@
             // 
             // splitContainer3
             // 
-            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer3.Location = new System.Drawing.Point(0, 0);
             this.splitContainer3.Name = "splitContainer3";
             this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -130,7 +129,7 @@
             this.splitContainer3.Panel2.Controls.Add(this.lblStartTime);
             this.splitContainer3.Panel2.Controls.Add(this.cmbStartTime);
             this.splitContainer3.Size = new System.Drawing.Size(227, 490);
-            this.splitContainer3.SplitterDistance = 195;
+            this.splitContainer3.SplitterDistance = 194;
             this.splitContainer3.TabIndex = 0;
             // 
             // clndPicker
@@ -146,9 +145,9 @@
             // btnConfirm
             // 
             this.btnConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnConfirm.Location = new System.Drawing.Point(149, 256);
+            this.btnConfirm.Location = new System.Drawing.Point(149, 246);
             this.btnConfirm.Name = "btnConfirm";
-            this.btnConfirm.Size = new System.Drawing.Size(75, 23);
+            this.btnConfirm.Size = new System.Drawing.Size(75, 22);
             this.btnConfirm.TabIndex = 5;
             this.btnConfirm.Text = "Bekræft";
             this.btnConfirm.UseVisualStyleBackColor = true;
@@ -213,7 +212,7 @@
             this.dgvAvailableGamingstations.RowHeadersWidth = 51;
             this.dgvAvailableGamingstations.RowTemplate.Height = 29;
             this.dgvAvailableGamingstations.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAvailableGamingstations.Size = new System.Drawing.Size(753, 561);
+            this.dgvAvailableGamingstations.Size = new System.Drawing.Size(754, 561);
             this.dgvAvailableGamingstations.TabIndex = 0;
             // 
             // NewBookingForm
@@ -222,8 +221,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 561);
             this.Controls.Add(this.splitContainer1);
-            this.MaximumSize = new System.Drawing.Size(1000, 600);
-            this.MinimumSize = new System.Drawing.Size(1000, 600);
             this.Name = "NewBookingForm";
             this.Text = "NewBookingForm";
             this.splitContainer1.Panel1.ResumeLayout(false);
