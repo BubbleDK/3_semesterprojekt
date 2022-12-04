@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NetCafeUCN.DAL.DAO;
 using NetCafeUCN.DAL.Model;
+using NetCafeUCN.API.Conversion;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,18 +19,19 @@ namespace NetCafeUCN.API.Controllers
             this.dataAccess = dataAccess;
         }
         // GET: api/<BookingLineController>
-        [HttpGet("{bookingno}")]
+        [HttpGet]
+        [Route("{bookingNo}")]
         public ActionResult<IEnumerable<BookingLine>> GetAll(string bookingNo)
         {
-            return Ok(dataAccess.GetBookingLinesByBooking(bookingNo));
+            return Ok(dataAccess.GetBookingLinesByBooking(bookingNo).BookingLineToDtos());
         }
 
         // GET api/<BookingLineController>/5
-        [HttpGet]
-        public string GetAll()
-        {
-            return "value";
-        }
+        //[HttpGet]
+        //public string GetAll()
+        //{
+        //    return "value";
+        //}
 
         // POST api/<BookingLineController>
         [HttpPost]

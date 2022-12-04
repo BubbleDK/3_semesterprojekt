@@ -10,6 +10,7 @@
     <link href="@Url.Content("~/css/SeatBooking.css")" rel="stylesheet" type="text/css" />
     @RenderSection("SeatBookingStyles", false)
     <link rel="stylesheet" href="~/NetCafeUCN.MVC.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/DropdownMainStyle.css" />
 </head>
 <body>
     <header>
@@ -37,8 +38,18 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">Brugere</a>
                             </li>
                         }
-                        <li class="nav-item">
+                        @*<li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="Create">Book</a>
+                        </li>*@
+                        <li class="dropdown">
+                            <button class="dropbtn">
+                                Booking
+                                <i class="fa fa-caret-down"></i>
+                            </button>
+                            <div class="dropdown-content">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="Create">Opret booking</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="Index">Find booking</a>
+                            </div>
                         </li>
                         <li class="nav-item">
                             @if (Context.User.Identity.IsAuthenticated)

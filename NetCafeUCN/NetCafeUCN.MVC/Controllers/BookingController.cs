@@ -11,19 +11,26 @@ namespace NetCafeUCN.MVC.Controllers
     public class BookingController : Controller
     {
         INetCafeDataAccessService<GamingStationDto> gamingStationService = new GamingstationService("https://localhost:7197/api/GamingStation");
+        INetCafeDataAccessService<BookingDto> bookingService = new BookingService("https://localhost:7197/api/Booking");
+        BookingLineService bookingLineService = new BookingLineService("https://localhost:7197/api/BookingLine");
         // GET: BookingController
         public ActionResult Index()
         {
-            BookingGamingStationViewModel viewModel = new BookingGamingStationViewModel();
-            viewModel.gamingStations = gamingStationService.GetAll();
+            /*BookingGamingStationViewModel viewModel = new BookingGamingStationViewModel();
+            viewModel.gamingStations = gamingStationService.GetAll();*/
 
-            return View(viewModel);
+            //return View(viewModel);
+            List<BookingDto> bookings = bookingService.GetAll().ToList();
+
+            return View(bookings);
         }
 
         // GET: BookingController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(string bookingNo)
         {
-            return View();
+            BookingDto booking = bookingService.Get(bookingNo);
+            booking.BookingLines = bookingLineService.GetAll(bookingNo).ToList();
+            return View(booking);
         }
 
         // GET: BookingController/Create
@@ -72,18 +79,20 @@ namespace NetCafeUCN.MVC.Controllers
         }
 
         // GET: BookingController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string? bookingNo)
         {
-            return View();
+            BookingDto bookingToDelete = bookingService.Get(bookingNo);
+            return View(bookingToDelete);
         }
 
         // POST: BookingController/Delete/5
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult DeleteConfirmed(string bookingNo)
         {
             try
             {
+                bookingService.Remove(bookingNo);
                 return RedirectToAction(nameof(Index));
             }
             catch

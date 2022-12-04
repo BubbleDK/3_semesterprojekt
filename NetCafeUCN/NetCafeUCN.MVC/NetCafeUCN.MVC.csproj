@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\css\DropdownMainStyle.css" />
     <_ContentIncludedByDefault Remove="wwwroot\css\SeatBooking.css" />
   </ItemGroup>
 

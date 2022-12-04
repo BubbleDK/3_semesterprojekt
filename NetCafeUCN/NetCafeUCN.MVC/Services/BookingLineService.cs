@@ -1,13 +1,8 @@
-﻿using NetCafeUCN.DesktopApp.DTO;
+﻿using NetCafeUCN;
+using NetCafeUCN.MVC.Models.DTO;
 using RestSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
-namespace NetCafeUCN.DesktopApp.ServiceLayer
+namespace NetCafeUCN.MVC.Services
 {
     public class BookingLineService
     {
@@ -19,10 +14,10 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
             RestClient = new RestClient(baseUri);
         }
 
-        public IEnumerable<BookingLineDTO> GetAll(string bookingNo)
+        public IEnumerable<BookingLineDto> GetAll(string bookingNo)
         {
-            var request = new RestRequest($"{BaseUri}{bookingNo}", Method.Get);
-            var response = RestClient.Execute<IEnumerable<BookingLineDTO>>(request);
+            var request = new RestRequest($"{BaseUri}/{bookingNo}", Method.Get);
+            var response = RestClient.Execute<IEnumerable<BookingLineDto>>(request);
             var result = response.Content;
             return response.Data;
             //return RestClient.Execute<IEnumerable<BookingLineDTO>>(new RestRequest($"{BaseUri}{bookingNo}", Method.Get)).Data;
