@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using NetCafeUCN.MVC.Models;
 using NetCafeUCN.MVC.Models.DTO;
 using NetCafeUCN.MVC.Services;
+using System.Security.Claims;
 
 namespace NetCafeUCN.MVC.Controllers
 {
@@ -88,11 +89,14 @@ namespace NetCafeUCN.MVC.Controllers
         // POST: BookingController/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string bookingNo)
+        public ActionResult DeleteConfirmed(string bookingNo, string phoneNo)
         {
             try
             {
-                bookingService.Remove(bookingNo);
+                if(phoneNo == User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.MobilePhone)?.Value)
+                {
+                    bookingService.Remove(bookingNo);
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
