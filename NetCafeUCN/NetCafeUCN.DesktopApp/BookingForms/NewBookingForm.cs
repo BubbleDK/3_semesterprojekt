@@ -228,6 +228,7 @@ namespace NetCafeUCN.DesktopApp.BookingForms
                     {
                         if(bookingService.Add(bookingDTO))
                         {
+                            MessageBox.Show("Oprettet booking fra: " + bookingDTO.StartTime + " til: " + bookingDTO.EndTime , "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             bookingsForm.RefreshList();
                             this.Dispose();
                         }
