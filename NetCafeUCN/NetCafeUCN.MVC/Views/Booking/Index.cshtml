@@ -1,4 +1,5 @@
-﻿@model IEnumerable<NetCafeUCN.MVC.Models.BookingDto>
+﻿@using System.Security.Claims
+@model IEnumerable<NetCafeUCN.MVC.Models.BookingDto>
 
 @{
     ViewData["Title"] = "Booking";
@@ -13,40 +14,44 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.BookingNo)
+                <label>Bookingnummer</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StartTime)
+                <label>Starttid</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EndTime)
+                <label>Sluttid</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PhoneNo)
+                <label>Telefonnummer</label>
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.BookingNo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNo)
-            </td>
-            <td>
-                @Html.ActionLink("Oplysninger", "Details", new { item.BookingNo }) |
-                @Html.ActionLink("Slet", "Delete", new { item.BookingNo })
-            </td>
-        </tr>
+            <tr>
+                @if (item.PhoneNo == @Context.User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.MobilePhone)?.Value)
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BookingNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhoneNo)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Oplysninger", "Details", new { item.BookingNo }) |
+                        @Html.ActionLink("Slet", "Delete", new { item.BookingNo })
+                    </td>
+                }
+
+            </tr>
 }
     </tbody>
 </table>

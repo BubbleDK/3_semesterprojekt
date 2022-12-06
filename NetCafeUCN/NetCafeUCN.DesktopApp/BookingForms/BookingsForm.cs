@@ -61,7 +61,15 @@ namespace NetCafeUCN.DesktopApp
         private void DeleteBooking()
         {
             BookingDTO bookingToRemove = (BookingDTO)dgvBookings.CurrentRow.DataBoundItem;
-            bookingService.Remove(bookingToRemove.BookingNo);
+            if (MessageBox.Show("Er du sikker på du at vil slette: " + bookingToRemove.BookingNo, "Slet booking", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            {
+                bookingService.Remove(bookingToRemove.BookingNo);
+                MessageBox.Show("Booking slettet: " + bookingToRemove.BookingNo, "Booking slettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Afbrød slet booking", "Aborted", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
             RefreshList();
         }
 

@@ -12,44 +12,38 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BookingNo)
+            <label>Bookingnummer:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.BookingNo)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StartTime)
+            <label>Starttid:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.StartTime)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EndTime)
+            <label>Sluttid</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.EndTime)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PhoneNo)
+            <label>Telefonnummer:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.PhoneNo)
         </dd>
-        <div>
-            @foreach (BookingLineDto item in Model.BookingLines)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayNameFor(modelItem => item.Stationid)
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Stationid)
-                    </td>
-                </tr>
-            }
-        </div>
+        @foreach (BookingLineDto item in Model.BookingLines)
+        {
+            <dt class="col-sm-2">
+                <label>Computer:</label>
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => item.Stationid)
+            </dd>
+        }
     </dl>
 </div>
 <div>
