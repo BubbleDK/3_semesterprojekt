@@ -17,6 +17,7 @@ namespace NetCafeUCN.DAL.Model
         public Booking()
         {
             BookingLines = new List<BookingLine>();
+            BookingNo = GenerateBookingNo();
         }
 
         public string GenerateBookingNo()
