@@ -38,7 +38,7 @@ namespace NetCafeUCN.MVC.Controllers
                     if (user != null) { await SignIn(user); }
                 }
             }
-            if (string.IsNullOrEmpty(returnUrl)) { return RedirectToAction(); }
+            if (string.IsNullOrEmpty(returnUrl)) { return RedirectToAction("Index", "Home"); }
             
             return View();
         }
