@@ -100,11 +100,13 @@ public class DAOTests
     {
 
         //Arrange
+
         Booking booking = new Booking();
+        Booking bookingSaved = new Booking();
         booking.StartTime = DateTime.Parse("2222 - 12 - 06T11: 00:00");
         booking.EndTime = DateTime.Parse("2222 - 12 - 06T12: 00:00");
         //Nummeret skal være i databasen
-        booking.PhoneNo = "00000000";
+        booking.PhoneNo = "88888888";
 
         BookingLine boookingLine = new BookingLine();
         boookingLine.StationId = 1;
@@ -115,6 +117,8 @@ public class DAOTests
         BookingDAO bookingDAO = new BookingDAO();
 
         SqlConnection conn = new SqlConnection(DBConnection.ConnectionString);
+        
+        
 
         try
         {
@@ -125,19 +129,40 @@ public class DAOTests
             //Assert
             Assert.True(bookingDAO.Add(booking));
 
-            Assert.Equivalent(booking, bookingDAO.Get(booking.BookingNo));
+            SqlCommand getLastSavedCommand = new SqlCommand("SELECT TOP 1 * FROM nc_Booking ORDER BY ID DESC", conn);
+            getLastSavedCommand.ExecuteNonQuery();
+
+            SqlDataReader reader = getLastSavedCommand.ExecuteReader();
+            while (reader.Read())
+            {
+                bookingSaved.BookingNo = (string)reader["bookingNo"];
+            }
+            bookingSaved = bookingDAO.Get(bookingSaved.BookingNo);
+            
+
+            Assert.Equivalent(booking.PhoneNo, bookingSaved.PhoneNo);
+            Assert.Equivalent(booking.BookingLines, bookingSaved.BookingLines);
 
             booking.EndTime = booking.EndTime.AddHours(1);
 
-            Assert.True(bookingDAO.Update(booking));
+            Assert.True(bookingDAO.Update(bookingSaved));
 
-            bookingDAO.Remove(booking.BookingNo);
+            bookingDAO.Remove(bookingSaved.BookingNo);
 
             Assert.Null(bookingDAO.Get(booking.BookingNo));
 
         }
         finally
         {
+            //Slet den eksisterende test fra tidligere, hvis den eksisterer
+            try
+            {
+                SqlCommand deleteCommand = new SqlCommand("DELETE nc_Booking WHERE bookingNo = @bookingNo", conn);
+
+                deleteCommand.Parameters.AddWithValue("@bookingNo", bookingSaved.BookingNo);
+                deleteCommand.ExecuteNonQuery();
+            }
+            catch (Exception) { }
             conn.Close();
 
         }
