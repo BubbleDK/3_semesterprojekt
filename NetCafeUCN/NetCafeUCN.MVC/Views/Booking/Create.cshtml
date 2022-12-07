@@ -89,16 +89,16 @@
 
             <div class="col-lg" style="margin-bottom: 20px;">
                 <h5>Vælg din plads her</h5>
-                @if (Model.gamingStations != null)
+                @if (Model.GamingStations != null)
                 {
                     <div class="seats-container">
                         <ol>
                             <li class="row">
                                 <ol class="seats">
-                                    @foreach (GamingStationDto item in Model.gamingStations)
+                                    @foreach (GamingStationDto item in Model.GamingStations)
                                     {
                                         <li class="seat">
-                                            <input type="checkbox" disabled="@item.Booked" id="@item.SeatNumber" checked="@item.isChecked" />
+                                            <input type="checkbox" disabled="@item.Booked" id="@item.SeatNumber" value="@item.isChecked" checked="@item.isChecked" onclick="myFunction()" />
                                             <label class="seatLabel" for="@item.SeatNumber">@item.SeatNumber</label>
                                         </li>
                                     }
@@ -127,6 +127,8 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
     <script type="text/javascript">
-       
+        function myFunction() {
+            console.log(document.getElementById("3").checked)
+        }
     </script>
 }

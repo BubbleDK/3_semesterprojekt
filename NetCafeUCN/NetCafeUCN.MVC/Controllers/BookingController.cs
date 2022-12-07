@@ -34,7 +34,7 @@ namespace NetCafeUCN.MVC.Controllers
         public ActionResult Create()
         {
             BookingGamingStationViewModel viewModel = new BookingGamingStationViewModel();
-            viewModel.gamingStations = gamingStationService.GetAll();
+            viewModel.GamingStations = gamingStationService.GetAll();
 
             return View(viewModel);
         }
@@ -42,16 +42,26 @@ namespace NetCafeUCN.MVC.Controllers
         // POST: BookingController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(BookingCreateModel model)
+        public ActionResult Create(BookingGamingStationViewModel bookingModel)
         {
             BookingDto booking = new BookingDto();
             try
             {
-                booking.PhoneNo = model.PhoneNo;
-                string dateString = "" + model.StartDate + " " + model.StartTime;
+                booking.PhoneNo = bookingModel.PhoneNo;
+                string dateString = "" + bookingModel.StartDate + " " + bookingModel.StartTime;
                 DateTime start = DateTime.Parse(dateString, System.Globalization.CultureInfo.InvariantCulture);
                 booking.StartTime = start;
-                booking.EndTime = start.AddHours(double.Parse(model.EndTime, System.Globalization.CultureInfo.InvariantCulture));
+                booking.EndTime = start.AddHours(double.Parse(bookingModel.EndTime, System.Globalization.CultureInfo.InvariantCulture));
+                if (bookingModel.GamingStations != null)
+                {
+                    foreach (var item in bookingModel.GamingStations)
+                    {
+                        Console.WriteLine(item.isChecked);
+                    }
+                } else
+                {
+                    Console.WriteLine("IT IS NULL");
+                }
                 //bookingService.Add(booking);
                 Console.WriteLine("Booking oprettet");
                 return RedirectToAction(nameof(Index));
