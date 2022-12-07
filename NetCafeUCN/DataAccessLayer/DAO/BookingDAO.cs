@@ -41,7 +41,7 @@ namespace NetCafeUCN.DAL.DAO
                         using (SqlCommand bookingCommand = new SqlCommand(
                                 "INSERT INTO nc_Booking VALUES(@bookingNo, @startTime, @endTime, @phoneNo); SELECT SCOPE_IDENTITY();", conn, trans))
                         {
-                            bookingCommand.Parameters.AddWithValue("@bookingNo", o.BookingNo);
+                            bookingCommand.Parameters.AddWithValue("@bookingNo", o.GenerateBookingNo());
                             bookingCommand.Parameters.AddWithValue("@startTime", o.StartTime);
                             bookingCommand.Parameters.AddWithValue("@endTime", o.EndTime);
                             bookingCommand.Parameters.AddWithValue("@phoneNo", o.PhoneNo);

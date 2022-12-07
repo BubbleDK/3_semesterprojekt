@@ -21,7 +21,6 @@ namespace NetCafeUCN.DAL.DAO
         public bool Add(Employee o)
         {
             SqlTransaction trans;
-            int id = 0;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
                 conn.Open();
