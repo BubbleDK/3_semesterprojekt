@@ -42,9 +42,9 @@ namespace NetCafeUCN.DAL.DAO
                         }
 
                         using (SqlCommand command = new SqlCommand(
-                            "INSERT INTO nc_Employee VALUES(@personid, @address, @role, @zipcode)", conn, trans))
+                            "INSERT INTO nc_Employee VALUES(@phone, @address, @role, @zipcode)", conn, trans))
                         {
-                            command.Parameters.AddWithValue("@personid", id);
+                            command.Parameters.AddWithValue("@phone", o.Phone);
                             command.Parameters.AddWithValue("@address", o.Address);
                             command.Parameters.AddWithValue("@role", o.Role);
                             command.Parameters.AddWithValue("@zipcode", o.Zipcode);
