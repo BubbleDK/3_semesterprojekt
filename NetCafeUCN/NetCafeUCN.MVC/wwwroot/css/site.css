@@ -4,7 +4,7 @@ html {
 
 @media (min-width: 768px) {
   html {
-    font-size: 18px;
+    font-size: 16px;
   }
 }
 
@@ -15,6 +15,12 @@ html {
 
 body {
   margin-bottom: 60px;
+}
+.navbar{
+    min-height: 20px !important;
+    margin-bottom: 50px !important;
+    padding-top: 0rem !important;
+    padding-bottom: 0rem !important;
 }
 
 @media all and (min-width: 992px) {
