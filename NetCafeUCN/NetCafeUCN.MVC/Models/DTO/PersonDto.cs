@@ -12,17 +12,19 @@ namespace NetCafeUCN.MVC.Models
     public abstract class PersonDto
     {
         [Required]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         [Required]
-        [EmailAddress]
-        public string Email { get; set; }
-        [Required]
-        [Phone]
-        public string Phone { get; set; }
-        public string? PersonType { get; set; }
+        [EmailAddress(ErrorMessage = "Ikke en gyldig email")]
+        public string Email { get; set; } = string.Empty;
+        [Required(ErrorMessage = "Skriv et gyldigt telefonnummer")]
+        [Display(Name = "Phone number")]
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression("^\\+?[1-9][0-9]{7}$", ErrorMessage = "Ikke et gyldigt telefonnummer")]
+        public string Phone { get; set; } = string.Empty;
+        public string? PersonType { get; set; } = string.Empty;
         [Required]
         [DataType(DataType.Password)]
-        public string Password { get; set; }
+        public string Password { get; set; } = string.Empty;
         public bool IsActive { get; set; }
         public PersonDto(string name, string email, string phone, string? personType, string password, bool isActive)
         {
