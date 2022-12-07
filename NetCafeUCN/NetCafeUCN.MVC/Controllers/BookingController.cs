@@ -42,28 +42,33 @@ namespace NetCafeUCN.MVC.Controllers
         // POST: BookingController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(BookingGamingStationViewModel bookingModel)
+        public ActionResult Create(string PhoneNo, string StartDate, string StartTime, string EndTime, List<GamingStationDto> GamingStations)
         {
             BookingDto booking = new BookingDto();
             try
             {
-                booking.PhoneNo = bookingModel.PhoneNo;
-                string dateString = "" + bookingModel.StartDate + " " + bookingModel.StartTime;
-                DateTime start = DateTime.Parse(dateString, System.Globalization.CultureInfo.InvariantCulture);
-                booking.StartTime = start;
-                booking.EndTime = start.AddHours(double.Parse(bookingModel.EndTime, System.Globalization.CultureInfo.InvariantCulture));
-                if (bookingModel.GamingStations != null)
+                Console.WriteLine(PhoneNo);
+                foreach (var item in GamingStations)
                 {
-                    foreach (var item in bookingModel.GamingStations)
-                    {
-                        Console.WriteLine(item.isChecked);
-                    }
-                } else
-                {
-                    Console.WriteLine("IT IS NULL");
+                    Console.WriteLine(item.SeatNumber);
                 }
-                //bookingService.Add(booking);
-                Console.WriteLine("Booking oprettet");
+                //booking.PhoneNo = bookingModel.PhoneNo;
+                //string dateString = "" + bookingModel.StartDate + " " + bookingModel.StartTime;
+                //DateTime start = DateTime.Parse(dateString, System.Globalization.CultureInfo.InvariantCulture);
+                //booking.StartTime = start;
+                //booking.EndTime = start.AddHours(double.Parse(bookingModel.EndTime, System.Globalization.CultureInfo.InvariantCulture));
+                //if (bookingModel.GamingStations != null)
+                //{
+                //    foreach (var item in bookingModel.GamingStations)
+                //    {
+                //        Console.WriteLine(item.isChecked);
+                //    }
+                //} else
+                //{
+                //    Console.WriteLine("IT IS NULL");
+                //}
+                ////bookingService.Add(booking);
+                //Console.WriteLine("Booking oprettet");
                 return RedirectToAction(nameof(Index));
             }
             catch
