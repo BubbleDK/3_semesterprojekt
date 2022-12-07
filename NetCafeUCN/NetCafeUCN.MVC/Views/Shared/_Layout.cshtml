@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - UCN NetCafé</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link href="@Url.Content("~/css/SeatBooking.css")" rel="stylesheet" type="text/css" />
     @RenderSection("SeatBookingStyles", false)
@@ -14,9 +15,14 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <script>
+            $('.dropdown').hover(function () {
+                $('.dropdown-toggle', this).trigger('click');
+            });
+        </script>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-inverse bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">UCN NetCafé</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/content/NETCAFEUCN.png" width="40" height="30"/></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -38,29 +44,39 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">Brugere</a>
                             </li>
                         }
-                        @*<li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="Create">Book</a>
-                        </li>*@
-                        <li class="dropdown">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link  dropdown-toggle text-dark" data-bs-toggle="dropdown">Booking</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Booking" asp-action="Create">Opret booking</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Booking" asp-action="Index">Find booking</a></li>
+                            </ul>
+                        </li>
+       
+                        @*<li class="dropdown">
                             <button class="dropbtn">
                                 Booking
                                 <i class="fa fa-caret-down"></i>
                             </button>
+                        
                             <div class="dropdown-content">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="Create">Opret booking</a>
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="Index">Find booking</a>
-                            </div>
+                            </div>*@
                         </li>
-                        <li class="nav-item">
+                    </ul>
+                    
+                    <ul class="nav navbar-nav navbar-right">
+                        
                             @if (Context.User.Identity.IsAuthenticated)
                             {
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="LogOut">Log out</a>
+                            <li class="nav-item"><a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="LogOut"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
                             }
                             else
                             {
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="LogIn">Log in</a>
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Create"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                            <li> <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="LogIn"><span class="glyphicon glyphicon-log-in"></span> Log in</a></li>
                             }
-                        </li>
+                        
                         
                     </ul>
                 </div>
