@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using NetCafeUCN.MVC.Models;
 using NetCafeUCN.MVC.Models.DTO;
 using NetCafeUCN.MVC.Services;
+using System.Reflection;
 using System.Security.Claims;
 
 namespace NetCafeUCN.MVC.Controllers
@@ -34,7 +35,7 @@ namespace NetCafeUCN.MVC.Controllers
         public ActionResult Create()
         {
             BookingGamingStationViewModel viewModel = new BookingGamingStationViewModel();
-            viewModel.GamingStations = gamingStationService.GetAll();
+            viewModel.GamingStations = (List<GamingStationDto>)gamingStationService.GetAll();
 
             return View(viewModel);
         }
@@ -42,33 +43,37 @@ namespace NetCafeUCN.MVC.Controllers
         // POST: BookingController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(string PhoneNo, string StartDate, string StartTime, string EndTime, List<GamingStationDto> GamingStations)
+        public ActionResult Create([FromForm] BookingGamingStationViewModel bookingModel)
         {
-            BookingDto booking = new BookingDto();
             try
             {
-                Console.WriteLine(PhoneNo);
-                foreach (var item in GamingStations)
+                BookingDto booking = new BookingDto();
+                booking.PhoneNo = bookingModel.PhoneNo;
+                string dateString = "" + bookingModel.StartDate + " " + bookingModel.StartTime;
+                DateTime start = DateTime.Parse(dateString, System.Globalization.CultureInfo.InvariantCulture);
+                booking.StartTime = start;
+                booking.EndTime = start.AddHours(double.Parse(bookingModel.EndTime, System.Globalization.CultureInfo.InvariantCulture));
+                List<GamingStationDto> allGamingStations = gamingStationService.GetAll().ToList();
+                if (bookingModel.GamingStations != null)
                 {
-                    Console.WriteLine(item.SeatNumber);
+                    for (int i = 0; i < bookingModel.GamingStations.Count(); i++)
+                    {
+                        if (bookingModel.GamingStations[i].isChecked)
+                        {
+                            booking.BookingLines.Add(new BookingLineDto()
+                            {
+                                Quantity = 1,
+                                Stationid = allGamingStations[i].ProductID,
+                                Consumableid = 0,
+                            });
+                        }
+                    }
                 }
-                //booking.PhoneNo = bookingModel.PhoneNo;
-                //string dateString = "" + bookingModel.StartDate + " " + bookingModel.StartTime;
-                //DateTime start = DateTime.Parse(dateString, System.Globalization.CultureInfo.InvariantCulture);
-                //booking.StartTime = start;
-                //booking.EndTime = start.AddHours(double.Parse(bookingModel.EndTime, System.Globalization.CultureInfo.InvariantCulture));
-                //if (bookingModel.GamingStations != null)
-                //{
-                //    foreach (var item in bookingModel.GamingStations)
-                //    {
-                //        Console.WriteLine(item.isChecked);
-                //    }
-                //} else
-                //{
-                //    Console.WriteLine("IT IS NULL");
-                //}
-                ////bookingService.Add(booking);
-                //Console.WriteLine("Booking oprettet");
+                else
+                {
+                    Console.WriteLine("Null");
+                }
+                bookingService.Add(booking);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -123,5 +128,17 @@ namespace NetCafeUCN.MVC.Controllers
                 return View();
             }
         }
+
+        //[HttpPost]
+        //public JsonResult AddBooking([FromForm] GamingStationDto whatever)
+        //{
+        //    Console.WriteLine("ADD BOOKING TRIGGERED");
+        //    foreach (var item in stations)
+        //    {
+        //        Console.WriteLine(item.SeatNumber);
+        //    }
+
+        //    return null;
+        //}
     }
 }

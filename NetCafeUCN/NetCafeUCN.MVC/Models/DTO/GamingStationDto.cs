@@ -8,6 +8,7 @@ namespace NetCafeUCN.MVC.Models
 {
     public class GamingStationDto : ProductDto
     {
+        public int ProductID { get; set; } 
         public string? SeatNumber { get; set; }
         public string? Description { get; set; }
         public bool Booked { get; set; }
