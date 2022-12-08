@@ -12,13 +12,20 @@ namespace NetCafeUCN.MVC.Controllers
     [AllowAnonymous]
     public class BookingController : Controller
     {
-        INetCafeDataAccessService<GamingStationDto> gamingStationService = new GamingstationService("https://localhost:7197/api/GamingStation");
-        INetCafeDataAccessService<BookingDto> bookingService = new BookingService("https://localhost:7197/api/Booking");
-        BookingLineService bookingLineService = new BookingLineService("https://localhost:7197/api/BookingLine");
+
+        INetCafeDataAccessService<GamingStationDto> _gamingStationService;
+        INetCafeDataAccessService<BookingDto> _bookingService;
+        BookingLineService _bookingLineService;
         // GET: BookingController
+        public BookingController(INetCafeDataAccessService<GamingStationDto> gamingStationService, INetCafeDataAccessService<BookingDto> bookingService, BookingLineService bookingLineService)
+        {
+            _gamingStationService = gamingStationService;
+            _bookingService = bookingService;
+            _bookingLineService = bookingLineService;
+        }
         public ActionResult Index()
         {
-            List<BookingDto> bookings = bookingService.GetAll().ToList();
+            List<BookingDto> bookings = _bookingService.GetAll().ToList();
 
             return View(bookings);
         }
@@ -26,8 +33,8 @@ namespace NetCafeUCN.MVC.Controllers
         // GET: BookingController/Details/5
         public ActionResult Details(string bookingNo)
         {
-            BookingDto booking = bookingService.Get(bookingNo);
-            booking.BookingLines = bookingLineService.GetAll(bookingNo).ToList();
+            BookingDto booking = _bookingService.Get(bookingNo);
+            booking.BookingLines = _bookingLineService.GetAll(bookingNo).ToList();
             return View(booking);
         }
 
@@ -35,7 +42,7 @@ namespace NetCafeUCN.MVC.Controllers
         public ActionResult Create()
         {
             BookingGamingStationViewModel viewModel = new BookingGamingStationViewModel();
-            viewModel.GamingStations = (List<GamingStationDto>)gamingStationService.GetAll();
+            viewModel.GamingStations = (List<GamingStationDto>)_gamingStationService.GetAll();
 
             return View(viewModel);
         }
@@ -53,7 +60,7 @@ namespace NetCafeUCN.MVC.Controllers
                 DateTime start = DateTime.Parse(dateString, System.Globalization.CultureInfo.InvariantCulture);
                 booking.StartTime = start;
                 booking.EndTime = start.AddHours(double.Parse(bookingModel.EndTime, System.Globalization.CultureInfo.InvariantCulture));
-                List<GamingStationDto> allGamingStations = gamingStationService.GetAll().ToList();
+                List<GamingStationDto> allGamingStations = _gamingStationService.GetAll().ToList();
                 if (bookingModel.GamingStations != null)
                 {
                     for (int i = 0; i < bookingModel.GamingStations.Count(); i++)
@@ -73,7 +80,7 @@ namespace NetCafeUCN.MVC.Controllers
                 {
                     Console.WriteLine("Null");
                 }
-                bookingService.Add(booking);
+                _bookingService.Add(booking);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -106,7 +113,7 @@ namespace NetCafeUCN.MVC.Controllers
         // GET: BookingController/Delete/5
         public ActionResult Delete(string? bookingNo)
         {
-            BookingDto bookingToDelete = bookingService.Get(bookingNo);
+            BookingDto bookingToDelete = _bookingService.Get(bookingNo);
             return View(bookingToDelete);
         }
 
@@ -119,7 +126,7 @@ namespace NetCafeUCN.MVC.Controllers
             {
                 if(phoneNo == User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.MobilePhone)?.Value)
                 {
-                    bookingService.Remove(bookingNo);
+                    _bookingService.Remove(bookingNo);
                 }
                 return RedirectToAction(nameof(Index));
             }

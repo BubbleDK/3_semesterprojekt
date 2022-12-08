@@ -9,7 +9,14 @@ namespace NetCafeUCN.MVC.Controllers
     [Authorize]
     public class ConsumableController : Controller
     {
-        INetCafeDataAccessService<ConsumableDto> consumableService = new ConsumableService("https://localhost:7197/api/Consumable");
+        INetCafeDataAccessService<ConsumableDto> _consumableService;
+
+        public ConsumableController(INetCafeDataAccessService<ConsumableDto> consumableService)
+        {
+            _consumableService = consumableService;
+        }
+
+
         // GET: ConsumableController
         [AllowAnonymous]
         public ActionResult Index()

@@ -9,7 +9,12 @@ namespace NetCafeUCN.MVC.Controllers
     [Authorize]
     public class GamingStationController : Controller
     {
-        INetCafeDataAccessService<GamingStationDto> gamingStationService = new GamingstationService("https://localhost:7197/api/GamingStation");
+        INetCafeDataAccessService<GamingStationDto> _gamingStationService;
+        public GamingStationController(INetCafeDataAccessService<GamingStationDto> gamingStationService)
+        {
+            gamingStationService = gamingStationService;
+        }
+
         // GET: GamingStationController
         [AllowAnonymous]
         public ActionResult Index()

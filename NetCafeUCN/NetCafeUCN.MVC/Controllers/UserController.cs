@@ -13,8 +13,14 @@ namespace NetCafeUCN.MVC.Controllers
     [Authorize]
     public class UserController : Controller
     {
-        INetCafeDataAccessService<CustomerDto> customerService = new CustomerService("https://localhost:7197/api/Customer");
-        INetCafeDataAccessService<EmployeeDto> employeeService = new EmployeeService("https://localhost:7197/api/Employee");
+        INetCafeDataAccessService<CustomerDto> _customerService;
+        INetCafeDataAccessService<EmployeeDto> _employeeService;
+        public UserController(INetCafeDataAccessService<CustomerDto> customerService, INetCafeDataAccessService<EmployeeDto> employeeService)
+        {
+            _customerService = customerService;
+            _employeeService = employeeService;
+        }
+
         // GET: PersonController
         [Authorize("Administrator")]
         public ActionResult Index()
