@@ -22,7 +22,7 @@
             {
                 <div class="form-group">
                     <label class="control-label">Telefon</label>
-                    <input asp-for="PhoneNo" class="form-control" id="PhoneNo" value="@Context.User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.MobilePhone)?.Value" />
+                    <input asp-for="PhoneNo" class="form-control" id="PhoneNo" maxlength="8" value="@Context.User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.MobilePhone)?.Value" />
                     <span asp-validation-for="PhoneNo" class="text-danger"></span>
                 </div>
             }
@@ -30,7 +30,7 @@
             {
                 <div class="form-group">
                     <label class="control-label">Telefon</label>
-                    <input asp-for="PhoneNo" class="form-control" id="PhoneNo" />
+                    <input asp-for="PhoneNo" class="form-control" id="PhoneNo" maxlength="8" />
                     <span asp-validation-for="PhoneNo" class="text-danger"></span>
                 </div>
             }
