@@ -222,6 +222,7 @@ namespace NetCafeUCN.DAL.DAO
         {
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
+                //TODO: Skriv lækker sql kode til at tjekke inbetween tiden og tjekke den ene dag man vil booke. 
                 using SqlCommand command = new SqlCommand("SELECT stationid, startTime, endTime FROM nc_Booking INNER JOIN nc_BookingLine ON " +
                     "nc_Booking.id = nc_BookingLine.bookingid where startTime = @startTime AND endTime = @endTime AND stationid = @stationid", conn);
                 command.Parameters.AddWithValue("@startTime", startTime);

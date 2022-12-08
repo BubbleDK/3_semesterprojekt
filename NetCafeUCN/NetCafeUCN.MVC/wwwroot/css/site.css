@@ -16,3 +16,27 @@ html {
 body {
   margin-bottom: 60px;
 }
+.navbar{
+    min-height: 20px !important;
+    margin-bottom: 50px !important;
+    padding-top: 0rem !important;
+    padding-bottom: 0rem !important;
+}
+
+@media all and (min-width: 992px) {
+    .navbar .nav-item .dropdown-menu {
+        display: none;
+    }
+
+    .navbar .nav-item:hover .nav-link {
+    }
+
+    .navbar .nav-item:hover .dropdown-menu {
+        display: block;
+    }
+
+    .navbar .nav-item .dropdown-menu {
+        margin-top: 0;
+    }
+
+}	

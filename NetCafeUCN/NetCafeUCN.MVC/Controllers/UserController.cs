@@ -13,15 +13,21 @@ namespace NetCafeUCN.MVC.Controllers
     [Authorize]
     public class UserController : Controller
     {
-        INetCafeDataAccessService<CustomerDto> customerService = new CustomerService("https://localhost:7197/api/Customer");
-        INetCafeDataAccessService<EmployeeDto> employeeService = new EmployeeService("https://localhost:7197/api/Employee");
+        INetCafeDataAccessService<CustomerDto> _customerService;
+        INetCafeDataAccessService<EmployeeDto> _employeeService;
+        public UserController(INetCafeDataAccessService<CustomerDto> customerService, INetCafeDataAccessService<EmployeeDto> employeeService)
+        {
+            _customerService = customerService;
+            _employeeService = employeeService;
+        }
+
         // GET: PersonController
         [Authorize("Administrator")]
         public ActionResult Index()
         {
             CustomerEmployeeViewModel viewModel = new CustomerEmployeeViewModel();
-            viewModel.customers = customerService.GetAll();
-            viewModel.employees = employeeService.GetAll();
+            viewModel.customers = _customerService.GetAll();
+            viewModel.employees = _employeeService.GetAll();
             
             return View(viewModel);
         }
@@ -48,20 +54,28 @@ namespace NetCafeUCN.MVC.Controllers
             if (!ModelState.IsValid)
             {
                 var errors = ModelState.SelectMany(x => x.Value.Errors.Select(z => z.Exception));
-                ViewBag.ErrorMessage = "Bruger ikke oprettet - fejl i oplysninger";
+                ViewBag.Error = "Bruger ikke oprettet - fejl i oplysninger";
+                RedirectToAction("Create");
             }
             else
             {
                 try
                 {
                     customer.Password = BCryptTool.HashPassword(customer.Password);
-                    customerService.Add(customer);
-                    return RedirectToAction("Login", "Account");
+                    if (_customerService.Add(customer))
+                    {
+                        return RedirectToAction("Login", "Account");
+                    }
+                    else
+                    {
+                        ViewBag.Error = "Telefonnummer er allerede oprettet i systemet";
+                        return View();
+                    }
                 }
                 catch (Exception)
                 {
-
-                    ViewBag.ErrorMassage = "Bruger ikke oprettet";
+                    ViewBag.Error = "Bruger ikke oprettet";
+                    RedirectToAction("Create");
                 }
             }
             return View();
@@ -73,11 +87,11 @@ namespace NetCafeUCN.MVC.Controllers
 
             
         {
-            if (customerService.GetAll().ToList().First(customer => customer.Phone == phone) != null)
+            if (_customerService.GetAll().ToList().First(customer => customer.Phone == phone) != null)
             {
                 //Customer c = customerService.GetAll().ToList().First(customer => customer.Phone == phone);
                 return RedirectToAction("EditCustomer");
-            }else if(employeeService.GetAll().ToList().First(employee => employee.Phone == phone) != null)
+            }else if(_employeeService.GetAll().ToList().First(employee => employee.Phone == phone) != null)
             {
                 //Employee e = employeeService.GetAll().ToList().First(employee => employee.Phone == phone);
                 return RedirectToAction("EditEmployee");

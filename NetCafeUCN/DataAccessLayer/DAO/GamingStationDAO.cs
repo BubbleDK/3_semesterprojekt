@@ -130,7 +130,7 @@ namespace NetCafeUCN.DAL.DAO
                     {
                         GamingStation product = new()
                         {
-                            ProductID= (int)reader["id"],
+                            ProductID = (int)reader["id"],
                             ProductNumber = (string)reader["productNo"],
                             Name = (string)reader["name"],
                             Description = (string)reader["description"],

@@ -9,7 +9,14 @@ namespace NetCafeUCN.MVC.Controllers
     [Authorize]
     public class ConsumableController : Controller
     {
-        INetCafeDataAccessService<ConsumableDto> consumableService = new ConsumableService("https://localhost:7197/api/Consumable");
+        INetCafeDataAccessService<ConsumableDto> _consumableService;
+
+        public ConsumableController(INetCafeDataAccessService<ConsumableDto> consumableService)
+        {
+            _consumableService = consumableService;
+        }
+
+
         // GET: ConsumableController
         [AllowAnonymous]
         public ActionResult Index()
@@ -21,14 +28,14 @@ namespace NetCafeUCN.MVC.Controllers
         [AllowAnonymous]
         public ActionResult Details(string productNumber)
         {
-            return View(consumableService.Get(productNumber));
+            return View(_consumableService.Get(productNumber));
         }
 
         // GET: ConsumableController/Create
         [Authorize(Roles = "Administrator")]
         public ActionResult Create(string productNumber)
         {
-            return View(consumableService.Get(productNumber));
+            return View(_consumableService.Get(productNumber));
         }
 
         // POST: ConsumableController/Create
@@ -51,7 +58,7 @@ namespace NetCafeUCN.MVC.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult Edit(string productNumber)
         {
-            return View(consumableService.Get(productNumber));
+            return View(_consumableService.Get(productNumber));
         }
 
         // POST: ConsumableController/Edit/5
@@ -62,10 +69,10 @@ namespace NetCafeUCN.MVC.Controllers
         {
             try
             {
-                var consumable = consumableService.Get(editedConsumable.ProductNumber);
+                var consumable = _consumableService.Get(editedConsumable.ProductNumber);
                 consumable.Description = editedConsumable.Description;
                 consumable.Name = editedConsumable.Name;
-                consumableService.Update(consumable);
+                _consumableService.Update(consumable);
                 return RedirectToAction(nameof(Index), "Product");
             }
             catch
@@ -78,7 +85,7 @@ namespace NetCafeUCN.MVC.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult Delete(string productNumber)
         {
-            return View(consumableService.Get(productNumber));
+            return View(_consumableService.Get(productNumber));
         }
 
         // POST: ConsumableController/Delete/5
@@ -89,7 +96,7 @@ namespace NetCafeUCN.MVC.Controllers
         {
             try
             {
-                consumableService.Remove(consumableToDelete.ProductNumber);
+                _consumableService.Remove(consumableToDelete.ProductNumber);
                 return RedirectToAction(nameof(Index), "Product");
             }
             catch

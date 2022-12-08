@@ -10,15 +10,23 @@ namespace NetCafeUCN.MVC.Controllers
     [Authorize]
     public class ProductController : Controller
     {
-        INetCafeDataAccessService<GamingStationDto> gamingStationService = new GamingstationService("https://localhost:7197/api/GamingStation");
-        INetCafeDataAccessService<ConsumableDto> consumableService = new ConsumableService("https://localhost:7197/api/Consumable");
+        INetCafeDataAccessService<GamingStationDto> _gamingStationService;
+        INetCafeDataAccessService<ConsumableDto> _consumableService;
         static GamingStationConsumableViewModel viewModel = new GamingStationConsumableViewModel();
+
+        public ProductController(INetCafeDataAccessService<GamingStationDto> gamingStationService, INetCafeDataAccessService<ConsumableDto> consumableService)
+        {
+            _gamingStationService = gamingStationService;
+            _consumableService = consumableService;
+        }
+
+
         // GET: ProductController
         [AllowAnonymous]
         public ActionResult Index()
         {
-            viewModel.gamingStations = gamingStationService.GetAll();
-            viewModel.consumables = consumableService.GetAll();
+            viewModel.gamingStations = _gamingStationService.GetAll();
+            viewModel.consumables = _consumableService.GetAll();
             return View(viewModel);
         }
 

@@ -7,11 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\css\TabStyle.css" />
-    <Content Remove="wwwroot\js\TabScript.js" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="Views\User\JavaScript.js" />
     <None Remove="Views\User\TabStyle.css" />
   </ItemGroup>
@@ -19,11 +14,6 @@
   <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\css\DropdownMainStyle.css" />
     <_ContentIncludedByDefault Remove="wwwroot\css\SeatBooking.css" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\css\TabStyle.css" />
-    <None Include="wwwroot\js\TabScript.js" />
   </ItemGroup>
 
   <ItemGroup>

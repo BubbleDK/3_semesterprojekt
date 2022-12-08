@@ -10,9 +10,9 @@
     ViewData["Title"] = "Booking";
 }
 
-<h1>Create</h1>
+<h1>Book en computer</h1>
 
-<h4>Book</h4>
+
 <hr />
 <div class="row" style="max-height: 400px">
     <div class="col">
@@ -22,7 +22,7 @@
             {
                 <div class="form-group">
                     <label class="control-label">Telefon</label>
-                    <input asp-for="PhoneNo" class="form-control" value="@Context.User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.MobilePhone)?.Value" />
+                    <input asp-for="PhoneNo" class="form-control" id="PhoneNo" maxlength="8" value="@Context.User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.MobilePhone)?.Value" />
                     <span asp-validation-for="PhoneNo" class="text-danger"></span>
                 </div>
             }
@@ -30,20 +30,20 @@
             {
                 <div class="form-group">
                     <label class="control-label">Telefon</label>
-                    <input asp-for="PhoneNo" class="form-control" />
+                    <input asp-for="PhoneNo" class="form-control" id="PhoneNo" maxlength="8" />
                     <span asp-validation-for="PhoneNo" class="text-danger"></span>
                 </div>
             }
            
             <div class="form-group">
                 <label class="control-label">Dato</label>
-                <input asp-for="StartDate" type="date" class="form-control" id="myDateInput" value="@string.Format("{0:yyyy-MM-dd}", DateTime.Now)" min="@string.Format("{0:yyyy-MM-dd}", DateTime.Now)" />
+                <input asp-for="StartDate" type="date" class="form-control" id="StartDate" value="@string.Format("{0:yyyy-MM-dd}", DateTime.Now)" min="@string.Format("{0:yyyy-MM-dd}", DateTime.Now)" />
                 <span asp-validation-for="StartDate" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label class="control-label">Start tid:</label>
-                <select id="time-select" class="form-control" asp-for="StartTime">
+                <select id="StartTime" class="form-control" asp-for="StartTime">
                     <option value="">--Vælg tid--</option>
                     <option value="09:00">09:00</option>
                     <option value="09:30">09:30</option>
@@ -80,28 +80,36 @@
 
             <div class="form-group">
                 <div class="slider" style="margin-top: 10px;">
-                    <input type="range" id="myInput" min="0.5" max="8" value="30"
+                    <input type="range" id="EndTime" min="0.5" max="8" value="0.5"
                            step="0.5" list="volsettings" oninput="rangeValue.innerText = this.value" asp-for="EndTime">
                     <p style="margin: 0;">Antal valgte timer:</p>
-                    <p id="rangeValue">0</p>
+                    <p id="rangeValue">0.5</p>
                 </div>
             </div>
 
             <div class="col-lg" style="margin-bottom: 20px;">
                 <h5>Vælg din plads her</h5>
-                @if (Model.gamingStations != null)
+                @if (Model.GamingStations != null)
                 {
                     <div class="seats-container">
                         <ol>
                             <li class="row">
                                 <ol class="seats">
-                                    @foreach (GamingStationDto item in Model.gamingStations)
+                                    @for (int i = 0; i < Model.GamingStations.Count(); i++)
                                     {
                                         <li class="seat">
-                                            <input type="checkbox" disabled="@item.Booked" id="@item.SeatNumber" checked="@item.isChecked" />
-                                            <label class="seatLabel" for="@item.SeatNumber">@item.SeatNumber</label>
+                                            <input type="checkbox" disabled="@Model.GamingStations[i].Booked" id="@Model.GamingStations[i].SeatNumber" checked="@Model.GamingStations[i].isChecked" onclick="!@Model.GamingStations[i].isChecked.ToString().ToLower()" asp-for="@Model.GamingStations[i].isChecked" />
+                                            <label class="seatLabel" for="@Model.GamingStations[i].SeatNumber">@Model.GamingStations[i].SeatNumber</label>
                                         </li>
                                     }
+
+                                    @*@foreach (GamingStationDto item in Model.GamingStations)
+                                    {
+                                        <li class="seat">
+                                            <input type="checkbox" disabled="@item.Booked" id="@item.SeatNumber" value="@item.SeatNumber" checked="@item.isChecked" onclick="getValue(this.value)" />
+                                            <label class="seatLabel" for="@item.SeatNumber">@item.SeatNumber</label>
+                                        </li>
+                                    }*@
                                 </ol>
                             </li>
                         </ol>
@@ -114,7 +122,7 @@
             </div>
 
             <div class="form-group" style="margin-bottom: 5px">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" id="createBooking" onclick="submitBookingLines()" />
             </div>
         </form>
         <div>
@@ -124,9 +132,56 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 
-    <script type="text/javascript">
-       
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>
+        const stations = [];
+        let count = 0;
+        @foreach (GamingStationDto item in Model.GamingStations)
+        {
+            @:stations.push({ SeatNumber: "@item.SeatNumber", Description: "@item.Description", Booked: "@item.Booked", isChecked: "@item.isChecked" });
+        }
+        function getValue(value) {
+            stations.forEach(function (item) {
+                if (item.SeatNumber == value) {
+                    item.isChecked = item.isChecked == "False" ? "True" : "False";
+                }
+            });
+        }
+
+        //function submitBookingLines() {
+        //    var data = JSON.stringify(stations);
+        //    console.log("submit")
+        //    $.ajax({
+        //        type: "POST",
+        //        url: "BookingController/AddBooking",
+        //        data: data,
+        //        success: function(response) {
+        //            console.log("Success")
+        //        }
+        //    })
+        //    return true;
+        //}
+
+        //$(document).ready(function () {
+        //    $("#createBooking").click(function () {
+        //        $.ajax({
+        //            type: "POST", //HTTP POST Method
+        //            url: "BookingController/Create", // BookingController/Create
+        //            data: { //Passing data
+        //                PhoneNo: $("#PhoneNo").val(), //Reading values
+        //                StartDate: $("#StartDate").val(),
+        //                StartTime: $("#StartTime").val(),
+        //                EndTime: $("#EndTime").val(),
+        //                GamingStations: JSON.stringify(stations),
+        //            }
+        //        });
+
+        //    });
+        //});
+
     </script>
 }

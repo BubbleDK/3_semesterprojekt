@@ -21,7 +21,6 @@ namespace NetCafeUCN.DAL.DAO
         public bool Add(Employee o)
         {
             SqlTransaction trans;
-            int id = 0;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
                 conn.Open();
@@ -30,21 +29,21 @@ namespace NetCafeUCN.DAL.DAO
                     try
                     {
                         using (SqlCommand productCommand = new SqlCommand(
-                                "INSERT INTO nc_Person VALUES(@name, @phone, @email, @personType, @password, @isActive); SELECT SCOPE_IDENTITY();", conn, trans))
+                                "INSERT INTO nc_Person VALUES(@name, @phone, @email, @personType, @password, @isActive);", conn, trans))
                         {
                             productCommand.Parameters.AddWithValue("@name", o.Name);
                             productCommand.Parameters.AddWithValue("@phone", o.Phone);
                             productCommand.Parameters.AddWithValue("@email", o.Email);
                             productCommand.Parameters.AddWithValue("@personType", "Employee");
-                            productCommand.Parameters.AddWithValue("@password", "Ikke Oprettet");
+                            productCommand.Parameters.AddWithValue("@password", o.Password);
                             productCommand.Parameters.AddWithValue("@isActive", o.IsActive);
-                            id = Convert.ToInt32(productCommand.ExecuteScalar());
+                            productCommand.ExecuteNonQuery();
                         }
 
                         using (SqlCommand command = new SqlCommand(
-                            "INSERT INTO nc_Employee VALUES(@personid, @address, @role, @zipcode)", conn, trans))
+                            "INSERT INTO nc_Employee VALUES(@phone, @address, @role, @zipcode)", conn, trans))
                         {
-                            command.Parameters.AddWithValue("@personid", id);
+                            command.Parameters.AddWithValue("@phone", o.Phone);
                             command.Parameters.AddWithValue("@address", o.Address);
                             command.Parameters.AddWithValue("@role", o.Role);
                             command.Parameters.AddWithValue("@zipcode", o.Zipcode);
@@ -73,7 +72,7 @@ namespace NetCafeUCN.DAL.DAO
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
                 using SqlCommand command = new SqlCommand(
-                    "SELECT name, phone, email, personType, address, role, zipCode, isActive FROM nc_Person INNER JOIN nc_Employee ON nc_Person.id = nc_Employee.personid WHERE phone = @phone;", conn);
+                    "SELECT nc_Person.name, nc_Person.phone, nc_Person.email, nc_Person.personType, nc_Employee.address, nc_Employee.role, nc_Employee.zipCode, nc_Person.isActive FROM nc_Person INNER JOIN nc_Employee ON nc_Person.phone = nc_Employee.phone WHERE nc_Person.phone = @phone;", conn);
                 command.Parameters.AddWithValue("@phone", key);
                 {
                     try
@@ -199,10 +198,11 @@ namespace NetCafeUCN.DAL.DAO
                             command.Parameters.AddWithValue("@name", o.Name);
                             command.Parameters.AddWithValue("@email", o.Email);
                             command.Parameters.AddWithValue("@personType", o.PersonType);
+                            command.Parameters.AddWithValue("@isActive", o.IsActive);
                             rows = command.ExecuteNonQuery();
                         }
                         using (SqlCommand gcommand = new SqlCommand(
-                            "UPDATE nc_Employee SET address = @address, role = @role, zipCode = @zipCode WHERE personid = (SELECT id FROM nc_Person WHERE phone = @phone)", conn, trans))
+                            "UPDATE nc_Employee SET address = @address, role = @role, zipCode = @zipCode WHERE phone = @phone", conn, trans))
                         {
                             gcommand.Parameters.AddWithValue("@phone", o.Phone);
                             gcommand.Parameters.AddWithValue("@address", o.Address);
