@@ -31,14 +31,20 @@ namespace NetCafeUCN.MVC.Controllers
             UserLoginDto? userLoginDto = _userProvider.GetHashByEmail(loginInfo.Email);
             if (userLoginDto != null)
             {
-                if (BCryptTool.ValidatePassword(loginInfo.Password, userLoginDto.PasswordHash))
+                if (BCryptTool.ValidatePassword(loginInfo.Password, userLoginDto.PasswordHash) == false)
+                {
+                    ViewBag.Error = "Oplysninger ikke korrekt";
+                    RedirectToAction("Login");
+                }
+                else
                 {
                     UserDto? user = _userProvider.GetUserByLogin(loginInfo.Email, userLoginDto.PasswordHash);
 
                     if (user != null) { await SignIn(user); }
+                    if (string.IsNullOrEmpty(returnUrl)) { return RedirectToAction("Index", "Home"); }
                 }
             }
-            if (string.IsNullOrEmpty(returnUrl)) { return RedirectToAction("Index", "Home"); }
+            
             
             return View();
         }
