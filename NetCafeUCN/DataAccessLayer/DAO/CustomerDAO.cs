@@ -20,6 +20,7 @@ namespace NetCafeUCN.DAL.DAO
 	    */
         public bool Add(Customer o)
         {
+            if(GetPhoneNo(o.Phone) == true) return false;
             SqlTransaction trans;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
@@ -231,34 +232,31 @@ namespace NetCafeUCN.DAL.DAO
                     catch (Exception)
                     {
 
-                        throw;
+                        throw new DataAccessException("Can't access data");
                     }
                 }
             }
         }
-        public string GetPhoneNo(dynamic key)
+        public bool GetPhoneNo(dynamic key)
         {
-            string phoneNo = string.Empty;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
-                SqlCommand command = new SqlCommand("SELECT phone FROM nc_Person WHERE id = @id", conn);
-                command.Parameters.AddWithValue("@id", key);
+                SqlCommand command = new SqlCommand("SELECT phone FROM nc_Person WHERE phone = @phone", conn);
+                command.Parameters.AddWithValue("@phone", key);
                 {
                     try
                     {
                         conn.Open();
                         SqlDataReader reader = command.ExecuteReader();
-                        while (reader.Read())
+                        if(reader.HasRows)
                         {
-                            phoneNo = (string)reader["phone"];
-
+                            return true;
                         }
-                        return phoneNo;
+                        else { return false; }
                     }
                     catch (Exception)
                     {
-
-                        throw;
+                        throw new DataAccessException("Can't access data");
                     }
                 }
             }

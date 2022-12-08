@@ -44,8 +44,11 @@ namespace NetCafeUCN.MVC.Controllers
                     if (string.IsNullOrEmpty(returnUrl)) { return RedirectToAction("Index", "Home"); }
                 }
             }
-            
-            
+            else
+            {
+                ViewBag.Error = "Oplysninger ikke korrekt";
+                RedirectToAction("Login"); 
+            }
             return View();
         }
         private async Task SignIn(UserDto user)

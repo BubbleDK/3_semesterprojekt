@@ -54,20 +54,28 @@ namespace NetCafeUCN.MVC.Controllers
             if (!ModelState.IsValid)
             {
                 var errors = ModelState.SelectMany(x => x.Value.Errors.Select(z => z.Exception));
-                ViewBag.ErrorMessage = "Bruger ikke oprettet - fejl i oplysninger";
+                ViewBag.Error = "Bruger ikke oprettet - fejl i oplysninger";
+                RedirectToAction("Create");
             }
             else
             {
                 try
                 {
                     customer.Password = BCryptTool.HashPassword(customer.Password);
-                    _customerService.Add(customer);
-                    return RedirectToAction("Login", "Account");
+                    if (_customerService.Add(customer))
+                    {
+                        return RedirectToAction("Login", "Account");
+                    }
+                    else
+                    {
+                        ViewBag.Error = "Telefonnummer er allerede oprettet i systemet";
+                        return View();
+                    }
                 }
                 catch (Exception)
                 {
-
-                    ViewBag.ErrorMassage = "Bruger ikke oprettet";
+                    ViewBag.Error = "Bruger ikke oprettet";
+                    RedirectToAction("Create");
                 }
             }
             return View();
