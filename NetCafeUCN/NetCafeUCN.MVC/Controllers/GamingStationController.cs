@@ -26,7 +26,7 @@ namespace NetCafeUCN.MVC.Controllers
         [AllowAnonymous]
         public ActionResult Details(string productNumber)
         {
-            return View(gamingStationService.Get(productNumber));
+            return View(_gamingStationService.Get(productNumber));
         }
 
 
@@ -57,7 +57,7 @@ namespace NetCafeUCN.MVC.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult Edit(string productNumber)
         {
-            return View(gamingStationService.Get(productNumber));
+            return View(_gamingStationService.Get(productNumber));
         }
 
         // POST: GamingStationController/Edit/5
@@ -68,11 +68,11 @@ namespace NetCafeUCN.MVC.Controllers
         {
             try
             {
-                var gamingstation = gamingStationService.Get(editedGamingstation.ProductNumber);
+                var gamingstation = _gamingStationService.Get(editedGamingstation.ProductNumber);
                 gamingstation.SeatNumber = editedGamingstation.SeatNumber;
                 gamingstation.Description = editedGamingstation.Description;
                 gamingstation.Name = editedGamingstation.Name;
-                gamingStationService.Update(gamingstation);
+                _gamingStationService.Update(gamingstation);
                 return RedirectToAction(nameof(Index), "Product");
             }
             catch
@@ -85,7 +85,7 @@ namespace NetCafeUCN.MVC.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult Delete(string? productNumber)
         {
-            GamingStationDto gamingStation = gamingStationService.Get(productNumber);
+            GamingStationDto gamingStation = _gamingStationService.Get(productNumber);
             return View(gamingStation);
         }
 
@@ -97,7 +97,7 @@ namespace NetCafeUCN.MVC.Controllers
         {
             try
             {
-                gamingStationService.Remove(productNumber);
+                _gamingStationService.Remove(productNumber);
                 return RedirectToAction(nameof(Index), "Product");
             }
             catch

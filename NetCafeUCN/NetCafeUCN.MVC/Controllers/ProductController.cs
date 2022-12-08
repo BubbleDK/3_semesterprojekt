@@ -25,8 +25,8 @@ namespace NetCafeUCN.MVC.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
-            viewModel.gamingStations = gamingStationService.GetAll();
-            viewModel.consumables = consumableService.GetAll();
+            viewModel.gamingStations = _gamingStationService.GetAll();
+            viewModel.consumables = _consumableService.GetAll();
             return View(viewModel);
         }
 

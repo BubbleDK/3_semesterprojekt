@@ -26,8 +26,8 @@ namespace NetCafeUCN.MVC.Controllers
         public ActionResult Index()
         {
             CustomerEmployeeViewModel viewModel = new CustomerEmployeeViewModel();
-            viewModel.customers = customerService.GetAll();
-            viewModel.employees = employeeService.GetAll();
+            viewModel.customers = _customerService.GetAll();
+            viewModel.employees = _employeeService.GetAll();
             
             return View(viewModel);
         }
@@ -61,7 +61,7 @@ namespace NetCafeUCN.MVC.Controllers
                 try
                 {
                     customer.Password = BCryptTool.HashPassword(customer.Password);
-                    customerService.Add(customer);
+                    _customerService.Add(customer);
                     return RedirectToAction("Login", "Account");
                 }
                 catch (Exception)
@@ -79,11 +79,11 @@ namespace NetCafeUCN.MVC.Controllers
 
             
         {
-            if (customerService.GetAll().ToList().First(customer => customer.Phone == phone) != null)
+            if (_customerService.GetAll().ToList().First(customer => customer.Phone == phone) != null)
             {
                 //Customer c = customerService.GetAll().ToList().First(customer => customer.Phone == phone);
                 return RedirectToAction("EditCustomer");
-            }else if(employeeService.GetAll().ToList().First(employee => employee.Phone == phone) != null)
+            }else if(_employeeService.GetAll().ToList().First(employee => employee.Phone == phone) != null)
             {
                 //Employee e = employeeService.GetAll().ToList().First(employee => employee.Phone == phone);
                 return RedirectToAction("EditEmployee");
