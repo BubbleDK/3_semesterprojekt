@@ -15,7 +15,7 @@ namespace NetCafeUCN.DesktopApp
         public GamingstationForm(ProductsForm productsForm)
         {
             InitializeComponent();
-            gamingstationService = new GamingStationService("https://localhost:7197/api/Gamingstation/");
+            gamingstationService = new GamingStationService(MainMenu.BaseUrl + "Gamingstation/");
             type = "Create";
             gs = new();
             txtProductType.Text = "Gamingstation";

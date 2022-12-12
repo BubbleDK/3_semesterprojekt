@@ -13,7 +13,7 @@ namespace NetCafeUCN.DesktopApp
         public ConsumableForm(ProductsForm productsForm)
         {
             InitializeComponent();
-            consumableService = new ConsumableService("https://localhost:7197/api/Consumable/");
+            consumableService = new ConsumableService(MainMenu.BaseUrl + "Consumable/");
             type = "Create";
             c = new();
             txtProductType.Text = "Consumable";
