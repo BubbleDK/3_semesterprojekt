@@ -13,9 +13,12 @@ namespace NetCafeUCN.DesktopApp
 {
     public partial class MainMenu : Form
     {
-        public MainMenu()
+        public static string BaseUrl { get; set; } = String.Empty;
+
+        public MainMenu(string baseUrl)
         {
             InitializeComponent();
+            BaseUrl = baseUrl;
         }
 
         private void btnProducts_Click(object sender, EventArgs e)

@@ -11,8 +11,8 @@ namespace NetCafeUCN.DesktopApp
         public ProductsForm()
         {
             InitializeComponent();
-            consumableService = new ConsumableService("https://localhost:7197/api/Consumable/");
-            gamingstationService = new GamingStationService("https://localhost:7197/api/Gamingstation/");
+            consumableService = new ConsumableService(MainMenu.BaseUrl + "Consumable/");
+            gamingstationService = new GamingStationService(MainMenu.BaseUrl + "Gamingstation/");
             RefreshList();
         }
 

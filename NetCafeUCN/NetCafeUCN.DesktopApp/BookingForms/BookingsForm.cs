@@ -10,7 +10,7 @@ namespace NetCafeUCN.DesktopApp
         public BookingsForm()
         {
             InitializeComponent();
-            bookingService = new BookingService("https://localhost:7197/api/Booking/");
+            bookingService = new BookingService(MainMenu.BaseUrl + "Booking/");
             RefreshList();
         }
 
