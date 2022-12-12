@@ -23,7 +23,7 @@ namespace NetCafeUCN.DAL.DAO
         public bool Add(Booking o)
         {
             CustomerDAO customerDAO = new CustomerDAO();
-            if (customerDAO.GetPhoneNo(o.PhoneNo)) return false;
+            if (customerDAO.GetPhoneNo(o.PhoneNo) != true) return false;
             SqlTransaction trans;
             int id = 0;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
