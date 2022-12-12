@@ -54,6 +54,21 @@ namespace NetCafeUCN.MVC.Controllers
         {
             try
             {
+                bool isAnyItemTrue = false;
+                foreach (var item in bookingModel.GamingStations)
+                {
+                    if (item.isChecked)
+                    {
+                        isAnyItemTrue = true;
+                    }
+                }
+
+                if (!isAnyItemTrue)
+                {
+                    ViewBag.Error = "Du skal vælge en maskine! :(";
+                    return RedirectToAction("Create");
+                }
+
                 BookingDto booking = new BookingDto();
                 booking.PhoneNo = bookingModel.PhoneNo;
                 string dateString = "" + bookingModel.StartDate + " " + bookingModel.StartTime;
@@ -80,7 +95,7 @@ namespace NetCafeUCN.MVC.Controllers
                 {
                     Console.WriteLine("Null");
                 }
-                if(_bookingService.Add(booking) == true)
+                if(_bookingService.Add(booking))
                 {
                     return RedirectToAction(nameof(Index));
                 }
