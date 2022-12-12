@@ -68,7 +68,7 @@ namespace NetCafeUCN.MVC.Controllers
                     }
                     else
                     {
-                        ViewBag.Error = "Telefonnummer er allerede oprettet i systemet";
+                        ViewBag.Error = "Telefonnummer eller email er allerede oprettet i systemet";
                         return View();
                     }
                 }
