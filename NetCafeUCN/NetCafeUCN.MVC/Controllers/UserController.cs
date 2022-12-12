@@ -62,7 +62,7 @@ namespace NetCafeUCN.MVC.Controllers
                 try
                 {
                     customer.Password = BCryptTool.HashPassword(customer.Password);
-                    if (_customerService.Add(customer))
+                    if (_customerService.Add(customer) == true)
                     {
                         return RedirectToAction("Login", "Account");
                     }
