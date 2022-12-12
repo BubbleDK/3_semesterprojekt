@@ -80,8 +80,15 @@ namespace NetCafeUCN.MVC.Controllers
                 {
                     Console.WriteLine("Null");
                 }
-                _bookingService.Add(booking);
-                return RedirectToAction(nameof(Index));
+                if(_bookingService.Add(booking) == true)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    ViewBag.Error = "Tidsrummet er optaget :(";
+                    return RedirectToAction("Create");
+                }
             }
             catch
             {
