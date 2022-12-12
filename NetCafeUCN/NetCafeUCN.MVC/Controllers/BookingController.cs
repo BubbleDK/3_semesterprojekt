@@ -65,8 +65,10 @@ namespace NetCafeUCN.MVC.Controllers
 
                 if (!isAnyItemTrue)
                 {
+                    BookingGamingStationViewModel viewModel = new BookingGamingStationViewModel();
+                    viewModel.GamingStations = (List<GamingStationDto>)_gamingStationService.GetAll();
                     ViewBag.Error = "Du skal vælge en maskine! :(";
-                    return RedirectToAction("Create");
+                    return View(viewModel);
                 }
 
                 BookingDto booking = new BookingDto();
@@ -101,8 +103,11 @@ namespace NetCafeUCN.MVC.Controllers
                 }
                 else
                 {
+
+                    BookingGamingStationViewModel viewModel = new BookingGamingStationViewModel();
+                    viewModel.GamingStations = (List<GamingStationDto>)_gamingStationService.GetAll();
                     ViewBag.Error = "Tidsrummet er optaget :(";
-                    return RedirectToAction("Create");
+                    return View(viewModel);
                 }
             }
             catch
