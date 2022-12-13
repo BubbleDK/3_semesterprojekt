@@ -85,25 +85,8 @@ CREATE TABLE nc_GamingStation(
     seatNo VARCHAR(50) NOT NULL,
     description VARCHAR(50),
 
-    CONSTRAINT fk_ncGamingstationrentableid foreign key (stationid) references nc_Product(id),
+    CONSTRAINT fk_ncGamingstationrentableid foreign key (stationid) references nc_Product(id) ON DELETE CASCADE,
 	PRIMARY KEY(stationid),
-);
-
-CREATE TABLE nc_Pack(
-    productid INT NOT NULL,
-
-    CONSTRAINT fk_ncPackproductid FOREIGN KEY (productid) REFERENCES nc_Product(id),
-    PRIMARY KEY(productid),
-);
-
-CREATE TABLE nc_PackLine(
-    productid INT NOT NULL,
-    quantity INT,
-    packid INT NOT NULL,
-
-    CONSTRAINT fk_ncPackLineproductid FOREIGN KEY (productid) REFERENCES nc_Product(id),
-    CONSTRAINT fk_ncPackLinepackid FOREIGN KEY (packid) REFERENCES nc_Pack(productid),
-    PRIMARY KEY(productid)
 );
 
 
