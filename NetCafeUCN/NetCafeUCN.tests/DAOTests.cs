@@ -46,14 +46,14 @@ public class DAOTests
     }
 
     [Fact]
-    public void TestCustomerDAO()
+    public void TestCustomerCRUDDAO()
     {
 
         //Arrange
         Customer customer = new Customer();
-        customer.Name = "Bob";
+        customer.Name = "Bob the Tester";
         customer.Email = "Bob@email.com";
-        customer.Phone = "1";
+        customer.Phone = "10000000";
         customer.PersonType = "Customer";
         customer.IsActive = true;
         customer.Password = BCryptTool.HashPassword("password");
@@ -75,7 +75,7 @@ public class DAOTests
             //Assert
             Assert.Equivalent(customer, customer2);
 
-            customer.Name = "Bobby";
+            customer.Name = "Bobby the Tester";
 
             Assert.True(customerDAO.Update(customer));
 
@@ -96,7 +96,8 @@ public class DAOTests
         }
     }
     [Fact]
-    public void TestBookingDAO()
+    //Test Create Read og Delete booking
+    public void TestBookingCRDDAO()
     {
 
         //Arrange
@@ -105,12 +106,12 @@ public class DAOTests
         Booking bookingSaved = new Booking();
         booking.StartTime = DateTime.Parse("2222 - 12 - 06T11: 00:00");
         booking.EndTime = DateTime.Parse("2222 - 12 - 06T12: 00:00");
-        //Nummeret skal være i databasen
+        //Nummeret SKAL være i databasen
         booking.PhoneNo = "88888888";
 
         BookingLine boookingLine = new BookingLine();
         boookingLine.StationId = 1;
-        boookingLine.Quantity = 1;
+        boookingLine.Quantity = 0;
         boookingLine.ConsumableId = -1;
         booking.addToBookingLine(boookingLine);
 
@@ -142,10 +143,6 @@ public class DAOTests
 
             Assert.Equivalent(booking.PhoneNo, bookingSaved.PhoneNo);
             Assert.Equivalent(booking.BookingLines, bookingSaved.BookingLines);
-
-            booking.EndTime = booking.EndTime.AddHours(1);
-
-            Assert.True(bookingDAO.Update(bookingSaved));
 
             bookingDAO.Remove(bookingSaved.BookingNo);
 
