@@ -9,7 +9,6 @@ builder.Services.AddScoped<INetCafeDAO<Customer>, CustomerDAO>();
 builder.Services.AddScoped<INetCafeDAO<Consumable>, ConsumableDAO>();
 builder.Services.AddScoped<INetCafeDAO<GamingStation>, GamingStationDAO>();
 builder.Services.AddScoped<INetCafeDAO<Employee>, EmployeeDAO>();
-builder.Services.AddScoped<INetCafeDAO<Pack>, PackDao>();
 builder.Services.AddScoped<UserDAO, UserDAO>();
 builder.Services.AddScoped<BookingLineDAO, BookingLineDAO>();
 builder.Services.AddControllers();
