@@ -29,10 +29,10 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             InitializeComponent();
             InitializeTimes();
             clndPicker.MinDate = DateTime.Now;
-            gamingStationService = new GamingStationService("https://localhost:7197/api/Gamingstation/");
-            bookingService = new BookingService("https://localhost:7197/api/Booking/");
-            customerService = new CustomerService("https://localhost:7197/api/Customer/");
-            bookingLineService = new BookingLineService("https://localhost:7197/api/BookingLine/");
+            gamingStationService = new GamingStationService(MainMenu.BaseUrl + "Gamingstation/");
+            bookingService = new BookingService(MainMenu.BaseUrl + "Booking/");
+            customerService = new CustomerService(MainMenu.BaseUrl + "Customer/");
+            bookingLineService = new BookingLineService(MainMenu.BaseUrl + "BookingLine/");
             RefreshGamingStations(gamingStationService.GetAll().ToList());
             bookingsForm = bookingsFormWeCameFrom;
             windowStatus = "Create";
@@ -48,8 +48,8 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             //cmbStartTime.SelectedValue = bookingToUpdate.StartTime;
             //TODO: SKAL RUNDES AF
             //cmbEndTime.SelectedValue = bookingToUpdate.EndTime;
-            gamingStationService = new GamingStationService("https://localhost:7197/api/Gamingstation/");
-            bookingService = new BookingService("https://localhost:7197/api/Booking/");
+            gamingStationService = new GamingStationService(MainMenu.BaseUrl + "Gamingstation/");
+            bookingService = new BookingService(MainMenu.BaseUrl + "Booking/");
             RefreshGamingStations(gamingStationService.GetAll().ToList());
             bookingDTO = bookingToUpdate;
             windowStatus = "Update";
@@ -179,7 +179,7 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             foreach (DataGridViewRow row in dgvAvailableGamingstations.SelectedRows)
             {
                 GamingStationDTO currentGamingstation = (GamingStationDTO)row.DataBoundItem;
-                bookingDTO.addToBookingLine(new BookingLineDTO { Quantity = 1, StationId = currentGamingstation.ProductID, ConsumableId = -1 });
+                bookingDTO.addToBookingLine(new BookingLineDTO { Quantity = 1, StationId = (int)currentGamingstation.ProductID, ConsumableId = -1 });
             }
             if (CheckPhoneNo(txtPhoneNo.Text))
             {
@@ -217,7 +217,7 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             foreach (DataGridViewRow row in dgvAvailableGamingstations.SelectedRows)
             {
                 GamingStationDTO currentGamingstation = (GamingStationDTO)row.DataBoundItem;
-                bookingDTO.addToBookingLine(new BookingLineDTO { Quantity = 1, StationId = currentGamingstation.ProductID, ConsumableId = -1 });
+                bookingDTO.addToBookingLine(new BookingLineDTO { Quantity = 1, StationId = (int)currentGamingstation.ProductID, ConsumableId = -1 });
             }
             if (CheckPhoneNo(txtPhoneNo.Text))
             {

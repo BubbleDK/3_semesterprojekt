@@ -18,7 +18,12 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
         }
         public bool Add(CustomerDTO o)
         {
-            return RestClient.Execute<CustomerDTO>(new RestRequest($"{BaseUri}", Method.Post).AddJsonBody(o)).IsSuccessful;
+            var request = new RestRequest($"{BaseUri}", Method.Post);
+            request.AddJsonBody(o);
+            var response = RestClient.Execute<CustomerDTO>(request);
+            var result = response.Content;
+            if (result == "false") { return false; }
+            return response.IsSuccessStatusCode;
         }
 
         public CustomerDTO? Get(dynamic key)

@@ -32,17 +32,18 @@ namespace NetCafeUCN.API.Controllers
         [Route("{phoneNo}")]
         public ActionResult<CustomerDTO> Get(string phoneNo)
         {
-            var product = dataAccess.Get(phoneNo).CustomerToDto();
-            if (product == null) { return NotFound(); }
+            var customer = dataAccess.Get(phoneNo).CustomerToDto();
+            if (customer == null) { return NotFound(); }
 
-            return Ok(product);
+            return Ok(customer);
         }
 
         // POST api/<CustomerController>
         [HttpPost]
         public ActionResult<bool> Add([FromBody] CustomerDTO p)
         {
-            return Ok(dataAccess.Add(p.CustomerFromDto()));
+            var customer = dataAccess.Add(p.CustomerFromDto());
+            return Ok(customer);
         }
 
         // PUT api/<ProductController>/

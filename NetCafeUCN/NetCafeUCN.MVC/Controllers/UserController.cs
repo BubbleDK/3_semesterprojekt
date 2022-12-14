@@ -62,13 +62,13 @@ namespace NetCafeUCN.MVC.Controllers
                 try
                 {
                     customer.Password = BCryptTool.HashPassword(customer.Password);
-                    if (_customerService.Add(customer))
+                    if (_customerService.Add(customer) == true)
                     {
                         return RedirectToAction("Login", "Account");
                     }
                     else
                     {
-                        ViewBag.Error = "Telefonnummer er allerede oprettet i systemet";
+                        ViewBag.Error = "Telefonnummer eller email er allerede oprettet i systemet";
                         return View();
                     }
                 }

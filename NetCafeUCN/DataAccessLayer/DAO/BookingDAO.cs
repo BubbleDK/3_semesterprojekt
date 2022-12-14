@@ -23,7 +23,7 @@ namespace NetCafeUCN.DAL.DAO
         public bool Add(Booking o)
         {
             CustomerDAO customerDAO = new CustomerDAO();
-            if (customerDAO.GetId(o.PhoneNo) == 0) return false;
+            if (customerDAO.GetPhoneNo(o.PhoneNo) != true) return false;
             SqlTransaction trans;
             int id = 0;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
@@ -223,16 +223,17 @@ namespace NetCafeUCN.DAL.DAO
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
                 //TODO: Skriv lækker sql kode til at tjekke inbetween tiden og tjekke den ene dag man vil booke. 
-                using SqlCommand command = new SqlCommand("SELECT stationid, startTime, endTime FROM nc_Booking INNER JOIN nc_BookingLine ON " +
-                    "nc_Booking.id = nc_BookingLine.bookingid where startTime = @startTime AND endTime = @endTime AND stationid = @stationid", conn);
-                command.Parameters.AddWithValue("@startTime", startTime);
-                command.Parameters.AddWithValue("@endTime", endTime);
-                command.Parameters.AddWithValue("@stationid", stationid);
+                using SqlCommand CheckCommand = new SqlCommand("SELECT stationid, startTime, endTime FROM nc_Booking INNER JOIN nc_BookingLine ON nc_Booking.id = nc_BookingLine.bookingid WHERE DATEADD(SECOND, -1, @startTime) <= nc_Booking.endTime AND (DATEADD(SECOND, -1, @endTime) IS NULL OR DATEADD(SECOND, -1, @endTime) >= nc_Booking.startTime) AND stationid = @stationid", conn);
+                //using SqlCommand command = new SqlCommand("SELECT stationid, startTime, endTime FROM nc_Booking INNER JOIN nc_BookingLine ON " +
+                //    "nc_Booking.id = nc_BookingLine.bookingid where startTime = @startTime AND endTime = @endTime AND stationid = @stationid", conn);
+                CheckCommand.Parameters.AddWithValue("@startTime", startTime);
+                CheckCommand.Parameters.AddWithValue("@endTime", endTime);
+                CheckCommand.Parameters.AddWithValue("@stationid", stationid);
                 {
                     try
                     {
                         conn.Open();
-                        SqlDataReader reader = command.ExecuteReader();
+                        SqlDataReader reader = CheckCommand.ExecuteReader();
                         return reader.HasRows;
                     }
                     catch (DataAccessException)

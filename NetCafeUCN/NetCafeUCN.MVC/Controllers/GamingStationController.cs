@@ -12,7 +12,7 @@ namespace NetCafeUCN.MVC.Controllers
         INetCafeDataAccessService<GamingStationDto> _gamingStationService;
         public GamingStationController(INetCafeDataAccessService<GamingStationDto> gamingStationService)
         {
-            gamingStationService = gamingStationService;
+            _gamingStationService = gamingStationService;
         }
 
         // GET: GamingStationController

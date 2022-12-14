@@ -22,6 +22,7 @@ namespace NetCafeUCN.MVC.Services
             request.AddJsonBody(o);
             var response = RestClient.Execute<BookingDto>(request);
             var result = response.Content;
+            if (result == "false") { return false; }
             return response.IsSuccessStatusCode;
             //    return RestClient.Execute<BookingDto>(new RestRequest($"{BaseUri}", Method.Post).AddJsonBody(o)).IsSuccessStatusCode;
         }

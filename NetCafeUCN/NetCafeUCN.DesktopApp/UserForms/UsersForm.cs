@@ -19,8 +19,8 @@ namespace NetCafeUCN.DesktopApp.UserForms
         public UsersForm()
         {
             InitializeComponent();
-            customerService = new CustomerService("https://localhost:7197/api/Customer/");
-            employeeService = new EmployeeService("https://localhost:7197/api/Employee/");
+            customerService = new CustomerService(MainMenu.BaseUrl + "Customer/");
+            employeeService = new EmployeeService(MainMenu.BaseUrl + "Employee/");
             RefreshList();
         }
 

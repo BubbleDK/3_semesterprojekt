@@ -8,10 +8,10 @@ namespace NetCafeUCN.DAL.Model
 {
     public abstract class Product
     {
-        public string ProductNumber{ get; set; }
+        public string? ProductNumber{ get; set; }
         public string ?Type { get; set; }
-        public string Name { get; set; }
-        public bool IsActive { get; set; }
+        public string? Name { get; set; }
+        public bool? IsActive { get; set; }
 
         public Product(string productNumber, string type, string name)
         {

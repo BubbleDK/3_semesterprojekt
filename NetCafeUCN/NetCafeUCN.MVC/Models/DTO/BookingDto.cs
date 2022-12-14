@@ -18,7 +18,8 @@ namespace NetCafeUCN.MVC.Models
         [Display(Name = "Phone number")]
         [DataType(DataType.PhoneNumber)]
         [RegularExpression("^\\+?[1-9][0-9]{7}$", ErrorMessage = "Ikke et gyldigt telefonnummer")]
-        public string PhoneNo { get; set; } = String.Empty;
+        public string PhoneNo { get; set; } = string.Empty;
+        [Required]
         public List<BookingLineDto> BookingLines { get; set; }
         public BookingDto()
         {
