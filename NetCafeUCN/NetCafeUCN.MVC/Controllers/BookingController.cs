@@ -76,7 +76,7 @@ namespace NetCafeUCN.MVC.Controllers
                 booking.PhoneNo = bookingModel.PhoneNo;
                 string dateString = "" + bookingModel.StartDate + " " + bookingModel.StartTime;
                 DateTime start = DateTime.Parse(dateString, System.Globalization.CultureInfo.InvariantCulture);
-                if (!(start.AddSeconds(-1).Hour > 9 && start.AddSeconds(-1).Hour < 24 && start.AddHours(double.Parse(bookingModel.EndTime, System.Globalization.CultureInfo.InvariantCulture)).AddSeconds(-1).Hour < 24 && start.AddHours(double.Parse(bookingModel.EndTime, System.Globalization.CultureInfo.InvariantCulture)).AddSeconds(-1).Hour > 9))
+                if (!(start.AddSeconds(-1).Hour > 9 && start.AddSeconds(-1800).Hour < 24 && start.AddHours(double.Parse(bookingModel.EndTime, System.Globalization.CultureInfo.InvariantCulture)).AddSeconds(-1).Hour < 24 && start.AddHours(double.Parse(bookingModel.EndTime, System.Globalization.CultureInfo.InvariantCulture)).AddSeconds(1800).Hour > 9))
                 {
                     BookingGamingStationViewModel viewModel = new BookingGamingStationViewModel();
                     viewModel.GamingStations = (List<GamingStationDto>)_gamingStationService.GetAll();
