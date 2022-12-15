@@ -1,5 +1,4 @@
-﻿using NetCafeUCN.DAL.DAO;
-using NetCafeUCN.DesktopApp.DTO;
+﻿using NetCafeUCN.DesktopApp.DTO;
 using NetCafeUCN.DesktopApp.ServiceLayer;
 using System;
 using System.Collections.Generic;
