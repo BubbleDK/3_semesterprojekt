@@ -12,9 +12,9 @@ namespace NetCafeUCN.API.Controllers
     public class BookingLineController : ControllerBase
     {
 
-        private BookingLineDAO dataAccess;
+        private INetCafeUCNBookingLineDAO dataAccess;
 
-        public BookingLineController(BookingLineDAO dataAccess)
+        public BookingLineController(INetCafeUCNBookingLineDAO dataAccess)
         {
             this.dataAccess = dataAccess;
         }
@@ -24,31 +24,6 @@ namespace NetCafeUCN.API.Controllers
         public ActionResult<IEnumerable<BookingLineDTO>> GetAll(string bookingNo)
         {
             return Ok(dataAccess.GetBookingLinesByBooking(bookingNo).BookingLineToDtos());
-        }
-
-        // GET api/<BookingLineController>/5
-        //[HttpGet]
-        //public string GetAll()
-        //{
-        //    return "value";
-        //}
-
-        // POST api/<BookingLineController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<BookingLineController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<BookingLineController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }

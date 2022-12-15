@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NetCafeUCN.DAL.DAO
 {
-    public class BookingLineDAO
+    public class BookingLineDAO : INetCafeUCNBookingLineDAO
     {
         public IEnumerable<BookingLine> GetBookingLinesByBooking(string bookingNo)
         {

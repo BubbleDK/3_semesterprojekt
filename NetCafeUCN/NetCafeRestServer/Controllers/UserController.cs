@@ -11,8 +11,8 @@ namespace NetCafeUCN.API.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private UserDAO userDAO;
-        public UserController(UserDAO userDAO)
+        private INetCafeUCNUserDAO userDAO;
+        public UserController(INetCafeUCNUserDAO userDAO)
         {
             this.userDAO = userDAO;
         }

@@ -9,8 +9,8 @@ builder.Services.AddScoped<INetCafeDAO<Customer>, CustomerDAO>();
 builder.Services.AddScoped<INetCafeDAO<Consumable>, ConsumableDAO>();
 builder.Services.AddScoped<INetCafeDAO<GamingStation>, GamingStationDAO>();
 builder.Services.AddScoped<INetCafeDAO<Employee>, EmployeeDAO>();
-builder.Services.AddScoped<UserDAO, UserDAO>();
-builder.Services.AddScoped<BookingLineDAO, BookingLineDAO>();
+builder.Services.AddScoped<INetCafeUCNUserDAO, UserDAO>();
+builder.Services.AddScoped<INetCafeUCNBookingLineDAO, BookingLineDAO>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
