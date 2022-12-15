@@ -74,7 +74,6 @@ namespace NetCafeUCN.DesktopApp.BookingForms
 
         private void cmbStartTime_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            //TODO: Check om tidspunkt ligger efter nuværende tidspunkt på datetime.now
             if (cmbEndTime.SelectedIndex <= cmbStartTime.SelectedIndex)
             {
                 cmbEndTime.SelectedIndex = cmbStartTime.SelectedIndex + 1;
@@ -84,7 +83,6 @@ namespace NetCafeUCN.DesktopApp.BookingForms
 
         private void cmbEndTime_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            //TODO: Check om tidspunkt ligger efter nuværende tidspunkt på datetime.now
             if (cmbEndTime.SelectedIndex <= cmbStartTime.SelectedIndex)
             {
                 cmbEndTime.SelectedIndex = cmbStartTime.SelectedIndex + 1;
