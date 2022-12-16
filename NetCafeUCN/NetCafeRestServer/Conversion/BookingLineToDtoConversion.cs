@@ -17,7 +17,8 @@ namespace NetCafeUCN.API.Conversion
             BookingLineDTO bookingLineDto = bookingline.CopyPropertiesTo(new BookingLineDTO { 
                 Quantity = bookingline.Quantity,
                 StationId = bookingline.StationId, 
-                ConsumableId = bookingline.ConsumableId});
+                ConsumableId = bookingline.ConsumableId
+            });
             return bookingLineDto;
         }
         public static IEnumerable<BookingLine> BookingLineFromDtos(this IEnumerable<BookingLineDTO> bookingLineDtos)
