@@ -6,7 +6,7 @@ using NetCafeUCN.DAL.Model;
 
 namespace NetCafeUCN.API.Controllers
 {
-    [Route("consumeables")]
+    [Route("consumables")]
     [ApiController]
     public class ConsumableController : ControllerBase
     {

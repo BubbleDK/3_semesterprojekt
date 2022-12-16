@@ -27,7 +27,7 @@ namespace NetCafeUCN.API.Controllers
             return Ok(dataAccess.GetAll().CustomerToDtos());
         }
 
-        // GET api/<ProductController>/74747
+        // GET api/<CustomerController>/74747
         [HttpGet]
         [Route("{phoneNo}")]
         public ActionResult<CustomerDTO> Get(string phoneNo)
