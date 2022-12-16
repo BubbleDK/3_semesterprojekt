@@ -222,8 +222,8 @@ namespace NetCafeUCN.DAL.DAO
             {
                 using SqlCommand CheckCommandv2 = new SqlCommand("SELECT stationid, startTime, endTime FROM nc_Booking " +
                     "INNER JOIN nc_BookingLine ON nc_Booking.id = nc_BookingLine.bookingid " +
-                    "WHERE @startTime Between nc_Booking.startTime AND nc_Booking.endTime " +
-                    "OR @endTime Between nc_Booking.startTime AND nc_Booking.endTime " +
+                    "WHERE @startTime >= nc_Booking.startTime AND @startTime < nc_Booking.endTime " +
+                    "OR @endTime > nc_Booking.startTime AND @endTime <= nc_Booking.endTime " +
                     "OR @startTime <= nc_Booking.startTime AND @endTime >= nc_Booking.endTime " +
                     "AND stationid = @stationid", conn);
                 CheckCommandv2.Parameters.AddWithValue("@startTime", startTime);

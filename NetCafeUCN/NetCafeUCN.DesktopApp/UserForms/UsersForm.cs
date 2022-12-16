@@ -100,7 +100,10 @@ namespace NetCafeUCN.DesktopApp.UserForms
 
         private void btnNewUser_Click(object sender, EventArgs e)
         {
-            ShowInputDialog();
+            MessageBox.Show("Denne funktion er ikke tilgængelig i øjeblikket", "Ikke tilgængelig", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            /*For at denne funktion virker skal der kunne laves hashed passwords via BCrypt i desktop også
+            Pt påsættes der ikke et password*/
+            //ShowInputDialog();
         }
 
         private void ShowInputDialog()
