@@ -9,13 +9,13 @@ using static System.Net.WebRequestMethods;
 var builder = WebApplication.CreateBuilder(args);
 string baseUri = "https://localhost:7197/api/";
 // Add services to the container.
-builder.Services.AddScoped<IUserProviderService, UserProviderService>(_ => new UserProviderService(baseUri + "User"));
-builder.Services.AddScoped<INetCafeDataAccessService<GamingStationDto>, GamingstationService>( _ => new GamingstationService(baseUri + "GamingStation"));
-builder.Services.AddScoped<INetCafeDataAccessService<BookingDto>, BookingService>(_ => new BookingService(baseUri + "Booking"));
-builder.Services.AddScoped<BookingLineService>(_ => new BookingLineService(baseUri + "BookingLine"));
-builder.Services.AddScoped<INetCafeDataAccessService<ConsumableDto>, ConsumableService>(_ => new ConsumableService(baseUri + "Consumable"));
-builder.Services.AddScoped<INetCafeDataAccessService<CustomerDto>, CustomerService>(_ => new CustomerService(baseUri + "Customer"));
-builder.Services.AddScoped<INetCafeDataAccessService<EmployeeDto>, EmployeeService>(_ => new EmployeeService(baseUri + "Employee"));
+builder.Services.AddScoped<IUserProviderService, UserProviderService>(_ => new UserProviderService(baseUri + "Users"));
+builder.Services.AddScoped<INetCafeDataAccessService<GamingStationDto>, GamingstationService>( _ => new GamingstationService(baseUri + "GamingStations"));
+builder.Services.AddScoped<INetCafeDataAccessService<BookingDto>, BookingService>(_ => new BookingService(baseUri + "Bookings"));
+builder.Services.AddScoped<BookingLineService>(_ => new BookingLineService(baseUri + "BookingLines"));
+builder.Services.AddScoped<INetCafeDataAccessService<ConsumableDto>, ConsumableService>(_ => new ConsumableService(baseUri + "Consumables"));
+builder.Services.AddScoped<INetCafeDataAccessService<CustomerDto>, CustomerService>(_ => new CustomerService(baseUri + "Customers"));
+builder.Services.AddScoped<INetCafeDataAccessService<EmployeeDto>, EmployeeService>(_ => new EmployeeService(baseUri + "Employees"));
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme);
 builder.Services.AddControllersWithViews();
