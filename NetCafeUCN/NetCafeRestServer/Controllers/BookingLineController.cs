@@ -7,6 +7,9 @@ using NetCafeUCN.API.DTO;
 
 namespace NetCafeUCN.API.Controllers
 {
+    /// <summary>
+    ///  API Controller for BookingLine, som implementere ControllerBase
+    /// </summary>
     [Route("bookinglines")]
     [ApiController]
     public class BookingLineController : ControllerBase
@@ -14,11 +17,20 @@ namespace NetCafeUCN.API.Controllers
 
         private readonly INetCafeUCNBookingLineDAO dataAccess;
 
+        /// <summary>
+        ///  BookingController constructor
+        /// </summary>
+        /// <param name="dataAccess">Model som skal sættes for controlleren</param>
         public BookingLineController(INetCafeUCNBookingLineDAO dataAccess)
         {
             this.dataAccess = dataAccess;
         }
         // GET: api/<BookingLineController>
+        /// <summary>
+        ///  Henter alle bookinger linjer
+        /// </summary>
+        /// <param name="bookingNo">booking nummer på den bestemte booking</param>
+        /// <returns>Returnere en collection af Bookingerlinjer</returns>
         [HttpGet]
         [Route("{bookingNo}")]
         public ActionResult<IEnumerable<BookingLineDTO>> GetAll(string bookingNo)
