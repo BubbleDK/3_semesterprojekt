@@ -7,11 +7,11 @@ using NetCafeUCN.DAL.DAO;
 
 namespace NetCafeUCN.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("users")]
     [ApiController]
     public class UserController : ControllerBase
     {
-        private INetCafeUCNUserDAO userDAO;
+        private readonly INetCafeUCNUserDAO userDAO;
         public UserController(INetCafeUCNUserDAO userDAO)
         {
             this.userDAO = userDAO;

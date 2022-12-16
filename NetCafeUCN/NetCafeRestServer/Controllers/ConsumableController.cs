@@ -6,11 +6,11 @@ using NetCafeUCN.DAL.Model;
 
 namespace NetCafeUCN.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("consumeables")]
     [ApiController]
     public class ConsumableController : ControllerBase
     {
-        private INetCafeDAO<Consumable> dataAccess;
+        private readonly INetCafeDAO<Consumable> dataAccess;
 
 
         public ConsumableController(INetCafeDAO<Consumable> dataAccess)

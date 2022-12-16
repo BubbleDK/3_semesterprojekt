@@ -7,11 +7,11 @@ using NetCafeUCN.DAL.Model;
 
 namespace NetCafeUCN.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("employees")]
     [ApiController]
     public class EmployeeController : Controller
     {
-        private INetCafeDAO<Employee> dataAccess;
+        private readonly INetCafeDAO<Employee> dataAccess;
         public EmployeeController(INetCafeDAO<Employee> dataAccess)
         {
             this.dataAccess = dataAccess;

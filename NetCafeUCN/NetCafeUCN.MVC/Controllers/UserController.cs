@@ -13,8 +13,8 @@ namespace NetCafeUCN.MVC.Controllers
     [Authorize]
     public class UserController : Controller
     {
-        INetCafeDataAccessService<CustomerDto> _customerService;
-        INetCafeDataAccessService<EmployeeDto> _employeeService;
+        readonly INetCafeDataAccessService<CustomerDto> _customerService;
+        readonly INetCafeDataAccessService<EmployeeDto> _employeeService;
         public UserController(INetCafeDataAccessService<CustomerDto> customerService, INetCafeDataAccessService<EmployeeDto> employeeService)
         {
             _customerService = customerService;

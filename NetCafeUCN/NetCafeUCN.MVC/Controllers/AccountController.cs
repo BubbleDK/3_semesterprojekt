@@ -15,7 +15,7 @@ namespace NetCafeUCN.MVC.Controllers
     [AllowAnonymous]
     public class AccountController : Controller
     {
-        IUserProviderService _userProvider;
+        readonly IUserProviderService _userProvider;
         
         public AccountController(IUserProviderService userProvider) => _userProvider = userProvider;
         // GET: AccountController

@@ -13,8 +13,8 @@ namespace NetCafeUCN.MVC.Controllers
     public class BookingController : Controller
     {
 
-        INetCafeDataAccessService<GamingStationDto> _gamingStationService;
-        INetCafeDataAccessService<BookingDto> _bookingService;
+        readonly INetCafeDataAccessService<GamingStationDto> _gamingStationService;
+        readonly INetCafeDataAccessService<BookingDto> _bookingService;
         BookingLineService _bookingLineService;
         // GET: BookingController
         public BookingController(INetCafeDataAccessService<GamingStationDto> gamingStationService, INetCafeDataAccessService<BookingDto> bookingService, BookingLineService bookingLineService)

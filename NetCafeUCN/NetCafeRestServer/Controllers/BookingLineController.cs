@@ -7,12 +7,12 @@ using NetCafeUCN.API.DTO;
 
 namespace NetCafeUCN.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("bookinglines")]
     [ApiController]
     public class BookingLineController : ControllerBase
     {
 
-        private INetCafeUCNBookingLineDAO dataAccess;
+        private readonly INetCafeUCNBookingLineDAO dataAccess;
 
         public BookingLineController(INetCafeUCNBookingLineDAO dataAccess)
         {

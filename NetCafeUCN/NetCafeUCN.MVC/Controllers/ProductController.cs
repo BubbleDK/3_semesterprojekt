@@ -10,8 +10,8 @@ namespace NetCafeUCN.MVC.Controllers
     [Authorize]
     public class ProductController : Controller
     {
-        INetCafeDataAccessService<GamingStationDto> _gamingStationService;
-        INetCafeDataAccessService<ConsumableDto> _consumableService;
+        readonly INetCafeDataAccessService<GamingStationDto> _gamingStationService;
+        readonly INetCafeDataAccessService<ConsumableDto> _consumableService;
         static GamingStationConsumableViewModel viewModel = new GamingStationConsumableViewModel();
 
         public ProductController(INetCafeDataAccessService<GamingStationDto> gamingStationService, INetCafeDataAccessService<ConsumableDto> consumableService)

@@ -9,7 +9,7 @@ namespace NetCafeUCN.MVC.Controllers
     [Authorize]
     public class GamingStationController : Controller
     {
-        INetCafeDataAccessService<GamingStationDto> _gamingStationService;
+        readonly INetCafeDataAccessService<GamingStationDto> _gamingStationService;
         public GamingStationController(INetCafeDataAccessService<GamingStationDto> gamingStationService)
         {
             _gamingStationService = gamingStationService;

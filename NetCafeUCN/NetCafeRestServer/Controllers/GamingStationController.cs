@@ -6,11 +6,11 @@ using NetCafeUCN.DAL.Model;
 
 namespace NetCafeUCN.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("gamingstations")]
     [ApiController]
     public class GamingStationController : ControllerBase
     {
-        private INetCafeDAO<GamingStation> dataAccess;
+        private readonly INetCafeDAO<GamingStation> dataAccess;
         
 
         public GamingStationController(INetCafeDAO<GamingStation> dataAccess)

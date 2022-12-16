@@ -6,11 +6,11 @@ using NetCafeUCN.DAL.Model;
 
 namespace NetCafeUCN.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("bookings")]
     [ApiController]
     public class BookingController : ControllerBase
     {
-        private INetCafeDAO<Booking> dataAccess;
+        private readonly INetCafeDAO<Booking> dataAccess;
 
         public BookingController(INetCafeDAO<Booking> dataAccess)
         {

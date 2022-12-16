@@ -9,7 +9,7 @@ namespace NetCafeUCN.MVC.Controllers
     [Authorize]
     public class ConsumableController : Controller
     {
-        INetCafeDataAccessService<ConsumableDto> _consumableService;
+        readonly INetCafeDataAccessService<ConsumableDto> _consumableService;
 
         public ConsumableController(INetCafeDataAccessService<ConsumableDto> consumableService)
         {
