@@ -7,7 +7,7 @@ using NetCafeUCN.MVC.Models.DTO;
 using static System.Net.WebRequestMethods;
 
 var builder = WebApplication.CreateBuilder(args);
-string baseUri = "https://localhost:7197/api/";
+string baseUri = "https://localhost:7197/";
 // Add services to the container.
 builder.Services.AddScoped<IUserProviderService, UserProviderService>(_ => new UserProviderService(baseUri + "Users"));
 builder.Services.AddScoped<INetCafeDataAccessService<GamingStationDto>, GamingstationService>( _ => new GamingstationService(baseUri + "GamingStations"));

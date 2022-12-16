@@ -28,10 +28,10 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             InitializeComponent();
             InitializeTimes();
             clndPicker.MinDate = DateTime.Now;
-            gamingStationService = new GamingStationService(MainMenu.BaseUrl + "Gamingstation/");
-            bookingService = new BookingService(MainMenu.BaseUrl + "Booking/");
-            customerService = new CustomerService(MainMenu.BaseUrl + "Customer/");
-            bookingLineService = new BookingLineService(MainMenu.BaseUrl + "BookingLine/");
+            gamingStationService = new GamingStationService(MainMenu.BaseUrl + "Gamingstations/");
+            bookingService = new BookingService(MainMenu.BaseUrl + "Bookings/");
+            customerService = new CustomerService(MainMenu.BaseUrl + "Customers/");
+            bookingLineService = new BookingLineService(MainMenu.BaseUrl + "BookingLines/");
             RefreshGamingStations(gamingStationService.GetAll().ToList());
             bookingsForm = bookingsFormWeCameFrom;
             windowStatus = "Create";

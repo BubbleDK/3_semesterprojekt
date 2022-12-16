@@ -10,7 +10,7 @@ namespace NetCafeUCN.DesktopApp
         public BookingsForm()
         {
             InitializeComponent();
-            bookingService = new BookingService(MainMenu.BaseUrl + "Booking/");
+            bookingService = new BookingService(MainMenu.BaseUrl + "Bookings/");
             RefreshList();
         }
 

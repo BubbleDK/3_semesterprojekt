@@ -103,7 +103,7 @@ namespace NetCafeUCN.DesktopApp.UserForms
             //Hvis persontypen er 0 arbejdes der med customers og derfor customerservice
             if (personType == 0) 
             {
-                INetCafeDataAccess<CustomerDTO> customerService = new CustomerService(MainMenu.BaseUrl + "Customer/");
+                INetCafeDataAccess<CustomerDTO> customerService = new CustomerService(MainMenu.BaseUrl + "Customers/");
                 _customer = new();
                 _customer.Name = txtName.Text;
                 _customer.Email = txtEmail.Text;
@@ -123,7 +123,7 @@ namespace NetCafeUCN.DesktopApp.UserForms
             //Hvis persontypen er 1 arbejdes der med employees og derfor employeeservice
             else if (personType == 1)
             {
-                INetCafeDataAccess<EmployeeDTO> employeeService = new EmployeeService(MainMenu.BaseUrl + "Employee/");
+                INetCafeDataAccess<EmployeeDTO> employeeService = new EmployeeService(MainMenu.BaseUrl + "Employees/");
                 _employee = new();
                 _employee.Name = txtName.Text;
                 _employee.Email = txtEmail.Text;

@@ -18,7 +18,7 @@ namespace NetCafeUCN.DesktopApp.BookingForms
         public BookingNumberInputForm()
         {
             InitializeComponent();
-            bookingService = new BookingService(MainMenu.BaseUrl + "Booking/");
+            bookingService = new BookingService(MainMenu.BaseUrl + "Bookings/");
         }
 
         private void btnConfirm_Click(object sender, EventArgs e)
