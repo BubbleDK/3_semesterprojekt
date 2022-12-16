@@ -18,7 +18,7 @@ namespace NetCafeUCN.API.Controllers
         private readonly INetCafeUCNBookingLineDAO dataAccess;
 
         /// <summary>
-        ///  BookingController constructor
+        ///  BookingLineController constructor
         /// </summary>
         /// <param name="dataAccess">Model som skal sættes for controlleren</param>
         public BookingLineController(INetCafeUCNBookingLineDAO dataAccess)
