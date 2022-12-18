@@ -3,7 +3,7 @@
     /// <summary>
     ///  UserLoginDto model
     /// </summary>
-    public class UserLoginDto
+    public class UserLoginDTO
     {
         public string Email { get; set; }
         public string PasswordHash { get; set; }

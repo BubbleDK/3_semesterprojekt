@@ -52,7 +52,7 @@ namespace NetCafeUCN.API.Controllers
         /// <returns>Returnere status kode 200 for OK</returns>
         [HttpPost]
         [Route("GetHashByEmail")]
-        public ActionResult<UserLoginDto?> GetHashByEmail([FromBody] UserLoginDto user)
+        public ActionResult<UserLoginDTO?> GetHashByEmail([FromBody] UserLoginDTO user)
         {
             return Ok(userDAO.GetHashByEmail(user.Email));
         }
