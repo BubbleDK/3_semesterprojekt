@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace NetCafeUCN.DAL.Model
 {
+    /// <summary>
+    ///  Employee model klasse, som nedarver fra Person
+    /// </summary>
     public class Employee:Person
     {
         public string? Role { get; set; }

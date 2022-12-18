@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace NetCafeUCN.DAL.Model
 {
+    /// <summary>
+    ///  Booking model klasse
+    /// </summary>
     public class Booking
     {
         public string BookingNo { get; set; } = string.Empty;
@@ -18,7 +21,10 @@ namespace NetCafeUCN.DAL.Model
         {
             BookingLines = new List<BookingLine>();
         }
-
+        /// <summary>
+        /// Metode til at generere et booking nummer
+        /// </summary>
+        /// <returns>Returnere string af det oprettede booking nummer</returns>
         public string GenerateBookingNo()
         {
             string myuuidAsString = Guid.NewGuid().ToString("N");
@@ -26,7 +32,10 @@ namespace NetCafeUCN.DAL.Model
 
             return "BO-" + res.ToUpper();
         }
-
+        /// <summary>
+        /// Metode til at tilføje en BookingLine til bookingen
+        /// </summary>
+        /// <param name="bl">En BookingLine</param>
         public void addToBookingLine(BookingLine bl)
         {
             BookingLines.Add(bl);
