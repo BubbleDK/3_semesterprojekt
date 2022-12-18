@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace NetCafeUCN.API.DTO
 {
+    /// <summary>
+    ///  EmployeeDTO model, arver fra PersonDTO
+    /// </summary>
     public class EmployeeDTO:PersonDTO
     {
         public string Role { get; set; }
