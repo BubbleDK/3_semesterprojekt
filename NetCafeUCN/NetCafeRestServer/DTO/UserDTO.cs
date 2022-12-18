@@ -1,5 +1,8 @@
 ﻿namespace NetCafeUCN.API.DTO
 {
+    /// <summary>
+    ///  UserDTO model
+    /// </summary>
     public class UserDTO
     {
         public enum UserRole { User, Administrator }
