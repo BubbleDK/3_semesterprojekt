@@ -3,8 +3,15 @@ using NetCafeUCN.DAL.Model;
 
 namespace NetCafeUCN.API.Conversion
 {
+    /// <summary>
+    ///  BookingToDtoConversion klassen er statisk og bruges til at konvertere bookings til DTO
+    /// </summary>
     public static class BookingToDtoConversion
     {
+        /// <summary>
+        /// Statisk metode som konvertere en collection af Booking til BookingDTO
+        /// </summary>
+        /// <param name="bookings">Collection af Booking</param>
         public static IEnumerable<BookingDTO> BookingToDtos(this IEnumerable<Booking> bookings)
         {
             foreach (var booking in bookings)
@@ -12,6 +19,11 @@ namespace NetCafeUCN.API.Conversion
                 yield return booking.BookingToDto();
             }
         }
+        /// <summary>
+        /// Statisk metode som konvertere en Booking til BookingDTO
+        /// </summary>
+        /// <param name="booking">En Booking</param>
+        /// <returns>Returnere den konverteret BookingDTO</returns>
         public static BookingDTO BookingToDto(this Booking booking)
         {
             List<BookingLineDTO> result = new();
@@ -23,6 +35,10 @@ namespace NetCafeUCN.API.Conversion
             b.BookingLines = result;
             return b;
         }
+        /// <summary>
+        /// Statisk metode som konvertere en collection af BookingDTO til Booking
+        /// </summary>
+        /// <param name="bookingDTOs">Collection af BookingDTO</param>
         public static IEnumerable<Booking> BookingFromDtos(this IEnumerable<BookingDTO> bookingDTOs)
         {
             foreach (var booking in bookingDTOs)
@@ -30,7 +46,11 @@ namespace NetCafeUCN.API.Conversion
                 yield return booking.BookingFromDto();
             }
         }
-
+        /// <summary>
+        /// Statisk metode som konvertere en BookingDTO til Booking
+        /// </summary>
+        /// <param name="bookingDTO">En BookingDTO</param>
+        /// <returns>Returnere den konverteret Booking</returns>
         public static Booking BookingFromDto(this BookingDTO bookingDTO)
         {
             List<BookingLine> result = new();
