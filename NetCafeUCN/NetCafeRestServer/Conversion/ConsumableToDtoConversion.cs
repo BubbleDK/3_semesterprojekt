@@ -9,9 +9,10 @@ namespace NetCafeUCN.API.Conversion
     public static class ConsumableToDtoConversion
     {
         /// <summary>
-        /// Statisk metode som konvertere en collection af Consumable til ConsumableDTO
+        /// Statisk metode som konvertere en collection af Consumable til en collection af ConsumableDTO
         /// </summary>
         /// <param name="consumables">Collection af ConsumableDTO</param>
+        /// <returns>Returnere den konverteret collection ConsumableDTO</returns>
         public static IEnumerable<ConsumableDTO> CSToDtos(this IEnumerable<Consumable> consumables)
         {
             foreach (var consumable in consumables)

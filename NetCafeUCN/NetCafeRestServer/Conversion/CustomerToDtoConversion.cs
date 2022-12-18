@@ -9,9 +9,10 @@ namespace NetCafeUCN.API.Conversion
     public static class CustomerToDtoConversion
     {
         /// <summary>
-        /// Statisk metode som konvertere en collection af Customer til CustomerDTO
+        /// Statisk metode som konvertere en collection af Customer til en collection af CustomerDTO
         /// </summary>
         /// <param name="customers">Collection af Customer</param>
+        /// <returns>Returnere den konverteret collection CustomerDTO</returns>
         public static IEnumerable<CustomerDTO> CustomerToDtos(this IEnumerable<Customer> customers)
         {
             foreach (var customer in customers)

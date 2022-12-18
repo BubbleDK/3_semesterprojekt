@@ -9,9 +9,10 @@ namespace NetCafeUCN.API.Conversion
     public static class BookingToDtoConversion
     {
         /// <summary>
-        /// Statisk metode som konvertere en collection af Booking til BookingDTO
+        /// Statisk metode som konvertere en collection af Booking til en collection af BookingDTO
         /// </summary>
         /// <param name="bookings">Collection af Booking</param>
+        /// <returns>Returnere den konverteret collection BookingDTO</returns>
         public static IEnumerable<BookingDTO> BookingToDtos(this IEnumerable<Booking> bookings)
         {
             foreach (var booking in bookings)
