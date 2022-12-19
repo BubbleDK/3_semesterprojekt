@@ -14,7 +14,7 @@ namespace NetCafeUCN.MVC.Controllers
     public class BookingController : Controller
     {
         readonly INetCafeDataAccessService<GamingStationDTO> _gamingStationService;
-        readonly INetCafeDataAccessService<BookingDto> _bookingService;
+        readonly INetCafeDataAccessService<BookingDTO> _bookingService;
         readonly BookingLineService _bookingLineService;
 
         // GET: BookingController
@@ -24,7 +24,7 @@ namespace NetCafeUCN.MVC.Controllers
         /// <param name="gamingStationService">Sæt den gamingstation service som skal bruges i klassen</param>
         /// <param name="bookingService">Sæt den booking service som skal bruges i klassen</param>
         /// <param name="bookingLineService">Sæt den BookingLine service som skal bruges i klassen</param>
-        public BookingController(INetCafeDataAccessService<GamingStationDTO> gamingStationService, INetCafeDataAccessService<BookingDto> bookingService, BookingLineService bookingLineService)
+        public BookingController(INetCafeDataAccessService<GamingStationDTO> gamingStationService, INetCafeDataAccessService<BookingDTO> bookingService, BookingLineService bookingLineService)
         {
             _gamingStationService = gamingStationService;
             _bookingService = bookingService;
@@ -36,7 +36,7 @@ namespace NetCafeUCN.MVC.Controllers
         /// <returns>Returnere et View med alle bookinger</returns>
         public ActionResult Index()
         {
-            List<BookingDto> bookings = _bookingService.GetAll().ToList();
+            List<BookingDTO> bookings = _bookingService.GetAll().ToList();
 
             return View(bookings);
         }
@@ -49,7 +49,7 @@ namespace NetCafeUCN.MVC.Controllers
         // GET: BookingController/Details/5
         public ActionResult Details(string bookingNo)
         {
-            BookingDto booking = _bookingService.Get(bookingNo);
+            BookingDTO booking = _bookingService.Get(bookingNo);
             booking.BookingLines = _bookingLineService.GetAll(bookingNo).ToList();
             return View(booking);
         }
@@ -98,7 +98,7 @@ namespace NetCafeUCN.MVC.Controllers
                     return View(bookingModel);
                 }
 
-                BookingDto booking = new BookingDto();
+                BookingDTO booking = new BookingDTO();
                 booking.PhoneNo = bookingModel.PhoneNo;
                 string dateString = "" + bookingModel.StartDate + " " + bookingModel.StartTime;
                 DateTime start = DateTime.Parse(dateString, System.Globalization.CultureInfo.InvariantCulture);
@@ -154,7 +154,7 @@ namespace NetCafeUCN.MVC.Controllers
         // GET: BookingController/Delete/5
         public ActionResult Delete(string? bookingNo)
         {
-            BookingDto bookingToDelete = _bookingService.Get(bookingNo);
+            BookingDTO bookingToDelete = _bookingService.Get(bookingNo);
             return View(bookingToDelete);
         }
 

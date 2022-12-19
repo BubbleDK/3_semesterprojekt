@@ -7,7 +7,7 @@ string baseUri = "https://localhost:7197/";
 // Add services to the container.
 builder.Services.AddScoped<IUserProviderService, UserProviderService>(_ => new UserProviderService(baseUri + "Users"));
 builder.Services.AddScoped<INetCafeDataAccessService<GamingStationDTO>, GamingstationService>( _ => new GamingstationService(baseUri + "GamingStations"));
-builder.Services.AddScoped<INetCafeDataAccessService<BookingDto>, BookingService>(_ => new BookingService(baseUri + "Bookings"));
+builder.Services.AddScoped<INetCafeDataAccessService<BookingDTO>, BookingService>(_ => new BookingService(baseUri + "Bookings"));
 builder.Services.AddScoped<BookingLineService>(_ => new BookingLineService(baseUri + "BookingLines"));
 builder.Services.AddScoped<INetCafeDataAccessService<ConsumableDTO>, ConsumableService>(_ => new ConsumableService(baseUri + "Consumables"));
 builder.Services.AddScoped<INetCafeDataAccessService<CustomerDTO>, CustomerService>(_ => new CustomerService(baseUri + "Customers"));
