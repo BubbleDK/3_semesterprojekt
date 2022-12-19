@@ -9,6 +9,9 @@ using System.Xml.Linq;
 
 namespace NetCafeUCN.MVC.Models
 {
+    /// <summary>
+    /// BookingDto model klasse
+    /// </summary>
     public class BookingDto
     {
         public string? BookingNo { get; set; } = string.Empty;

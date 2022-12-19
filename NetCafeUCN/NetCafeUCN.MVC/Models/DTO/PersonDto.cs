@@ -9,6 +9,9 @@ using RequiredAttribute = System.ComponentModel.DataAnnotations.RequiredAttribut
 
 namespace NetCafeUCN.MVC.Models
 {
+    /// <summary>
+    /// PersonDto model klasse, som er en abstrakt klasse
+    /// </summary>
     public abstract class PersonDto
     {
         [Required]

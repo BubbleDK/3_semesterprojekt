@@ -1,5 +1,8 @@
 ﻿namespace NetCafeUCN.MVC.Models.DTO
 {
+    /// <summary>
+    /// UserDto model klasse
+    /// </summary>
     public class UserDto
     {
         public enum UserRole { User, Administrator }

@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace NetCafeUCN.MVC.Models
 {
+    /// <summary>
+    /// EmployeeDto model klasse, nedarver fra PersonDto
+    /// </summary>
     public class EmployeeDto : PersonDto
     {
-        
-
         public string? Role { get; set; }
         public string? Address { get; set; }
         public int? Zipcode { get; set; }
