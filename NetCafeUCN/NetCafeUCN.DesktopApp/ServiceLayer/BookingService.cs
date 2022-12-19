@@ -34,9 +34,7 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
 
         public IEnumerable<BookingDTO> GetAll()
         {
-            //var request = new RestRequest($"{BaseUri}");
-            //var response = RestClient.Execute<BookingDTO>(request);
-            //var result = response.Content;
+            
             return RestClient.Execute<IEnumerable<BookingDTO>>(new RestRequest()).Data;
         }
 
