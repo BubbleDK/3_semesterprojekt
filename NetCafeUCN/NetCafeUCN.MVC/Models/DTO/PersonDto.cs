@@ -38,10 +38,6 @@ namespace NetCafeUCN.MVC.Models
         {
 
         }
-        public override string ToString()
-        {
-            return Name;
-        }
     }
 
 }
