@@ -1,10 +1,6 @@
 using NetCafeUCN.MVC.Services;
 using NetCafeUCN.MVC.Models;
-using NetCafeUCN.MVC.Controllers;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.Extensions.DependencyInjection;
-using NetCafeUCN.MVC.Models.DTO;
-using static System.Net.WebRequestMethods;
 
 var builder = WebApplication.CreateBuilder(args);
 string baseUri = "https://localhost:7197/";

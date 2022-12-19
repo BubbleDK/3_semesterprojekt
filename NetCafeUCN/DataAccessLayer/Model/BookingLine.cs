@@ -1,5 +1,8 @@
 ﻿namespace NetCafeUCN.DAL.Model
 {
+    /// <summary>
+    ///  BookingLine model klasse
+    /// </summary>
     public class BookingLine
     {
         public int? Quantity { get; set; }

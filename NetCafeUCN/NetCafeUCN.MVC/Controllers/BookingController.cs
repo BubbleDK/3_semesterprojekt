@@ -1,28 +1,39 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NetCafeUCN.MVC.Models;
 using NetCafeUCN.MVC.Models.DTO;
 using NetCafeUCN.MVC.Services;
-using System.Reflection;
 using System.Security.Claims;
 
 namespace NetCafeUCN.MVC.Controllers
 {
+    /// <summary>
+    ///  BookingController klasse, nedarver fra controller klassen
+    /// </summary>
     [AllowAnonymous]
     public class BookingController : Controller
     {
-
         readonly INetCafeDataAccessService<GamingStationDto> _gamingStationService;
         readonly INetCafeDataAccessService<BookingDto> _bookingService;
-        BookingLineService _bookingLineService;
+        readonly BookingLineService _bookingLineService;
+
         // GET: BookingController
+        /// <summary>
+        /// BookingController constructor, bliver constructed når man rammer BookingController
+        /// </summary>
+        /// <param name="gamingStationService">Sæt den gamingstation service som skal bruges i klassen</param>
+        /// <param name="bookingService">Sæt den booking service som skal bruges i klassen</param>
+        /// <param name="bookingLineService">Sæt den BookingLine service som skal bruges i klassen</param>
         public BookingController(INetCafeDataAccessService<GamingStationDto> gamingStationService, INetCafeDataAccessService<BookingDto> bookingService, BookingLineService bookingLineService)
         {
             _gamingStationService = gamingStationService;
             _bookingService = bookingService;
             _bookingLineService = bookingLineService;
         }
+        /// <summary>
+        /// Get metode til index view.
+        /// </summary>
+        /// <returns>Returnere et View med alle bookinger</returns>
         public ActionResult Index()
         {
             List<BookingDto> bookings = _bookingService.GetAll().ToList();
@@ -30,6 +41,11 @@ namespace NetCafeUCN.MVC.Controllers
             return View(bookings);
         }
 
+        /// <summary>
+        /// Get metode til details view.
+        /// </summary>
+        /// <param name="bookingNo">string af booking nummeret</param>
+        /// <returns>Returnere et View med den bestemte booking</returns>
         // GET: BookingController/Details/5
         public ActionResult Details(string bookingNo)
         {
@@ -38,6 +54,10 @@ namespace NetCafeUCN.MVC.Controllers
             return View(booking);
         }
 
+        /// <summary>
+        /// Get metode til Create view.
+        /// </summary>
+        /// <returns>Returnere et View hvor man kan oprette ny booking</returns>
         // GET: BookingController/Create
         public ActionResult Create()
         {
@@ -47,6 +67,11 @@ namespace NetCafeUCN.MVC.Controllers
             return View(viewModel);
         }
 
+        /// <summary>
+        /// Post metode til opetterelse af ny booking.
+        /// </summary>
+        /// <param name="bookingModel">Henter data fra form som passer på BookingGamingStationViewModel</param>
+        /// <returns>Returnere et ActionResult</returns>
         // POST: BookingController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -55,15 +80,17 @@ namespace NetCafeUCN.MVC.Controllers
             try
             {
                 bool isAnyItemTrue = false;
-                foreach (var item in bookingModel.GamingStations)
+                if (bookingModel.GamingStations != null)
                 {
-                    if (item.isChecked)
+                    foreach (var item in bookingModel.GamingStations)
                     {
-                        isAnyItemTrue = true;
-                        break;
+                        if (item.isChecked)
+                        {
+                            isAnyItemTrue = true;
+                            break;
+                        }
                     }
                 }
-
                 if (!isAnyItemTrue)
                 {
                     bookingModel.GamingStations = (List<GamingStationDto>)_gamingStationService.GetAll();
@@ -119,28 +146,11 @@ namespace NetCafeUCN.MVC.Controllers
                 return View();
             }
         }
-        [Authorize]
-        // GET: BookingController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-        // POST: BookingController/Edit/5
-        [HttpPost]
-        [Authorize]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
+ 
+        /// <summary>
+        /// Get metode til Delete view.
+        /// </summary>
+        /// <returns>Returnere et View hvor man kan se den booking man ønsker at slette</returns>
         // GET: BookingController/Delete/5
         public ActionResult Delete(string? bookingNo)
         {
@@ -148,6 +158,12 @@ namespace NetCafeUCN.MVC.Controllers
             return View(bookingToDelete);
         }
 
+        /// <summary>
+        /// Post metode til Delete en booking.
+        /// </summary>
+        /// <param name="bookingNo">string af booking nummeret</param>
+        /// <param name="phoneNo">string af telefon nummeret</param>
+        /// <returns>Returnere et ActionResult</returns>
         // POST: BookingController/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -166,17 +182,5 @@ namespace NetCafeUCN.MVC.Controllers
                 return View();
             }
         }
-
-        //[HttpPost]
-        //public JsonResult AddBooking([FromForm] GamingStationDto whatever)
-        //{
-        //    Console.WriteLine("ADD BOOKING TRIGGERED");
-        //    foreach (var item in stations)
-        //    {
-        //        Console.WriteLine(item.SeatNumber);
-        //    }
-
-        //    return null;
-        //}
     }
 }

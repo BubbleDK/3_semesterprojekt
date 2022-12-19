@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NetCafeUCN.MVC.Models
+﻿namespace NetCafeUCN.MVC.Models
 {
+    /// <summary>
+    /// GamingStationDto model klasse, nedarver fra ProductDto
+    /// </summary>
     public class GamingStationDto : ProductDto
     {
         public int ProductID { get; set; } 

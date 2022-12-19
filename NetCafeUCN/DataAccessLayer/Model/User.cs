@@ -1,5 +1,8 @@
 ﻿namespace NetCafeUCN.DAL.Model
 {
+    /// <summary>
+    ///  User model klasse
+    /// </summary>
     public class User
     {
         public enum UserRole { User, Administrator }

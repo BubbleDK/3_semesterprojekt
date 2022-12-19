@@ -1,25 +1,16 @@
 ﻿using DataAccessLayer.Exceptions;
 using NetCafeUCN.DAL.Model;
 using System.Data.SqlClient;
-using System.Globalization;
 using System.Data;
 
 namespace NetCafeUCN.DAL.DAO
 {
-    /* @authors Rasmus Gudiksen, Jakob Kjeldsteen, Emil Tolstrup Petersen, Christian Funder og Mark Drongesen
-     * <summary>
-     * Denne klasse styrer kontakten mellem database og systemet omhandlende Booking
-     * <summary/>
-     */
+    /// <summary>
+    /// BookingDAO klasse, implementere INetCafeDAO og håndtere kontakten mellem databasen og resten
+    /// af systemet der omhandler en booking
+    /// </summary>
     public class BookingDAO : INetCafeDAO<Booking>
     {
-        /*
-       * <summary>
-       * Metoden tilføjer en Booking en til databasen.
-       * <summary/>
-       * <param name="o">Er den Booking der bliver tilføjet til databasen</param>
-       * <returns>En bool<returns/>
-       */
         public bool Add(Booking o)
         {
             CustomerDAO customerDAO = new CustomerDAO();

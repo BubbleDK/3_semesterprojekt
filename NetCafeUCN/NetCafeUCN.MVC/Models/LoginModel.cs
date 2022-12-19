@@ -2,6 +2,9 @@
 
 namespace NetCafeUCN.MVC.Models
 {
+    /// <summary>
+    /// LoginModel klasse
+    /// </summary>
     public class LoginModel
     {
         [Required]

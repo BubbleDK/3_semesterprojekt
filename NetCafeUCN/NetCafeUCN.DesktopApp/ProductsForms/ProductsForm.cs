@@ -1,6 +1,5 @@
 ﻿using NetCafeUCN.DesktopApp.DTO;
 using NetCafeUCN.DesktopApp.ServiceLayer;
-using System.Windows.Forms;
 
 namespace NetCafeUCN.DesktopApp
 {
@@ -8,6 +7,9 @@ namespace NetCafeUCN.DesktopApp
     {
         INetCafeDataAccess<ConsumableDTO> consumableService;
         INetCafeDataAccess<GamingStationDTO> gamingstationService;
+        /// <summary>
+        /// Constructor til base productsform, denne form viser et overblik over produkter
+        /// </summary>
         public ProductsForm()
         {
             InitializeComponent();
@@ -16,6 +18,9 @@ namespace NetCafeUCN.DesktopApp
             RefreshList();
         }
 
+        /// <summary>
+        /// Metode til at opdatere datagridviewet som viser produkterne.
+        /// </summary>
         public void RefreshList()
         {
             dgvConsumables.DataSource = null;
@@ -47,6 +52,9 @@ namespace NetCafeUCN.DesktopApp
             UpdateProduct();
         }
 
+        /// <summary>
+        /// Metode til at åbne en ny form til at opdatere det valgte produkt fra listen
+        /// </summary>
         private void UpdateProduct()
         {
             if (dgvConsumables.CurrentRow != null)
@@ -78,6 +86,9 @@ namespace NetCafeUCN.DesktopApp
             dgvGamingstations.CurrentCell = null;
         }
 
+        /// <summary>
+        /// Metode til at slette det valgte produkt.
+        /// </summary>
         private void DeleteSelectedProduct()
         {
             if (dgvConsumables.CurrentRow != null)

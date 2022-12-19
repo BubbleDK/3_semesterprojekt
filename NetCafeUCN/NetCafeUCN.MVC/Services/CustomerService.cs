@@ -1,16 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using NetCafeUCN.MVC.Models;
-using Newtonsoft.Json;
+﻿using NetCafeUCN.MVC.Models;
 using RestSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NetCafeUCN.MVC.Services
 {
-    
+
     public class CustomerService : INetCafeDataAccessService<CustomerDto>
     {
         public string BaseUri { get; private set; }

@@ -1,14 +1,11 @@
 ﻿using NetCafeUCN.MVC.Models.DTO;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace NetCafeUCN.MVC.Models
 {
+    /// <summary>
+    /// BookingDto model klasse
+    /// </summary>
     public class BookingDto
     {
         public string? BookingNo { get; set; } = string.Empty;

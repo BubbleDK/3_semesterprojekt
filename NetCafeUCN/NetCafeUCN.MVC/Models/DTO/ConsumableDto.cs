@@ -1,15 +1,19 @@
-﻿namespace NetCafeUCN.MVC.Models;
-
-public class ConsumableDto : ProductDto
+﻿namespace NetCafeUCN.MVC.Models
 {
-    public string ?Description { get; set; }
-    public ConsumableDto() : base()
+    /// <summary>
+    /// ConsumableDto model klasse, nedarver fra ProductDto
+    /// </summary>
+    public class ConsumableDto : ProductDto
     {
+        public string? Description { get; set; }
+        public ConsumableDto() : base()
+        {
 
-    }
-    public override string ToString()
-    {
+        }
+        public override string ToString()
+        {
 
-        return ProductNumber + Description;
+            return ProductNumber + Description;
+        }
     }
 }

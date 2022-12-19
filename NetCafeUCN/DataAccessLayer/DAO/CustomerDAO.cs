@@ -4,20 +4,8 @@ using System.Data.SqlClient;
 
 namespace NetCafeUCN.DAL.DAO
 {
-    /* @authors Rasmus Gudiksen, Jakob Kjeldsteen, Emil Tolstrup Petersen, Christian Funder og Mark Drongesen
-     * <summary>
-     * Denne klasse styrer kontakten mellem database og systemet omhandlende Customer
-     * <summary/>
-     */
     public class CustomerDAO : INetCafeDAO<Customer>
     {
-        /*
-        * <summary>
-	    * Metoden tilføjer en Customer en til databasen.
-	    * <summary/>
-	    * <param name="o">Er den Customer der bliver tilføjet til databasen</param>
-	    * <returns>En bool<returns/>
-	    */
         public bool Add(Customer o)
         {
             if(GetPhoneNo(o.Phone) == true) return false;
@@ -57,13 +45,6 @@ namespace NetCafeUCN.DAL.DAO
                 return true;
             }
         }
-        /*
-        * <summary>
-	    * Metoden henter en specifik Customer fra databasen.
-	    * <summary/>
-	    * <param name="key">Er et telefon nummer der bliver brugt til at finde en Customer</param>
-	    * <returns>En Customer<returns/>
-	    */
         public Customer? Get(dynamic key)
         {
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
@@ -97,12 +78,6 @@ namespace NetCafeUCN.DAL.DAO
                 }
             }
         }
-        /*
-        * <summary>
-	    * Metoden henter alle Customers fra databasen.
-	    * <summary/>
-	    * <returns>En liste af Customers<returns/>
-	    */
         public IEnumerable<Customer> GetAll()
         {
             string sqlStatement = "SELECT * FROM nc_Customer inner join nc_Person on nc_Person.phone = nc_Customer.phone";
@@ -135,13 +110,6 @@ namespace NetCafeUCN.DAL.DAO
             }
             return list;
         }
-        /*
-        * <summary>
-	    * Metoden opdaterer isActive på en Customer.
-	    * <summary/>
-	    * <param name="key">Er et telefon nummer der bliver brugt til at finde en Customer</param>
-	    * <returns>En bool<returns/>
-	    */
         public bool Remove(dynamic key)
         {
             SqlTransaction trans;
@@ -168,13 +136,6 @@ namespace NetCafeUCN.DAL.DAO
                 }
             }
         }
-        /*
-        * <summary>
-	    * Metoden opdaterer en Customer fra databasen.
-	    * <summary/>
-	    * <param name="o">Er den opdateret Customer</param>
-	    * <returns>En bool<returns/>
-	    */
         public bool Update(Customer o)
         {
             int rows = -1;
@@ -211,33 +172,13 @@ namespace NetCafeUCN.DAL.DAO
                 }
             }
         }
-        //public int GetId(dynamic key)
-        //{
-        //    int id = 0;
-        //    using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
-        //    {
-        //        SqlCommand command = new SqlCommand("SELECT id FROM nc_Person WHERE phone = @phone", conn);
-        //        command.Parameters.AddWithValue("@phone", key);
-        //        {
-        //            try
-        //            {
-        //                conn.Open();
-        //                SqlDataReader reader = command.ExecuteReader();
-        //                while (reader.Read())
-        //                {
-        //                    id = (int)reader["id"];
-                            
-        //                }
-        //                return id;
-        //            }
-        //            catch (Exception)
-        //            {
 
-        //                throw new DataAccessException("Can't access data");
-        //            }
-        //        }
-        //    }
-        //}
+        /// <summary>
+        /// Metode til at check om email eksistere
+        /// </summary>
+        /// <param name="email">string af den email som skal tjekkes</param>
+        /// <returns>bool afhængig af statussen på operationen</returns>
+        /// <exception cref="DataAccessException"></exception>
         public bool EmailCheck(string email)
         {
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
@@ -262,6 +203,13 @@ namespace NetCafeUCN.DAL.DAO
                 }
             }
         }
+
+        /// <summary>
+        /// Metode til at tjekke om telefon nummeret eksistere
+        /// </summary>
+        /// <param name="key">Dymaisk nøgle som bruges som søge parametre</param>
+        /// <returns>bool afhængig af statussen på operationen</returns>
+        /// <exception cref="DataAccessException"></exception>
         public bool GetPhoneNo(dynamic key)
         {
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))

@@ -6,18 +6,29 @@ using NetCafeUCN.DAL.Model;
 
 namespace NetCafeUCN.API.Controllers
 {
+    /// <summary>
+    ///  API Controller for Booking, som implementere ControllerBase
+    /// </summary>
     [Route("bookings")]
     [ApiController]
     public class BookingController : ControllerBase
     {
         private readonly INetCafeDAO<Booking> dataAccess;
 
+        /// <summary>
+        ///  BookingController constructor
+        /// </summary>
+        /// <param name="dataAccess">Model som skal sættes for controlleren</param>
         public BookingController(INetCafeDAO<Booking> dataAccess)
         {
             this.dataAccess = dataAccess;
         }
 
         // GET: api/<BookingController>
+        /// <summary>
+        ///  Henter alle bookinger
+        /// </summary>
+        /// <returns>Returnere en collection af Bookinger</returns>
         [HttpGet]
         public ActionResult <IEnumerable<BookingDTO>> Get()
         {
@@ -25,6 +36,11 @@ namespace NetCafeUCN.API.Controllers
         }
 
         // GET api/<BookingController>/5
+        /// <summary>
+        ///  Henter en bestemt booking
+        /// </summary>
+        /// <param name="bookingNo">booking nummer på den bestemte booking</param>
+        /// <returns>Returnere den bestemte booking eller 404 status kode hvis den ikke blev fundet</returns>
         [HttpGet]
         [Route("{bookingNo}")]
         public ActionResult<BookingDTO> Get(string bookingNo)
@@ -35,6 +51,11 @@ namespace NetCafeUCN.API.Controllers
         }
 
         // POST api/<BookingController>
+        /// <summary>
+        ///  Opretter en ny booking
+        /// </summary>
+        /// <param name="bookingdto">Objekt af en booking</param>
+        /// <returns>Returnere status kode 200 for OK</returns>
         [HttpPost]
         public ActionResult<bool> Add([FromBody] BookingDTO bookingdto)
         {
@@ -42,6 +63,11 @@ namespace NetCafeUCN.API.Controllers
         }
 
         // PUT api/<BookingController>/5
+        /// <summary>
+        ///  Opdatere en booking
+        /// </summary>
+        /// <param name="bookingdto">Objekt af en booking</param>
+        /// <returns>Returnere status kode 200 for OK</returns>
         [HttpPut]
         public ActionResult<bool> Update(BookingDTO bookingdto)
         {
@@ -49,6 +75,11 @@ namespace NetCafeUCN.API.Controllers
         }
 
         // DELETE api/<BookingController>/5
+        /// <summary>
+        ///  Sletter en booking
+        /// </summary>
+        /// <param name="bookingNo">Booking nummer på den booking der skal slettes</param>
+        /// <returns>Returnere status kode 200 hvis den blev fjernet, eller 404 status kode hvis den ikke blev fundet</returns>
         [HttpDelete("{bookingNo}")]
         public ActionResult<bool> Delete(string bookingNo)
         {

@@ -1,11 +1,4 @@
-﻿using NetCafeUCN.MVC.Authentication;
-using NetCafeUCN.MVC.Models.DTO;
-using NetCafeUCN.MVC.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using NetCafeUCN.MVC.Services;
 
 namespace NetCafeUCN.tests
 {
