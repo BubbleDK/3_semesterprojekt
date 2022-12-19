@@ -4,7 +4,7 @@ using RestSharp;
 namespace NetCafeUCN.MVC.Services
 {
 
-    public class GamingstationService : INetCafeDataAccessService<GamingStationDto>
+    public class GamingstationService : INetCafeDataAccessService<GamingStationDTO>
     {
         public string BaseUri { get; private set; }
         private RestClient RestClient { get; set; }
@@ -14,28 +14,27 @@ namespace NetCafeUCN.MVC.Services
             RestClient = new RestClient(baseUri);
         }
         
-        public bool Add(GamingStationDto o)
+        public bool Add(GamingStationDTO o)
         {
-            return RestClient.Execute<GamingStationDto>(new RestRequest($"{BaseUri}/{o}", Method.Post)).IsSuccessful;
+            return RestClient.Execute<GamingStationDTO>(new RestRequest($"{BaseUri}/{o}", Method.Post)).IsSuccessful;
         }
 
-        public GamingStationDto? Get(dynamic key)
+        public GamingStationDTO? Get(dynamic key)
         {
-            return RestClient.Execute<GamingStationDto>(new RestRequest($"{BaseUri}/{key}",Method.Get)).Data;
+            return RestClient.Execute<GamingStationDTO>(new RestRequest($"{BaseUri}/{key}",Method.Get)).Data;
         }
-        public IEnumerable<GamingStationDto> GetAll()
+        public IEnumerable<GamingStationDTO> GetAll()
         {
-            return RestClient.Execute<IEnumerable<GamingStationDto>>(new RestRequest($"{BaseUri}"), Method.Get).Data;
+            return RestClient.Execute<IEnumerable<GamingStationDTO>>(new RestRequest($"{BaseUri}"), Method.Get).Data;
         }
         public bool Remove(dynamic key)
         {
-            return RestClient.Execute<GamingStationDto>(new RestRequest($"{BaseUri}/{key}", Method.Delete)).IsSuccessful;
+            return RestClient.Execute<GamingStationDTO>(new RestRequest($"{BaseUri}/{key}", Method.Delete)).IsSuccessful;
         }
         
-        public bool Update(GamingStationDto o)
+        public bool Update(GamingStationDTO o)
         {
-            return RestClient.Execute<GamingStationDto>(new RestRequest($"{BaseUri}/", Method.Put).AddJsonBody(o)).IsSuccessful;
-            //return RestClient.Execute<GamingStationDto>(new RestRequest($"{BaseUri}/{o}",Method.Put)).IsSuccessful;
+            return RestClient.Execute<GamingStationDTO>(new RestRequest($"{BaseUri}/", Method.Put).AddJsonBody(o)).IsSuccessful;
         }
     }
 }

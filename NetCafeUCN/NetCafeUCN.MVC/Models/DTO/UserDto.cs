@@ -3,7 +3,7 @@
     /// <summary>
     /// UserDto model klasse
     /// </summary>
-    public class UserDto
+    public class UserDTO
     {
         public enum UserRole { User, Administrator }
         public int Id { get; set; }

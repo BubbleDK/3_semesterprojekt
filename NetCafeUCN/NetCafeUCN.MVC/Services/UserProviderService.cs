@@ -13,20 +13,20 @@ namespace NetCafeUCN.MVC.Services
             RestClient = new RestClient(baseUri);
         }
         
-        public UserLoginDto? GetHashByEmail(string email)
+        public UserLoginDTO? GetHashByEmail(string email)
         {
-            UserLoginDto? body = new UserLoginDto {Email = email, PasswordHash = "" };
+            UserLoginDTO? body = new UserLoginDTO {Email = email, PasswordHash = "" };
             RestRequest request = new RestRequest($"{BaseUri}/GetHashByEmail");
             request.AddJsonBody(body);
-            var result = RestClient.Post<UserLoginDto>(request);
-            return RestClient.Post<UserLoginDto>(request);
+            var result = RestClient.Post<UserLoginDTO>(request);
+            return RestClient.Post<UserLoginDTO>(request);
         }
-        public UserDto? GetUserByLogin(string email, string passwordHash)
+        public UserDTO? GetUserByLogin(string email, string passwordHash)
         {
-            UserDto? body = new UserDto { Id = 0, Email = email, PasswordHash = passwordHash, PhoneNo = "", Name = "", Role = 0 };
+            UserDTO? body = new UserDTO { Id = 0, Email = email, PasswordHash = passwordHash, PhoneNo = "", Name = "", Role = 0 };
             RestRequest request = new RestRequest($"{BaseUri}");
             request.AddJsonBody(body);
-            return RestClient.Post<UserDto>(request);
+            return RestClient.Post<UserDTO>(request);
         }
     }
 }

@@ -3,7 +3,7 @@
     /// <summary>
     /// GamingStationDto model klasse, nedarver fra ProductDto
     /// </summary>
-    public class GamingStationDto : ProductDto
+    public class GamingStationDTO : ProductDTO
     {
         public int ProductID { get; set; } 
         public string? SeatNumber { get; set; }

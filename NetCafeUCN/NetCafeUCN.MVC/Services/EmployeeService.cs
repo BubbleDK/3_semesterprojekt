@@ -4,7 +4,7 @@ using RestSharp;
 namespace NetCafeUCN.MVC.Services
 {
 
-    public class EmployeeService : INetCafeDataAccessService<EmployeeDto>
+    public class EmployeeService : INetCafeDataAccessService<EmployeeDTO>
     {
         public string BaseUri { get; private set; }
         private RestClient RestClient { get; set; }
@@ -15,30 +15,30 @@ namespace NetCafeUCN.MVC.Services
             RestClient = new RestClient(baseUri);
         }
         
-        public bool Add(EmployeeDto o)
+        public bool Add(EmployeeDTO o)
         {
-            return RestClient.Execute<EmployeeDto>(new RestRequest($"{BaseUri}/{o}", Method.Post)).IsSuccessful;
+            return RestClient.Execute<EmployeeDTO>(new RestRequest($"{BaseUri}/{o}", Method.Post)).IsSuccessful;
         }
 
-        public EmployeeDto? Get(dynamic key)
+        public EmployeeDTO? Get(dynamic key)
         {
-            return RestClient.Execute<EmployeeDto>(new RestRequest($"{BaseUri}/{key}", Method.Get)).Data;
+            return RestClient.Execute<EmployeeDTO>(new RestRequest($"{BaseUri}/{key}", Method.Get)).Data;
         }
 
-        public IEnumerable<EmployeeDto> GetAll()
+        public IEnumerable<EmployeeDTO> GetAll()
         {
-            return RestClient.Execute<IEnumerable<EmployeeDto>>(new RestRequest($"{BaseUri}"), Method.Get).Data;
+            return RestClient.Execute<IEnumerable<EmployeeDTO>>(new RestRequest($"{BaseUri}"), Method.Get).Data;
 
         }
         
         public bool Remove(dynamic key)
         {
-            return RestClient.Execute<EmployeeDto>(new RestRequest($"{key}", Method.Delete)).IsSuccessful;
+            return RestClient.Execute<EmployeeDTO>(new RestRequest($"{key}", Method.Delete)).IsSuccessful;
         }
 
-        public bool Update(EmployeeDto o)
+        public bool Update(EmployeeDTO o)
         {
-            return RestClient.Execute<EmployeeDto>(new RestRequest($"{BaseUri}/{0}", Method.Put)).IsSuccessful;
+            return RestClient.Execute<EmployeeDTO>(new RestRequest($"{BaseUri}/{0}", Method.Put)).IsSuccessful;
         }
 
 

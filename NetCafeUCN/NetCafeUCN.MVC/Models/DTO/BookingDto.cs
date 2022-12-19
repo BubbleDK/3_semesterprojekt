@@ -6,7 +6,7 @@ namespace NetCafeUCN.MVC.Models
     /// <summary>
     /// BookingDto model klasse
     /// </summary>
-    public class BookingDto
+    public class BookingDTO
     {
         public string? BookingNo { get; set; } = string.Empty;
         public DateTime StartTime { get; set; }
@@ -17,10 +17,10 @@ namespace NetCafeUCN.MVC.Models
         [RegularExpression("^\\+?[1-9][0-9]{7}$", ErrorMessage = "Ikke et gyldigt telefonnummer")]
         public string PhoneNo { get; set; } = string.Empty;
         [Required]
-        public List<BookingLineDto> BookingLines { get; set; }
-        public BookingDto()
+        public List<BookingLineDTO> BookingLines { get; set; }
+        public BookingDTO()
         {
-            BookingLines = new List<BookingLineDto>();
+            BookingLines = new List<BookingLineDTO>();
         }
     }
 }

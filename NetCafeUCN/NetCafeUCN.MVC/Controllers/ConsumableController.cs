@@ -11,13 +11,13 @@ namespace NetCafeUCN.MVC.Controllers
     [Authorize]
     public class ConsumableController : Controller
     {
-        readonly INetCafeDataAccessService<ConsumableDto> _consumableService;
+        readonly INetCafeDataAccessService<ConsumableDTO> _consumableService;
 
         /// <summary>
         /// ConsumableController constructor
         /// </summary>
         /// <param name="consumableService">Sæt den consumable service som skal bruges i klassen</param>
-        public ConsumableController(INetCafeDataAccessService<ConsumableDto> consumableService)
+        public ConsumableController(INetCafeDataAccessService<ConsumableDTO> consumableService)
         {
             _consumableService = consumableService;
         }
@@ -94,7 +94,7 @@ namespace NetCafeUCN.MVC.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
-        public ActionResult Edit(ConsumableDto editedConsumable)
+        public ActionResult Edit(ConsumableDTO editedConsumable)
         {
             try
             {
@@ -131,7 +131,7 @@ namespace NetCafeUCN.MVC.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
-        public ActionResult Delete(ConsumableDto consumableToDelete)
+        public ActionResult Delete(ConsumableDTO consumableToDelete)
         {
             try
             {

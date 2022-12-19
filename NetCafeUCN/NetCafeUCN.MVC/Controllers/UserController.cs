@@ -10,9 +10,9 @@ namespace NetCafeUCN.MVC.Controllers
     [Authorize]
     public class UserController : Controller
     {
-        readonly INetCafeDataAccessService<CustomerDto> _customerService;
-        readonly INetCafeDataAccessService<EmployeeDto> _employeeService;
-        public UserController(INetCafeDataAccessService<CustomerDto> customerService, INetCafeDataAccessService<EmployeeDto> employeeService)
+        readonly INetCafeDataAccessService<CustomerDTO> _customerService;
+        readonly INetCafeDataAccessService<EmployeeDTO> _employeeService;
+        public UserController(INetCafeDataAccessService<CustomerDTO> customerService, INetCafeDataAccessService<EmployeeDTO> employeeService)
         {
             _customerService = customerService;
             _employeeService = employeeService;
@@ -44,7 +44,7 @@ namespace NetCafeUCN.MVC.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([FromForm]CustomerDto customer)
+        public ActionResult Create([FromForm]CustomerDTO customer)
         {
             customer.IsActive = true;
             customer.PersonType = "Customer";

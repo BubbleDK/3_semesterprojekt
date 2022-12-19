@@ -1,5 +1,5 @@
 ﻿@using NetCafeUCN.MVC.Models.DTO
-@model NetCafeUCN.MVC.Models.BookingDto
+@model NetCafeUCN.MVC.Models.BookingDTO
 
 @{
     ViewData["Title"] = "Details";
@@ -35,7 +35,7 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.PhoneNo)
         </dd>
-        @foreach (BookingLineDto item in Model.BookingLines)
+        @foreach (BookingLineDTO item in Model.BookingLines)
         {
             <dt class="col-sm-2">
                 <label>Computer:</label>

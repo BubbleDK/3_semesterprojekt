@@ -12,8 +12,8 @@ namespace NetCafeUCN.MVC.Controllers
     [Authorize]
     public class ProductController : Controller
     {
-        readonly INetCafeDataAccessService<GamingStationDto> _gamingStationService;
-        readonly INetCafeDataAccessService<ConsumableDto> _consumableService;
+        readonly INetCafeDataAccessService<GamingStationDTO> _gamingStationService;
+        readonly INetCafeDataAccessService<ConsumableDTO> _consumableService;
         static GamingStationConsumableViewModel viewModel = new GamingStationConsumableViewModel();
 
         /// <summary>
@@ -21,7 +21,7 @@ namespace NetCafeUCN.MVC.Controllers
         /// </summary>
         /// <param name="gamingStationService">Sæt den gamingstation service som skal bruges i klassen</param>
         /// <param name="consumableService">Sæt den consumable service som skal bruges i klassen</param>
-        public ProductController(INetCafeDataAccessService<GamingStationDto> gamingStationService, INetCafeDataAccessService<ConsumableDto> consumableService)
+        public ProductController(INetCafeDataAccessService<GamingStationDTO> gamingStationService, INetCafeDataAccessService<ConsumableDTO> consumableService)
         {
             _gamingStationService = gamingStationService;
             _consumableService = consumableService;

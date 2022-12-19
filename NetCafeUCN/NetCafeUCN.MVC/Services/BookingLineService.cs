@@ -26,12 +26,11 @@ namespace NetCafeUCN.MVC.Services
         /// </summary>
         /// <param name="bookingNo">string af booking nummeret</param>
         /// <returns>En collection af BookingLineDto</returns>
-        public IEnumerable<BookingLineDto> GetAll(string bookingNo)
+        public IEnumerable<BookingLineDTO> GetAll(string bookingNo)
         {
             var request = new RestRequest($"{BaseUri}/{bookingNo}", Method.Get);
-            var response = RestClient.Execute<IEnumerable<BookingLineDto>>(request);
+            var response = RestClient.Execute<IEnumerable<BookingLineDTO>>(request);
             return response.Data;
-            //return RestClient.Execute<IEnumerable<BookingLineDTO>>(new RestRequest($"{BaseUri}{bookingNo}", Method.Get)).Data;
         }
     }
 }

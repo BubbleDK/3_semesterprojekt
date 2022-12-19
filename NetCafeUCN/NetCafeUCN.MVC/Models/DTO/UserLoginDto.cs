@@ -3,7 +3,7 @@
     /// <summary>
     /// UserLoginDto model klasse
     /// </summary>
-    public class UserLoginDto
+    public class UserLoginDTO
     {
         public string Email { get; set; } = string.Empty;
         public string? PasswordHash { get; set; }

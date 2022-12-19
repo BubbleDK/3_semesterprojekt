@@ -3,17 +3,12 @@
     /// <summary>
     /// ConsumableDto model klasse, nedarver fra ProductDto
     /// </summary>
-    public class ConsumableDto : ProductDto
+    public class ConsumableDTO : ProductDTO
     {
         public string? Description { get; set; }
-        public ConsumableDto() : base()
+        public ConsumableDTO() : base()
         {
 
-        }
-        public override string ToString()
-        {
-
-            return ProductNumber + Description;
         }
     }
 }

@@ -14,11 +14,7 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
         }
         public bool Add(ConsumableDTO o)
         {
-            //var request = new RestRequest($"{BaseUri}", Method.Post);
-            //request.RequestFormat = DataFormat.Json;
-            //request.AddBody(o);
-            //var response = RestClient.Execute<Consumable>(request);
-            //return response.IsSuccessful;
+            
             return RestClient.Execute<ConsumableDTO>(new RestRequest($"{BaseUri}", Method.Post).AddJsonBody(o)).IsSuccessful;
         }
 

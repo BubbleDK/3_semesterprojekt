@@ -8,8 +8,8 @@ namespace NetCafeUCN.MVC.Controllers
     [Authorize]
     public class GamingStationController : Controller
     {
-        readonly INetCafeDataAccessService<GamingStationDto> _gamingStationService;
-        public GamingStationController(INetCafeDataAccessService<GamingStationDto> gamingStationService)
+        readonly INetCafeDataAccessService<GamingStationDTO> _gamingStationService;
+        public GamingStationController(INetCafeDataAccessService<GamingStationDTO> gamingStationService)
         {
             _gamingStationService = gamingStationService;
         }
@@ -63,7 +63,7 @@ namespace NetCafeUCN.MVC.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
-        public ActionResult Edit(GamingStationDto editedGamingstation)
+        public ActionResult Edit(GamingStationDTO editedGamingstation)
         {
             try
             {
@@ -84,7 +84,7 @@ namespace NetCafeUCN.MVC.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult Delete(string? productNumber)
         {
-            GamingStationDto gamingStation = _gamingStationService.Get(productNumber);
+            GamingStationDTO gamingStation = _gamingStationService.Get(productNumber);
             return View(gamingStation);
         }
 
