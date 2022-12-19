@@ -43,7 +43,7 @@ namespace NetCafeUCN.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Login([FromForm] LoginModel loginInfo, [FromQuery] string returnUrl)
         {
-            UserLoginDto? userLoginDto = _userProvider.GetHashByEmail(loginInfo.Email);
+            UserLoginDTO? userLoginDto = _userProvider.GetHashByEmail(loginInfo.Email);
             if (userLoginDto != null)
             {
                 if (BCryptTool.ValidatePassword(loginInfo.Password, userLoginDto.PasswordHash) == false)
@@ -53,7 +53,7 @@ namespace NetCafeUCN.MVC.Controllers
                 }
                 else
                 {
-                    UserDto? user = _userProvider.GetUserByLogin(loginInfo.Email, userLoginDto.PasswordHash);
+                    UserDTO? user = _userProvider.GetUserByLogin(loginInfo.Email, userLoginDto.PasswordHash);
 
                     if (user != null) { await SignIn(user); }
                     if (string.IsNullOrEmpty(returnUrl)) { return RedirectToAction("Index", "Home"); }
@@ -68,7 +68,7 @@ namespace NetCafeUCN.MVC.Controllers
         }
 
         // Skal der skrives dokumentation til private metoder?
-        private async Task SignIn(UserDto user)
+        private async Task SignIn(UserDTO user)
         {
             var claims = new List<Claim>
         {

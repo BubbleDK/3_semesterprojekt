@@ -3,7 +3,7 @@
     /// <summary>
     /// ProductDto model klasse
     /// </summary>
-    public class ProductDto
+    public class ProductDTO
     {
         public string? Name { get; set; }
         public string? ProductNumber { get; set; }

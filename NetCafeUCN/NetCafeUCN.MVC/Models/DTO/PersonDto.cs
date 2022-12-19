@@ -6,7 +6,7 @@ namespace NetCafeUCN.MVC.Models
     /// <summary>
     /// PersonDto model klasse, som er en abstrakt klasse
     /// </summary>
-    public abstract class PersonDto
+    public abstract class PersonDTO
     {
         [Required]
         public string Name { get; set; } = string.Empty;
@@ -25,7 +25,7 @@ namespace NetCafeUCN.MVC.Models
         [DataType(DataType.Password)]
         public string Password { get; set; } = string.Empty;
         public bool IsActive { get; set; }
-        public PersonDto(string name, string email, string phone, string? personType, string password, bool isActive)
+        public PersonDTO(string name, string email, string phone, string? personType, string password, bool isActive)
         {
             Name = name;
             Email = email;
@@ -34,7 +34,7 @@ namespace NetCafeUCN.MVC.Models
             Password = password;
             IsActive = isActive;    
         }
-        public PersonDto()
+        public PersonDTO()
         {
 
         }

@@ -5,7 +5,7 @@
     /// </summary>
     public class GamingStationConsumableViewModel
     {
-        public IEnumerable<GamingStationDto> gamingStations { get; set; } = Enumerable.Empty<GamingStationDto>();
-        public IEnumerable<ConsumableDto> consumables { get; set; } = Enumerable.Empty<ConsumableDto>();
+        public IEnumerable<GamingStationDTO> gamingStations { get; set; } = Enumerable.Empty<GamingStationDTO>();
+        public IEnumerable<ConsumableDTO> consumables { get; set; } = Enumerable.Empty<ConsumableDTO>();
     }
 }

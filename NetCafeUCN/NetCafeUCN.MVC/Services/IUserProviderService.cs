@@ -12,14 +12,14 @@ namespace NetCafeUCN.MVC.Services
         /// </summary>
         /// <param name="email">String af emailen som man ønsker at hente det hashet password på</param>
         /// <returns>Et UserLoginDto objekt</returns>
-        UserLoginDto? GetHashByEmail(string email);
+        UserLoginDTO? GetHashByEmail(string email);
         /// <summary>
         /// Metode til at hente en specifik bruger, ved brug af email og password
         /// </summary>
         /// <param name="email">string af email på den specifikke bruger man vil hente</param>
         /// <param name="password">string af password på den specifikke bruger man vil hente </param>
         /// <returns></returns>
-        UserDto? GetUserByLogin(string email, string password);
+        UserDTO? GetUserByLogin(string email, string password);
         
     }
 }

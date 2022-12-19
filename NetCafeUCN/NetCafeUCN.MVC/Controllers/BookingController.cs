@@ -13,7 +13,7 @@ namespace NetCafeUCN.MVC.Controllers
     [AllowAnonymous]
     public class BookingController : Controller
     {
-        readonly INetCafeDataAccessService<GamingStationDto> _gamingStationService;
+        readonly INetCafeDataAccessService<GamingStationDTO> _gamingStationService;
         readonly INetCafeDataAccessService<BookingDto> _bookingService;
         readonly BookingLineService _bookingLineService;
 
@@ -24,7 +24,7 @@ namespace NetCafeUCN.MVC.Controllers
         /// <param name="gamingStationService">Sæt den gamingstation service som skal bruges i klassen</param>
         /// <param name="bookingService">Sæt den booking service som skal bruges i klassen</param>
         /// <param name="bookingLineService">Sæt den BookingLine service som skal bruges i klassen</param>
-        public BookingController(INetCafeDataAccessService<GamingStationDto> gamingStationService, INetCafeDataAccessService<BookingDto> bookingService, BookingLineService bookingLineService)
+        public BookingController(INetCafeDataAccessService<GamingStationDTO> gamingStationService, INetCafeDataAccessService<BookingDto> bookingService, BookingLineService bookingLineService)
         {
             _gamingStationService = gamingStationService;
             _bookingService = bookingService;
@@ -62,7 +62,7 @@ namespace NetCafeUCN.MVC.Controllers
         public ActionResult Create()
         {
             BookingGamingStationViewModel viewModel = new BookingGamingStationViewModel();
-            viewModel.GamingStations = (List<GamingStationDto>)_gamingStationService.GetAll();
+            viewModel.GamingStations = (List<GamingStationDTO>)_gamingStationService.GetAll();
 
             return View(viewModel);
         }
@@ -93,7 +93,7 @@ namespace NetCafeUCN.MVC.Controllers
                 }
                 if (!isAnyItemTrue)
                 {
-                    bookingModel.GamingStations = (List<GamingStationDto>)_gamingStationService.GetAll();
+                    bookingModel.GamingStations = (List<GamingStationDTO>)_gamingStationService.GetAll();
                     ViewBag.Error = "Du skal vælge en maskine! :(";
                     return View(bookingModel);
                 }
@@ -104,20 +104,20 @@ namespace NetCafeUCN.MVC.Controllers
                 DateTime start = DateTime.Parse(dateString, System.Globalization.CultureInfo.InvariantCulture);
                 if (!(start.AddHours(double.Parse(bookingModel.EndTime, System.Globalization.CultureInfo.InvariantCulture)).Hour <= 24))
                 {
-                    bookingModel.GamingStations = (List<GamingStationDto>)_gamingStationService.GetAll();
+                    bookingModel.GamingStations = (List<GamingStationDTO>)_gamingStationService.GetAll();
                     ViewBag.Error = "Du kan kun booke en tid indenfor vores åbningstid";
                     return View(bookingModel);
                 }
                 booking.StartTime = start;
                 booking.EndTime = start.AddHours(double.Parse(bookingModel.EndTime, System.Globalization.CultureInfo.InvariantCulture));
-                List<GamingStationDto> allGamingStations = _gamingStationService.GetAll().ToList();
+                List<GamingStationDTO> allGamingStations = _gamingStationService.GetAll().ToList();
                 if (bookingModel.GamingStations != null)
                 {
                     for (int i = 0; i < bookingModel.GamingStations.Count(); i++)
                     {
                         if (bookingModel.GamingStations[i].isChecked)
                         {
-                            booking.BookingLines.Add(new BookingLineDto()
+                            booking.BookingLines.Add(new BookingLineDTO()
                             {
                                 Quantity = 1,
                                 Stationid = allGamingStations[i].ProductID,
@@ -136,7 +136,7 @@ namespace NetCafeUCN.MVC.Controllers
                 }
                 else
                 {
-                    bookingModel.GamingStations = (List<GamingStationDto>)_gamingStationService.GetAll();
+                    bookingModel.GamingStations = (List<GamingStationDTO>)_gamingStationService.GetAll();
                     ViewBag.Error = "Tidsrummet er optaget :(";
                     return View(bookingModel);
                 }
