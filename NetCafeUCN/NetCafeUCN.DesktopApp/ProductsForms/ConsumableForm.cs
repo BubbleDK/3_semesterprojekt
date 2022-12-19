@@ -10,10 +10,14 @@ namespace NetCafeUCN.DesktopApp
         ProductsForm productsForm;
         //Type til at bestemme om man redigerer eller opretter nyt objekt
         private string type = "";
+        /// <summary>
+        /// Constructor til at oprette consumable product
+        /// </summary>
+        /// <param name="productsForm">Base productsform indsættes</param>
         public ConsumableForm(ProductsForm productsForm)
         {
             InitializeComponent();
-            consumableService = new ConsumableService(MainMenu.BaseUrl + "Consumable/");
+            consumableService = new ConsumableService(MainMenu.BaseUrl + "Consumables/");
             type = "Create";
             c = new();
             txtProductType.Text = "Consumable";
@@ -21,6 +25,12 @@ namespace NetCafeUCN.DesktopApp
             this.txtProductNum.Enabled = true;
         }
 
+        /// <summary>
+        /// Constructor til at opdatere et consumable object
+        /// </summary>
+        /// <param name="c">En DTO af consumable, det objekt der skal opdateres</param>
+        /// <param name="service">Service som bruges når der skal kaldes til API</param>
+        /// <param name="productsForm">Base productsform indsættes</param>
         public ConsumableForm(ConsumableDTO c, INetCafeDataAccess<ConsumableDTO> service, ProductsForm productsForm)
         {
             InitializeComponent();
@@ -34,6 +44,9 @@ namespace NetCafeUCN.DesktopApp
             this.productsForm = productsForm;
         }
 
+        /// <summary>
+        /// Metoden køres når der bliver trykket bekræft i formen.
+        /// </summary>
         private void confirmOption()
         {
             c.Name = txtProductName.Text;

@@ -14,11 +14,18 @@ namespace NetCafeUCN.DesktopApp.UserForms
     {
         UsersForm userForm;
 
+        /// <summary>
+        /// En enum til at bestemme hvilke typer af users der kan oprettes.
+        /// </summary>
         private enum Type
         {
             Customer = 0,
             Employee = 1,
         }
+        /// <summary>
+        /// Constructoren til denne form
+        /// </summary>
+        /// <param name="userForm">Base userform sendes med</param>
         public UserInputDialog(UsersForm userForm)
         {
             InitializeComponent();
@@ -32,6 +39,9 @@ namespace NetCafeUCN.DesktopApp.UserForms
             confirmInput();
             this.Dispose();
         }
+        /// <summary>
+        /// Metoden der køres når man trykker på bekræft
+        /// </summary>
         private void confirmInput()
         {
             if (cmbInput.SelectedIndex == 0)

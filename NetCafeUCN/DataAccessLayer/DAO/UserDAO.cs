@@ -9,7 +9,7 @@ using static NetCafeUCN.DAL.Model.User;
 
 namespace NetCafeUCN.DAL.DAO
 {
-    public class UserDAO
+    public class UserDAO : INetCafeUCNUserDAO
     {
         public IEnumerable<User> GetAll()
         {
@@ -56,7 +56,7 @@ namespace NetCafeUCN.DAL.DAO
             }
         }
 
-        public UserLogin? GetHashByEmail(string email)
+        public UserLogin GetHashByEmail(string email)
         {
             string sqlStatement = "SELECT Email, passwordHash from nc_person where @email = email";
             UserLogin? user = null;

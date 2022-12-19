@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace NetCafeUCN.API.DTO
 {
+    /// <summary>
+    ///  PersonDTO model
+    /// </summary>
     public class PersonDTO
     {
         public string? Name { get; set; }

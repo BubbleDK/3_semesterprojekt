@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace NetCafeUCN.MVC.Models
 {
+    /// <summary>
+    /// GamingStationDto model klasse, nedarver fra ProductDto
+    /// </summary>
     public class GamingStationDto : ProductDto
     {
         public int ProductID { get; set; } 

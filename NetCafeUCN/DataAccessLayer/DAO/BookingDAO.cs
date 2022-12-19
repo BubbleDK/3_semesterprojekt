@@ -1,7 +1,6 @@
 ﻿using DataAccessLayer.Exceptions;
 using NetCafeUCN.DAL.Model;
 using System.Data.SqlClient;
-using System.Globalization;
 using System.Data;
 
 namespace NetCafeUCN.DAL.DAO
@@ -23,7 +22,7 @@ namespace NetCafeUCN.DAL.DAO
         public bool Add(Booking o)
         {
             CustomerDAO customerDAO = new CustomerDAO();
-            if (customerDAO.GetId(o.PhoneNo) == 0) return false;
+            if (customerDAO.GetPhoneNo(o.PhoneNo) != true) return false;
             SqlTransaction trans;
             int id = 0;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
@@ -35,8 +34,7 @@ namespace NetCafeUCN.DAL.DAO
                     {
                         foreach (var item in o.BookingLines)
                         {
-                            Console.WriteLine(BookingCheck(o.StartTime, o.EndTime, item.StationId));
-                            if (BookingCheck(o.StartTime, o.EndTime, item.StationId)) return false;
+                            if(BookingCheck(o.StartTime, o.EndTime, item.StationId)) return false;
                         }
                         using (SqlCommand bookingCommand = new SqlCommand(
                                 "INSERT INTO nc_Booking VALUES(@bookingNo, @startTime, @endTime, @phoneNo); SELECT SCOPE_IDENTITY();", conn, trans))
@@ -110,7 +108,6 @@ namespace NetCafeUCN.DAL.DAO
                 }
             }
         }
-        //TODO: FIX: Skal ikke hente bookinglines her, da bookinglines gør det slow. Samtidigt skal telefonnumre gemmes på ordren i stedet for id.
         public IEnumerable<Booking> GetAll()
         {
             string sqlStatement = "SELECT * FROM nc_Booking";
@@ -222,17 +219,20 @@ namespace NetCafeUCN.DAL.DAO
         {
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
-                //TODO: Skriv lækker sql kode til at tjekke inbetween tiden og tjekke den ene dag man vil booke. 
-                using SqlCommand command = new SqlCommand("SELECT stationid, startTime, endTime FROM nc_Booking INNER JOIN nc_BookingLine ON " +
-                    "nc_Booking.id = nc_BookingLine.bookingid where startTime = @startTime AND endTime = @endTime AND stationid = @stationid", conn);
-                command.Parameters.AddWithValue("@startTime", startTime);
-                command.Parameters.AddWithValue("@endTime", endTime);
-                command.Parameters.AddWithValue("@stationid", stationid);
+                using SqlCommand CheckCommandv2 = new SqlCommand("SELECT stationid, startTime, endTime FROM nc_Booking " +
+                    "INNER JOIN nc_BookingLine ON nc_Booking.id = nc_BookingLine.bookingid " +
+                    "WHERE @startTime >= nc_Booking.startTime AND @startTime < nc_Booking.endTime " +
+                    "OR @endTime > nc_Booking.startTime AND @endTime <= nc_Booking.endTime " +
+                    "OR @startTime <= nc_Booking.startTime AND @endTime >= nc_Booking.endTime " +
+                    "AND stationid = @stationid", conn);
+                CheckCommandv2.Parameters.AddWithValue("@startTime", startTime);
+                CheckCommandv2.Parameters.AddWithValue("@endTime", endTime);
+                CheckCommandv2.Parameters.AddWithValue("@stationid", stationid);
                 {
                     try
                     {
                         conn.Open();
-                        SqlDataReader reader = command.ExecuteReader();
+                        SqlDataReader reader = CheckCommandv2.ExecuteReader();
                         return reader.HasRows;
                     }
                     catch (DataAccessException)

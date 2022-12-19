@@ -1,5 +1,4 @@
-﻿using NetCafeUCN.DAL.DAO;
-using NetCafeUCN.DesktopApp.DTO;
+﻿using NetCafeUCN.DesktopApp.DTO;
 using NetCafeUCN.DesktopApp.ServiceLayer;
 using System;
 using System.Collections.Generic;
@@ -24,20 +23,29 @@ namespace NetCafeUCN.DesktopApp.BookingForms
         BookingsForm bookingsForm;
         BookingDTO bookingDTO;
         string windowStatus;
+
+        /// <summary>
+        /// Constructor til at oprette ny booking hvor vi benytter informationer fra tidligere form
+        /// </summary>
+        /// <param name="bookingsFormWeCameFrom">Indsæt formen man kom fra</param>
         public NewBookingForm(BookingsForm bookingsFormWeCameFrom)
         {
             InitializeComponent();
             InitializeTimes();
             clndPicker.MinDate = DateTime.Now;
-            gamingStationService = new GamingStationService(MainMenu.BaseUrl + "Gamingstation/");
-            bookingService = new BookingService(MainMenu.BaseUrl + "Booking/");
-            customerService = new CustomerService(MainMenu.BaseUrl + "Customer/");
-            bookingLineService = new BookingLineService(MainMenu.BaseUrl + "BookingLine/");
+            gamingStationService = new GamingStationService(MainMenu.BaseUrl + "Gamingstations/");
+            bookingService = new BookingService(MainMenu.BaseUrl + "Bookings/");
+            customerService = new CustomerService(MainMenu.BaseUrl + "Customers/");
+            bookingLineService = new BookingLineService(MainMenu.BaseUrl + "BookingLines/");
             RefreshGamingStations(gamingStationService.GetAll().ToList());
             bookingsForm = bookingsFormWeCameFrom;
             windowStatus = "Create";
         }
-
+        
+        /// <summary>
+        /// Constructor til når der skal opdateres en booking (endnu ikke implementeret)
+        /// </summary>
+        /// <param name="bookingToUpdate">Indsæt den booking man vil opdatere</param>
         public NewBookingForm(BookingDTO bookingToUpdate)
         {
             //TODO: SKAL MARKERE ALLE GAMINGSTATIONS I LISTEN SOM ER PÅ BOOKINGEN 
@@ -55,6 +63,10 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             windowStatus = "Update";
         }
 
+        /// <summary>
+        /// Metoden til at refresh datagridviewet med tilgængelige Gamingstations
+        /// </summary>
+        /// <param name="availableGamingStations">En liste med de tilgængelige Gamingstations</param>
         private void RefreshGamingStations(List<GamingStationDTO> availableGamingStations)
         {
             dgvAvailableGamingstations.DataSource = availableGamingStations;
@@ -67,15 +79,17 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             dgvAvailableGamingstations.Columns["ProductNumber"].HeaderText = "Produkt nr:";
         }
 
+        /// <summary>
+        /// Indsæt tider på de to comboboxes i vinduet
+        /// En box med muligheder for starttid og en for sluttid
+        /// </summary>
         private void InitializeTimes()
         {
             cmbStartTime.DataSource = DateTimeUI.GetStartTimes();
             cmbEndTime.DataSource = DateTimeUI.GetEndTimes();
         }
-
         private void cmbStartTime_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            //TODO: Check om tidspunkt ligger efter nuværende tidspunkt på datetime.now
             if (cmbEndTime.SelectedIndex <= cmbStartTime.SelectedIndex)
             {
                 cmbEndTime.SelectedIndex = cmbStartTime.SelectedIndex + 1;
@@ -85,7 +99,6 @@ namespace NetCafeUCN.DesktopApp.BookingForms
 
         private void cmbEndTime_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            //TODO: Check om tidspunkt ligger efter nuværende tidspunkt på datetime.now
             if (cmbEndTime.SelectedIndex <= cmbStartTime.SelectedIndex)
             {
                 cmbEndTime.SelectedIndex = cmbStartTime.SelectedIndex + 1;
@@ -98,6 +111,9 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             RefreshGamingStationsTimeChanged();
         }
 
+        /// <summary>
+        /// Metode til at opdatere listen af Gamingstations baseret på de tidspunkter man vælger i combobox i vinduet
+        /// </summary>
         private void RefreshGamingStationsTimeChanged()
         {
             DateTime currDate = clndPicker.SelectionStart;
@@ -166,6 +182,9 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             }
         }
 
+        /// <summary>
+        /// Metode til at opdatere en booking (endnu ikke implementeret)
+        /// </summary>
         private void UpdateBooking()
         {
             DateTime currDate = clndPicker.SelectionStart;
@@ -179,7 +198,7 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             foreach (DataGridViewRow row in dgvAvailableGamingstations.SelectedRows)
             {
                 GamingStationDTO currentGamingstation = (GamingStationDTO)row.DataBoundItem;
-                bookingDTO.addToBookingLine(new BookingLineDTO { Quantity = 1, StationId = currentGamingstation.ProductID, ConsumableId = -1 });
+                bookingDTO.addToBookingLine(new BookingLineDTO { Quantity = 1, StationId = (int)currentGamingstation.ProductID, ConsumableId = -1 });
             }
             if (CheckPhoneNo(txtPhoneNo.Text))
             {
@@ -200,6 +219,9 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             }
         }
 
+        /// <summary>
+        /// Metode til at oprette en booking med informationerne fra winforms
+        /// </summary>
         private void CreateBooking()
         {
             BookingDTO bookingDTO = new BookingDTO();
@@ -217,7 +239,7 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             foreach (DataGridViewRow row in dgvAvailableGamingstations.SelectedRows)
             {
                 GamingStationDTO currentGamingstation = (GamingStationDTO)row.DataBoundItem;
-                bookingDTO.addToBookingLine(new BookingLineDTO { Quantity = 1, StationId = currentGamingstation.ProductID, ConsumableId = -1 });
+                bookingDTO.addToBookingLine(new BookingLineDTO { Quantity = 1, StationId = (int)currentGamingstation.ProductID, ConsumableId = -1 });
             }
             if (CheckPhoneNo(txtPhoneNo.Text))
             {
@@ -253,6 +275,11 @@ namespace NetCafeUCN.DesktopApp.BookingForms
             }
         }
 
+        /// <summary>
+        /// Regex til at validere et telefonnummer baseret på dansk standard af 8 tal som ikke må starte på 0
+        /// </summary>
+        /// <param name="phoneNo">Det indtastede telefonnummer</param>
+        /// <returns></returns>
         private bool CheckPhoneNo(string phoneNo)
         {
             Regex validatePhoneNoRegex = new Regex("^\\+?[1-9][0-9]{7}$");

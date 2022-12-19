@@ -19,7 +19,12 @@ namespace NetCafeUCN.DesktopApp.ServiceLayer
         }
         public bool Add(GamingStationDTO o)
         {
-            return RestClient.Execute<GamingStationDTO>(new RestRequest($"{BaseUri}", Method.Post).AddJsonBody(o)).IsSuccessful;
+            var request = new RestRequest($"{BaseUri}", Method.Post);
+            request.AddJsonBody(o);
+            var response = RestClient.Execute<GamingStationDTO>(request);
+            var result = response.Content;
+            if (result == "false") { return false; }
+            return response.IsSuccessStatusCode;
         }
 
         public GamingStationDTO? Get(dynamic key)

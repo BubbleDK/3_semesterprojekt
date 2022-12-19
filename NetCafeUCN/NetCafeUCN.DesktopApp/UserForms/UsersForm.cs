@@ -16,14 +16,20 @@ namespace NetCafeUCN.DesktopApp.UserForms
     {
         INetCafeDataAccess<CustomerDTO> customerService;
         INetCafeDataAccess<EmployeeDTO> employeeService;
+        /// <summary>
+        /// Constructoren til at oprette formen for alle users/brugere i systemet.
+        /// </summary>
         public UsersForm()
         {
             InitializeComponent();
-            customerService = new CustomerService(MainMenu.BaseUrl + "Customer/");
-            employeeService = new EmployeeService(MainMenu.BaseUrl + "Employee/");
+            customerService = new CustomerService(MainMenu.BaseUrl + "customers");
+            employeeService = new EmployeeService(MainMenu.BaseUrl + "employees");
             RefreshList();
         }
 
+        /// <summary>
+        /// Metoden til at opdatere datagridview komponentet
+        /// </summary>
         public void RefreshList()
         {
             dgvCustomers.DataSource = null;
@@ -51,6 +57,9 @@ namespace NetCafeUCN.DesktopApp.UserForms
             DeleteSelectedUser();
         }
 
+        /// <summary>
+        /// Slet den valgte user fra listen
+        /// </summary>
         private void DeleteSelectedUser()
         {
             if (dgvCustomers.CurrentRow != null)
@@ -82,6 +91,9 @@ namespace NetCafeUCN.DesktopApp.UserForms
             
         }
 
+        /// <summary>
+        /// Opdater den valgte bruger fra listen
+        /// </summary>
         private void UpdateSelectedUser()
         {
             if (dgvCustomers.CurrentRow != null)
@@ -100,7 +112,10 @@ namespace NetCafeUCN.DesktopApp.UserForms
 
         private void btnNewUser_Click(object sender, EventArgs e)
         {
-            ShowInputDialog();
+            MessageBox.Show("Denne funktion er ikke tilgængelig i øjeblikket", "Ikke tilgængelig", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            /*For at denne funktion virker skal der kunne laves hashed passwords via BCrypt i desktop også
+            Pt påsættes der ikke et password*/
+            //ShowInputDialog();
         }
 
         private void ShowInputDialog()

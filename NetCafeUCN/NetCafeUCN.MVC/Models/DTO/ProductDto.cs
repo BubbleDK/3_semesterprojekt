@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace NetCafeUCN.MVC.Models
 {
+    /// <summary>
+    /// ProductDto model klasse
+    /// </summary>
     public class ProductDto
     {
         public string? Name { get; set; }

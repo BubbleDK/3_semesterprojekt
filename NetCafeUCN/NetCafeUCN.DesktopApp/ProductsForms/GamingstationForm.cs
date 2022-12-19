@@ -12,10 +12,14 @@ namespace NetCafeUCN.DesktopApp
 
         //Type til at bestemme om man redigerer eller opretter nyt objekt
         private string type = "";
+        /// <summary>
+        /// Constructor til at oprette gamingstation formen
+        /// </summary>
+        /// <param name="productsForm">Base productsform sendes med</param>
         public GamingstationForm(ProductsForm productsForm)
         {
             InitializeComponent();
-            gamingstationService = new GamingStationService(MainMenu.BaseUrl + "Gamingstation/");
+            gamingstationService = new GamingStationService(MainMenu.BaseUrl + "Gamingstations/");
             type = "Create";
             gs = new();
             txtProductType.Text = "Gamingstation";
@@ -23,6 +27,12 @@ namespace NetCafeUCN.DesktopApp
             this.txtProductNum.Enabled = true;
         }
 
+        /// <summary>
+        /// Constructor til at opdatere en gamingstation
+        /// </summary>
+        /// <param name="gs">Den gamingstation man ønsker at opdatere</param>
+        /// <param name="service">Den service der skal bruges til at kontakte API'et</param>
+        /// <param name="productsForm">Base products form sendes med</param>
         public GamingstationForm(GamingStationDTO gs, INetCafeDataAccess<GamingStationDTO> service, ProductsForm productsForm)
         {
             InitializeComponent();
@@ -43,6 +53,9 @@ namespace NetCafeUCN.DesktopApp
             this.Dispose();
         }
 
+        /// <summary>
+        /// Metoden der kaldes når man trykker på bekræft knappen.
+        /// </summary>
         private void confirmOption()
         {
             gs.Name = txtProductName.Text;

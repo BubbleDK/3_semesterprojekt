@@ -21,6 +21,7 @@ namespace NetCafeUCN.DAL.DAO
         public bool Add(Customer o)
         {
             if(GetPhoneNo(o.Phone) == true) return false;
+            if(EmailCheck(o.Email) == true) return false;
             SqlTransaction trans;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
@@ -210,28 +211,52 @@ namespace NetCafeUCN.DAL.DAO
                 }
             }
         }
-        public int GetId(dynamic key)
+        //public int GetId(dynamic key)
+        //{
+        //    int id = 0;
+        //    using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
+        //    {
+        //        SqlCommand command = new SqlCommand("SELECT id FROM nc_Person WHERE phone = @phone", conn);
+        //        command.Parameters.AddWithValue("@phone", key);
+        //        {
+        //            try
+        //            {
+        //                conn.Open();
+        //                SqlDataReader reader = command.ExecuteReader();
+        //                while (reader.Read())
+        //                {
+        //                    id = (int)reader["id"];
+                            
+        //                }
+        //                return id;
+        //            }
+        //            catch (Exception)
+        //            {
+
+        //                throw new DataAccessException("Can't access data");
+        //            }
+        //        }
+        //    }
+        //}
+        public bool EmailCheck(string email)
         {
-            int id = 0;
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
             {
-                SqlCommand command = new SqlCommand("SELECT id FROM nc_Person WHERE phone = @phone", conn);
-                command.Parameters.AddWithValue("@phone", key);
+                SqlCommand command = new SqlCommand("SELECT email FROM nc_Person WHERE email = @email", conn);
+                command.Parameters.AddWithValue("@email", email);
                 {
                     try
                     {
                         conn.Open();
                         SqlDataReader reader = command.ExecuteReader();
-                        while (reader.Read())
+                        if (reader.HasRows)
                         {
-                            id = (int)reader["id"];
-                            
+                            return true;
                         }
-                        return id;
+                        else { return false; }
                     }
                     catch (Exception)
                     {
-
                         throw new DataAccessException("Can't access data");
                     }
                 }

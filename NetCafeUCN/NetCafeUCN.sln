@@ -13,8 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCafeUCN.DesktopApp", "Ne
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCafeUCN.MVC", "NetCafeUCN.MVC\NetCafeUCN.MVC.csproj", "{AC2FBD2C-69AF-40DC-A10E-3366D7CFE358}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing", "Testing\Testing.csproj", "{48FB2D8F-33AE-408C-B28E-70C0D64AD26C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,10 +39,6 @@ Global
 		{AC2FBD2C-69AF-40DC-A10E-3366D7CFE358}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC2FBD2C-69AF-40DC-A10E-3366D7CFE358}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC2FBD2C-69AF-40DC-A10E-3366D7CFE358}.Release|Any CPU.Build.0 = Release|Any CPU
-		{48FB2D8F-33AE-408C-B28E-70C0D64AD26C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{48FB2D8F-33AE-408C-B28E-70C0D64AD26C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{48FB2D8F-33AE-408C-B28E-70C0D64AD26C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{48FB2D8F-33AE-408C-B28E-70C0D64AD26C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

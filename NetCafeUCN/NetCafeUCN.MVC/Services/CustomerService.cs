@@ -24,8 +24,12 @@ namespace NetCafeUCN.MVC.Services
         //
         public bool Add(CustomerDto o)
         {
-            return RestClient.Execute<CustomerDto>(new RestRequest($"{BaseUri}", Method.Post).AddJsonBody(o)).IsSuccessful;
-
+            var request = new RestRequest($"{BaseUri}", Method.Post);
+            request.AddJsonBody(o);
+            var response = RestClient.Execute<CustomerDto>(request);
+            var result = response.Content;
+            if(result == "false") { return false; }
+            return response.IsSuccessStatusCode;
         }
 
         public CustomerDto? Get(dynamic key)

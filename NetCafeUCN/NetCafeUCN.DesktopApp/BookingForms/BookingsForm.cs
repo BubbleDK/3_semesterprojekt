@@ -7,13 +7,20 @@ namespace NetCafeUCN.DesktopApp
     public partial class BookingsForm : Form
     {
         INetCafeDataAccess<BookingDTO> bookingService;
+
+        /// <summary>
+        /// Constructor til bookingformen
+        /// </summary>
         public BookingsForm()
         {
             InitializeComponent();
-            bookingService = new BookingService(MainMenu.BaseUrl + "Booking/");
+            bookingService = new BookingService(MainMenu.BaseUrl + "Bookings/");
             RefreshList();
         }
 
+        /// <summary>
+        /// Metode til at opdatere listen over bookings
+        /// </summary>
         public void RefreshList()
         {
             dgvBookings.DataSource = null;
@@ -58,6 +65,9 @@ namespace NetCafeUCN.DesktopApp
             DeleteBooking();
         }
 
+        /// <summary>
+        /// Metode til at slette en booking, her tager man den booking man har markeret.
+        /// </summary>
         private void DeleteBooking()
         {
             BookingDTO bookingToRemove = (BookingDTO)dgvBookings.CurrentRow.DataBoundItem;

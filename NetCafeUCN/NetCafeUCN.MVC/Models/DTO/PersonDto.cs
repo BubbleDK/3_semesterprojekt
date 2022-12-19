@@ -9,11 +9,16 @@ using RequiredAttribute = System.ComponentModel.DataAnnotations.RequiredAttribut
 
 namespace NetCafeUCN.MVC.Models
 {
+    /// <summary>
+    /// PersonDto model klasse, som er en abstrakt klasse
+    /// </summary>
     public abstract class PersonDto
     {
         [Required]
         public string Name { get; set; } = string.Empty;
         [Required]
+        [RegularExpression(@"^([0-9a-zA-Z]([\+\-_\.][0-9a-zA-Z]+)*)+@(([0-9a-zA-Z][-\w]*[0-9a-zA-Z]*\.)+[a-zA-Z0-9]{2,3})$", 
+            ErrorMessage = "Ikke gyldigt email format. Eksempel af korrekt format: joe.example@example.org")]
         [EmailAddress(ErrorMessage = "Ikke en gyldig email")]
         public string Email { get; set; } = string.Empty;
         [Required(ErrorMessage = "Skriv et gyldigt telefonnummer")]

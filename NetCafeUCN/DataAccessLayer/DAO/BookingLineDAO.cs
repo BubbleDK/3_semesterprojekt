@@ -1,16 +1,19 @@
 ﻿using DataAccessLayer.Exceptions;
 using NetCafeUCN.DAL.Model;
-using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NetCafeUCN.DAL.DAO
 {
-    public class BookingLineDAO
+    /// <summary>
+    ///  BookingLineDAO klassen, som implementere INetCafeUCNBookingLineDAO
+    /// </summary>
+    public class BookingLineDAO : INetCafeUCNBookingLineDAO
     {
+        /// <summary>
+        /// Metode som henter alle bookinglines tilknyttet til en booking
+        /// </summary>
+        /// <param name="bookingNo">Et booking nummer</param>
+        /// <returns>Returnere en collection af BookingLine</returns>
         public IEnumerable<BookingLine> GetBookingLinesByBooking(string bookingNo)
         {
             List<BookingLine> bookingLines = new List<BookingLine>();

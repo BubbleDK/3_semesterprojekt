@@ -46,14 +46,14 @@ public class DAOTests
     }
 
     [Fact]
-    public void TestCustomerDAO()
+    public void TestCustomerCRUDDAO()
     {
 
         //Arrange
         Customer customer = new Customer();
-        customer.Name = "Bob";
+        customer.Name = "Bob the Tester";
         customer.Email = "Bob@email.com";
-        customer.Phone = "1";
+        customer.Phone = "10000000";
         customer.PersonType = "Customer";
         customer.IsActive = true;
         customer.Password = BCryptTool.HashPassword("password");
@@ -75,7 +75,7 @@ public class DAOTests
             //Assert
             Assert.Equivalent(customer, customer2);
 
-            customer.Name = "Bobby";
+            customer.Name = "Bobby the Tester";
 
             Assert.True(customerDAO.Update(customer));
 
@@ -88,7 +88,7 @@ public class DAOTests
         {
             SqlCommand deleteCommand = new SqlCommand("DELETE nc_Person WHERE phone = @phoneNo", conn);
 
-            deleteCommand.Parameters.AddWithValue("@phoneNo", 1);
+            deleteCommand.Parameters.AddWithValue("@phoneNo", 10000000);
             deleteCommand.ExecuteNonQuery();
 
             conn.Close();
@@ -96,7 +96,104 @@ public class DAOTests
         }
     }
     [Fact]
-    public void TestBookingDAO()
+    public void TestGamingStationCRUDDAO()
+    {
+
+        //Arrange
+        GamingStation gamingStation = new GamingStation();
+        gamingStation.ProductNumber = "Test1000";
+        gamingStation.Type = "Gamingstation";
+        gamingStation.Name = "Gamer 1";
+        gamingStation.IsActive = true;
+        gamingStation.SeatNumber = "1";
+        gamingStation.Description = "Gamer PC 1 på plads nr 1";
+        GamingStationDAO gamingStationDAO = new GamingStationDAO();
+        SqlConnection conn = new SqlConnection(DBConnection.ConnectionString);
+
+        try
+        {
+            //Act
+            conn.Open();
+
+
+            gamingStationDAO.Add(gamingStation);
+
+            GamingStation gamingStation2 = new GamingStation();
+            gamingStation2 = gamingStationDAO.Get(gamingStation.ProductNumber);
+            //Assert
+            Assert.Equal(gamingStation.ProductNumber, gamingStation2.ProductNumber);
+
+            gamingStation.Name = "Gamingstation 1";
+            gamingStation.Description = "Gamingstation 1 på plads nr 1";
+
+            Assert.True(gamingStationDAO.Update(gamingStation));
+
+            gamingStationDAO.Remove(gamingStation.ProductNumber);
+
+            Assert.False(gamingStationDAO.Get(gamingStation.ProductNumber).IsActive);
+
+        }
+        finally
+        {
+            SqlCommand deleteCommand = new SqlCommand("DELETE nc_Product WHERE productNo = @productNo", conn);
+
+            deleteCommand.Parameters.AddWithValue("@productNo", "Test1000");
+            deleteCommand.ExecuteNonQuery();
+
+            conn.Close();
+        }
+    }
+
+    [Fact]
+    public void TestConsumableCRUDDAO()
+    {
+
+        //Arrange
+        Consumable consumable = new Consumable();
+        consumable.ProductNumber = "Test2000";
+        consumable.Type = "Consumable";
+        consumable.Name = "Consumable 1";
+        consumable.IsActive = true;
+        consumable.Description = "Consumable 1";
+        ConsumableDAO consumableDAO = new ConsumableDAO();
+        SqlConnection conn = new SqlConnection(DBConnection.ConnectionString);
+
+        try
+        {
+            //Act
+            conn.Open();
+
+
+            consumableDAO.Add(consumable);
+
+            Consumable consumable2 = new Consumable();
+            consumable2 = consumableDAO.Get(consumable.ProductNumber);
+            //Assert
+            Assert.Equivalent(consumable, consumable2);
+
+            consumable.Name = "Banan";
+            consumable.Description = "Banan";
+
+            Assert.True(consumableDAO.Update(consumable));
+
+            consumableDAO.Remove(consumable.ProductNumber);
+
+            Assert.Null(consumableDAO.Get(consumable.ProductNumber));
+
+        }
+        finally
+        {
+            SqlCommand deleteCommand = new SqlCommand("DELETE nc_Product WHERE productNo = @productNo", conn);
+
+            deleteCommand.Parameters.AddWithValue("@productNo", "Test2000");
+            deleteCommand.ExecuteNonQuery();
+
+            conn.Close();
+        }
+    }
+    [Fact]
+    //Test Create Read og Delete booking
+    public void TestBookingCRDDAO()
     {
 
         //Arrange
@@ -105,12 +202,12 @@ public class DAOTests
         Booking bookingSaved = new Booking();
         booking.StartTime = DateTime.Parse("2222 - 12 - 06T11: 00:00");
         booking.EndTime = DateTime.Parse("2222 - 12 - 06T12: 00:00");
-        //Nummeret skal være i databasen
+        //Nummeret SKAL være i databasen
         booking.PhoneNo = "88888888";
 
         BookingLine boookingLine = new BookingLine();
         boookingLine.StationId = 1;
-        boookingLine.Quantity = 1;
+        boookingLine.Quantity = 0;
         boookingLine.ConsumableId = -1;
         booking.addToBookingLine(boookingLine);
 
@@ -142,10 +239,6 @@ public class DAOTests
 
             Assert.Equivalent(booking.PhoneNo, bookingSaved.PhoneNo);
             Assert.Equivalent(booking.BookingLines, bookingSaved.BookingLines);
-
-            booking.EndTime = booking.EndTime.AddHours(1);
-
-            Assert.True(bookingDAO.Update(bookingSaved));
 
             bookingDAO.Remove(bookingSaved.BookingNo);
 

@@ -7,33 +7,52 @@ using NetCafeUCN.DAL.DAO;
 
 namespace NetCafeUCN.API.Controllers
 {
-    [Route("api/[controller]")]
+    /// <summary>
+    ///  API Controller for User, som implementere ControllerBase
+    /// </summary>
+    [Route("users")]
     [ApiController]
     public class UserController : ControllerBase
     {
-        private UserDAO userDAO;
-        public UserController(UserDAO userDAO)
+        private readonly INetCafeUCNUserDAO userDAO;
+        /// <summary>
+        ///  UserController constructor
+        /// </summary>
+        /// <param name="userDAO">Model som skal sættes for controlleren</param>
+        public UserController(INetCafeUCNUserDAO userDAO)
         {
             this.userDAO = userDAO;
         }
 
-
+        /// <summary>
+        ///  Henter alle users
+        /// </summary>
+        /// <returns>Returnere en collection af users</returns>
         [HttpGet]
         public IEnumerable<UserDTO> GetUsers()
         {
             return userDAO.GetAll().ToDtos();
         }
 
-
+        /// <summary>
+        ///  Henter en bestemt user
+        /// </summary>
+        /// <param name="user">Et objekt af en user</param>
+        /// <returns>Returnere status kode 200 for OK</returns>
         [HttpPost]
         public ActionResult<UserDTO?> Get([FromBody] UserDTO user)
         {
             return Ok(userDAO.GetUserByLogin(user.Email, user.PasswordHash).ToDto());
         }
 
+        /// <summary>
+        ///  Henter et bestemt hash ved brug af email
+        /// </summary>
+        /// <param name="user">Et objekt af en user</param>
+        /// <returns>Returnere status kode 200 for OK</returns>
         [HttpPost]
         [Route("GetHashByEmail")]
-        public ActionResult<UserLoginDto?> GetHashByEmail([FromBody] UserLoginDto user)
+        public ActionResult<UserLoginDTO?> GetHashByEmail([FromBody] UserLoginDTO user)
         {
             return Ok(userDAO.GetHashByEmail(user.Email));
         }
