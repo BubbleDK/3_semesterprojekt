@@ -11,7 +11,7 @@ namespace NetCafeUCN.DesktopApp
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new MainMenu("https://localhost:7197/"));
+            Application.Run(new MainMenu("http://79.171.148.186/api/"));
         }
     }
 }
