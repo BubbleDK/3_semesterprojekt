@@ -5,7 +5,7 @@
     /// </summary>
     public class CustomerEmployeeViewModel
     {
-        public IEnumerable<EmployeeDto> employees { get; set;}
-        public IEnumerable<CustomerDto> customers { get; set;}
+        public IEnumerable<EmployeeDto> employees { get; set;} = Enumerable.Empty<EmployeeDto>();
+        public IEnumerable<CustomerDto> customers { get; set;} = Enumerable.Empty<CustomerDto>();
     }
 }

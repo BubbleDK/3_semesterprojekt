@@ -17,7 +17,7 @@ namespace NetCafeUCN.MVC.Controllers
     {
         readonly INetCafeDataAccessService<GamingStationDto> _gamingStationService;
         readonly INetCafeDataAccessService<BookingDto> _bookingService;
-        BookingLineService _bookingLineService;
+        readonly BookingLineService _bookingLineService;
 
         // GET: BookingController
         /// <summary>
@@ -82,15 +82,17 @@ namespace NetCafeUCN.MVC.Controllers
             try
             {
                 bool isAnyItemTrue = false;
-                foreach (var item in bookingModel.GamingStations)
+                if (bookingModel.GamingStations != null)
                 {
-                    if (item.isChecked)
+                    foreach (var item in bookingModel.GamingStations)
                     {
-                        isAnyItemTrue = true;
-                        break;
+                        if (item.isChecked)
+                        {
+                            isAnyItemTrue = true;
+                            break;
+                        }
                     }
                 }
-
                 if (!isAnyItemTrue)
                 {
                     bookingModel.GamingStations = (List<GamingStationDto>)_gamingStationService.GetAll();
@@ -147,31 +149,6 @@ namespace NetCafeUCN.MVC.Controllers
             }
         }
  
-        [Authorize]
-        // GET: BookingController/Edit/5
-        // BLIVER IKKE BRUGT?
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: BookingController/Edit/5
-        // BLIVER IKKE BRUGT?
-        [HttpPost]
-        [Authorize]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
         /// <summary>
         /// Get metode til Delete view.
         /// </summary>
