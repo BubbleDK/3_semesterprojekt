@@ -35,7 +35,6 @@ namespace NetCafeUCN.MVC.Services
         public bool Update(GamingStationDTO o)
         {
             return RestClient.Execute<GamingStationDTO>(new RestRequest($"{BaseUri}/", Method.Put).AddJsonBody(o)).IsSuccessful;
-            //return RestClient.Execute<GamingStationDto>(new RestRequest($"{BaseUri}/{o}",Method.Put)).IsSuccessful;
         }
     }
 }

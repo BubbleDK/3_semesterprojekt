@@ -31,7 +31,6 @@ namespace NetCafeUCN.MVC.Services
             var request = new RestRequest($"{BaseUri}/{bookingNo}", Method.Get);
             var response = RestClient.Execute<IEnumerable<BookingLineDTO>>(request);
             return response.Data;
-            //return RestClient.Execute<IEnumerable<BookingLineDTO>>(new RestRequest($"{BaseUri}{bookingNo}", Method.Get)).Data;
         }
     }
 }
