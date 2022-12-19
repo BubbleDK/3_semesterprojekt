@@ -28,11 +28,5 @@
         public GamingStation()
         {
         }
-
-        public override string ToString()
-        {
-
-            return ProductNumber + SeatNumber;
-        }
     }
 }
