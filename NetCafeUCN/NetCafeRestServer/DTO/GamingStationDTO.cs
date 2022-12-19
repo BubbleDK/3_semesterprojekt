@@ -12,9 +12,6 @@ namespace NetCafeUCN.API.DTO
         public string? SeatNumber { get; set; }
         public string? Description { get; set; }
 
-        public override string ToString()
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

@@ -7,10 +7,6 @@
         {
 
         }
-        public override string ToString()
-        {
-
-            return ProductNumber + Description;
-        }
+        
     }
 }

@@ -24,8 +24,6 @@ namespace NetCafeUCN.API.DTO
         {
         }
 
-        public override abstract string ToString();
-
 
     }
 }
