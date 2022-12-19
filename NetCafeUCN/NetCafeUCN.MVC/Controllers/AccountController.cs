@@ -69,7 +69,10 @@ namespace NetCafeUCN.MVC.Controllers
             return View();
         }
 
-        // Skal der skrives dokumentation til private metoder?
+        /// <summary>
+        /// Bruges til at logge dig, via. dine brugeroplysninger
+        /// </summary>
+        /// <param name="user">UserDto objekt</param>
         private async Task SignIn(UserDto user)
         {
             var claims = new List<Claim>

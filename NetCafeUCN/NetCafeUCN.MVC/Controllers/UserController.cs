@@ -10,17 +10,30 @@ using System.Linq;
 
 namespace NetCafeUCN.MVC.Controllers
 {
+    /// <summary>
+    /// UserController klasse, som nedarver fra Controller
+    /// </summary>
     [Authorize]
     public class UserController : Controller
     {
         readonly INetCafeDataAccessService<CustomerDto> _customerService;
         readonly INetCafeDataAccessService<EmployeeDto> _employeeService;
+
+        /// <summary>
+        /// UserController constructor
+        /// </summary>
+        /// <param name="customerService">Sæt den customer service som skal bruges i klassen</param>
+        /// <param name="employeeService">Sæt den employee service som skal bruges i klassen</param>
         public UserController(INetCafeDataAccessService<CustomerDto> customerService, INetCafeDataAccessService<EmployeeDto> employeeService)
         {
             _customerService = customerService;
             _employeeService = employeeService;
         }
 
+        /// <summary>
+        /// Get metode til index view
+        /// </summary>
+        /// <returns>Et view af alle customers og employees</returns>
         // GET: PersonController
         [Authorize("Administrator")]
         public ActionResult Index()
@@ -32,17 +45,33 @@ namespace NetCafeUCN.MVC.Controllers
             return View(viewModel);
         }
 
+        /// <summary>
+        /// Get metode til details view
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: PersonController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
+
+        /// <summary>
+        /// Get metode til create view
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         // GET: PersonController/Create
         public ActionResult Create()
         {
             return View();
         }
+
+        /// <summary>
+        /// Post metode, til at oprette en ny customer
+        /// </summary>
+        /// <param name="customer">CustomerDto objekt ud fra form værdier</param>
+        /// <returns>Et view</returns>
         // POST: PersonController/Create
         [HttpPost]
         [AllowAnonymous]
@@ -82,10 +111,13 @@ namespace NetCafeUCN.MVC.Controllers
            
         }
 
+        /// <summary>
+        /// Get metode til edit view
+        /// </summary>
+        /// <param name="phone">string af telefon nummeret på den ønskede person som skal ændres</param>
+        /// <returns>Et view med enten EditCustomer eller EditEmployee</returns>
         // GET: PersonController/Edit/5
         public ActionResult Edit(string phone)
-
-            
         {
             if (_customerService.GetAll().ToList().First(customer => customer.Phone == phone) != null)
             {
@@ -100,10 +132,15 @@ namespace NetCafeUCN.MVC.Controllers
             {
                 return RedirectToAction("Index");
             }
-            
             //return View();
         }
 
+        /// <summary>
+        /// Not implemented yet
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="collection"></param>
+        /// <returns></returns>
         // POST: PersonController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -119,12 +156,23 @@ namespace NetCafeUCN.MVC.Controllers
             }
         }
 
+        /// <summary>
+        /// Get metode til delete view
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: PersonController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
+        /// <summary>
+        /// Not implemented yet
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="collection"></param>
+        /// <returns></returns>
         // POST: PersonController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]

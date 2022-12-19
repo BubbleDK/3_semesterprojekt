@@ -6,11 +6,18 @@ using NetCafeUCN.MVC.Services;
 
 namespace NetCafeUCN.MVC.Controllers
 {
+    /// <summary>
+    ///  ConsumableController klasse, nedarver fra controller klassen
+    /// </summary>
     [Authorize]
     public class ConsumableController : Controller
     {
         readonly INetCafeDataAccessService<ConsumableDto> _consumableService;
 
+        /// <summary>
+        /// ConsumableController constructor
+        /// </summary>
+        /// <param name="consumableService">Sæt den consumable service som skal bruges i klassen</param>
         public ConsumableController(INetCafeDataAccessService<ConsumableDto> consumableService)
         {
             _consumableService = consumableService;
@@ -24,6 +31,11 @@ namespace NetCafeUCN.MVC.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Get metode til details view.
+        /// </summary>
+        /// <param name="productNumber">string af produkt nummeret</param>
+        /// <returns>Returnere et View med det bestemte produkt</returns>
         // GET: ConsumableController/Details/5
         [AllowAnonymous]
         public ActionResult Details(string productNumber)
@@ -31,6 +43,11 @@ namespace NetCafeUCN.MVC.Controllers
             return View(_consumableService.Get(productNumber));
         }
 
+        /// <summary>
+        /// Get metode til create view.
+        /// </summary>
+        /// <param name="productNumber">string af produkt nummeret</param>
+        /// <returns>Returnere et View med det bestemte produkt</returns>
         // GET: ConsumableController/Create
         [Authorize(Roles = "Administrator")]
         public ActionResult Create(string productNumber)
@@ -38,6 +55,9 @@ namespace NetCafeUCN.MVC.Controllers
             return View(_consumableService.Get(productNumber));
         }
 
+        /// <summary>
+        /// Not implemented.
+        /// </summary>
         // POST: ConsumableController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -54,6 +74,11 @@ namespace NetCafeUCN.MVC.Controllers
             }
         }
 
+        /// <summary>
+        /// Get metode til edit view.
+        /// </summary>
+        /// <param name="productNumber">string af produkt nummeret</param>
+        /// <returns>Returnere et View med det bestemte produkt</returns>
         // GET: ConsumableController/Edit/5
         [Authorize(Roles = "Administrator")]
         public ActionResult Edit(string productNumber)
@@ -61,6 +86,11 @@ namespace NetCafeUCN.MVC.Controllers
             return View(_consumableService.Get(productNumber));
         }
 
+        /// <summary>
+        /// Post metode til at redigere et produkt
+        /// </summary>
+        /// <param name="editedConsumable">Objekt af ConsumableDto</param>
+        /// <returns>Returnere et View med produkter</returns>
         // POST: ConsumableController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -81,6 +111,11 @@ namespace NetCafeUCN.MVC.Controllers
             }
         }
 
+        /// <summary>
+        /// Get metode til delete view.
+        /// </summary>
+        /// <param name="productNumber">string af produkt nummeret</param>
+        /// <returns>Returnere et View med det bestemte produkt</returns>
         // GET: ConsumableController/Delete/5
         [Authorize(Roles = "Administrator")]
         public ActionResult Delete(string productNumber)
@@ -88,6 +123,11 @@ namespace NetCafeUCN.MVC.Controllers
             return View(_consumableService.Get(productNumber));
         }
 
+        /// <summary>
+        /// Post til at delete et consumable
+        /// </summary>
+        /// <param name="consumableToDelete">Objekt af ConsumableDto</param>
+        /// <returns>Returnere et View</returns>
         // POST: ConsumableController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
