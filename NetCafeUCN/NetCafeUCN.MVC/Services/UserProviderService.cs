@@ -1,9 +1,5 @@
 ﻿using NetCafeUCN.MVC.Models.DTO;
-using System.Text.Json;
-using NuGet.Protocol;
 using RestSharp;
-using static NetCafeUCN.MVC.Models.DTO.UserDto;
-using Microsoft.AspNetCore.Components;
 
 namespace NetCafeUCN.MVC.Services
 {

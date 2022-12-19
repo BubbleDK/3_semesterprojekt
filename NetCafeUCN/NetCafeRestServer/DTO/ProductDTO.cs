@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NetCafeUCN.API.DTO
+﻿namespace NetCafeUCN.API.DTO
 {
+    /// <summary>
+    ///  ProductDTO model, abstract klasse
+    /// </summary>
     public abstract class ProductDTO
     {
         public string? ProductNumber { get; set; } = string.Empty;

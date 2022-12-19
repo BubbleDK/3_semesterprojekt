@@ -1,28 +1,11 @@
 ﻿using DataAccessLayer.Exceptions;
 using NetCafeUCN.DAL.Model;
-using System;
 using System.Data.SqlClient;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NetCafeUCN.DAL.DAO
 {
-    /* @authors Rasmus Gudiksen, Jakob Kjeldsteen, Emil Tolstrup Petersen, Christian Funder og Mark Drongesen
-     * <summary>
-     * Denne klasse styrer kontakten mellem database og systemet omhandlende Gamingstation
-     * <summary/>
-     */
     public class GamingStationDAO : INetCafeDAO<GamingStation>
     {
-        /*
-        * <summary>
-	    * Metoden tilføjer en GamingStation en til databasen.
-	    * <summary/>
-	    * <param name="p">Er den GamingStation der bliver tilføjet til databasen</param>
-	    * <returns>En bool<returns/>
-	    */
         public bool Add(GamingStation p)
         {
             SqlTransaction trans;
@@ -63,13 +46,6 @@ namespace NetCafeUCN.DAL.DAO
             }
             return true;
         }
-        /*
-        * <summary>
-	    * Metoden henter en specifik GamingStation fra databasen.
-	    * <summary/>
-	    * <param name="key">Er et produkt nummer der bliver brugt til at finde en GamingStation</param>
-	    * <returns>En GamingStation<returns/>
-	    */
         public GamingStation? Get(dynamic key)
         {
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
@@ -106,12 +82,6 @@ namespace NetCafeUCN.DAL.DAO
             }
             return null;
         }
-        /*
-        * <summary>
-	    * Metoden henter alle GamingStations fra databasen.
-	    * <summary/>
-	    * <returns>En liste af GamingStations<returns/>
-	    */
         public IEnumerable<GamingStation> GetAll()
         {
 
@@ -149,13 +119,6 @@ namespace NetCafeUCN.DAL.DAO
             }
             return list;
         }
-        /*
-        * <summary>
-	    * Metoden opdaterer isActive på en GamingStation.
-	    * <summary/>
-	    * <param name="key">Er et produkt nummer der bliver brugt til at finde en GamingStation</param>
-	    * <returns>En bool<returns/>
-	    */
         public bool Remove(dynamic key)
         {
             using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
@@ -174,56 +137,6 @@ namespace NetCafeUCN.DAL.DAO
                 }
             }
         }
-        //public bool Remove(dynamic key)
-        //{
-        //    SqlTransaction trans;
-        //    int id = 0;
-        //    using (SqlConnection conn = new SqlConnection(DBConnection.ConnectionString))
-        //    {
-        //        conn.Open();
-        //        using (trans = conn.BeginTransaction())
-        //        {
-        //            try
-        //            {
-        //                using (SqlCommand command = new SqlCommand("SELECT id FROM nc_Product WHERE productNo = @productNo", conn, trans)) 
-        //                { 
-        //                    command.Parameters.AddWithValue("@productNo", key);
-        //                    SqlDataReader reader = command.ExecuteReader();
-        //                    while (reader.Read())
-        //                    {
-        //                        id = (int)reader["id"];
-        //                    }
-        //                    reader.Close();
-        //                }
-        //                using (SqlCommand updateCommand = new SqlCommand("UPDATE nc_BookingLine SET stationid = @id WHERE stationid = @id", conn, trans))
-        //                {
-        //                    updateCommand.Parameters.AddWithValue("@id", id);
-        //                    updateCommand.ExecuteNonQuery();
-        //                }
-        //                using (SqlCommand deleteCommand = new SqlCommand("DELETE FROM nc_Product WHERE id = @id", conn, trans))
-        //                {
-        //                    deleteCommand.Parameters.AddWithValue("@id", id);
-        //                    deleteCommand.ExecuteNonQuery();
-        //                    trans.Commit();
-        //                    return true;
-        //                }
-        //            }
-        //            catch (DataAccessException)
-        //            {
-        //                trans.Rollback();
-        //                throw new DataAccessException("Can't access data");
-        //            }
-        //        }
-        //    }
-        //}
-
-        /*
-        * <summary>
-	    * Metoden opdaterer en GamingStation fra databasen.
-	    * <summary/>
-	    * <param name="o">Er den opdateret GamingStation</param>
-	    * <returns>En bool<returns/>
-	    */
         public bool Update(GamingStation o)
         {
             int rows = -1;

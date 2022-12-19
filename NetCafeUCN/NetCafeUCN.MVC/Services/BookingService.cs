@@ -2,10 +2,11 @@
 using RestSharp;
 
 namespace NetCafeUCN.MVC.Services
-{/// <summary>
- /// Handles CRUD functionality for objects of type Booking
- /// Uses RestSharp to communicate with Controllers in the API
- /// </summary>
+{
+    /// <summary>
+    /// Handles CRUD functionality for objects of type Booking
+    /// Uses RestSharp to communicate with Controllers in the API
+    /// </summary>
     public class BookingService : INetCafeDataAccessService<BookingDto>
     {
         public string BaseUri { get; private set; }

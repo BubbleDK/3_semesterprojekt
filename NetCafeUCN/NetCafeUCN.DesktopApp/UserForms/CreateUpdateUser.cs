@@ -1,14 +1,5 @@
 ﻿using NetCafeUCN.DesktopApp.DTO;
 using NetCafeUCN.DesktopApp.ServiceLayer;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace NetCafeUCN.DesktopApp.UserForms
 {
@@ -22,7 +13,11 @@ namespace NetCafeUCN.DesktopApp.UserForms
         EmployeeDTO? _employee;
         CustomerDTO? _customer;
 
-        //Constructor til at oprette customer/employee
+        /// <summary>
+        /// Constructor til at oprette en form til at oprette en user
+        /// </summary>
+        /// <param name="usersForm">Base userform</param>
+        /// <param name="type">Typen af user man ønsker at oprette</param>
         public CreateUpdateUser(UsersForm usersForm, int type)
         {
             InitializeComponent();
@@ -45,12 +40,16 @@ namespace NetCafeUCN.DesktopApp.UserForms
                 txtZipCode.Enabled = false;
                 txtPersonType.Text = "Customer";
             }
-            else if(type == 1)
+            else if (type == 1)
             {
                 txtPersonType.Text = "Employee";
             }
         }
-        //Constructor til at opdatere customers
+        /// <summary>
+        /// Constructor til at lave formen til at opdatere en customer
+        /// </summary>
+        /// <param name="usersForm">Base userform</param>
+        /// <param name="c">Den customer man ønsker at opdatere</param>
         public CreateUpdateUser(UsersForm usersForm, CustomerDTO c)
         {
             InitializeComponent();
@@ -75,7 +74,11 @@ namespace NetCafeUCN.DesktopApp.UserForms
             txtPhone.Enabled = false;
             txtPersonType.Text = c.PersonType;
         }
-        //Constructor til at opdatere employees
+        /// <summary>
+        /// Constructor til at opdatere en employee
+        /// </summary>
+        /// <param name="usersForm">Base userform</param>
+        /// <param name="e">Den employee man ønsker opdateret</param>
         public CreateUpdateUser(UsersForm usersForm, EmployeeDTO e)
         {
             InitializeComponent();
@@ -101,7 +104,7 @@ namespace NetCafeUCN.DesktopApp.UserForms
         private void ConfirmInput()
         {
             //Hvis persontypen er 0 arbejdes der med customers og derfor customerservice
-            if (personType == 0) 
+            if (personType == 0)
             {
                 INetCafeDataAccess<CustomerDTO> customerService = new CustomerService(MainMenu.BaseUrl + "Customers/");
                 _customer = new();
@@ -110,10 +113,11 @@ namespace NetCafeUCN.DesktopApp.UserForms
                 _customer.Phone = txtPhone.Text;
                 _customer.PersonType = txtPersonType.Text;
                 _customer.isActive = true;
-                if(actionType == 0)
+                if (actionType == 0)
                 {
                     customerService.Add(_customer);
-                }else if(actionType == 1)
+                }
+                else if (actionType == 1)
                 {
                     customerService.Update(_customer);
                 }

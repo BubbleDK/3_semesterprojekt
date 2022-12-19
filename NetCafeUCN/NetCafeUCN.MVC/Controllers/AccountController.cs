@@ -1,30 +1,45 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NetCafeUCN.MVC.Models;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Identity;
 using NetCafeUCN.MVC.Models.DTO;
 using NetCafeUCN.MVC.Services;
 using NetCafeUCN.MVC.Authentication;
 
 namespace NetCafeUCN.MVC.Controllers
 {
+    /// <summary>
+    ///  AccountController klasse, som nedarver fra Controller
+    /// </summary>
     [AllowAnonymous]
     public class AccountController : Controller
     {
         readonly IUserProviderService _userProvider;
-        
+        /// <summary>
+        /// AccountController constructor
+        /// </summary>
+        /// <param name="userProvider">userProvider af typen IUserProviderService</param>
         public AccountController(IUserProviderService userProvider) => _userProvider = userProvider;
+
         // GET: AccountController
+        /// <summary>
+        /// Login metode til at vise Login View.
+        /// </summary>
+        /// <returns>Returnere et ActionResult af login view</returns>
         [HttpGet]
         public ActionResult Login()
         {
             return View();
         }
 
+        /// <summary>
+        /// Login post metode, som logger dig ind hvis de givne oplysninger er korrekte.
+        /// </summary>
+        /// <param name="loginInfo">Henter data fra den indtastede form, og former det som LoginModel</param>
+        /// <param name="returnUrl">Det URL link som man skal sendes videre til</param>
+        /// <returns>Returnere et ActionResult eller view</returns>
         [HttpPost]
         public async Task<IActionResult> Login([FromForm] LoginModel loginInfo, [FromQuery] string returnUrl)
         {
@@ -51,6 +66,8 @@ namespace NetCafeUCN.MVC.Controllers
             }
             return View();
         }
+
+        // Skal der skrives dokumentation til private metoder?
         private async Task SignIn(UserDto user)
         {
             var claims = new List<Claim>
@@ -99,7 +116,10 @@ namespace NetCafeUCN.MVC.Controllers
             TempData["Message"] = $"You are logged in as {claimsIdentity.Name}";
         }
 
-        //deletes the authentication cooke
+        /// <summary>
+        /// LogOut metode, som logger dig ud og fjerner din authentication cookie.
+        /// </summary>
+        /// <returns>Returnere et ActionResult af den valgte side</returns>
         public async Task<IActionResult> LogOut()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);

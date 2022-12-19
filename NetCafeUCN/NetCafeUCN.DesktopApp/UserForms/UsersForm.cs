@@ -1,14 +1,5 @@
 ﻿using NetCafeUCN.DesktopApp.DTO;
 using NetCafeUCN.DesktopApp.ServiceLayer;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace NetCafeUCN.DesktopApp.UserForms
 {
@@ -16,6 +7,9 @@ namespace NetCafeUCN.DesktopApp.UserForms
     {
         INetCafeDataAccess<CustomerDTO> customerService;
         INetCafeDataAccess<EmployeeDTO> employeeService;
+        /// <summary>
+        /// Constructoren til at oprette formen for alle users/brugere i systemet.
+        /// </summary>
         public UsersForm()
         {
             InitializeComponent();
@@ -24,6 +18,9 @@ namespace NetCafeUCN.DesktopApp.UserForms
             RefreshList();
         }
 
+        /// <summary>
+        /// Metoden til at opdatere datagridview komponentet
+        /// </summary>
         public void RefreshList()
         {
             dgvCustomers.DataSource = null;
@@ -51,6 +48,9 @@ namespace NetCafeUCN.DesktopApp.UserForms
             DeleteSelectedUser();
         }
 
+        /// <summary>
+        /// Slet den valgte user fra listen
+        /// </summary>
         private void DeleteSelectedUser()
         {
             if (dgvCustomers.CurrentRow != null)
@@ -82,6 +82,9 @@ namespace NetCafeUCN.DesktopApp.UserForms
             
         }
 
+        /// <summary>
+        /// Opdater den valgte bruger fra listen
+        /// </summary>
         private void UpdateSelectedUser()
         {
             if (dgvCustomers.CurrentRow != null)
