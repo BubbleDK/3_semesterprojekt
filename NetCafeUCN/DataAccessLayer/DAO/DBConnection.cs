@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NetCafeUCN.DAL.DAO
+﻿namespace NetCafeUCN.DAL.DAO
 {
     /// <summary>
     /// Denne klasse opretter en string som bliver brugt til at oprette forbindelse til databasen.

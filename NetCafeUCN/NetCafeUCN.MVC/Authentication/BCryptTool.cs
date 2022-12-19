@@ -1,11 +1,4 @@
-﻿using BCrypt.Net;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NetCafeUCN.MVC.Authentication
+﻿namespace NetCafeUCN.MVC.Authentication
 {
     /// <summary>
     ///  BCryptTool klassen er statisk og benyttes til at bruge BCrypts funktionaliteter

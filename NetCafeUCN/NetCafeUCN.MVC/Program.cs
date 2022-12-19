@@ -1,13 +1,9 @@
 using NetCafeUCN.MVC.Services;
 using NetCafeUCN.MVC.Models;
-using NetCafeUCN.MVC.Controllers;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.Extensions.DependencyInjection;
-using NetCafeUCN.MVC.Models.DTO;
-using static System.Net.WebRequestMethods;
 
 var builder = WebApplication.CreateBuilder(args);
-string baseUri = "https://localhost:7197/";
+string baseUri = "https://localhost:7197/api/";
 // Add services to the container.
 builder.Services.AddScoped<IUserProviderService, UserProviderService>(_ => new UserProviderService(baseUri + "Users"));
 builder.Services.AddScoped<INetCafeDataAccessService<GamingStationDto>, GamingstationService>( _ => new GamingstationService(baseUri + "GamingStations"));

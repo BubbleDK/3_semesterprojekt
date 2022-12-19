@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NetCafeUCN.MVC.Models;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Identity;
 using NetCafeUCN.MVC.Models.DTO;
 using NetCafeUCN.MVC.Services;
 using NetCafeUCN.MVC.Authentication;
@@ -69,10 +67,7 @@ namespace NetCafeUCN.MVC.Controllers
             return View();
         }
 
-        /// <summary>
-        /// Bruges til at logge dig, via. dine brugeroplysninger
-        /// </summary>
-        /// <param name="user">UserDto objekt</param>
+        // Skal der skrives dokumentation til private metoder?
         private async Task SignIn(UserDto user)
         {
             var claims = new List<Claim>

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NetCafeUCN.DAL.Authentication
+﻿namespace NetCafeUCN.DAL.Authentication
 {
     /// <summary>
     ///  BCryptTool klassen er statisk og benyttes til at bruge BCrypts funktionaliteter

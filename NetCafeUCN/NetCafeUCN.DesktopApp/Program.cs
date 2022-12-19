@@ -1,5 +1,3 @@
-using NetCafeUCN.DesktopApp.ServiceLayer;
-
 namespace NetCafeUCN.DesktopApp
 {
     internal static class Program

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NetCafeUCN.DAL.Model
+﻿namespace NetCafeUCN.DAL.Model
 {
     /// <summary>
     ///  Person model klasse, som er en abstrakt klasse.

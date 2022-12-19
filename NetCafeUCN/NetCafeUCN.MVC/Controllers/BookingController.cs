@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NetCafeUCN.MVC.Models;
 using NetCafeUCN.MVC.Models.DTO;
 using NetCafeUCN.MVC.Services;
-using System.Reflection;
 using System.Security.Claims;
 
 namespace NetCafeUCN.MVC.Controllers

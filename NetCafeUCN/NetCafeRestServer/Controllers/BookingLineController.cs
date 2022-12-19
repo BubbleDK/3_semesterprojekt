@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NetCafeUCN.DAL.DAO;
 using NetCafeUCN.API.Conversion;
 using NetCafeUCN.API.DTO;
+using NetCafeUCN.DAL.DAO;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 

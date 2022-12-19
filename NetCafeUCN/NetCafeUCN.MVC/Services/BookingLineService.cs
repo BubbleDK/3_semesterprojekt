@@ -1,5 +1,4 @@
-﻿using NetCafeUCN;
-using NetCafeUCN.MVC.Models.DTO;
+﻿using NetCafeUCN.MVC.Models.DTO;
 using RestSharp;
 
 namespace NetCafeUCN.MVC.Services

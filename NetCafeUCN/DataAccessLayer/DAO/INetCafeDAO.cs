@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NetCafeUCN.DAL.DAO
+﻿namespace NetCafeUCN.DAL.DAO
 {
-     /// <summary>
-     /// Dette er et generic interface der beskriver metoderne i DAO.
-     /// <summary/>
+    /// <summary>
+    /// Dette er et generic interface der beskriver metoderne i DAO.
+    /// <summary/>
     public interface INetCafeDAO<TEntity>
     {
         /// <summary>

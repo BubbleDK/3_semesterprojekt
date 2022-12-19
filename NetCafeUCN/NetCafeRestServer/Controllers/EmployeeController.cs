@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using NetCafeUCN.API.Conversion;
 using NetCafeUCN.API.DTO;
 using NetCafeUCN.DAL.DAO;

@@ -1,6 +1,5 @@
 ﻿using NetCafeUCN.DesktopApp.DTO;
 using RestSharp;
-using System.Linq;
 
 namespace NetCafeUCN.DesktopApp.ServiceLayer
 {

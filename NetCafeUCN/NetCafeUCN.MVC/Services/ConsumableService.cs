@@ -1,15 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using NetCafeUCN.MVC.Models;
+﻿using NetCafeUCN.MVC.Models;
 using RestSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NetCafeUCN.MVC.Services
 {
-    
+
     public class ConsumableService : INetCafeDataAccessService<ConsumableDto>
     {
         public string BaseUri { get; private set; }

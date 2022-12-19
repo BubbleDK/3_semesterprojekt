@@ -1,6 +1,5 @@
 ﻿using DataAccessLayer.Exceptions;
 using NetCafeUCN.DAL.Model;
-using System.Collections.Generic;
 using System.Data.SqlClient;
 
 namespace NetCafeUCN.DAL.DAO
